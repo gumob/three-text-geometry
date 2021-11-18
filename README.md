@@ -4,22 +4,25 @@
 
 <!-- toc -->
 
-- [Quickstart](#quickstart)
-- [Features](#features)
-  - [TypeScript](#typescript)
-  - [ESLint](#eslint)
-  - [`jest`](#jest)
-  - [`dripip`](#dripip)
-  - [Simple succinct friendly low-barrier issue templates](#simple-succinct-friendly-low-barrier-issue-templates)
-  - [Prettier](#prettier)
-  - [`format-imports`](#format-imports)
-  - [npm scripts for development lifecycle](#npm-scripts-for-development-lifecycle)
-  - [CI with GitHub Actions](#ci-with-github-actions)
-  - [Renovate](#renovate)
-  - [Yarn 2](#yarn-2)
-  - [CJS+ESM Hybrid package build (see [Dr. Axel's article about this](https://2ality.com/2019/10/hybrid-npm-packages.html))](#cjsesm-hybrid-package-build-see-dr-axels-article-about-thishttps2alitycom201910hybrid-npm-packageshtml)
-  - [VSCode Settings](#vscode-settings)
-  - [Readme Table of Contents](#readme-table-of-contents)
+- [template-typescript-lib](#template-typescript-lib)
+    - [Quickstart](#quickstart)
+    - [Features](#features)
+      - [TypeScript for Type Safety & Productivity](#typescript-for-type-safety--productivity)
+      - [ESLint For Linting](#eslint-for-linting)
+      - [`jest` for Testing](#jest-for-testing)
+      - [`dripip` for Releasing](#dripip-for-releasing)
+      - [Simple succinct friendly low-barrier issue templates](#simple-succinct-friendly-low-barrier-issue-templates)
+      - [Prettier for code formating](#prettier-for-code-formating)
+      - [`format-imports`](#format-imports)
+      - [npm scripts for development lifecycle](#npm-scripts-for-development-lifecycle)
+      - [CI with GitHub Actions](#ci-with-github-actions)
+      - [Renovate configuration](#renovate-configuration)
+      - [Yarn 2 for package management](#yarn-2-for-package-management)
+      - [CJS+ESM Hybrid package build (see Dr. Axel's article about this)](#cjsesm-hybrid-package-build-see-dr-axels-article-about-this)
+      - [VSCode Settings](#vscode-settings)
+      - [Readme Table of Contents](#readme-table-of-contents)
+  - [Generate Bitmap Font](#generate-bitmap-font)
+      - [Install msdf-bmfont-xml](#install-msdf-bmfont-xml)
 
 <!-- tocstop -->
 
@@ -180,3 +183,29 @@ gh repo clone jasonkuhrt/template-typescript-lib foobar \
 1. Using [`markdown-toc`](https://github.com/jonschlinkert/markdown-toc)
 
 ![Alt](https://repobeats.axiom.co/api/embed/3c932f1cb76da4ad21328bfdd0ad1c6fbbe76a0b.svg "Repobeats analytics image")
+
+
+## Generate Bitmap Font
+
+#### Install msdf-bmfont-xml
+```
+npm install msdf-bmfont-xml -g
+```
+
+```
+msdf-bmfont \
+    --output-type xml \
+    --filename './tests/fnt/Roboto-Regular' \
+    --font-size 128 \
+    --texture-size 4096,4096 \
+    './tests/fnt/Roboto-Regular.ttf'
+```
+
+```
+msdf-bmfont \
+    --output-type json \
+    --filename './tests/fnt/Roboto-Regular' \
+    --font-size 128 \
+    --texture-size 4096,4096 \
+    './tests/fnt/Roboto-Regular.ttf'
+```

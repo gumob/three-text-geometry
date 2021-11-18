@@ -10,8 +10,9 @@
  */
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import * as mime from 'mime-types';
-import { BMFontJsonParser } from '~/parser';
+import { BMFontJsonParser, BMFontBinaryParser } from '~/parser';
 import { BMFont, isBMFont } from '~/types';
+import { isBinary } from '~/utils';
 
 enum BMFontLoaderErrorType {
     LoadError = 'LoadError',
@@ -59,12 +60,16 @@ class BMFontLoader {
 
     parseFont(data: any): BMFont | null {
         try {
+            console.log('typeof', typeof data);
+            console.log('mime', mime.lookup(data));
+            console.log('isBinary', isBinary(data));
             if (typeof data === 'string' && mime.lookup(data) == 'application/json' || data.charAt(0) === '{') {
                 return new BMFontJsonParser().parse(data.toString());
             }
-            // else if (isBinary(data)) {
-            //     return new BMFontBinaryParser().parse(typeof data === 'string' ? Buffer.from(data, 'binary') : data);
-            // }
+            else if (typeof data === 'object' && isBinary(data)) {
+                console.log('data', data);
+                return new BMFontBinaryParser().parse(typeof data === 'string' ? Buffer.from(data, 'binary') : data);
+            }
             // else if (mime.lookup(data) == 'application/xml' || data.charAt(0) === '<') {
             //     return parseXML(data.toString().trim());
             // }

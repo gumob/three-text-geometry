@@ -42,7 +42,7 @@
     "build": "yarn clean && yarn build:cjs && yarn build:esm",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build:esm": "tsc --project tsconfig.esm.json",
-    "test": "jest",
+    "test": "clear && jest --clearCache && jest",
     "clean": "rm -rf dist-cjs dist-esm node_modules/.cache",
     "release:pr": "dripip pr",
     "release:canary": "dripip preview",
@@ -53,6 +53,7 @@
   "dependencies": {
     "ajv": "^8.8.1",
     "axios": "^0.24.0",
+    "fast-xml-parser": "^4.0.0-beta.0",
     "floggy": "^0.3.1",
     "mime-types": "^2.1.34",
     "three": "^0.134.0",

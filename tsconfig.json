@@ -39,6 +39,11 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
 
+    // Type definition that enable importing xml
+    "typeRoots": [
+        "./src/definition.d.ts"
+    ],
+
     // Other
     // Only enable this for applications.
     // Packages doing this force their consumers to.

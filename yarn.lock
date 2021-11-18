@@ -3026,6 +3026,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-xml-parser@npm:^4.0.0-beta.0":
+  version: 4.0.0-beta.0
+  resolution: "fast-xml-parser@npm:4.0.0-beta.0"
+  dependencies:
+    strnum: ^1.0.4
+  bin:
+    fxparser: src/cli/cli.js
+  checksum: a103a09f4515cffcc86f62cc1f133dd519e298367bfa4aa186a7987fe1b68b52203c6778dfd59cf629eeed48812f106096289e77850669480c227871a486cf8c
+  languageName: node
+  linkType: hard
+
 "fastq@npm:^1.6.0":
   version: 1.13.0
   resolution: "fastq@npm:1.13.0"
@@ -6324,6 +6335,13 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
+"strnum@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "strnum@npm:1.0.4"
+  checksum: 91432c37fef1c4df4eb32e5ff9ae7962a4627f81001fee3f86c3f279226a54157b2a14d074d85265c6c36e5e93bdb45f4339e46bdba0f1325c5c27fae78007b1
+  languageName: node
+  linkType: hard
+
 "supports-color@npm:^5.3.0":
   version: 5.5.0
   resolution: "supports-color@npm:5.5.0"
@@ -6446,6 +6464,7 @@ fsevents@^2.3.2:
     eslint: 8.0.1
     eslint-config-prettier: 8.3.0
     eslint-plugin-only-warn: 1.0.3
+    fast-xml-parser: ^4.0.0-beta.0
     floggy: ^0.3.1
     format-imports: 2.4.1
     jest: 27.3.1
