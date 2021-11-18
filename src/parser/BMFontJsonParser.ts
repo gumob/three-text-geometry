@@ -10,12 +10,18 @@ import { BMFont } from '~/types';
 
 class BMFontJsonParser {
     public parse(json: string): BMFont | null {
-        const ajv = new Ajv();
-        const validate = ajv.compile(schema);
-        const valid: boolean = validate(json);
-        if (valid) {
-            return JSON.parse(json) as BMFont;
-        } else {
+        try {
+            console.log(json);
+            const ajv = new Ajv();
+            const validate = ajv.compile(schema);
+            const valid: boolean = validate(json);
+            if (valid) {
+                return JSON.parse(json) as BMFont;
+            } else {
+                return null;
+            }
+        } catch (error: any) {
+            console.error(error);
             return null;
         }
     }
