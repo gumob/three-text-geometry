@@ -57,10 +57,21 @@ describe('BMFontLoader', () => {
     }
   });
 
+  test('Ascii', async () => {
+    try {
+      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-16.fnt';
+      const loader = new BMFontLoader();
+      const font = await loader.loadAscii(uri);
+      expect(isBMFont(font)).toEqual(true);
+    } catch (error: any) {
+      console.error(error);
+    }
+  });
+
   // test('Binary', async () => {
   //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-16.fnt';
   //   const loader = new BMFontLoader();
-  //   const font = await loader.loadBinary(uri);
+  //   const font = await loader.loadAscii(uri);
   //   expect(isBMFont(font)).toEqual(true);
   // });
 

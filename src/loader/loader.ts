@@ -10,7 +10,7 @@
  */
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from 'axios';
 import * as mime from 'mime-types';
-import { BMFontJsonParser, BMFontBinaryParser, BMFontXMLParser } from '~/parser';
+import { BMFontJsonParser, BMFontBinaryParser, BMFontXMLParser, BMFontAsciiParser } from '~/parser';
 import { BMFont, isBMFont } from '~/types';
 import { isBinary } from '~/utils';
 
@@ -64,6 +64,22 @@ class BMFontLoader {
                 .get(uri, config)
                 .then((response: AxiosResponse<object>) => {
                     const result: BMFont | null = new BMFontXMLParser().parse(response.data.toString());
+                    if (result && isBMFont(result)) resolve(result);
+                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError));
+
+                })
+                .catch((error: AxiosError) => {
+                    reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message));
+                });
+        });
+    }
+
+    loadAscii(uri: string, config: AxiosRequestConfig | undefined = undefined): Promise<BMFont> {
+        return new Promise((resolve, reject) => {
+            axios
+                .get(uri, config)
+                .then((response: AxiosResponse<object>) => {
+                    const result: BMFont | null = new BMFontAsciiParser().parse(response.data.toString());
                     if (result && isBMFont(result)) resolve(result);
                     else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError));
 
