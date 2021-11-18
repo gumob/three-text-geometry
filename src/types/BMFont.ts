@@ -1,3 +1,7 @@
+function isBMFont(value: any) {
+    return 'chars' in value && 'info' in value && 'common' in value && 'kernings' in value;
+}
+
 interface BMFont {
     pages: string[],
     chars: BMFontChar[],
@@ -63,6 +67,7 @@ interface BMFontKern {
 }
 
 export {
+    isBMFont,
     BMFont,
     BMFontChar,
     BMFontInfo,

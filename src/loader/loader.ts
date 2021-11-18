@@ -11,26 +11,48 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import * as mime from 'mime-types';
 import { BMFontJsonParser } from '~/parser';
-import { BMFont } from '~/types';
+import { BMFont, isBMFont } from '~/types';
+
+enum BMFontLoaderErrorType {
+    LoadError = 'LoadError',
+    ParseError = 'ParseError',
+}
+
+class BMFontLoaderError extends Error {
+    constructor(type: BMFontLoaderErrorType, message: string | undefined = undefined) {
+        let msg: string;
+        switch(type) {
+            case BMFontLoaderErrorType.ParseError:
+                msg = 'Failed to parse json data';
+                break;
+            case BMFontLoaderErrorType.LoadError:
+                msg = message ? message : 'Failed to load json data';
+                break;
+            default:
+                msg = 'Unknown Error';
+                break;
+        }
+        super(msg);
+        this.name = type;
+        Object.setPrototypeOf(this, BMFontLoaderError.prototype);
+    }
+}
 
 class BMFontLoader {
     constructor() {}
     
     load(uri: string): Promise<BMFont> {
-        console.log('uri', uri);
         return new Promise((resolve, reject) => {
             axios
                 .get(uri)
-                // .then((response: AxiosResponse<any>) => {
-                .then((response: AxiosResponse) => {
-                    console.log('response', response);
+                .then((response: AxiosResponse<object>) => {
                     const result: BMFont | null = this.parseFont(response.data);
-                    if (result) resolve(result);
-                    else reject('Failed to validate json data.');
+                    if (result && isBMFont(result)) resolve(result);
+                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError));
+
                 })
                 .catch((error: AxiosError) => {
-                    console.error('error', error);
-                    reject(error);
+                    reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message));
                 });
         });
     }
@@ -56,4 +78,4 @@ class BMFontLoader {
     }
 }
 
-export { BMFontLoader };
+export { BMFontLoader, BMFontLoaderError, BMFontLoaderErrorType };

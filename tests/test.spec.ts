@@ -1,18 +1,45 @@
 import * as THREE from 'three';
-import { computeBox } from '~/utils';
-import { BMFontLoader } from '~/loader';
+// import { computeBox } from '~/utils';
+import { BMFontLoader, BMFontLoaderErrorType } from '~/loader';
 import TextGeometry from '~/index';
-import { BMFont } from '~/types';
+import { BMFont, isBMFont } from '~/types';
 
-test('load font', async () => {
-  computeBox(new Array<number>(), new THREE.Box3());
+test('BMFontLoader / Valid Json', async () => {
   const loader = new BMFontLoader();
   try {
-    // const font = await loader.load('./src/fnt/Roboto-msdf.json');
-    const font = await loader.load('/Users/kojirof/Documents/pj-github/three-bmfont-text-ts/tests/fnt/Roboto-msdf.json');
-    console.log('font', font);
-  } catch (error) {
-    // console.error('error', error);
+    const font = await loader.load('https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-msdf.json');
+    expect(isBMFont(font)).toEqual(true);
+  } catch (error: any) {
   }
-  // const geom = new TextGeometry({});
+});
+
+test('BMFontLoader / Empty Json', async () => {
+  const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-msdf-empty.json';
+  const loader = new BMFontLoader();
+  // expect(await loader.load(uri)).toThrow(BMFontLoaderErrorType.LoadError);
+  try {
+     await loader.load(uri);
+  } catch (error: any) {
+    expect(error.name).toBe(BMFontLoaderErrorType.ParseError);
+  }
+});
+
+test('BMFontLoader / Invalid Json', async () => {
+  const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-msdf-invalid.json';
+  const loader = new BMFontLoader();
+  try {
+     await loader.load(uri);
+  } catch (error: any) {
+    expect(error.name).toBe(BMFontLoaderErrorType.ParseError);
+  }
+});
+
+test('BMFontLoader / Not Fouind Json', async () => {
+  const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-msdf-notfound.json';
+  const loader = new BMFontLoader();
+  try {
+     await loader.load(uri);
+  } catch (error: any) {
+    expect(error.name).toBe(BMFontLoaderErrorType.LoadError);
+  }
 });
