@@ -5,6 +5,7 @@
  */
 
 import { Buffer } from 'buffer';
+import { BMFontLoaderError, BMFontLoaderErrorType } from '~/loader';
 import {
     BMFont,
     BMFontChar,
@@ -23,24 +24,24 @@ class BMFontBinaryParser {
 
     public parse(buf: Buffer): BMFont {
         if (buf.length < 6)
-            throw new Error('invalid buffer length for BMFont');
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Invalid buffer length for BMFont');
         const header = BMFontBinaryParser.HEADER.every((byte, i) => {
             return buf.readUInt8(i) === byte;
         });
         if (!header)
-            throw new Error('BMFont missing BMF byte header');
-        let i = 3
-        const vers = buf.readUInt8(i++)
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'BMFont missing BMF byte header');
+        let i = 3;
+        const vers = buf.readUInt8(i++);
         if (vers > 3)
-            throw new Error('Only supports BMFont Binary v3 (BMFont App v1.10)')
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Only supports BMFont Binary v3 (BMFont App v1.10)');
         var target: BMFont = DefaultBMFont();
         for (var b = 0; b < 5; b++)
-            i += this.readBlock(target, buf, i)
-        return target
+            i += this.readBlock(target, buf, i);
+        return target;
     }
 
     private readBlock(target: BMFont, buf: Buffer, i: number): number {
-        if (i > buf.length - 1) return 0;
+        if (i > buf.length - 1) return 0;;
         const blockID = buf.readUInt8(i++);
         const blockSize = buf.readInt32LE(i);
         i += 4;
@@ -65,51 +66,51 @@ class BMFontBinaryParser {
     }
 
     private readInfo(buf: Buffer, i: number): BMFontInfo {
-        let info: BMFontInfo = DefaultBMFontInfo()
-        info.size = buf.readInt16LE(i)
+        let info: BMFontInfo = DefaultBMFontInfo();
+        info.size = buf.readInt16LE(i);
 
-        const bitField = buf.readUInt8(i + 2)
-        info.smooth = (bitField >> 7) & 1
-        info.unicode = (bitField >> 6) & 1
-        info.italic = (bitField >> 5) & 1
-        info.bold = (bitField >> 4) & 1
+        const bitField = buf.readUInt8(i + 2);
+        info.smooth = (bitField >> 7) & 1;
+        info.unicode = (bitField >> 6) & 1;
+        info.italic = (bitField >> 5) & 1;
+        info.bold = (bitField >> 4) & 1;
 
         /** fixedHeight is only mentioned in binary spec */
         if ((bitField >> 3) & 1)
-            info.fixedHeight = 1
+            info.fixedHeight = 1;
 
         // info.charset = buf.readUInt8(i + 3) || ''; /** TODO: Array? or String? */
-        info.stretchH = buf.readUInt16LE(i + 4)
-        info.aa = buf.readUInt8(i + 6)
+        info.stretchH = buf.readUInt16LE(i + 4);
+        info.aa = buf.readUInt8(i + 6);
         info.padding = [
             buf.readInt8(i + 7),
             buf.readInt8(i + 8),
             buf.readInt8(i + 9),
             buf.readInt8(i + 10)
-        ]
+        ];
         info.spacing = [
             buf.readInt8(i + 11),
             buf.readInt8(i + 12)
-        ]
-        info.outline = buf.readUInt8(i + 13)
-        info.face = this.readStringNT(buf, i + 14)
-        return info
+        ];
+        info.outline = buf.readUInt8(i + 13);
+        info.face = this.readStringNT(buf, i + 14);
+        return info;
     }
 
     private readCommon(buf: Buffer, i: number): BMFontCommon {
         const common: BMFontCommon = DefaultBMFontCommon();
-        common.lineHeight = buf.readUInt16LE(i)
-        common.base = buf.readUInt16LE(i + 2)
-        common.scaleW = buf.readUInt16LE(i + 4)
-        common.scaleH = buf.readUInt16LE(i + 6)
-        common.pages = buf.readUInt16LE(i + 8)
-        // const bitField = buf.readUInt8(i + 10)
-        common.packed = 0
-        common.alphaChnl = buf.readUInt8(i + 11)
-        common.redChnl = buf.readUInt8(i + 12)
-        common.greenChnl = buf.readUInt8(i + 13)
-        common.blueChnl = buf.readUInt8(i + 14)
-        return common
+        common.lineHeight = buf.readUInt16LE(i);
+        common.base = buf.readUInt16LE(i + 2);
+        common.scaleW = buf.readUInt16LE(i + 4);
+        common.scaleH = buf.readUInt16LE(i + 6);
+        common.pages = buf.readUInt16LE(i + 8);
+        // const bitField = buf.readUInt8(i + 10);
+        common.packed = 0;
+        common.alphaChnl = buf.readUInt8(i + 11);
+        common.redChnl = buf.readUInt8(i + 12);
+        common.greenChnl = buf.readUInt8(i + 13);
+        common.blueChnl = buf.readUInt8(i + 14);
+        return common;
     }
 
     private readPages(buf: Buffer, i: number, size: number): Array<string> {
@@ -121,12 +122,12 @@ class BMFontBinaryParser {
             pages[c] = buf.slice(i, i + text.length).toString('utf8');
             i += len;
         }
-        return pages
+        return pages;
     }
 
     private readChars(buf: Buffer, i: number, blockSize: number): Array<BMFontChar> {
-        const chars: Array<BMFontChar> = []
-        var count = blockSize / 20
+        const chars: Array<BMFontChar> = [];
+        var count = blockSize / 20;
         for (var c = 0; c < count; c++) {
             const char: BMFontChar = {
                 id: 0,
@@ -141,39 +142,39 @@ class BMFontBinaryParser {
                 x: 0,
                 y: 0,
                 page: 0
-            }
-            const off = c * 20
-            char.id = buf.readUInt32LE(i + 0 + off)
-            char.x = buf.readUInt16LE(i + 4 + off)
-            char.y = buf.readUInt16LE(i + 6 + off)
-            char.width = buf.readUInt16LE(i + 8 + off)
-            char.height = buf.readUInt16LE(i + 10 + off)
-            char.xoffset = buf.readInt16LE(i + 12 + off)
-            char.yoffset = buf.readInt16LE(i + 14 + off)
-            char.xadvance = buf.readInt16LE(i + 16 + off)
-            char.page = buf.readUInt8(i + 18 + off)
-            char.chnl = buf.readUInt8(i + 19 + off)
-            chars[c] = char
+            };
+            const off = c * 20;
+            char.id = buf.readUInt32LE(i + 0 + off);
+            char.x = buf.readUInt16LE(i + 4 + off);
+            char.y = buf.readUInt16LE(i + 6 + off);
+            char.width = buf.readUInt16LE(i + 8 + off);
+            char.height = buf.readUInt16LE(i + 10 + off);
+            char.xoffset = buf.readInt16LE(i + 12 + off);
+            char.yoffset = buf.readInt16LE(i + 14 + off);
+            char.xadvance = buf.readInt16LE(i + 16 + off);
+            char.page = buf.readUInt8(i + 18 + off);
+            char.chnl = buf.readUInt8(i + 19 + off);
+            chars[c] = char;
         }
-        return chars
+        return chars;
     }
 
     private readKernings(buf: Buffer, i: number, blockSize: number): Array<BMFontKern> {
-        const kernings: Array<BMFontKern> = []
-        const count = blockSize / 10
+        const kernings: Array<BMFontKern> = [];
+        const count = blockSize / 10;
         for (var c = 0; c < count; c++) {
             const kern: BMFontKern = DefaultBMFontKern();
-            const off = c * 10
-            kern.first = buf.readUInt32LE(i + 0 + off)
-            kern.second = buf.readUInt32LE(i + 4 + off)
-            kern.amount = buf.readInt16LE(i + 8 + off)
-            kernings[c] = kern
+            const off = c * 10;
+            kern.first = buf.readUInt32LE(i + 0 + off);
+            kern.second = buf.readUInt32LE(i + 4 + off);
+            kern.amount = buf.readInt16LE(i + 8 + off);
+            kernings[c] = kern;
         }
-        return kernings
+        return kernings;
     }
 
     readStringNT(buf: Buffer, offset: number): string {
-        return this.readNameNT(buf, offset).toString('utf8')
+        return this.readNameNT(buf, offset).toString('utf8');
     }
 
     readNameNT(buf: Buffer, offset: number): Buffer {
