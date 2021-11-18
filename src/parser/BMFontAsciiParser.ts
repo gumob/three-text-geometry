@@ -1,7 +1,7 @@
 import Ajv, { nil } from 'ajv'
 import schema from './BMFontJsonSchema.json'
 import { BMFont, BMFontChar, BMFontCommon, BMFontDistanceField, BMFontInfo, BMFontKern, DefaultBMFont, DefaultBMFontCommon, DefaultBMFontDistanceField, DefaultBMFontInfo } from '~/types';
-import { BMFontLoaderError, BMFontLoaderErrorType } from '~/loader';
+import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error';
 
 /**
  * # How to create a json schema

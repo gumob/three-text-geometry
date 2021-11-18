@@ -10,35 +10,10 @@
  */
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from 'axios';
 import * as mime from 'mime-types';
+import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error';
 import { BMFontJsonParser, BMFontBinaryParser, BMFontXMLParser, BMFontAsciiParser } from '~/parser';
 import { BMFont, isBMFont } from '~/types';
 import { isBinary } from '~/utils';
-
-enum BMFontLoaderErrorType {
-    LoadError = 'LoadError',
-    ParseError = 'ParseError',
-}
-
-class BMFontLoaderError extends Error {
-    constructor(type: BMFontLoaderErrorType, message: string | undefined = undefined) {
-        let msg: string;
-        switch (type) {
-            case BMFontLoaderErrorType.ParseError:
-                msg = message ? message : 'Failed to parse data';
-                break;
-            case BMFontLoaderErrorType.LoadError:
-                msg = message ? message : 'Failed to load data';
-                break;
-            default:
-                msg = 'Unknown Error';
-                break;
-        }
-        super(msg);
-        this.name = type;
-        Object.setPrototypeOf(this, BMFontLoaderError.prototype);
-    }
-}
-
 class BMFontLoader {
     constructor() { }
 
@@ -132,4 +107,4 @@ class BMFontLoader {
     //  }
 }
 
-export { BMFontLoader, BMFontLoaderError, BMFontLoaderErrorType };
+export { BMFontLoader };

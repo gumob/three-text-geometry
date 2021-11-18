@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { BMFontLoader, BMFontLoaderErrorType } from '~/loader';
+import { BMFontLoader } from '~/loader';
+import { BMFontLoaderErrorType } from '~/error';
 import { BMFont, isBMFont } from '~/types';
 
 const config = {

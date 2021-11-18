@@ -5,7 +5,7 @@
  */
 
 import { Buffer } from 'buffer';
-import { BMFontLoaderError, BMFontLoaderErrorType } from '~/loader';
+import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error';
 import {
     BMFont,
     BMFontChar,
