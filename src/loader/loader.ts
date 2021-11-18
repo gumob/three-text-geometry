@@ -24,10 +24,10 @@ class BMFontLoaderError extends Error {
         let msg: string;
         switch (type) {
             case BMFontLoaderErrorType.ParseError:
-                msg = 'Failed to parse json data';
+                msg = message ? message : 'Failed to parse data';
                 break;
             case BMFontLoaderErrorType.LoadError:
-                msg = message ? message : 'Failed to load json data';
+                msg = message ? message : 'Failed to load data';
                 break;
             default:
                 msg = 'Unknown Error';
@@ -49,7 +49,7 @@ class BMFontLoader {
                 .then((response: AxiosResponse<object>) => {
                     const result: BMFont | null = new BMFontJsonParser().parse(response.data);
                     if (result && isBMFont(result)) resolve(result);
-                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError));
+                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Failed to parse json data'));
 
                 })
                 .catch((error: AxiosError) => {
@@ -65,7 +65,7 @@ class BMFontLoader {
                 .then((response: AxiosResponse<object>) => {
                     const result: BMFont | null = new BMFontXMLParser().parse(response.data.toString());
                     if (result && isBMFont(result)) resolve(result);
-                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError));
+                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Failed to parse xml data'));
 
                 })
                 .catch((error: AxiosError) => {
@@ -81,7 +81,7 @@ class BMFontLoader {
                 .then((response: AxiosResponse<object>) => {
                     const result: BMFont | null = new BMFontAsciiParser().parse(response.data.toString());
                     if (result && isBMFont(result)) resolve(result);
-                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError));
+                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Failed to parse ascii data'));
 
                 })
                 .catch((error: AxiosError) => {
@@ -98,7 +98,7 @@ class BMFontLoader {
                     const data = (typeof response.data === 'string') ? Buffer.from(response.data, 'binary') : response.data as Buffer;
                     const result: BMFont | null = new BMFontBinaryParser().parse(data);
                     if (result && isBMFont(result)) resolve(result);
-                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError));
+                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Failed to parse binary data'));
 
                 })
                 .catch((error: AxiosError) => {

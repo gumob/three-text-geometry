@@ -69,19 +69,18 @@ class BMFontAsciiParser {
             }
         });
         if (JSON.stringify(result.info) === JSON.stringify(DefaultBMFontInfo()))
-            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No info data');
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, `No info data. \n${JSON.stringify(result)}`);
         if (JSON.stringify(result.common) === JSON.stringify(DefaultBMFontCommon()))
-            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No common data');
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, `No common data. \n${JSON.stringify(result)}`);
         if (result.pages.length == 0)
-            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No page data');
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, `No page data. \n${JSON.stringify(result)}`);
         if (result.chars.length == 0)
-            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No chars data');
-        if (result.kernings.length == 0)
-            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No kernings data');
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, `No char data. \n${JSON.stringify(result)}`);
+        // if (result.kernings.length == 0)
+        //     throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, `No kernings data. \n${JSON.stringify(result)}`);
         // console.log(result);
         return result;
     }
 }
 
 export { BMFontAsciiParser };
-

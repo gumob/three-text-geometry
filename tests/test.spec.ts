@@ -57,9 +57,75 @@ describe('BMFontLoader', () => {
     }
   });
 
-  test('Ascii', async () => {
+  test('Ascii / DejaVu-sdf.fnt', async () => {
+    try {
+      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/DejaVu-sdf.fnt';
+      const loader = new BMFontLoader();
+      const font = await loader.loadAscii(uri);
+      expect(isBMFont(font)).toEqual(true);
+    } catch (error: any) {
+      console.error(error);
+    }
+  });
+
+  test('Ascii / Lato-Regular-16.fnt', async () => {
     try {
       const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-16.fnt';
+      const loader = new BMFontLoader();
+      const font = await loader.loadAscii(uri);
+      expect(isBMFont(font)).toEqual(true);
+    } catch (error: any) {
+      console.error(error);
+    }
+  });
+
+  test('Ascii / Lato-Regular-24.fnt', async () => {
+    try {
+      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-24.fnt';
+      const loader = new BMFontLoader();
+      const font = await loader.loadAscii(uri);
+      expect(isBMFont(font)).toEqual(true);
+    } catch (error: any) {
+      console.error(error);
+    }
+  });
+
+  test('Ascii / Lato-Regular-32.fnt', async () => {
+    try {
+      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-32.fnt';
+      const loader = new BMFontLoader();
+      const font = await loader.loadAscii(uri);
+      expect(isBMFont(font)).toEqual(true);
+    } catch (error: any) {
+      console.error(error);
+    }
+  });
+
+  test('Ascii / Lato-Regular-64.fnt', async () => {
+    try {
+      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-64.fnt';
+      const loader = new BMFontLoader();
+      const font = await loader.loadAscii(uri);
+      expect(isBMFont(font)).toEqual(true);
+    } catch (error: any) {
+      console.error(error);
+    }
+  });
+
+  test('Ascii / Norwester-Multi-32.fnt', async () => {
+    try {
+      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Norwester-Multi-32.fnt';
+      const loader = new BMFontLoader();
+      const font = await loader.loadAscii(uri);
+      expect(isBMFont(font)).toEqual(true);
+    } catch (error: any) {
+      console.error(error);
+    }
+  });
+
+  test('Ascii / Norwester-Multi-64.fnt', async () => {
+    try {
+      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Norwester-Multi-64.fnt';
       const loader = new BMFontLoader();
       const font = await loader.loadAscii(uri);
       expect(isBMFont(font)).toEqual(true);
