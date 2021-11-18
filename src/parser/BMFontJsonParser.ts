@@ -9,14 +9,13 @@ import { BMFont } from '~/types';
  */
 
 class BMFontJsonParser {
-    public parse(json: string): BMFont | null {
+    public parse(json: object): BMFont | null {
         try {
-            console.log(json);
             const ajv = new Ajv();
             const validate = ajv.compile(schema);
             const valid: boolean = validate(json);
             if (valid) {
-                return JSON.parse(json) as BMFont;
+                return json as BMFont;
             } else {
                 return null;
             }
