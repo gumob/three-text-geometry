@@ -12,9 +12,15 @@ const config = {
 
 describe('BMFontLoader', () => {
 
-  test('Valid  XML', async () => {
+  test('Valid Single Page XML', async () => {
     const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular.xml';
-    // const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular-pages.xml';
+    const loader = new BMFontLoader();
+    const font = await loader.loadXML(uri, config);
+    expect(isBMFont(font)).toEqual(true);
+  });
+
+  test('Valid Multiple Page XML', async () => {
+    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular-pages.xml';
     const loader = new BMFontLoader();
     const font = await loader.loadXML(uri, config);
     expect(isBMFont(font)).toEqual(true);
