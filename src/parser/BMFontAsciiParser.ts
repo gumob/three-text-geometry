@@ -9,9 +9,6 @@ import { BMFontLoaderError, BMFontLoaderErrorType } from '~/loader';
  * quicktype ./src/types/BMFont.ts -o ./src/parser/BMFontJsonSchema.json --lang schema
  */
 
-// type LineData = { key: string, data: { id: number, file: string} };
-type LineData = { key: string, data: any };
-
 class BMFontAsciiParser {
     parse(data: string) {
         data = data.trim();
@@ -35,10 +32,14 @@ class BMFontAsciiParser {
                     const arr = str.split('=');
                     const key: string = arr[0] as string;
                     const value: string = arr[1] as string;
-                    if (/^-?\d+\.?\d*$/.test(value)) keyValues[key] = +value;
-                    else if (/^[\d,]+/.test(value)) keyValues[key] = value.split(',').map((value) => (+value));
-                    else if (/^("|').*("|')$/.test(value)) keyValues[key] = value.replace(/^("|')(.*)("|')$/g, '$2');
-                    else keyValues[key] = value;
+                    if (/^-?\d+\.?\d*$/.test(value))
+                        keyValues[key] = +value;
+                    else if (/^[\d,]+/.test(value))
+                        keyValues[key] = value.split(',').map((value) => (+value));
+                    else if (/^("|').*("|')$/.test(value))
+                        keyValues[key] = value.replace(/^("|')(.*)("|')$/g, '$2');
+                    else
+                        keyValues[key] = value;
                 });
             switch (rootKey) {
                 case 'info':
@@ -67,11 +68,16 @@ class BMFontAsciiParser {
                     break
             }
         });
-        if (JSON.stringify(result.info) === JSON.stringify(DefaultBMFontInfo())) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No info data');
-        if (JSON.stringify(result.common) === JSON.stringify(DefaultBMFontCommon())) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No common data');
-        if (result.pages.length == 0) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No page data');
-        if (result.chars.length == 0) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No chars data');
-        if (result.kernings.length == 0) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No kernings data');
+        if (JSON.stringify(result.info) === JSON.stringify(DefaultBMFontInfo()))
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No info data');
+        if (JSON.stringify(result.common) === JSON.stringify(DefaultBMFontCommon()))
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No common data');
+        if (result.pages.length == 0)
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No page data');
+        if (result.chars.length == 0)
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No chars data');
+        if (result.kernings.length == 0)
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No kernings data');
         // console.log(result);
         return result;
     }
