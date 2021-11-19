@@ -80,29 +80,28 @@ function createTextLayoutOption(option: any = {}): TextLayoutOption {
     };
 }
 
-function DefaultTextGeometryOption(): TextGeometryOption {
-    const opt = createTextLayoutOption();
+function createTextGeometryOption(option: any = {}): TextGeometryOption {
     return {
         /** WordWrapOption specific */
-        start: opt.start,
-        end: opt.end,
-        width: opt.width,
-        mode: opt.mode,
-        measure: opt.measure,
+        start: option.start !== undefined ? option.start : 0,
+        end: option.end !== undefined ? option.end : undefined,
+        width: option.width !== undefined ? option.width : undefined,
+        mode: option.mode !== undefined ? option.mode : WordWrapMode.None,
+        measure: option.measure || undefined,
         /** TextLayoutOption specific */
-        font: opt.font,
-        text: opt.text,
-        letterSpacing: opt.letterSpacing,
-        tabSize: opt.tabSize,
-        lineHeight: opt.lineHeight,
-        align: opt.align,
+        font: option.font,
+        text: option.text,
+        letterSpacing: option.letterSpacing !== undefined ? option.letterSpacing : 0,
+        tabSize: option.tabSize !== undefined ? option.tabSize : 4,
+        lineHeight: option.lineHeight,
+        align: option.align || TextLayoutAlign.Left,
         /** TextGeometryOption specific */
-        flipY: true,
-        multipage: false,
+        flipY: option.flipY !== undefined ? option.flipY : true,
+        multipage: option.multipage !== undefined ? option.multipage : false
     };
 }
 
 export {
     ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, WordMetrics, WordWrapMode, WordWrapOption,
-    createWordWrapOption, createTextLayoutOption, DefaultTextGeometryOption
+    createWordWrapOption, createTextLayoutOption, createTextGeometryOption
 }

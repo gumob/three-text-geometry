@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { BMFontLoader } from '~/loader';
 import { BMFontLoaderErrorType } from '~/error';
-import { BMFont, DefaultTextGeometryOption, isBMFont, TextGeometryOption } from '~/types';
+import { BMFont, createTextGeometryOption, isBMFont, TextGeometryOption } from '~/types';
 import TextGeometry from '~/index';
 
 const config = {
@@ -19,7 +19,7 @@ describe('TextGeometry', () => {
     const loader = new BMFontLoader();
     const font = await loader.loadXML(uri);
     expect(isBMFont(font)).toEqual(true);
-    // const option: TextGeometryOption = DefaultTextGeometryOption();
+    // const option: TextGeometryOption = createTextGeometryOption();
     // option.font = font;
     // const geometry = new TextGeometry(option);
     // geometry.update('Hello World');

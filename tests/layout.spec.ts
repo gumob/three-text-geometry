@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import fs from 'fs';
 import { BMFontLoader } from '~/loader';
 import { BMFontLoaderErrorType } from '~/error';
-import { BMFont, BMFontChar, createTextLayoutOption, DefaultTextGeometryOption, isBMFont, TextGeometryOption, TextGlyph } from '~/types';
+import { BMFont, BMFontChar, createTextLayoutOption, createTextGeometryOption, isBMFont, TextGeometryOption, TextGlyph } from '~/types';
 import TextGeometry from '~/index';
 import { TextLayout } from '~/layout';
 import { BMFontAsciiParser, BMFontXMLParser } from '~/parser';

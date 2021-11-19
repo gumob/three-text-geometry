@@ -1,11 +1,11 @@
 import * as THREE from 'three'
 import { TextLayout } from '~/layout'
-import { BMFont, DefaultTextGeometryOption, TextGeometryOption, TextGlyph, TextLayoutAlign, WordWrapMode } from '~/types'
+import { BMFont, createTextGeometryOption, TextGeometryOption, TextGlyph, TextLayoutAlign, WordWrapMode } from '~/types'
 import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '~/utils'
 
 class TextGeometry extends THREE.BufferGeometry {
   layout: TextLayout | undefined;
-  _opt: TextGeometryOption = DefaultTextGeometryOption();
+  _opt: TextGeometryOption = createTextGeometryOption();
   visibleGlyphs: TextGlyph[] = [];
 
   constructor(option: TextGeometryOption) {
