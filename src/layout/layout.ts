@@ -48,7 +48,6 @@ class TextLayout {
     public update(option: TextLayoutOption) {
         const opt: TextLayoutOption = option;
         this._opt.font = opt.font ? opt.font : this._opt.font;
-        if (!this._opt.font && !opt.font) throw new TypeError('must specify a `font` in options');
         this._opt.text = opt.text !== undefined ? opt.text : (this._opt.text || '');
         this._opt.mode = opt.mode ? opt.mode : this._opt.mode;
         this._opt.align = opt.align ? opt.align : this._opt.align;
@@ -227,8 +226,7 @@ class TextLayout {
         }
 
         /** make sure rightmost edge lines up with rendered _glyphs */
-        if (lastGlyph)
-            curWidth += lastGlyph.xoffset;
+        if (lastGlyph) curWidth += lastGlyph.xoffset;
 
         return {
             start: start,

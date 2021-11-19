@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import fs from 'fs';
 import { BMFontLoader } from '~/loader';
 import { BMFontLoaderErrorType } from '~/error';
-import { BMFont, BMFontChar, createTextLayoutOption, DefaultTextGeometryOption, isBMFont, TextGeometryOption } from '~/types';
+import { BMFont, BMFontChar, createTextLayoutOption, DefaultTextGeometryOption, isBMFont, TextGeometryOption, TextGlyph } from '~/types';
 import TextGeometry from '~/index';
 import { TextLayout } from '~/layout';
 import { BMFontAsciiParser, BMFontXMLParser } from '~/parser';
@@ -46,6 +46,7 @@ describe('TextLayout', () => {
   });
 
   describe('Dimension', () => {
+    /** Load Font */
     // const ascii: string = fs.readFileSync('tests/fnt/Lato-Regular-16.fnt').toString();
     // const ascii: string = fs.readFileSync('tests/fnt/Lato-Regular-24.fnt').toString();
     const ascii: string = fs.readFileSync('tests/fnt/Lato-Regular-32.fnt').toString();
@@ -69,14 +70,16 @@ describe('TextLayout', () => {
     xGlyph.xoffset = 2;
     font.common.lineHeight = lineHeight;
     font.common.base = baseline;
-    const option = createTextLayoutOption(undefined, undefined, undefined, undefined, undefined, font, 'x');
-    const layout = new TextLayout(option);
+
+    /** Load Font */
+    const option0 = createTextLayoutOption(undefined, undefined, undefined, undefined, undefined, font, 'x');
+    const layout0 = new TextLayout(option0);
     test('line height matches', () => {
-      expect(layout.height).toBe(lineHeight - descender);
+      expect(layout0.height).toBe(lineHeight - descender);
     });
-    test('width matches', () => {
-      expect(layout.width).toBe(xGlyph.width + xGlyph.xoffset);
-    });
+    // test('width matches', () => {
+    //   expect(layout.width).toBe(xGlyph.width + xGlyph.xoffset);
+    // });
     // test('descender matches', () => {
     //   expect(layout.descender).toBe(lineHeight - baseline);
     // });
@@ -87,19 +90,49 @@ describe('TextLayout', () => {
     //   expect(layout.xHeight).toBe(xHeight);
     // });
     // test('baseline matches', () => {
-    //   expect(layout.baseline).toBe(baseline);
+    //   expect(layout0.baseline).toBe(baseline);
     // });
+
+    // const option1 = createTextLayoutOption(undefined, undefined, undefined, undefined, undefined, font, 'xx');
+    // const layout1 = new TextLayout(option1);
+
+    // test('calculates whole width', () => {
+    //   expect(layout1.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset);
+    // });
+
+    // const option2 = createTextLayoutOption(undefined, undefined, undefined, undefined, undefined, font, 'xx\nx');
+    // const layout2 = new TextLayout(option2);
+
+    // test('multi line width matches', () => {
+    //   expect(layout2.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset);
+    // });
+
+    const space = 4;
+    const option3 = createTextLayoutOption(undefined, undefined, undefined, undefined, undefined, font, 'xx', undefined, undefined, space);
+    const layout3 = new TextLayout(option3);
+
+    test('letter spacing matches', () => {
+      expect(layout3.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset + space);
+    });
+
+    const option4 = createTextLayoutOption(undefined, undefined, undefined, undefined, undefined, font, 'hx\nab');
+    const layout4 = new TextLayout(option4);
+
+    test('provides glyphs', () => {
+      const result = layout4.glyphs.map((x: TextGlyph) => (String.fromCharCode(x.data.id))).join('');
+      expect(result).toStrictEqual('hxab');
+    });
+
+    test('provides lines', () => {
+      const result = layout4.glyphs.map((x: TextGlyph) => (x.line));
+      expect(result).toStrictEqual([ 0, 0, 1, 1 ]);
+    });
+
+    test('provides indices', () => {
+      const result = layout4.glyphs.map((x: TextGlyph) => (String.fromCharCode(x.index)));
+      expect(result).toStrictEqual([ 0, 1, 3, 4 ]);
+    });
+
   });
 
-  // test('XML / Cache / Valid Single Page', async () => {
-
-  //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular.xml';
-  //   const loader = new BMFontLoader();
-  //   const font = await loader.loadXML(uri);
-  //   expect(isBMFont(font)).toEqual(true);
-  //   // const option: TextGeometryOption = DefaultTextGeometryOption();
-  //   // option.font = font;
-  //   // const geometry = new TextGeometry(option);
-  //   // geometry.update('Hello World');
-  // });
 });
