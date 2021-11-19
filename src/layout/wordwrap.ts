@@ -10,14 +10,9 @@ const newlineChar = '\n'
 const whitespace = /\s/
 
 function wrap(text: string, opt: WordWrapOption = createWordWrapOption()): string {
-    // console.log('text', text);
-    const results = lines(text, opt);
-    const result = results
+    return lines(text, opt)
         .map((line: WordMetrics) => (text.substring(line.start, line.end)))
         .join('\n');
-    // console.log('results', results);
-    // console.log('result', result);
-    return result;
 }
 
 function lines(text: string, opt: WordWrapOption = createWordWrapOption()): WordMetrics[] {
@@ -29,15 +24,6 @@ function lines(text: string, opt: WordWrapOption = createWordWrapOption()): Word
     const width: number = opt.width !== undefined ? opt.width : Number.MAX_VALUE;
     const mode: WordWrapMode = opt.mode;
     const measure: ComputeMetrics = opt.measure || monospace;
-
-    // console.log('text', text);
-    // console.log(
-    //     'start', start,
-    //     'end', end,
-    //     'width', width,
-    //     'mode', mode,
-    //     'measure', measure
-    // );
 
     if (mode === WordWrapMode.Pre)
         return pre(measure, text, start, end, width);
