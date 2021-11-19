@@ -3,17 +3,12 @@
 /* eslint @typescript-eslint/no-unsafe-member-access: 0 */
 /* eslint @typescript-eslint/no-unsafe-call: 0 */
 /* eslint @typescript-eslint/no-unsafe-argument: 0 */
-/**
- * 
- * https://github.com/Jam3/load-bmfont
- * 
- */
+
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse } from 'axios';
-import * as mime from 'mime-types';
 import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error';
 import { BMFontJsonParser, BMFontBinaryParser, BMFontXMLParser, BMFontAsciiParser } from '~/parser';
-import { BMFont, isBMFont } from '~/types';
-import { isBinary } from '~/utils';
+import { BMFont } from '~/types';
+
 class BMFontLoader {
     constructor() { }
 
