@@ -22,9 +22,7 @@ class BMFontLoader {
             axios
                 .get(uri, config)
                 .then((response: AxiosResponse<object>) => {
-                    const result: BMFont | null = new BMFontJsonParser().parse(response.data);
-                    if (result && isBMFont(result)) resolve(result);
-                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Failed to parse json data'));
+                    resolve(new BMFontJsonParser().parse(response.data));
 
                 })
                 .catch((error: AxiosError) => {
@@ -38,9 +36,7 @@ class BMFontLoader {
             axios
                 .get(uri, config)
                 .then((response: AxiosResponse<object>) => {
-                    const result: BMFont | null = new BMFontXMLParser().parse(response.data.toString());
-                    if (result && isBMFont(result)) resolve(result);
-                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Failed to parse xml data'));
+                    resolve(new BMFontXMLParser().parse(response.data.toString()));
 
                 })
                 .catch((error: AxiosError) => {
@@ -54,10 +50,7 @@ class BMFontLoader {
             axios
                 .get(uri, config)
                 .then((response: AxiosResponse<object>) => {
-                    const result: BMFont | null = new BMFontAsciiParser().parse(response.data.toString());
-                    if (result && isBMFont(result)) resolve(result);
-                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Failed to parse ascii data'));
-
+                    resolve(new BMFontAsciiParser().parse(response.data.toString()));
                 })
                 .catch((error: AxiosError) => {
                     reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message));
@@ -71,9 +64,7 @@ class BMFontLoader {
                 .get(uri, config)
                 .then((response: AxiosResponse<object>) => {
                     const data = (typeof response.data === 'string') ? Buffer.from(response.data, 'binary') : response.data as Buffer;
-                    const result: BMFont | null = new BMFontBinaryParser().parse(data);
-                    if (result && isBMFont(result)) resolve(result);
-                    else reject(new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Failed to parse binary data'));
+                    resolve(new BMFontBinaryParser().parse(data));
 
                 })
                 .catch((error: AxiosError) => {
@@ -81,30 +72,6 @@ class BMFontLoader {
                 });
         });
     }
-
-    //  parseFont(data: any): BMFont | null {
-    //      try {
-    //         console.log(typeof data);
-    //          if (typeof data === 'string' && data.trim().startsWith('{')) {
-    //              return new BMFontJsonParser().parse(data);
-    //          }
-    //          else if (typeof data === 'string' && data.trim().startsWith('<?xml')) {
-    //              return new BMFontXMLParser().parse(data.toString());
-    //          }
-    //          else if (typeof data === 'object' && isBinary(data)) {
-    //              return new BMFontBinaryParser().parse(typeof data === 'string' ? Buffer.from(data, 'binary') : data);
-    //          }
-    //          // else if (mime.lookup(data) == 'application/xml' || data.charAt(0) === '<') {
-    //          //     return parseXML(data.toString().trim());
-    //          // }
-    //          // else {
-    //          //     return parseASCII(data.toString().trim());
-    //          // }
-    //          return null;
-    //      } catch (e) {
-    //          return null;
-    //      }
-    //  }
 }
 
 export { BMFontLoader };

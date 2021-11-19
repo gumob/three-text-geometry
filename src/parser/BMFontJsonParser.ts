@@ -1,6 +1,7 @@
 import Ajv from 'ajv'
 import schema from './BMFontJsonSchema.json'
 import { BMFont } from '~/types';
+import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error';
 
 /**
  * # How to create a json schema
@@ -9,7 +10,7 @@ import { BMFont } from '~/types';
  */
 
 class BMFontJsonParser {
-    public parse(json: object): BMFont | null {
+    public parse(json: object): BMFont {
         try {
             const ajv = new Ajv();
             const validate = ajv.compile(schema);
@@ -17,11 +18,10 @@ class BMFontJsonParser {
             if (valid) {
                 return json as BMFont;
             } else {
-                return null;
+                throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Invalid json data');
             }
         } catch (error: any) {
-            console.error(error);
-            return null;
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, error.message);
         }
     }
 }

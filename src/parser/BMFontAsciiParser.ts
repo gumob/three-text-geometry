@@ -10,7 +10,7 @@ import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error';
  */
 
 class BMFontAsciiParser {
-    parse(data: string) {
+    parse(data: string): BMFont {
         data = data.trim();
 
         let lines: string[] = data.split(/\r\n?|\n/g);

@@ -144,7 +144,7 @@ describe('BMFontLoader', () => {
       const font = await loader.loadAscii(uri, config);
       expect(isBMFont(font)).toEqual(true);
     } catch (error: any) {
-      expect(error.name).toBe(BMFontLoaderErrorType.ParseError);
+      expect(error.name).toBe(BMFontLoaderErrorType.LoadError);
     }
   });
 
@@ -238,7 +238,7 @@ describe('BMFontLoader', () => {
       const loader = new BMFontLoader();
       await loader.loadBinary(uri, config);
     } catch (error: any) {
-      expect(error.name).toBe(BMFontLoaderErrorType.ParseError);
+      expect(error.name).toBe(BMFontLoaderErrorType.LoadError);
     }
   });
 
@@ -248,7 +248,7 @@ describe('BMFontLoader', () => {
       const loader = new BMFontLoader();
       await loader.loadBinary(uri, config);
     } catch (error: any) {
-      expect(error.name).toBe(BMFontLoaderErrorType.ParseError);
+      expect(error.name).toBe(BMFontLoaderErrorType.LoadError);
     }
   });
 
