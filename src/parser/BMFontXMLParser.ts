@@ -1,4 +1,5 @@
 import { XMLParser } from 'fast-xml-parser';
+import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error';
 import { BMFont, BMFontChar, BMFontCommon, BMFontInfo, BMFontKern } from '~/types';
 
 /**
@@ -8,7 +9,7 @@ import { BMFont, BMFontChar, BMFontCommon, BMFontInfo, BMFontKern } from '~/type
  */
 
 class BMFontXMLParser {
-    public parse(xml: string): BMFont | null {
+    public parse(xml: string): BMFont {
         try {
             const options = {
                 ignoreAttributes: false,
@@ -17,7 +18,11 @@ class BMFontXMLParser {
             const parser = new XMLParser(options);
             const json: any = parser.parse(xml);
             const font = json.font;
-            if (!font) return null;
+            if (!font) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No font data in BMFont file');
+            if (!font.pages) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No font data in BMFont file');
+            if (!font.chars) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No chars data in BMFont file');
+            if (!font.info) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No info data in BMFont file');
+            if (!font.common) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No common data in BMFont file');
             // console.log('font.pages.page', font.pages.page);
             let pages: string[];
             if (Array.isArray(font.pages.page)) {
@@ -79,8 +84,8 @@ class BMFontXMLParser {
             }
             return bmFont;
         } catch(error: any){
-            console.error(error);
-            return null;
+            // console.error(error);
+            throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, error.message);
         }
     }
 }

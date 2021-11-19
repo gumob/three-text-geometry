@@ -14,7 +14,7 @@ class BMFontAsciiParser {
         data = data.trim();
 
         let lines: string[] = data.split(/\r\n?|\n/g);
-        if (lines.length === 0) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No data in BMFont file')
+        if (lines.length === 0) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No data in BMFont file');
 
         let result: BMFont = DefaultBMFont();
 
