@@ -1,42 +1,46 @@
 import * as THREE from 'three'
 import { TextLayout } from '~/layout'
-import { TextGeometryOption, TextGlyph, TextLayoutAlign, WordWrapMode } from '~/types'
+import { BMFont, DefaultTextGeometryOption, TextGeometryOption, TextGlyph, TextLayoutAlign, WordWrapMode } from '~/types'
 import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '~/utils'
 
 class TextGeometry extends THREE.BufferGeometry {
   layout: TextLayout | undefined;
-  _opt: TextGeometryOption | undefined;
+  _opt: TextGeometryOption = DefaultTextGeometryOption();
   visibleGlyphs: TextGlyph[] = [];
 
-  constructor(option: TextGeometryOption | string) {
+  constructor(option: TextGeometryOption) {
     super()
     this.update(option);
   }
 
   public update(option: TextGeometryOption | string) {
-    let opt: TextGeometryOption = {};
-    if (typeof option === 'string') opt.text = option;
-    else opt = option;
-    if (!opt.font) throw new TypeError('must specify a { font } in options');
-    opt.text = typeof option === 'string' ? option : option.text;
-    opt.mode = (typeof opt.mode === typeof WordWrapMode) ? opt.mode : WordWrapMode.Pre;
-    opt.align = (typeof opt.align === typeof TextLayoutAlign) ? opt.align : TextLayoutAlign.Left;
-    opt.letterSpacing = (typeof opt.letterSpacing === 'number') ? opt.letterSpacing : 0;
-    opt.lineHeight = (typeof opt.lineHeight === 'number') ? opt.lineHeight : opt.font.common.lineHeight;
-    opt.tabSize = (typeof opt.tabSize === 'number') ? opt.tabSize : 4;
-    opt.start = (typeof opt.start === 'number') ? opt.start : 4;
-    opt.end = (typeof opt.end === 'number') ? opt.end : 0;
-    opt.flipY = (typeof opt.flipY === 'boolean') ? opt.flipY : true;
-    opt.multipage = (typeof opt.multipage === 'boolean') ? opt.multipage : false;
+    // let opt: TextGeometryOption = {};
+    if (typeof option === 'string') {
+      this._opt.text = option;
+    } else {
+      const opt: TextGeometryOption = option;
+      if (!opt.font) throw new TypeError('must specify a `font` in options');
+      this._opt.font = opt.font;
+      this._opt.text = opt.text ? opt.text : this._opt.text;
+      this._opt.mode = opt.mode ? opt.mode : this._opt.mode;
+      this._opt.align = opt.align ? opt.align : this._opt.align;
+      this._opt.letterSpacing = typeof opt.letterSpacing === 'number' ? opt.letterSpacing : this._opt.letterSpacing;
+      this._opt.lineHeight = typeof opt.lineHeight === 'number' ? opt.lineHeight : (typeof this._opt.lineHeight === 'number' ? this._opt.lineHeight : opt.font.common.lineHeight);
+      this._opt.tabSize = (typeof opt.tabSize === 'number') ? opt.tabSize : this._opt.tabSize;
+      this._opt.start = (typeof opt.start === 'number') ? opt.start : this._opt.start;
+      this._opt.end = (typeof opt.end === 'number') ? opt.end : this._opt.end;
+      this._opt.flipY = (typeof opt.flipY === 'boolean') ? opt.flipY : this._opt.flipY;
+      this._opt.multipage = (typeof opt.multipage === 'boolean') ? opt.multipage : this._opt.multipage;
+    };
 
-    this.layout = new TextLayout(opt);
+    this.layout = new TextLayout(this._opt);
 
     /** the desired BMFont data */
-    const font = opt.font;
+    const font: BMFont = this._opt.font!;
 
     /** determine texture size from font file */
-    const texWidth = font.common.scaleW
-    const texHeight = font.common.scaleH
+    const texWidth = font.common.scaleW;
+    const texHeight = font.common.scaleH;
 
     /** get visible glyphs */
     const glyphs = this.layout.glyphs.filter(function (glyph) {
@@ -49,7 +53,7 @@ class TextGeometry extends THREE.BufferGeometry {
 
     /** get common vertex data */
     const positions = extractPositions(glyphs)
-    const uvs = extractUVs(glyphs, texWidth, texHeight, opt.flipY)
+    const uvs = extractUVs(glyphs, texWidth, texHeight, this._opt.flipY!)
     const indices = createIndices([], {
       clockwise: true,
       type: 'uint16',
@@ -62,9 +66,9 @@ class TextGeometry extends THREE.BufferGeometry {
     this.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
 
     /** update multipage data */
-    if (!opt.multipage && 'page' in this.attributes) {
+    if (!this._opt.multipage && 'page' in this.attributes) {
       this.deleteAttribute('page'); /** disable multipage rendering */
-    } else if (opt.multipage) {
+    } else if (this._opt.multipage) {
       this.setAttribute('page', new THREE.BufferAttribute(extractPages(glyphs), 1)); /** enable multipage rendering */
     }
   }

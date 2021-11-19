@@ -54,5 +54,17 @@ interface TextGeometryOption extends TextLayoutOption {
     multipage?: boolean;
 }
 
+function DefaultTextGeometryOption() {
+    return {
+        mode: WordWrapMode.Pre,
+        align: TextLayoutAlign.Left,
+        letterSpacing : 0,
+        tabSize : 4,
+        start : 4,
+        end : 0,
+        flipY : true,
+        multipage : false,
+    };
+}
 
-export { ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, TextMetrics, WordWrapMode, WordWrapOption }
+export { ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, TextMetrics, WordWrapMode, WordWrapOption, DefaultTextGeometryOption }
