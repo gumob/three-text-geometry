@@ -10,9 +10,9 @@ interface BSDFShaderOption {
 
 function createMultipageShader(opt: BSDFShaderOption) {
   opt = opt || {}
-  const opacity = typeof opt.opacity === 'number' ? opt.opacity : 1;
+  const opacity = opt.opacity !== undefined ? opt.opacity : 1;
   const precision = opt.precision || 'highp';
-  const alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001;
+  const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
 
   let textures: THREE.Texture[] = opt.textures || [];
   textures = Array.isArray(textures) ? textures : [textures];

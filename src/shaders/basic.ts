@@ -10,8 +10,8 @@ interface BasicShaderOption {
 
 function createBasicShader (opt: BasicShaderOption) {
   opt = opt || {}
-  const opacity: number = typeof opt.opacity === 'number' ? opt.opacity : 1;
-  const alphaTest: number = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001;
+  const opacity: number = opt.opacity !== undefined ? opt.opacity : 1;
+  const alphaTest: number = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
   const precision: string = opt.precision || 'highp';
   const color: THREE.Color = opt.color || new THREE.Color();
   const map: THREE.Texture = opt.map || new THREE.Texture();

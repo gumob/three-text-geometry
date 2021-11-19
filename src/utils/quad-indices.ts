@@ -27,8 +27,8 @@ function createIndices(array: QuadIndices | QuadOptions | null = null, opt: Quad
     else opt = opt || {};
 
     const type = typeof opt.type === 'string' ? opt.type : 'uint16'
-    const count = typeof opt.count === 'number' ? opt.count : 1;
-    const start = typeof opt.start === 'number' ? opt.start : 0;
+    const count = opt.count !== undefined ? opt.count : 1;
+    const start = opt.start !== undefined ? opt.start : 0;
     const clockwise = typeof opt.clockwise === 'boolean' ? opt.clockwise : true;
 
     const dir = clockwise ? [0, 2, 3] : [2, 1, 3];

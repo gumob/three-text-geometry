@@ -66,27 +66,39 @@ function createWordWrapOption(
     };
 }
 
-function DefaultTextLayoutOption(): TextLayoutOption {
+function createTextLayoutOption(
+    start: number | undefined = undefined,
+    end: number | undefined = undefined,
+    width: number | undefined = undefined,
+    mode: WordWrapMode | undefined = undefined,
+    measure: ComputeMetrics | undefined = undefined,
+    font: BMFont | undefined = undefined,
+    text: string | undefined = undefined,
+    letterSpacing: number | undefined = undefined,
+    tabSize: number | undefined = undefined,
+    lineHeight: number | undefined = undefined,
+    align: TextLayoutAlign | undefined = undefined
+): TextLayoutOption {
     const opt = createWordWrapOption();
     return {
         /** WordWrapOption specific */
-        start: opt.start,
-        end: opt.end,
-        width: opt.width,
-        mode: opt.mode,
-        measure: opt.measure,
+        start: start !== undefined ? start : 0,
+        end: end !== undefined ? end : undefined,
+        width: width !== undefined ? width : undefined,
+        mode: mode !== undefined ? mode : WordWrapMode.None,
+        measure: measure || undefined,
         /** TextLayoutOption specific */
-        font: undefined,
-        text: undefined,
-        letterSpacing: 0,
-        tabSize: 4,
-        lineHeight: undefined,
-        align: TextLayoutAlign.Left,
+        font: font,
+        text: text,
+        letterSpacing: letterSpacing !== undefined ? letterSpacing : 0,
+        tabSize: tabSize !== undefined ? tabSize : 4,
+        lineHeight: lineHeight,
+        align: align || TextLayoutAlign.Left
     };
 }
 
 function DefaultTextGeometryOption(): TextGeometryOption {
-    const opt = DefaultTextLayoutOption();
+    const opt = createTextLayoutOption();
     return {
         /** WordWrapOption specific */
         start: opt.start,
@@ -109,5 +121,5 @@ function DefaultTextGeometryOption(): TextGeometryOption {
 
 export {
     ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, WordMetrics, WordWrapMode, WordWrapOption,
-    createWordWrapOption, DefaultTextLayoutOption, DefaultTextGeometryOption
+    createWordWrapOption, createTextLayoutOption, DefaultTextGeometryOption
 }

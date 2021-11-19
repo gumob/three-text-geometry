@@ -1,18 +1,18 @@
 
 import xtend from 'xtend';
 import * as wordwrap from '~/layout'
-import { BMFont, BMFontChar, ComputeMetrics, DefaultTextLayoutOption, TextGlyph, TextLayoutAlign, TextLayoutOption, WordMetrics, WordWrapMode } from '~/types'
+import { BMFont, BMFontChar, ComputeMetrics, createTextLayoutOption, TextGlyph, TextLayoutAlign, TextLayoutOption, WordMetrics, WordWrapMode } from '~/types'
 
 const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
 const M_WIDTHS = ['m', 'w'];
 const CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-const TAB_ID = '\t'.charCodeAt(0)
-const SPACE_ID = ' '.charCodeAt(0)
+const TAB_ID = '\t'.charCodeAt(0);
+const SPACE_ID = ' '.charCodeAt(0);
 
 class TextLayout {
     private _opt: TextLayoutOption;
     private _measure: ComputeMetrics;
-    
+
     private _linesTotal = 0;
     private _fallbackSpaceGlyph: BMFontChar | null = null;
     private _fallbackTabGlyph: BMFontChar | null = null;
@@ -38,42 +38,30 @@ class TextLayout {
     public get lineHeight(): number { return this._lineHeight; }
 
     constructor(option: TextLayoutOption) {
+        if (option.font === undefined) throw new TypeError('Must specify a `font` in options');
         this._opt = option;
         this._glyphs = [];
         this._measure = this.computeMetrics.bind(this);
-        this.update(option)
+        this.update(option);
     }
 
     public update(option: TextLayoutOption) {
-        // let opt: TextLayoutOption = DefaultTextLayoutOption();
-        // if (typeof option === 'string') opt.text = option;
-        // else opt = option;
-        // if (!opt.font) throw new TypeError('must specify a { font } in options');
-        // opt.text = typeof option === 'string' ? option : option.text;
-        // opt.mode = (typeof opt.mode === typeof WordWrapMode) ? opt.mode : WordWrapMode.Pre;
-        // opt.align = (typeof opt.align === typeof TextLayoutAlign) ? opt.align : TextLayoutAlign.Left;
-        // opt.letterSpacing = (typeof opt.letterSpacing === 'number') ? opt.letterSpacing : 0;
-        // opt.lineHeight = (typeof opt.lineHeight === 'number') ? opt.lineHeight : opt.font.common.lineHeight;
-        // opt.tabSize = (typeof opt.tabSize === 'number') ? opt.tabSize : 4;
-        // opt.start = (typeof opt.start === 'number') ? opt.start : 4;
-        // opt.end = (typeof opt.end === 'number') ? opt.end : 0;
-        // opt = xtend({ measure: this._measure }, opt);
-        // this._opt = opt;
-
         const opt: TextLayoutOption = option;
         this._opt.font = opt.font ? opt.font : this._opt.font;
         if (!this._opt.font && !opt.font) throw new TypeError('must specify a `font` in options');
-        const font: BMFont = this._opt.font!; 
-        const text: string = this._opt.text = opt.text ? opt.text : this._opt.text || '';
+        this._opt.text = opt.text !== undefined ? opt.text : (this._opt.text || '');
         this._opt.mode = opt.mode ? opt.mode : this._opt.mode;
         this._opt.align = opt.align ? opt.align : this._opt.align;
-        this._opt.letterSpacing = typeof opt.letterSpacing === 'number' ? opt.letterSpacing : this._opt.letterSpacing;
-        this._opt.lineHeight = typeof opt.lineHeight === 'number' ? opt.lineHeight : (typeof this._opt.lineHeight === 'number' ? this._opt.lineHeight : this._opt.font!.common.lineHeight);
-        this._opt.tabSize = (typeof opt.tabSize === 'number') ? opt.tabSize : this._opt.tabSize;
-        this._opt.start = (typeof opt.start === 'number') ? opt.start : this._opt.start;
-        this._opt.end = (typeof opt.end === 'number') ? opt.end : this._opt.end;
-        this._opt.measure = opt.measure ? opt.measure : this._opt.measure;
+        this._opt.letterSpacing = opt.letterSpacing !== undefined ? opt.letterSpacing : this._opt.letterSpacing;
+        this._opt.lineHeight = opt.lineHeight !== undefined ? opt.lineHeight : (this._opt.lineHeight !== undefined ? this._opt.lineHeight : this._opt.font!.common.lineHeight);
+        this._opt.tabSize = opt.tabSize !== undefined ? opt.tabSize : this._opt.tabSize;
+        this._opt.start = opt.start !== undefined ? opt.start : this._opt.start;
+        this._opt.end = opt.end !== undefined ? opt.end : this._opt.end;
+        this._opt.measure = opt.measure !== undefined ? opt.measure : this._opt.measure;
         // this._opt = xtend({ measure: this._measure }, opt);
+
+        const font: BMFont = this._opt.font!;
+        const text: string = this._opt.text;
 
         this._setupSpaceGlyphs(font)
 
@@ -155,7 +143,7 @@ class TextLayout {
     }
 
     asNumber(num: number | undefined, def = 0) {
-        return typeof num === 'number' ? num : def;
+        return num !== undefined ? num : def;
     }
 
     private _setupSpaceGlyphs(font: BMFont) {

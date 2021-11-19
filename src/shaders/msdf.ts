@@ -11,8 +11,8 @@ interface BSDFShaderOption {
 
 function createMSDFShader(opt: BSDFShaderOption) {
   opt = opt || {};
-  const opacity = typeof opt.opacity === 'number' ? opt.opacity : 1;
-  const alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001;
+  const opacity = opt.opacity !== undefined ? opt.opacity : 1;
+  const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
   const precision = opt.precision || 'highp';
   const color = opt.color || new THREE.Color();
   const map = opt.map || new THREE.Texture();
