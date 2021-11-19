@@ -28,43 +28,80 @@ enum WordWrapMode {
 }
 
 interface WordWrapOption {
-    width?: number;
-    start?: number;
+    start: number;
     end?: number;
-    mode?: WordWrapMode;
+    width?: number;
+    mode: WordWrapMode;
     measure?: ComputeMetrics;
 }
 
 interface TextLayoutOption extends WordWrapOption {
     font?: BMFont;
     text?: string;
-    align?: TextLayoutAlign;
-    letterSpacing?: number;
+    letterSpacing: number;
+    tabSize: number;
     lineHeight?: number;
-    tabSize?: number;
-    // width?: number;
-    // mode?: WordWrapMode;
-    // start?: number;
-    // end?: number;
-    // measure?: ComputeMetrics;
+    align: TextLayoutAlign;
 }
 
 interface TextGeometryOption extends TextLayoutOption {
-    flipY?: boolean;
-    multipage?: boolean;
+    flipY: boolean;
+    multipage: boolean;
 }
 
-function DefaultTextGeometryOption() {
+function DefaultWordWrapOption(): WordWrapOption {
     return {
+        /** WordWrapOption specific */
+        start: 0,
+        end: undefined,
+        width: undefined,
         mode: WordWrapMode.Pre,
-        align: TextLayoutAlign.Left,
-        letterSpacing : 0,
-        tabSize : 4,
-        start : 4,
-        end : 0,
-        flipY : true,
-        multipage : false,
+        measure: undefined,
     };
 }
 
-export { ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, TextMetrics, WordWrapMode, WordWrapOption, DefaultTextGeometryOption }
+function DefaultTextLayoutOption(): TextLayoutOption {
+    const opt = DefaultWordWrapOption();
+    return {
+        /** WordWrapOption specific */
+        start: opt.start,
+        end: opt.end,
+        width: opt.width,
+        mode: opt.mode,
+        measure: opt.measure,
+        /** TextLayoutOption specific */
+        font: undefined,
+        text: undefined,
+        letterSpacing: 0,
+        tabSize: 4,
+        lineHeight: undefined,
+        align: TextLayoutAlign.Left,
+    };
+}
+
+function DefaultTextGeometryOption(): TextGeometryOption {
+    const opt = DefaultTextLayoutOption();
+    return {
+        /** WordWrapOption specific */
+        start: opt.start,
+        end: opt.end,
+        width: opt.width,
+        mode: opt.mode,
+        measure: opt.measure,
+        /** TextLayoutOption specific */
+        font: opt.font,
+        text: opt.text,
+        letterSpacing: opt.letterSpacing,
+        tabSize: opt.tabSize,
+        lineHeight: opt.lineHeight,
+        align: opt.align,
+        /** TextGeometryOption specific */
+        flipY: true,
+        multipage: false,
+    };
+}
+
+export {
+    ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, TextMetrics, WordWrapMode, WordWrapOption,
+    DefaultWordWrapOption, DefaultTextLayoutOption, DefaultTextGeometryOption
+}

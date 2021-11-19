@@ -3,21 +3,13 @@
  * https://github.com/mattdesl/word-wrapper
  * 
  */
-import { ComputeMetrics, TextMetrics, WordWrapMode, WordWrapOption } from '~/types'
+import { ComputeMetrics, DefaultWordWrapOption, TextMetrics, WordWrapMode, WordWrapOption } from '~/types'
 
 const newline = /\n/
 const newlineChar = '\n'
 const whitespace = /\s/
 
-const defaultWordWrapOption: WordWrapOption = {
-    width: undefined,
-    measure: undefined,
-    start: 0,
-    end: undefined,
-    mode: WordWrapMode.Pre
-}
-
-function lines(text: string, opt: WordWrapOption | undefined): string {
+function lines(text: string, opt: WordWrapOption = DefaultWordWrapOption()): string {
     return wordwrap(text, opt)
         .map((line: TextMetrics) => {
             return text.substring(line.start, line.end)
@@ -25,15 +17,14 @@ function lines(text: string, opt: WordWrapOption | undefined): string {
         .join('\n');
 }
 
-function wordwrap(text: string, opt: WordWrapOption | undefined): TextMetrics[] {
+function wordwrap(text: string, opt: WordWrapOption = DefaultWordWrapOption()): TextMetrics[] {
     /** zero width results in nothing visible */
-    opt = opt || Object.assign({}, defaultWordWrapOption);
-    if (opt.width === 0 && opt.mode !== 'nowrap') return [];
+    if (opt.width === 0 && opt.mode !== WordWrapMode.NoWrap) return [];
     text = text || '';
-    const width: number = typeof opt.width === 'number' ? opt.width : Number.MAX_VALUE;
-    const start: number = Math.max(0, opt.start || 0);
+    const start: number = Math.max(0, opt.start);
     const end: number = typeof opt.end === 'number' ? opt.end : text.length;
-    const mode: WordWrapMode = opt.mode || WordWrapMode.Pre;
+    const width: number = typeof opt.width === 'number' ? opt.width : Number.MAX_VALUE;
+    const mode: WordWrapMode = opt.mode;
     const measure: ComputeMetrics = opt.measure || monospace;
     if (mode === WordWrapMode.Pre) return pre(measure, text, start, end, width);
     else return greedy(measure, text, start, end, width, mode);
@@ -73,8 +64,8 @@ function greedy(measure: ComputeMetrics, text: string, start: number, end: numbe
     const lines: TextMetrics[] = [];
 
     let testWidth: number = width;
-    /** if 'nowrap' is specified, we only wrap on newline chars */
-    if (mode === 'nowrap') testWidth = Number.MAX_VALUE;
+    /** if WordWrapMode.NoWrap is specified, we only wrap on newline chars */
+    if (mode === WordWrapMode.NoWrap) testWidth = Number.MAX_VALUE;
 
     while (start < end && start < text.length) {
         /** get next newline position */

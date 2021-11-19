@@ -1,7 +1,7 @@
 
 import xtend from 'xtend';
 import { wordwrap } from '~/layout'
-import { BMFont, BMFontChar, ComputeMetrics, TextGlyph, TextLayoutAlign, TextLayoutOption, TextMetrics, WordWrapMode } from '~/types'
+import { BMFont, BMFontChar, ComputeMetrics, DefaultTextLayoutOption, TextGlyph, TextLayoutAlign, TextLayoutOption, TextMetrics, WordWrapMode } from '~/types'
 
 const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
 const M_WIDTHS = ['m', 'w'];
@@ -10,13 +10,14 @@ const TAB_ID = '\t'.charCodeAt(0)
 const SPACE_ID = ' '.charCodeAt(0)
 
 class TextLayout {
-    glyphs: TextGlyph[];
-    private _measure: ComputeMetrics;
     private _opt: TextLayoutOption;
+    private _measure: ComputeMetrics;
+    
     private _linesTotal = 0;
     private _fallbackSpaceGlyph: BMFontChar | null = null;
     private _fallbackTabGlyph: BMFontChar | null = null;
 
+    private _glyphs: TextGlyph[];
     private _width = 0;
     private _height = 0;
     private _descender = 0;
@@ -26,6 +27,7 @@ class TextLayout {
     private _capHeight = 0;
     private _lineHeight = 0;
 
+    public get glyphs(): TextGlyph[] { return this._glyphs; }
     public get width(): number { return this._width; }
     public get height(): number { return this._height; }
     public get descender(): number { return this._descender; }
@@ -37,40 +39,50 @@ class TextLayout {
 
     constructor(option: TextLayoutOption) {
         this._opt = option;
-        this.glyphs = [];
+        this._glyphs = [];
         this._measure = this.computeMetrics.bind(this);
         this.update(option)
     }
 
     public update(option: TextLayoutOption) {
-        let opt: TextLayoutOption = {};
-        if (typeof option === 'string') opt.text = option;
-        else opt = option;
-        if (!opt.font) throw new TypeError('must specify a { font } in options');
-        opt.text = typeof option === 'string' ? option : option.text;
-        opt.mode = (typeof opt.mode === typeof WordWrapMode) ? opt.mode : WordWrapMode.Pre;
-        opt.align = (typeof opt.align === typeof TextLayoutAlign) ? opt.align : TextLayoutAlign.Left;
-        opt.letterSpacing = (typeof opt.letterSpacing === 'number') ? opt.letterSpacing : 0;
-        opt.lineHeight = (typeof opt.lineHeight === 'number') ? opt.lineHeight : opt.font.common.lineHeight;
-        opt.tabSize = (typeof opt.tabSize === 'number') ? opt.tabSize : 4;
-        opt.start = (typeof opt.start === 'number') ? opt.start : 4;
-        opt.end = (typeof opt.end === 'number') ? opt.end : 0;
-        opt = xtend({ measure: this._measure }, opt);
-        this._opt = opt;
+        // let opt: TextLayoutOption = DefaultTextLayoutOption();
+        // if (typeof option === 'string') opt.text = option;
+        // else opt = option;
+        // if (!opt.font) throw new TypeError('must specify a { font } in options');
+        // opt.text = typeof option === 'string' ? option : option.text;
+        // opt.mode = (typeof opt.mode === typeof WordWrapMode) ? opt.mode : WordWrapMode.Pre;
+        // opt.align = (typeof opt.align === typeof TextLayoutAlign) ? opt.align : TextLayoutAlign.Left;
+        // opt.letterSpacing = (typeof opt.letterSpacing === 'number') ? opt.letterSpacing : 0;
+        // opt.lineHeight = (typeof opt.lineHeight === 'number') ? opt.lineHeight : opt.font.common.lineHeight;
+        // opt.tabSize = (typeof opt.tabSize === 'number') ? opt.tabSize : 4;
+        // opt.start = (typeof opt.start === 'number') ? opt.start : 4;
+        // opt.end = (typeof opt.end === 'number') ? opt.end : 0;
+        // opt = xtend({ measure: this._measure }, opt);
+        // this._opt = opt;
 
-        if (!opt.font) throw new Error('must provide a valid bitmap font');
+        const opt: TextLayoutOption = option;
+        this._opt.font = opt.font ? opt.font : this._opt.font;
+        if (!this._opt.font && !opt.font) throw new TypeError('must specify a `font` in options');
+        const font: BMFont = this._opt.font!; 
+        const text: string = this._opt.text = opt.text ? opt.text : this._opt.text || '';
+        this._opt.mode = opt.mode ? opt.mode : this._opt.mode;
+        this._opt.align = opt.align ? opt.align : this._opt.align;
+        this._opt.letterSpacing = typeof opt.letterSpacing === 'number' ? opt.letterSpacing : this._opt.letterSpacing;
+        this._opt.lineHeight = typeof opt.lineHeight === 'number' ? opt.lineHeight : (typeof this._opt.lineHeight === 'number' ? this._opt.lineHeight : this._opt.font!.common.lineHeight);
+        this._opt.tabSize = (typeof opt.tabSize === 'number') ? opt.tabSize : this._opt.tabSize;
+        this._opt.start = (typeof opt.start === 'number') ? opt.start : this._opt.start;
+        this._opt.end = (typeof opt.end === 'number') ? opt.end : this._opt.end;
+        this._opt.measure = opt.measure ? opt.measure : this._opt.measure;
+        // this._opt = xtend({ measure: this._measure }, opt);
 
-        const glyphs: TextGlyph[] = this.glyphs;
-        const text = opt.text || '';
-        const font: BMFont = opt.font;
         this._setupSpaceGlyphs(font)
 
-        const lines = wordwrap(text, opt);
+        const lines = wordwrap(text, this._opt);
         // const lines: string[] = wrap(text, { width: opt.width, newline: '\n' }).split('\n');
-        const minWidth = opt.width || 0
+        const minWidth = this._opt.width || 0
 
-        /** clear glyphs */
-        glyphs.length = 0
+        /** clear _glyphs */
+        this._glyphs.length = 0
 
         /** get max line width */
         const maxLineWidth = lines.reduce((prev: number, line: TextMetrics) => {
@@ -80,10 +92,10 @@ class TextLayout {
         /** the pen position */
         let x = 0
         let y = 0
-        const lineHeight = this.asNumber(opt.lineHeight, font.common.lineHeight)
+        const lineHeight = this.asNumber(this._opt.lineHeight, font.common.lineHeight)
         const baseline = font.common.base
         const descender = lineHeight - baseline
-        const letterSpacing = opt.letterSpacing || 0
+        const letterSpacing = this._opt.letterSpacing || 0
         const height = lineHeight * lines.length - descender
         const align = this._opt.align;
 
@@ -122,7 +134,7 @@ class TextLayout {
                     else if (align === TextLayoutAlign.Right)
                         tx += (maxLineWidth - lineWidth)
 
-                    glyphs.push({
+                    this._glyphs.push({
                         position: [tx, y],
                         data: glyph,
                         index: i,
@@ -148,7 +160,7 @@ class TextLayout {
 
     private _setupSpaceGlyphs(font: BMFont) {
         /** These are fallbacks, when the font doesn't include */
-        /** ' ' or '\t' glyphs */
+        /** ' ' or '\t' _glyphs */
         this._fallbackSpaceGlyph = null
         this._fallbackTabGlyph = null
 
@@ -156,7 +168,7 @@ class TextLayout {
             return
 
         /** try to get space glyph */
-        /** then fall back to the 'm' or 'w' glyphs */
+        /** then fall back to the 'm' or 'w' _glyphs */
         /** then fall back to the first glyph available */
         const space = this.getGlyphById(font, SPACE_ID)
             || this.getMGlyph(font)
@@ -226,7 +238,7 @@ class TextLayout {
             count++;
         }
 
-        /** make sure rightmost edge lines up with rendered glyphs */
+        /** make sure rightmost edge lines up with rendered _glyphs */
         if (lastGlyph)
             curWidth += lastGlyph.xoffset;
 

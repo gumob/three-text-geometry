@@ -15,32 +15,29 @@ class TextGeometry extends THREE.BufferGeometry {
 
   public update(option: TextGeometryOption | string) {
     // let opt: TextGeometryOption = {};
+    /** Validate Option */
     if (typeof option === 'string') {
       this._opt.text = option;
-    } else {
-      const opt: TextGeometryOption = option;
-      if (!opt.font) throw new TypeError('must specify a `font` in options');
-      this._opt.font = opt.font;
-      this._opt.text = opt.text ? opt.text : this._opt.text;
-      this._opt.mode = opt.mode ? opt.mode : this._opt.mode;
-      this._opt.align = opt.align ? opt.align : this._opt.align;
-      this._opt.letterSpacing = typeof opt.letterSpacing === 'number' ? opt.letterSpacing : this._opt.letterSpacing;
-      this._opt.lineHeight = typeof opt.lineHeight === 'number' ? opt.lineHeight : (typeof this._opt.lineHeight === 'number' ? this._opt.lineHeight : opt.font.common.lineHeight);
-      this._opt.tabSize = (typeof opt.tabSize === 'number') ? opt.tabSize : this._opt.tabSize;
-      this._opt.start = (typeof opt.start === 'number') ? opt.start : this._opt.start;
-      this._opt.end = (typeof opt.end === 'number') ? opt.end : this._opt.end;
-      this._opt.flipY = (typeof opt.flipY === 'boolean') ? opt.flipY : this._opt.flipY;
-      this._opt.multipage = (typeof opt.multipage === 'boolean') ? opt.multipage : this._opt.multipage;
-    };
+    }
+    const opt: TextGeometryOption = option as TextGeometryOption;
+    this._opt.font = opt.font ? opt.font : this._opt.font;
+    if (!this._opt.font && !opt.font) throw new TypeError('must specify a `font` in options');
+    this._opt.text = opt.text ? opt.text : this._opt.text;
+    this._opt.mode = opt.mode ? opt.mode : this._opt.mode;
+    this._opt.align = opt.align ? opt.align : this._opt.align;
+    this._opt.letterSpacing = typeof opt.letterSpacing === 'number' ? opt.letterSpacing : this._opt.letterSpacing;
+    this._opt.lineHeight = typeof opt.lineHeight === 'number' ? opt.lineHeight : (typeof this._opt.lineHeight === 'number' ? this._opt.lineHeight : this._opt.font!.common.lineHeight);
+    this._opt.tabSize = (typeof opt.tabSize === 'number') ? opt.tabSize : this._opt.tabSize;
+    this._opt.start = (typeof opt.start === 'number') ? opt.start : this._opt.start;
+    this._opt.end = (typeof opt.end === 'number') ? opt.end : this._opt.end;
+    this._opt.flipY = (typeof opt.flipY === 'boolean') ? opt.flipY : this._opt.flipY;
+    this._opt.multipage = (typeof opt.multipage === 'boolean') ? opt.multipage : this._opt.multipage;
 
     this.layout = new TextLayout(this._opt);
 
-    /** the desired BMFont data */
-    const font: BMFont = this._opt.font!;
-
     /** determine texture size from font file */
-    const texWidth = font.common.scaleW;
-    const texHeight = font.common.scaleH;
+    const texWidth = this._opt.font!.common.scaleW;
+    const texHeight = this._opt.font!.common.scaleH;
 
     /** get visible glyphs */
     const glyphs = this.layout.glyphs.filter(function (glyph) {
