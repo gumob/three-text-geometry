@@ -14,9 +14,6 @@ class BMFontLoaderError extends Error {
             case BMFontLoaderErrorType.LoadError:
                 msg = message ? message : 'Failed to load data';
                 break;
-            // default:
-            //     msg = 'Unknown Error';
-            //     break;
         }
         super(msg);
         this.name = type;
