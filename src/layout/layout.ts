@@ -1,6 +1,6 @@
 
 import xtend from 'xtend';
-import { wordwrap } from '~/layout'
+import * as wordwrap from '~/layout'
 import { BMFont, BMFontChar, ComputeMetrics, DefaultTextLayoutOption, TextGlyph, TextLayoutAlign, TextLayoutOption, TextMetrics, WordWrapMode } from '~/types'
 
 const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
@@ -77,7 +77,7 @@ class TextLayout {
 
         this._setupSpaceGlyphs(font)
 
-        const lines = wordwrap(text, this._opt);
+        const lines = wordwrap.lines(text, this._opt);
         // const lines: string[] = wrap(text, { width: opt.width, newline: '\n' }).split('\n');
         const minWidth = this._opt.width || 0
 

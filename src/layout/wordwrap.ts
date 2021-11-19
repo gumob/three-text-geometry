@@ -3,21 +3,19 @@
  * https://github.com/mattdesl/word-wrapper
  * 
  */
-import { ComputeMetrics, DefaultWordWrapOption, TextMetrics, WordWrapMode, WordWrapOption } from '~/types'
+import { ComputeMetrics, createWordWrapOption, TextMetrics, WordWrapMode, WordWrapOption } from '~/types'
 
 const newline = /\n/
 const newlineChar = '\n'
 const whitespace = /\s/
 
-function lines(text: string, opt: WordWrapOption = DefaultWordWrapOption()): string {
-    return wordwrap(text, opt)
-        .map((line: TextMetrics) => {
-            return text.substring(line.start, line.end)
-        })
+function wrap(text: string, opt: WordWrapOption = createWordWrapOption()): string {
+    return lines(text, opt)
+        .map((line: TextMetrics) => (text.substring(line.start, line.end)))
         .join('\n');
 }
 
-function wordwrap(text: string, opt: WordWrapOption = DefaultWordWrapOption()): TextMetrics[] {
+function lines(text: string, opt: WordWrapOption = createWordWrapOption()): TextMetrics[] {
     /** zero width results in nothing visible */
     if (opt.width === 0 && opt.mode !== WordWrapMode.NoWrap) return [];
     text = text || '';
@@ -26,8 +24,10 @@ function wordwrap(text: string, opt: WordWrapOption = DefaultWordWrapOption()): 
     const width: number = typeof opt.width === 'number' ? opt.width : Number.MAX_VALUE;
     const mode: WordWrapMode = opt.mode;
     const measure: ComputeMetrics = opt.measure || monospace;
-    if (mode === WordWrapMode.Pre) return pre(measure, text, start, end, width);
-    else return greedy(measure, text, start, end, width, mode);
+    if (mode === WordWrapMode.Pre)
+        return pre(measure, text, start, end, width);
+    else
+        return greedy(measure, text, start, end, width, mode);
 }
 
 function idxOf(text: string, chr: string, start: number, end: number) {
@@ -122,4 +122,4 @@ function monospace(_: string, start: number, end: number, width: number): TextMe
     }
 }
 
-export { lines, wordwrap };
+export { lines, wrap };

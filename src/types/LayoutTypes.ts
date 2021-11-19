@@ -49,19 +49,24 @@ interface TextGeometryOption extends TextLayoutOption {
     multipage: boolean;
 }
 
-function DefaultWordWrapOption(): WordWrapOption {
+function createWordWrapOption(
+    start: number | undefined = undefined,
+    end: number | undefined = undefined,
+    width: number | undefined = undefined,
+    mode: WordWrapMode | undefined = undefined,
+    measure: ComputeMetrics | undefined = undefined): WordWrapOption {
     return {
         /** WordWrapOption specific */
-        start: 0,
-        end: undefined,
-        width: undefined,
-        mode: WordWrapMode.Pre,
-        measure: undefined,
+        start: start || 0,
+        end: end || undefined,
+        width: width || undefined,
+        mode: mode || WordWrapMode.Pre,
+        measure: measure || undefined,
     };
 }
 
 function DefaultTextLayoutOption(): TextLayoutOption {
-    const opt = DefaultWordWrapOption();
+    const opt = createWordWrapOption();
     return {
         /** WordWrapOption specific */
         start: opt.start,
@@ -103,5 +108,5 @@ function DefaultTextGeometryOption(): TextGeometryOption {
 
 export {
     ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, TextMetrics, WordWrapMode, WordWrapOption,
-    DefaultWordWrapOption, DefaultTextLayoutOption, DefaultTextGeometryOption
+    createWordWrapOption, DefaultTextLayoutOption, DefaultTextGeometryOption
 }
