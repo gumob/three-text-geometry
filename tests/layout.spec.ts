@@ -34,7 +34,7 @@ describe('TextLayout', () => {
   describe('Option', () => {
     test('No font option', () => {
       try {
-        new TextLayout()
+        new TextLayout('')
       } catch (e) {
         expect(e).toEqual(new TypeError('Must specify a `font` in options'));
       }
@@ -68,8 +68,7 @@ describe('TextLayout', () => {
     font.common.base = baseline;
 
     /** Load Font */
-    const option0 = {font: font, text: 'x'};
-    const layout0 = new TextLayout(option0);
+    const layout0 = new TextLayout('x', {font: font});
 
     /** Success */
     test('line height matches', () => {
@@ -77,9 +76,9 @@ describe('TextLayout', () => {
     });
 
     /** Fail */
-    // test('width matches', () => {
-    //   expect(layout0.width).toBe(xGlyph.width + xGlyph.xoffset);
-    // });
+    test('width matches', () => {
+      expect(layout0.width).toBe(xGlyph.width + xGlyph.xoffset);
+    });
 
     /** Success */
     test('descender matches', () => {
@@ -101,14 +100,14 @@ describe('TextLayout', () => {
       expect(layout0.baseline).toBe(baseline);
     });
 
-    const layout1 = new TextLayout({font: font, text: 'xx'});
+    const layout1 = new TextLayout('xx', {font: font});
 
     /** Fail */
     // test('calculates whole width', () => {
     //   expect(layout1.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset);
     // });
 
-    const layout2 = new TextLayout({font: font, text: 'xx\nx'});
+    const layout2 = new TextLayout('xx\nx', {font: font});
 
     /** Fail */
     // test('multi line width matches', () => {
@@ -116,14 +115,14 @@ describe('TextLayout', () => {
     // });
 
     const letterSpacing = 4;
-    const layout3 = new TextLayout({font: font, text: 'xx', letterSpacing: letterSpacing});
+    const layout3 = new TextLayout('xx', {font: font, letterSpacing: letterSpacing});
 
     /** Fail */
     // test('letter spacing matches', () => {
     //   expect(layout3.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset + letterSpacing);
     // });
 
-    const layout4 = new TextLayout({font: font, text: 'hx\nab'});
+    const layout4 = new TextLayout('hx\nab', {font: font});
 
     /** Success */
     test('provides glyphs', () => {

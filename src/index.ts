@@ -9,7 +9,6 @@ class TextGeometry extends THREE.BufferGeometry {
     flipY: false,
     multipage: false,
     font: undefined,
-    text: undefined,
     letterSpacing: undefined,
     tabSize: undefined,
     lineHeight: undefined,
@@ -22,21 +21,18 @@ class TextGeometry extends THREE.BufferGeometry {
   };
   visibleGlyphs: TextGlyph[] = [];
 
-  constructor(option: any) {
+  constructor(text: string, option: any = {}) {
     super()
     if (option.font === undefined) throw new TypeError('must specify a `font` in options');
-    this.update(option);
+    this._opt.font = option.font;
+    this.update(text, option);
   }
 
-  public update(option: any) {
+  public update(text: string, option: any = {}) {
     // let opt: TextGeometryOption = {};
     /** Validate Option */
-    if (typeof option === 'string') {
-      this._opt.text = option;
-    }
     const opt: any = option;
     this._opt.font = opt.font ? opt.font : this._opt.font;
-    this._opt.text = opt.text ? opt.text : this._opt.text;
     this._opt.mode = opt.mode ? opt.mode : this._opt.mode;
     this._opt.align = opt.align ? opt.align : this._opt.align;
     this._opt.letterSpacing = typeof opt.letterSpacing === 'number' ? opt.letterSpacing : this._opt.letterSpacing;
@@ -47,7 +43,7 @@ class TextGeometry extends THREE.BufferGeometry {
     this._opt.flipY = (typeof opt.flipY === 'boolean') ? opt.flipY : this._opt.flipY;
     this._opt.multipage = (typeof opt.multipage === 'boolean') ? opt.multipage : this._opt.multipage;
 
-    this.layout = new TextLayout(this._opt);
+    this.layout = new TextLayout(text, this._opt);
 
     /** determine texture size from font file */
     const texWidth = this._opt.font!.common.scaleW;

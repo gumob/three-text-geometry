@@ -12,7 +12,6 @@ const SPACE_ID = ' '.charCodeAt(0);
 class TextLayout {
     private _opt: TextLayoutOption = {
         font: undefined,
-        text: undefined,
         letterSpacing: undefined,
         tabSize: undefined,
         lineHeight: undefined,
@@ -49,23 +48,22 @@ class TextLayout {
     public get capHeight(): number { return this._capHeight; }
     public get lineHeight(): number { return this._lineHeight; }
 
-    constructor(option: any = {}) {
+    constructor(text: string, option: any = {}) {
         if (option.font === undefined) throw new TypeError('Must specify a `font` in options');
-        this._opt.font = option.font;
         this._glyphs = [];
         this._measure = this.computeMetrics.bind(this);
-        this.update(option);
+        this.update(text, option);
     }
 
-    public update(option: any = {}) {
+    public update(text: string, option: any = {}) {
         // const opt: any = option;
-        this._opt.text = option.text || '';
+        if (option.font !== undefined) this._opt.font = option.font;
         if (option.start !== undefined) this._opt.start = Math.max(0, option.start);
         else this._opt.start = 0;
         if (option.end !== undefined) this._opt.end = option.end;
-        else this._opt.end = this._opt.text!.length;
+        else this._opt.end = text.length;
         if (option.width !== undefined) this._opt.width = option.width;
-        else this._opt.width = Number.MAX_VALUE;
+        // else this._opt.width = Number.MAX_VALUE;
         if (option.mode !== undefined) this._opt.mode = option.mode;
         if (option.align !== undefined) this._opt.align = option.align;
         else this._opt.align = TextLayoutAlign.Left;
@@ -75,17 +73,18 @@ class TextLayout {
         else this._opt.lineHeight = this._opt.font!.common.lineHeight;
         if (option.tabSize !== undefined) this._opt.tabSize = option.tabSize;
         else this._opt.tabSize = 4;
-        this._opt.measure = option.measure !== undefined ? option.measure : this._opt.measure;
+        // this._opt.measure = option.measure !== undefined ? option.measure : this._opt.measure;
+        this._opt.measure = this._measure;
         // this._opt = xtend({ measure: this._measure }, opt);
 
-        const font: BMFont = this._opt.font!;
-        const text: string = this._opt.text!;
+        // const text: string = this._opt.text!;
 
-        this._setupSpaceGlyphs(font)
+        const font: BMFont = this._opt.font!;
+
+        this._setupSpaceGlyphs(font);
 
         const lines = wordwrap.lines(text, this._opt);
-        // const lines: string[] = wrap(text, { width: opt.width, newline: '\n' }).split('\n');
-        const minWidth = this._opt.width || 0
+        const minWidth = this._opt.width || 0;
 
         /** clear _glyphs */
         this._glyphs.length = 0
@@ -167,11 +166,11 @@ class TextLayout {
     private _setupSpaceGlyphs(font: BMFont) {
         /** These are fallbacks, when the font doesn't include */
         /** ' ' or '\t' _glyphs */
-        this._fallbackSpaceGlyph = null
-        this._fallbackTabGlyph = null
+        this._fallbackSpaceGlyph = null;
+        this._fallbackTabGlyph = null;
 
         if (!font.chars || font.chars.length === 0)
-            return
+            return;
 
         /** try to get space glyph */
         /** then fall back to the 'm' or 'w' _glyphs */
@@ -191,14 +190,14 @@ class TextLayout {
     }
 
     private getGlyph(font: BMFont, id: number): BMFontChar | null {
-        const glyph = this.getGlyphById(font, id)
+        const glyph = this.getGlyphById(font, id);
         if (glyph)
-            return glyph
+            return glyph;
         else if (id === TAB_ID)
-            return this._fallbackTabGlyph
+            return this._fallbackTabGlyph;
         else if (id === SPACE_ID)
-            return this._fallbackSpaceGlyph
-        return null
+            return this._fallbackSpaceGlyph;
+        return null;
     }
 
     private computeMetrics(text: string, start: number, end: number, width: number): WordMetrics {

@@ -38,7 +38,7 @@ interface WordWrapOption {
 
 interface TextLayoutOption extends WordWrapOption {
     font: BMFont | undefined;
-    text: string | undefined;
+    // text: string | undefined;
     letterSpacing: number | undefined;
     tabSize: number | undefined;
     lineHeight: number | undefined;
