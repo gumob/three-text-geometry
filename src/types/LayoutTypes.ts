@@ -1,7 +1,7 @@
 import { BMFont, BMFontChar } from '~/types';
 
-// declare function ComputeMetrics(text: string, start: number, end: number, width: number): TextMetrics;
-type ComputeMetrics = (text: string, start: number, end: number, width: number) => TextMetrics;
+// declare function ComputeMetrics(text: string, start: number, end: number, width: number): WordMetrics;
+type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics;
 
 interface TextGlyph {
     position: [number, number];
@@ -10,7 +10,7 @@ interface TextGlyph {
     line: number;
 }
 
-interface TextMetrics {
+interface WordMetrics {
     start: number,
     end: number,
     width: number
@@ -24,7 +24,8 @@ enum TextLayoutAlign {
 
 enum WordWrapMode {
     Pre = 'pre',
-    NoWrap = 'nowrap'
+    NoWrap = 'nowrap',
+    None = 'none'
 }
 
 interface WordWrapOption {
@@ -57,10 +58,10 @@ function createWordWrapOption(
     measure: ComputeMetrics | undefined = undefined): WordWrapOption {
     return {
         /** WordWrapOption specific */
-        start: start || 0,
-        end: end || undefined,
-        width: width || undefined,
-        mode: mode || WordWrapMode.Pre,
+        start: start !== undefined ? start : 0,
+        end: end !== undefined ? end : undefined,
+        width: width !== undefined ? width : undefined,
+        mode: mode || WordWrapMode.None,
         measure: measure || undefined,
     };
 }
@@ -107,6 +108,6 @@ function DefaultTextGeometryOption(): TextGeometryOption {
 }
 
 export {
-    ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, TextMetrics, WordWrapMode, WordWrapOption,
+    ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, WordMetrics, WordWrapMode, WordWrapOption,
     createWordWrapOption, DefaultTextLayoutOption, DefaultTextGeometryOption
 }

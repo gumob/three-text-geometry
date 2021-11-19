@@ -3,27 +3,42 @@
  * https://github.com/mattdesl/word-wrapper
  * 
  */
-import { ComputeMetrics, createWordWrapOption, TextMetrics, WordWrapMode, WordWrapOption } from '~/types'
+import { ComputeMetrics, createWordWrapOption, WordMetrics, WordWrapMode, WordWrapOption } from '~/types'
 
 const newline = /\n/
 const newlineChar = '\n'
 const whitespace = /\s/
 
 function wrap(text: string, opt: WordWrapOption = createWordWrapOption()): string {
-    return lines(text, opt)
-        .map((line: TextMetrics) => (text.substring(line.start, line.end)))
+    // console.log('text', text);
+    const results = lines(text, opt);
+    const result = results
+        .map((line: WordMetrics) => (text.substring(line.start, line.end)))
         .join('\n');
+    // console.log('results', results);
+    // console.log('result', result);
+    return result;
 }
 
-function lines(text: string, opt: WordWrapOption = createWordWrapOption()): TextMetrics[] {
+function lines(text: string, opt: WordWrapOption = createWordWrapOption()): WordMetrics[] {
     /** zero width results in nothing visible */
     if (opt.width === 0 && opt.mode !== WordWrapMode.NoWrap) return [];
     text = text || '';
     const start: number = Math.max(0, opt.start);
-    const end: number = typeof opt.end === 'number' ? opt.end : text.length;
-    const width: number = typeof opt.width === 'number' ? opt.width : Number.MAX_VALUE;
+    const end: number = opt.end !== undefined ? opt.end : text.length;
+    const width: number = opt.width !== undefined ? opt.width : Number.MAX_VALUE;
     const mode: WordWrapMode = opt.mode;
     const measure: ComputeMetrics = opt.measure || monospace;
+
+    // console.log('text', text);
+    // console.log(
+    //     'start', start,
+    //     'end', end,
+    //     'width', width,
+    //     'mode', mode,
+    //     'measure', measure
+    // );
+
     if (mode === WordWrapMode.Pre)
         return pre(measure, text, start, end, width);
     else
@@ -40,8 +55,8 @@ function isWhitespace(chr: string): boolean {
     return whitespace.test(chr);
 }
 
-function pre(measure: ComputeMetrics, text: string, start: number, end: number, width: number): TextMetrics[] {
-    const lines: TextMetrics[] = [];
+function pre(measure: ComputeMetrics, text: string, start: number, end: number, width: number): WordMetrics[] {
+    const lines: WordMetrics[] = [];
     let lineStart: number = start;
     for (let i = start; i < end && i < text.length; i++) {
         const chr: string = text.charAt(i);
@@ -50,7 +65,7 @@ function pre(measure: ComputeMetrics, text: string, start: number, end: number, 
         /** Or if we've reached the EOF */
         if (isNewline || i === end - 1) {
             const lineEnd: number = isNewline ? i : i + 1;
-            const measured: TextMetrics = measure(text, lineStart, lineEnd, width);
+            const measured: WordMetrics = measure(text, lineStart, lineEnd, width);
             lines.push(measured);
             lineStart = i + 1;
         }
@@ -58,10 +73,10 @@ function pre(measure: ComputeMetrics, text: string, start: number, end: number, 
     return lines;
 }
 
-function greedy(measure: ComputeMetrics, text: string, start: number, end: number, width: number, mode: string): TextMetrics[] {
+function greedy(measure: ComputeMetrics, text: string, start: number, end: number, width: number, mode: string): WordMetrics[] {
     /** A greedy word wrapper based on LibGDX algorithm */
     /** https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFontCache.java */
-    const lines: TextMetrics[] = [];
+    const lines: WordMetrics[] = [];
 
     let testWidth: number = width;
     /** if WordWrapMode.NoWrap is specified, we only wrap on newline chars */
@@ -78,7 +93,7 @@ function greedy(measure: ComputeMetrics, text: string, start: number, end: numbe
         }
 
         /** determine visible # of glyphs for the available width */
-        const measured: TextMetrics = measure(text, start, newLine, testWidth);
+        const measured: WordMetrics = measure(text, start, newLine, testWidth);
 
         let lineEnd: number = start + (measured.end - measured.start);
         let nextStart: number = lineEnd + newlineChar.length;
@@ -113,12 +128,13 @@ function greedy(measure: ComputeMetrics, text: string, start: number, end: numbe
 }
 
 /** determines the visible number of glyphs within a given width */
-function monospace(_: string, start: number, end: number, width: number): TextMetrics {
+function monospace(_: string, start: number, end: number, width: number): WordMetrics {
     const glyphs: number = Math.min(width, end - start);
     return {
         start: start,
         end: start + glyphs,
-        width: width
+        width: 0
+        // width: width
     }
 }
 

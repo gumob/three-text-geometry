@@ -1,108 +1,136 @@
-import * as wordwrap from '~/layout'
-import { createWordWrapOption, WordWrapMode } from '~/types';
-// import pre from '../package.json'
-// var pre = JSON.stringify(require('./package.json'), undefined, 2)
+import fs from 'fs';
+import * as wordwrap from '~/layout';
+import { createWordWrapOption, WordMetrics, WordWrapMode } from '~/types';
 
-describe('wordwrap', () => {
-  const text = 'lorem   ipsum \t dolor sit amet'
-  const multi = 'lorem\nipsum dolor sit amet'
-  // test('text with no width is unchanged', () => {
-  //   expect(wordwrap.wrap(text)).toEqual(text);
-  // });
-  // test('text with newlines is multi-lined', () => {
-  //   expect(wordwrap.wrap(multi)).toEqual(multi);
-  // });
-  test('word-wordwrap with N width', () => {
-    const result = wordwrap.wrap(text, createWordWrapOption(undefined, undefined, 10));
-    console.log(result);
-    expect(result).toEqual('lorem\nipsum\ndolor sit\namet');
+function compute2(_text: string, start: number, end: number, width: number): WordMetrics {
+  /** assume each glyph is Npx monospace */
+  const pxWidth = 5
+  const availableGlyphs = Math.floor(width / pxWidth)
+  const totalGlyphs = Math.floor((end - start) * pxWidth)
+  const glyphs = Math.min((end - start), availableGlyphs, totalGlyphs)
+  return {
+    width: glyphs * pxWidth, /** only used for unit test */
+    start: start,
+    end: start + glyphs
+  }
+}
+
+function chop(text: string, width: number) {
+  return text.split(/\n/g).map(function (str: string) {
+    return str.substring(0, width)
+  }).join('\n')
+}
+
+describe('WordWrap', () => {
+
+  describe('wraps monospace glyphs by columns', () => {
+
+    let json = fs.readFileSync('package.json', 'utf8');
+    json = JSON.stringify(JSON.parse(json), undefined, 2);
+
+    test('pre does not change text', () => {
+      expect(wordwrap.wrap(json, createWordWrapOption(undefined, undefined, undefined, WordWrapMode.Pre))).toEqual(json);
+    });
+
+    test('pre with width will clip text', () => {
+      expect(wordwrap.wrap(json, createWordWrapOption(undefined, undefined, 20, WordWrapMode.Pre))).toEqual(chop(json, 20));
+    });
+
+    const text = 'lorem   ipsum \t dolor sit amet';
+    const multi = 'lorem\nipsum dolor sit amet';
+
+    test('text with no width is unchanged', () => {
+      expect(wordwrap.wrap(text)).toEqual(text);
+    });
+
+    test('text with newlines is multi-lined', () => {
+      expect(wordwrap.wrap(multi)).toEqual(multi);
+    });
+
+    test('word-wordwrap with N width', () => {
+      expect(wordwrap.wrap(text, createWordWrapOption(undefined, undefined, 10))).toEqual('lorem\nipsum\ndolor sit\namet');
+    });
+
+    const overflow = 'it overflows';
+
+    test('overflow text pushed to next line', () => {
+      expect(wordwrap.wrap(overflow, createWordWrapOption(undefined, undefined, 5))).toEqual('it\noverf\nlows');
+    });
+
+    const nowrap = 'this text  \n  only wraps \nnewlines';
+
+    test('eats starting whitespace', () => {
+      expect(wordwrap.wrap(nowrap, createWordWrapOption(undefined, undefined, undefined, WordWrapMode.NoWrap))).toEqual('this text  \nonly wraps \nnewlines');
+    });
+
+    test('zero width results in empty string', () => {
+      expect(wordwrap.wrap('this is not visible', createWordWrapOption(undefined, undefined, 0))).toEqual('');
+    });
+
+    test('zero width results in empty string', () => {
+      expect(wordwrap.wrap('this is not visible', createWordWrapOption(undefined, undefined, 0, WordWrapMode.Pre))).toEqual('');
+    });
+
+    test('zero width nowrap does not result in empty string', () => {
+      expect(wordwrap.wrap('this is not\nvisible', createWordWrapOption(undefined, undefined, 0, WordWrapMode.NoWrap))).toEqual('this is not\nvisible');
+    });
+
+    test('test some text', () => {
+      expect(wordwrap.wrap('test some text')).toEqual('test some text');
+    });
   });
 
-  //   const text = 'lorem   ipsum \t dolor sit amet'
-  //   const multi = 'lorem\nipsum dolor sit amet'
-  //   t.equal(wordwrap(text), text, 'text with no width is unchanged');
-  //   t.equal(wordwrap(multi), multi, 'text with newlines is multi-lined');
-  //   t.equal(wordwrap(text, createWordWrapOption(undefined, undefined, 10)), 'lorem\nipsum\ndolor sit\namet', 'word-wordwrap with N width')
+  describe('wrap a sub-section', () => {
+
+    const str = 'the quick brown fox jumps over the lazy dog'
+
+    /** word-wrap the entire sentence */
+    const text = wordwrap.wrap(str, createWordWrapOption(undefined, undefined, 10));
+
+    /** bits at a time */
+    const start = 20;
+    const end = 30;
+
+    const text0 = wordwrap.wrap(str, createWordWrapOption(start, end, 10));
+    const text1 = wordwrap.wrap(str, createWordWrapOption(end, undefined, 10));
+
+    test('only word-wraps a sub-section of text', () => {
+      expect(text0).toEqual('jumps over');
+    });
+
+    test('only word-wraps a sub-section of text', () => {
+      expect(text1).toEqual('the lazy\ndog');
+    });
+
+  });
+
+  describe('custom compute function', () => {
+
+    /** a custom compute function that assumes pixel width instead of monospace char width */
+    const word = 'words'
+
+    test('test compute', () => {
+      expect(compute2(word, 0, word.length, 4)).toStrictEqual({ end: 0, start: 0, width: 0 });
+    });
+
+    test('test compute', () => {
+      expect(compute2(word, 0, word.length, 5)).toStrictEqual({ end: 1, start: 0, width: 5 });
+    });
+
+    test('cuts text with variable glyph width', () => {
+      const text = 'some lines'
+      expect(wordwrap.wrap(text, createWordWrapOption(undefined, undefined, 20, undefined, compute2))).toEqual('some\nline\ns');
+    });
+
+  });
+
+  describe('wraps text to a list of lines', () => {
+    
+    test('cuts text with variable glyph width', () => {
+      const expected = [{ end: 9, start: 0, width: 0 }, { end: 15, start: 10, width: 0 }];
+      expect(wordwrap.lines('the quick brown', createWordWrapOption(undefined, undefined, 10))).toEqual(expected);
+    });
+
+  });
 
 })
-
-// test('wraps monospace glyphs by columns', function (t) {
-//   const pre = 'lorem   ipsum \t dolor sit amet'
-//   t.equal(wordwrap(pre, createWordWrapOption(undefined, undefined, undefined, WordWrapMode.Pre)),
-//     pre, 'pre does not change text')
-//   t.equal(wordwrap(pre, createWordWrapOption(undefined, undefined, 20, WordWrapMode.Pre)),
-//     chop(pre, 20), 'pre with width will clip text')
-
-//   const text = 'lorem   ipsum \t dolor sit amet'
-//   const multi = 'lorem\nipsum dolor sit amet'
-//   t.equal(wordwrap(text), text, 'text with no width is unchanged');
-//   t.equal(wordwrap(multi), multi, 'text with newlines is multi-lined');
-//   t.equal(wordwrap(text, createWordWrapOption(undefined, undefined, 10)), 'lorem\nipsum\ndolor sit\namet', 'word-wordwrap with N width')
-
-//   const overflow = 'it overflows'
-//   t.equal(wordwrap(overflow, createWordWrapOption(undefined, undefined, 5)), 'it\noverf\nlows', 'overflow text pushed to next line')
-
-//   const nowrap = 'this text  \n  only wraps \nnewlines'
-//   t.equal(wordwrap(nowrap, createWordWrapOption(undefined, undefined, undefined, WordWrapMode.NoWrap)), 'this text  \nonly wraps \nnewlines', 'eats starting whitespace')
-
-//   // t.equal(wordwrap(''), '')
-//   t.equal(wordwrap('this is not visible', { width: 0 }), '', 'zero width results in empty string')
-//   t.equal(wordwrap('this is not visible', { width: 0, mode: 'pre' }), '', 'zero width results in empty string')
-//   t.equal(wordwrap('this is not\nvisible', { width: 0, mode: 'nowrap' }), 'this is not\nvisible', 'zero width nowrap does not result in empty string')
-//   t.equal(wordwrap('test some text'), 'test some text')
-
-//   t.end()
-// })
-
-// test('wrap a sub-section', function(t) {
-//     var str = 'the quick brown fox jumps over the lazy dog'
-
-//     //word-wrap the entire sentence
-//     var text = wordwrap(str, { width: 10 })
-
-//     //bits at a time
-//     var start = 20
-//     var end = 30
-//     var text0 = wordwrap(str, { width: 10, start: start, end: end })
-//     var text1 = wordwrap(str, { width: 10, start: end })
-
-//     t.equal(text0, 'jumps over', 'only word-wraps a sub-section of text')
-//     t.equal(text1, 'the lazy\ndog', 'only word-wraps a sub-section of text')
-//     t.end()
-// })
-
-// test('custom compute function', function(t) {
-//     //a custom compute function that assumes pixel width instead of monospace char width
-//     var word = 'words'
-//     t.deepEqual(compute2(word, 0, word.length, 4), { end: 0, start: 0, width: 0 }, 'test compute')
-//     t.deepEqual(compute2(word, 0, word.length, 5), { end: 1, start: 0, width: 5 }, 'test compute')
-
-//     var text = 'some lines'
-//     t.equal(wordwrap(text, { width: 20, measure: compute2 }), 'some\nline\ns', 'cuts text with variable glyph width')
-//     t.end()
-// })
-
-// test('wraps text to a list of lines', function(t) {
-//     var expected = [ { end: 9, start: 0 }, { end: 15, start: 10 } ]
-//     t.deepEqual(lines('the quick brown', { width: 10 }), expected, 'returns a list of substring indices')
-//     t.end()
-// })
-
-// function compute2(_text: string, start: number, end: number, width: number) {
-//   //assume each glyph is Npx monospace
-//   const pxWidth = 5
-//   const availableGlyphs = Math.floor(width / pxWidth)
-//   const totalGlyphs = Math.floor((end - start) * pxWidth)
-//   const glyphs = Math.min((end - start), availableGlyphs, totalGlyphs)
-//   return {
-//     width: glyphs * pxWidth, //only used for unit test
-//     start: start,
-//     end: start + glyphs
-//   }
-// }
-
-// function chop(text: string, width: number) {
-//   return text.split(/\n/g).map(function (str: string) {
-//     return str.substring(0, width)
-//   }).join('\n')
-// }

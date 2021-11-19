@@ -1,7 +1,7 @@
 
 import xtend from 'xtend';
 import * as wordwrap from '~/layout'
-import { BMFont, BMFontChar, ComputeMetrics, DefaultTextLayoutOption, TextGlyph, TextLayoutAlign, TextLayoutOption, TextMetrics, WordWrapMode } from '~/types'
+import { BMFont, BMFontChar, ComputeMetrics, DefaultTextLayoutOption, TextGlyph, TextLayoutAlign, TextLayoutOption, WordMetrics, WordWrapMode } from '~/types'
 
 const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
 const M_WIDTHS = ['m', 'w'];
@@ -85,7 +85,7 @@ class TextLayout {
         this._glyphs.length = 0
 
         /** get max line width */
-        const maxLineWidth = lines.reduce((prev: number, line: TextMetrics) => {
+        const maxLineWidth = lines.reduce((prev: number, line: WordMetrics) => {
             return Math.max(prev, line.width, minWidth)
         }, 0);
 
@@ -114,7 +114,7 @@ class TextLayout {
 
         /** layout each glyph */
         // const wthis = new WeakRef(this);
-        lines.forEach((line: TextMetrics, lineIndex: number) => {
+        lines.forEach((line: WordMetrics, lineIndex: number) => {
             const start = line.start;
             const end = line.end;
             const lineWidth = line.width;
@@ -195,7 +195,7 @@ class TextLayout {
         return null
     }
 
-    private computeMetrics(text: string, start: number, end: number, width: number): TextMetrics {
+    private computeMetrics(text: string, start: number, end: number, width: number): WordMetrics {
         const letterSpacing = this._opt.letterSpacing || 0
         const font = this._opt.font;
         let curPen = 0;
