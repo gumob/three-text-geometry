@@ -50,6 +50,29 @@ interface TextGeometryOption extends TextLayoutOption {
     multipage: boolean;
 }
 
+interface WordWrapArgs {
+    start: number | undefined;
+    end: number | undefined;
+    width: number | undefined;
+    mode: WordWrapMode | undefined;
+    measure: ComputeMetrics | undefined;
+}
+
+interface TextLayoutArgs extends WordWrapArgs {
+    font: BMFont | undefined;
+    text: string | undefined;
+    letterSpacing: number | undefined;
+    tabSize: number | undefined;
+    lineHeight: number | undefined;
+    align: TextLayoutAlign | undefined;
+}
+
+interface TextGeometryArgs extends TextLayoutArgs {
+    flipY: boolean | undefined;
+    multipage: boolean | undefined;
+}
+
+
 function createWordWrapOption(option: any = {}): WordWrapOption {
     return {
         /** WordWrapOption specific */
@@ -103,5 +126,6 @@ function createTextGeometryOption(option: any = {}): TextGeometryOption {
 
 export {
     ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, WordMetrics, WordWrapMode, WordWrapOption,
+    // WordWrapArgs, TextLayoutArgs, TextGeometryArgs,
     createWordWrapOption, createTextLayoutOption, createTextGeometryOption
 }
