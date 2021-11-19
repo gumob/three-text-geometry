@@ -50,50 +50,33 @@ interface TextGeometryOption extends TextLayoutOption {
     multipage: boolean;
 }
 
-function createWordWrapOption(
-    start: number | undefined = undefined,
-    end: number | undefined = undefined,
-    width: number | undefined = undefined,
-    mode: WordWrapMode | undefined = undefined,
-    measure: ComputeMetrics | undefined = undefined): WordWrapOption {
+function createWordWrapOption(option: any = {}): WordWrapOption {
     return {
         /** WordWrapOption specific */
-        start: start !== undefined ? start : 0,
-        end: end !== undefined ? end : undefined,
-        width: width !== undefined ? width : undefined,
-        mode: mode || WordWrapMode.None,
-        measure: measure || undefined,
+        start: option.start !== undefined ? option.start : 0,
+        end: option.end !== undefined ? option.end : undefined,
+        width: option.width !== undefined ? option.width : undefined,
+        mode: option.mode !== undefined ? option.mode : WordWrapMode.None,
+        measure: option.measure || undefined,
     };
 }
 
-function createTextLayoutOption(
-    start: number | undefined = undefined,
-    end: number | undefined = undefined,
-    width: number | undefined = undefined,
-    mode: WordWrapMode | undefined = undefined,
-    measure: ComputeMetrics | undefined = undefined,
-    font: BMFont | undefined = undefined,
-    text: string | undefined = undefined,
-    letterSpacing: number | undefined = undefined,
-    tabSize: number | undefined = undefined,
-    lineHeight: number | undefined = undefined,
-    align: TextLayoutAlign | undefined = undefined
-): TextLayoutOption {
-    const opt = createWordWrapOption();
+function createTextLayoutOption(option: any = {}): TextLayoutOption {
+    // const opt = createWordWrapOption();
     return {
         /** WordWrapOption specific */
-        start: start !== undefined ? start : 0,
-        end: end !== undefined ? end : undefined,
-        width: width !== undefined ? width : undefined,
-        mode: mode !== undefined ? mode : WordWrapMode.None,
-        measure: measure || undefined,
+        start: option.start !== undefined ? option.start : 0,
+        end: option.end !== undefined ? option.end : undefined,
+        width: option.width !== undefined ? option.width : undefined,
+        mode: option.mode !== undefined ? option.mode : WordWrapMode.None,
+        measure: option.measure || undefined,
         /** TextLayoutOption specific */
-        font: font,
-        text: text,
-        letterSpacing: letterSpacing !== undefined ? letterSpacing : 0,
-        tabSize: tabSize !== undefined ? tabSize : 4,
-        lineHeight: lineHeight,
-        align: align || TextLayoutAlign.Left
+        font: option.font,
+        text: option.text,
+        letterSpacing: option.letterSpacing !== undefined ? option.letterSpacing : 0,
+        tabSize: option.tabSize !== undefined ? option.tabSize : 4,
+        lineHeight: option.lineHeight,
+        align: option.align || TextLayoutAlign.Left
     };
 }
 

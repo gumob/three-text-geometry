@@ -29,11 +29,11 @@ describe('WordWrap', () => {
     json = JSON.stringify(JSON.parse(json), undefined, 2);
 
     test('pre does not change text', () => {
-      expect(wordwrap.wrap(json, createWordWrapOption(undefined, undefined, undefined, WordWrapMode.Pre))).toEqual(json);
+      expect(wordwrap.wrap(json, createWordWrapOption({ mode: WordWrapMode.Pre }))).toEqual(json);
     });
 
     test('pre with width will clip text', () => {
-      expect(wordwrap.wrap(json, createWordWrapOption(undefined, undefined, 20, WordWrapMode.Pre))).toEqual(chop(json, 20));
+      expect(wordwrap.wrap(json, createWordWrapOption({ width: 20, mode: WordWrapMode.Pre }))).toEqual(chop(json, 20));
     });
 
     const text = 'lorem   ipsum \t dolor sit amet';
@@ -48,31 +48,31 @@ describe('WordWrap', () => {
     });
 
     test('word-wordwrap with N width', () => {
-      expect(wordwrap.wrap(text, createWordWrapOption(undefined, undefined, 10))).toEqual('lorem\nipsum\ndolor sit\namet');
+      expect(wordwrap.wrap(text, createWordWrapOption({ width: 10 }))).toEqual('lorem\nipsum\ndolor sit\namet');
     });
 
     const overflow = 'it overflows';
 
     test('overflow text pushed to next line', () => {
-      expect(wordwrap.wrap(overflow, createWordWrapOption(undefined, undefined, 5))).toEqual('it\noverf\nlows');
+      expect(wordwrap.wrap(overflow, createWordWrapOption({ width: 5 }))).toEqual('it\noverf\nlows');
     });
 
     const nowrap = 'this text  \n  only wraps \nnewlines';
 
     test('eats starting whitespace', () => {
-      expect(wordwrap.wrap(nowrap, createWordWrapOption(undefined, undefined, undefined, WordWrapMode.NoWrap))).toEqual('this text  \nonly wraps \nnewlines');
+      expect(wordwrap.wrap(nowrap, createWordWrapOption({ mode: WordWrapMode.NoWrap }))).toEqual('this text  \nonly wraps \nnewlines');
     });
 
     test('zero width results in empty string', () => {
-      expect(wordwrap.wrap('this is not visible', createWordWrapOption(undefined, undefined, 0))).toEqual('');
+      expect(wordwrap.wrap('this is not visible', createWordWrapOption({ width: 0 }))).toEqual('');
     });
 
     test('zero width results in empty string', () => {
-      expect(wordwrap.wrap('this is not visible', createWordWrapOption(undefined, undefined, 0, WordWrapMode.Pre))).toEqual('');
+      expect(wordwrap.wrap('this is not visible', createWordWrapOption({ width: 0, mode: WordWrapMode.Pre }))).toEqual('');
     });
 
     test('zero width nowrap does not result in empty string', () => {
-      expect(wordwrap.wrap('this is not\nvisible', createWordWrapOption(undefined, undefined, 0, WordWrapMode.NoWrap))).toEqual('this is not\nvisible');
+      expect(wordwrap.wrap('this is not\nvisible', createWordWrapOption({ width: 0, mode: WordWrapMode.NoWrap }))).toEqual('this is not\nvisible');
     });
 
     test('test some text', () => {
@@ -85,14 +85,14 @@ describe('WordWrap', () => {
     const str = 'the quick brown fox jumps over the lazy dog'
 
     /** word-wrap the entire sentence */
-    const text = wordwrap.wrap(str, createWordWrapOption(undefined, undefined, 10));
+    const text = wordwrap.wrap(str, createWordWrapOption({ width: 10 }));
 
     /** bits at a time */
     const start = 20;
     const end = 30;
 
-    const text0 = wordwrap.wrap(str, createWordWrapOption(start, end, 10));
-    const text1 = wordwrap.wrap(str, createWordWrapOption(end, undefined, 10));
+    const text0 = wordwrap.wrap(str, createWordWrapOption({ start: start, end: end, width: 10 }));
+    const text1 = wordwrap.wrap(str, createWordWrapOption({ start: end, width: 10 }));
 
     test('only word-wraps a sub-section of text', () => {
       expect(text0).toEqual('jumps over');
@@ -119,16 +119,16 @@ describe('WordWrap', () => {
 
     test('cuts text with variable glyph width', () => {
       const text = 'some lines'
-      expect(wordwrap.wrap(text, createWordWrapOption(undefined, undefined, 20, undefined, compute2))).toEqual('some\nline\ns');
+      expect(wordwrap.wrap(text, createWordWrapOption({ width: 20, measure: compute2 }))).toEqual('some\nline\ns');
     });
 
   });
 
   describe('wraps text to a list of lines', () => {
-    
+
     test('cuts text with variable glyph width', () => {
       const expected = [{ end: 9, start: 0, width: 0 }, { end: 15, start: 10, width: 0 }];
-      expect(wordwrap.lines('the quick brown', createWordWrapOption(undefined, undefined, 10))).toEqual(expected);
+      expect(wordwrap.lines('the quick brown', createWordWrapOption({ width: 10 }))).toEqual(expected);
     });
 
   });
