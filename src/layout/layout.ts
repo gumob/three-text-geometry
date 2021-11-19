@@ -1,7 +1,7 @@
 
 import xtend from 'xtend';
 import * as wordwrap from '~/layout'
-import { BMFont, BMFontChar, ComputeMetrics, createTextLayoutOption, TextGlyph, TextLayoutAlign, TextLayoutOption, WordMetrics, WordWrapMode } from '~/types'
+import { BMFont, BMFontChar, ComputeMetrics, TextGlyph, TextLayoutAlign, TextLayoutOption, WordMetrics } from '~/types'
 
 const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
 const M_WIDTHS = ['m', 'w'];
@@ -10,7 +10,19 @@ const TAB_ID = '\t'.charCodeAt(0);
 const SPACE_ID = ' '.charCodeAt(0);
 
 class TextLayout {
-    private _opt: TextLayoutOption;
+    private _opt: TextLayoutOption = {
+        font: undefined,
+        text: undefined,
+        letterSpacing: undefined,
+        tabSize: undefined,
+        lineHeight: undefined,
+        align: undefined,
+        start: undefined,
+        end: undefined,
+        width: undefined,
+        mode: undefined,
+        measure: undefined
+    };
     private _measure: ComputeMetrics;
 
     private _linesTotal = 0;
@@ -37,30 +49,37 @@ class TextLayout {
     public get capHeight(): number { return this._capHeight; }
     public get lineHeight(): number { return this._lineHeight; }
 
-    constructor(option: TextLayoutOption) {
+    constructor(option: any = {}) {
         if (option.font === undefined) throw new TypeError('Must specify a `font` in options');
-        this._opt = option;
+        this._opt.font = option.font;
         this._glyphs = [];
         this._measure = this.computeMetrics.bind(this);
         this.update(option);
     }
 
-    public update(option: TextLayoutOption) {
-        const opt: TextLayoutOption = option;
-        this._opt.font = opt.font ? opt.font : this._opt.font;
-        this._opt.text = opt.text !== undefined ? opt.text : (this._opt.text || '');
-        this._opt.mode = opt.mode ? opt.mode : this._opt.mode;
-        this._opt.align = opt.align ? opt.align : this._opt.align;
-        this._opt.letterSpacing = opt.letterSpacing !== undefined ? opt.letterSpacing : this._opt.letterSpacing;
-        this._opt.lineHeight = opt.lineHeight !== undefined ? opt.lineHeight : (this._opt.lineHeight !== undefined ? this._opt.lineHeight : this._opt.font!.common.lineHeight);
-        this._opt.tabSize = opt.tabSize !== undefined ? opt.tabSize : this._opt.tabSize;
-        this._opt.start = opt.start !== undefined ? opt.start : this._opt.start;
-        this._opt.end = opt.end !== undefined ? opt.end : this._opt.end;
-        this._opt.measure = opt.measure !== undefined ? opt.measure : this._opt.measure;
+    public update(option: any = {}) {
+        // const opt: any = option;
+        this._opt.text = option.text || '';
+        if (option.start !== undefined) this._opt.start = Math.max(0, option.start);
+        else this._opt.start = 0;
+        if (option.end !== undefined) this._opt.end = option.end;
+        else this._opt.end = this._opt.text!.length;
+        if (option.width !== undefined) this._opt.width = option.width;
+        else this._opt.width = Number.MAX_VALUE;
+        if (option.mode !== undefined) this._opt.mode = option.mode;
+        if (option.align !== undefined) this._opt.align = option.align;
+        else this._opt.align = TextLayoutAlign.Left;
+        if (option.letterSpacing !== undefined) this._opt.letterSpacing = option.letterSpacing;
+        else this._opt.letterSpacing = 0;
+        if (option.lineHeight !== undefined) this._opt.lineHeight = option.lineHeight;
+        else this._opt.lineHeight = this._opt.font!.common.lineHeight;
+        if (option.tabSize !== undefined) this._opt.tabSize = option.tabSize;
+        else this._opt.tabSize = 4;
+        this._opt.measure = option.measure !== undefined ? option.measure : this._opt.measure;
         // this._opt = xtend({ measure: this._measure }, opt);
 
         const font: BMFont = this._opt.font!;
-        const text: string = this._opt.text;
+        const text: string = this._opt.text!;
 
         this._setupSpaceGlyphs(font)
 

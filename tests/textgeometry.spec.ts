@@ -1,8 +1,7 @@
 import * as THREE from 'three';
-import { BMFontLoader } from '~/loader';
-import { BMFontLoaderErrorType } from '~/error';
-import { BMFont, createTextGeometryOption, isBMFont, TextGeometryOption } from '~/types';
 import TextGeometry from '~/index';
+import { BMFontLoader } from '~/loader';
+import { isBMFont } from '~/types';
 
 const config = {
   headers: {
@@ -19,9 +18,7 @@ describe('TextGeometry', () => {
     const loader = new BMFontLoader();
     const font = await loader.loadXML(uri);
     expect(isBMFont(font)).toEqual(true);
-    // const option: TextGeometryOption = createTextGeometryOption();
-    // option.font = font;
-    // const geometry = new TextGeometry(option);
-    // geometry.update('Hello World');
+    const geometry = new TextGeometry({ font: font });
+    geometry.update('Hello World');
   });
 });

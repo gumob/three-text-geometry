@@ -1,27 +1,41 @@
 import * as THREE from 'three'
 import { TextLayout } from '~/layout'
-import { BMFont, createTextGeometryOption, TextGeometryOption, TextGlyph, TextLayoutAlign, WordWrapMode } from '~/types'
+import { TextGeometryOption, TextGlyph, TextLayoutAlign, WordWrapMode } from '~/types'
 import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '~/utils'
 
 class TextGeometry extends THREE.BufferGeometry {
   layout: TextLayout | undefined;
-  _opt: TextGeometryOption = createTextGeometryOption();
+  _opt: TextGeometryOption = {
+    flipY: false,
+    multipage: false,
+    font: undefined,
+    text: undefined,
+    letterSpacing: undefined,
+    tabSize: undefined,
+    lineHeight: undefined,
+    align: undefined,
+    start: undefined,
+    end: undefined,
+    width: undefined,
+    mode: undefined,
+    measure: undefined
+  };
   visibleGlyphs: TextGlyph[] = [];
 
-  constructor(option: TextGeometryOption) {
+  constructor(option: any) {
     super()
+    if (option.font === undefined) throw new TypeError('must specify a `font` in options');
     this.update(option);
   }
 
-  public update(option: TextGeometryOption | string) {
+  public update(option: any) {
     // let opt: TextGeometryOption = {};
     /** Validate Option */
     if (typeof option === 'string') {
       this._opt.text = option;
     }
-    const opt: TextGeometryOption = option as TextGeometryOption;
+    const opt: any = option;
     this._opt.font = opt.font ? opt.font : this._opt.font;
-    if (!this._opt.font && !opt.font) throw new TypeError('must specify a `font` in options');
     this._opt.text = opt.text ? opt.text : this._opt.text;
     this._opt.mode = opt.mode ? opt.mode : this._opt.mode;
     this._opt.align = opt.align ? opt.align : this._opt.align;
