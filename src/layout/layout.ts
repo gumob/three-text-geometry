@@ -110,8 +110,8 @@ class TextLayout {
         this._ascender = lineHeight - descender - this._xHeight;
 
         /** layout each glyph */
-        const self = this;
-        lines.forEach((line: WordMetrics, lineIndex: number) => {
+        for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+            const line: WordMetrics = lines[lineIndex]!;
             const start = line.start;
             const end = line.end;
             const lineWidth = line.width;
@@ -128,7 +128,7 @@ class TextLayout {
                     if (align === TextLayoutAlign.Center) tx += (maxLineWidth - lineWidth) / 2;
                     else if (align === TextLayoutAlign.Right) tx += (maxLineWidth - lineWidth);
 
-                    self._glyphs.push({
+                    this._glyphs.push({
                         position: [tx, y],
                         data: glyph,
                         index: i,
@@ -144,8 +144,7 @@ class TextLayout {
             /** next line DOWN */
             y += lineHeight;
             x = 0;
-        })
-        // this._linesTotal = lines.length;
+        }
     }
 
     private _setupSpaceGlyphs(font: BMFont, tabSize: number) {
