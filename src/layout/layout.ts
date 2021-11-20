@@ -55,7 +55,7 @@ class TextLayout {
     }
 
     public update(text: string, option: any = {}) {
-        // const opt: any = option;
+        /** Initalize options */
         if (option.font !== undefined) this._opt.font = option.font;
         if (option.start !== undefined) this._opt.start = Math.max(0, option.start);
         else this._opt.start = 0;
@@ -70,10 +70,9 @@ class TextLayout {
         else this._opt.lineHeight = this._opt.font!.common.lineHeight;
         if (option.tabSize !== undefined) this._opt.tabSize = option.tabSize;
         else this._opt.tabSize = 4;
+        this._setupSpaceGlyphs(this._opt.font!, this._opt.tabSize!);
 
         const font: BMFont = this._opt.font!;
-
-        this._setupSpaceGlyphs(font);
 
         const lines = wordwrap.lines(text, this._opt);
         const minWidth = this._opt.width || 0;
@@ -111,7 +110,7 @@ class TextLayout {
         this._ascender = lineHeight - descender - this._xHeight;
 
         /** layout each glyph */
-        // const wthis = new WeakRef(this);
+        const self = this;
         lines.forEach((line: WordMetrics, lineIndex: number) => {
             const start = line.start;
             const end = line.end;
@@ -129,7 +128,7 @@ class TextLayout {
                     if (align === TextLayoutAlign.Center) tx += (maxLineWidth - lineWidth) / 2;
                     else if (align === TextLayoutAlign.Right) tx += (maxLineWidth - lineWidth);
 
-                    this._glyphs.push({
+                    self._glyphs.push({
                         position: [tx, y],
                         data: glyph,
                         index: i,
@@ -149,7 +148,7 @@ class TextLayout {
         // this._linesTotal = lines.length;
     }
 
-    private _setupSpaceGlyphs(font: BMFont) {
+    private _setupSpaceGlyphs(font: BMFont, tabSize: number) {
         /** These are fallbacks, when the font doesn't include */
         /** ' ' or '\t' _glyphs */
         this._fallbackSpaceGlyph = null;
@@ -165,7 +164,6 @@ class TextLayout {
             || font.chars[0];
         if (!space) return;
         /** and create a fallback for tab */
-        const tabSize: number = this._opt.tabSize!;
         const tabWidth: number = tabSize * space.xadvance;
         this._fallbackSpaceGlyph = { ...space };
         this._fallbackTabGlyph = Object.assign(space, {
