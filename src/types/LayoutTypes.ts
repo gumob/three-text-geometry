@@ -17,9 +17,12 @@ interface WordMetrics {
 }
 
 enum TextLayoutAlign {
-    Left = 'left',
-    Center = 'center',
-    Right = 'right',
+    Left = 0,
+    Center = 1,
+    Right = 2,
+    // Left = 'left',
+    // Center = 'center',
+    // Right = 'right',
 }
 
 enum WordWrapMode {
