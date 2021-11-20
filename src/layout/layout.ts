@@ -91,7 +91,7 @@ class TextLayout {
         let y = 0;
         const lineHeight: number = this._opt.lineHeight!;
         const baseline: number = font.common.base;
-        const descender : number= lineHeight - baseline;
+        const descender: number = lineHeight - baseline;
         const letterSpacing: number = this._opt.letterSpacing!;
         const height: number = lineHeight * lines.length - descender;
         const align: TextLayoutAlign = this._opt.align!;
@@ -224,7 +224,6 @@ class TextLayout {
 
         /** make sure rightmost edge lines up with rendered _glyphs */
         if (lastGlyph) curWidth += lastGlyph.xoffset;
-
         return {
             start: start,
             end: start + count,
