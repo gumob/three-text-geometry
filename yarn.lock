@@ -1254,13 +1254,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mime-types@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "@types/mime-types@npm:2.1.1"
-  checksum: 106b5d556add46446a579ad25ff15d6b421851790d887edcad558c90c1e64b1defc72bfbaf4b08f208916e21d9cc45cdb951d77be51268b18221544cfe054a3c
-  languageName: node
-  linkType: hard
-
 "@types/ms@npm:*":
   version: 0.7.31
   resolution: "@types/ms@npm:0.7.31"
@@ -4425,6 +4418,17 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
+"jest-three@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "jest-three@npm:1.3.1"
+  dependencies:
+    ramda: 0.26.1
+  peerDependencies:
+    three: ^0.92.0
+  checksum: aa5562817933e5638d68243153baffa99b5e5f93c580ba9c1dce4187b77c26814ac03cd1955151c9994623e162df39d32d2e8d6701d22a16ee51f32ff017d299
+  languageName: node
+  linkType: hard
+
 "jest-util@npm:^27.0.0, jest-util@npm:^27.1.1":
   version: 27.1.1
   resolution: "jest-util@npm:27.1.1"
@@ -5013,28 +5017,12 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"mime-db@npm:1.51.0":
-  version: 1.51.0
-  resolution: "mime-db@npm:1.51.0"
-  checksum: 613b1ac9d6e725cc24444600b124a7f1ce6c60b1baa654f39a3e260d0995a6dffc5693190217e271af7e2a5612dae19f2a73f3e316707d797a7391165f7ef423
-  languageName: node
-  linkType: hard
-
 "mime-types@npm:^2.1.12, mime-types@npm:~2.1.19":
   version: 2.1.32
   resolution: "mime-types@npm:2.1.32"
   dependencies:
     mime-db: 1.49.0
   checksum: 4487dfd2f872126d2c219ec731ad47a6169a438d5a4cce6ecef7594ce08eaefaf0d85429485a76ec005f095016c7ec488a24cf8bfcc0ea06de0355e23395746f
-  languageName: node
-  linkType: hard
-
-"mime-types@npm:^2.1.34":
-  version: 2.1.34
-  resolution: "mime-types@npm:2.1.34"
-  dependencies:
-    mime-db: 1.51.0
-  checksum: 67013de9e9d6799bde6d669d18785b7e18bcd212e710d3e04a4727f92f67a8ad4e74aee24be28b685adb794944814bde649119b58ee3282ffdbee58f9278d9f3
   languageName: node
   linkType: hard
 
@@ -5647,6 +5635,13 @@ fsevents@^2.3.2:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
   checksum: b676f8c040cdc5b12723ad2f91414d267605b26419d5c821ff03befa817ddd10e238d22b25d604920340fd73efd8ba795465a0377c4adf45a4a41e4234e42dc4
+  languageName: node
+  linkType: hard
+
+"ramda@npm:0.26.1":
+  version: 0.26.1
+  resolution: "ramda@npm:0.26.1"
+  checksum: 19c2730e44c129538151ae034c89be9b2c6a4ccc7c65cff57497418bc532ce09282f98cd927c39b0b03c6bc3f1d1a12d822b7b07f96a1634f4958a6c05b7b384
   languageName: node
   linkType: hard
 
@@ -6443,7 +6438,6 @@ fsevents@^2.3.2:
     "@prisma-labs/prettier-config": 0.1.0
     "@types/ajv": ^1.0.0
     "@types/jest": 27.0.2
-    "@types/mime-types": ^2.1.1
     "@types/node": 16.11.2
     "@types/offscreencanvas": ^2019.6.4
     "@types/three": ^0.134.0
@@ -6460,11 +6454,11 @@ fsevents@^2.3.2:
     floggy: ^0.3.1
     format-imports: 2.4.1
     jest: 27.3.1
+    jest-three: ^1.3.1
     jest-watch-select-projects: 2.0.0
     jest-watch-suspend: 1.1.2
     jest-watch-typeahead: 1.0.0
     markdown-toc: ^1.2.0
-    mime-types: ^2.1.34
     prettier: 2.4.1
     three: ^0.134.0
     ts-jest: 27.0.7
