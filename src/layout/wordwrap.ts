@@ -3,32 +3,39 @@
  * https://github.com/mattdesl/word-wrapper
  * 
  */
-import { ComputeMetrics, createWordWrapOption, WordMetrics, WordWrapMode, WordWrapOption } from '~/types'
+import { ComputeMetrics, WordMetrics, WordWrapMode, WordWrapOption } from '~/types'
 
 const newline = /\n/
 const newlineChar = '\n'
 const whitespace = /\s/
 
-function wrap(text: string, opt: WordWrapOption = createWordWrapOption()): string {
-    return lines(text, opt)
+function wrap(text: string, option: any = {}): string {
+    return lines(text, option)
         .map((line: WordMetrics) => (text.substring(line.start, line.end)))
         .join('\n');
 }
 
-function lines(text: string, opt: WordWrapOption = createWordWrapOption()): WordMetrics[] {
+function lines(text: string, option: any = {}): WordMetrics[] {
     /** zero width results in nothing visible */
-    if (opt.width === 0 && opt.mode !== WordWrapMode.NoWrap) return [];
+    const opt: WordWrapOption = {
+        start: undefined, end: undefined, width: undefined,
+        mode: undefined, measure: undefined
+    };
     text = text || '';
-    const start: number = Math.max(0, opt.start);
-    const end: number = opt.end !== undefined ? opt.end : text.length;
-    const width: number = opt.width !== undefined ? opt.width : Number.MAX_VALUE;
-    const mode: WordWrapMode = opt.mode;
-    const measure: ComputeMetrics = opt.measure || monospace;
+    if (option.start !== undefined) opt.start = Math.max(0, option.start);
+    else opt.start = 0;
+    if (option.end !== undefined) opt.end = option.end;
+    else opt.end = text.length;
+    if (option.width !== undefined) opt.width = option.width;
+    else opt.width = Number.MAX_VALUE;
+    if (option.mode !== undefined) opt.mode = option.mode;
+    opt.measure = option.measure || monospace;
+    if (opt.width === 0 && opt.mode !== WordWrapMode.NoWrap) return [];
 
-    if (mode === WordWrapMode.Pre)
-        return pre(measure, text, start, end, width);
+    if (option.mode === WordWrapMode.Pre)
+        return pre(opt.measure!, text, opt.start, opt.end!, opt.width!);
     else
-        return greedy(measure, text, start, end, width, mode);
+        return greedy(opt.measure!, text, opt.start, opt.end!, opt.width!, opt.mode!);
 }
 
 function idxOf(text: string, chr: string, start: number, end: number) {
