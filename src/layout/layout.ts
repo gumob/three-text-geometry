@@ -21,9 +21,8 @@ class TextLayout {
         mode: undefined,
         measure: undefined
     };
-    // private _measure: ComputeMetrics;
 
-    private _linesTotal = 0;
+    // private _linesTotal = 0;
     private _fallbackSpaceGlyph: BMFontChar | null = null;
     private _fallbackTabGlyph: BMFontChar | null = null;
 
@@ -49,9 +48,9 @@ class TextLayout {
 
     constructor(text: string, option: any = {}) {
         if (option.font === undefined) throw new TypeError('Must specify a `font` in options');
-        this._glyphs = [];
-        // this._measure = this.computeMetrics.bind(this);
+        this._opt.font = option.font;
         this._opt.measure = this.computeMetrics.bind(this);
+        this._glyphs = [];
         this.update(text, option);
     }
 
@@ -77,12 +76,11 @@ class TextLayout {
         this._setupSpaceGlyphs(font);
 
         const lines = wordwrap.lines(text, this._opt);
-        // console.log('this._opt', this._opt);
-        // console.log('lines', lines);
         const minWidth = this._opt.width || 0;
 
         /** clear _glyphs */
-        this._glyphs.length = 0
+        this._glyphs = [];
+        // this._glyphs.length = 0;
 
         /** get max line width */
         const maxLineWidth = lines.reduce((prev: number, line: WordMetrics) => {
@@ -90,17 +88,17 @@ class TextLayout {
         }, 0);
 
         /** the pen position */
-        let x = 0
-        let y = 0
-        const lineHeight = this.asNumber(this._opt.lineHeight, font.common.lineHeight)
-        const baseline = font.common.base
-        const descender = lineHeight - baseline
-        const letterSpacing = this._opt.letterSpacing || 0
-        const height = lineHeight * lines.length - descender
-        const align = this._opt.align;
+        let x = 0;
+        let y = 0;
+        const lineHeight: number = this._opt.lineHeight!;
+        const baseline: number = font.common.base;
+        const descender : number= lineHeight - baseline;
+        const letterSpacing: number = this._opt.letterSpacing!;
+        const height: number = lineHeight * lines.length - descender;
+        const align: TextLayoutAlign = this._opt.align!;
 
         /** draw text along baseline */
-        y -= height
+        y -= height;
 
         /** the metrics for this text layout */
         this._width = maxLineWidth;
@@ -125,14 +123,11 @@ class TextLayout {
                 // const glyph = wthis.deref()?.getGlyph(font, id);
                 const glyph = this.getGlyph(font, id);
                 if (glyph) {
-                    if (lastGlyph)
-                        x += this.getKerning(font, lastGlyph.id, glyph.id);
+                    if (lastGlyph) x += this.getKerning(font, lastGlyph.id, glyph.id);
 
                     let tx = x;
-                    if (align === TextLayoutAlign.Center)
-                        tx += (maxLineWidth - lineWidth) / 2;
-                    else if (align === TextLayoutAlign.Right)
-                        tx += (maxLineWidth - lineWidth);
+                    if (align === TextLayoutAlign.Center) tx += (maxLineWidth - lineWidth) / 2;
+                    else if (align === TextLayoutAlign.Right) tx += (maxLineWidth - lineWidth);
 
                     this._glyphs.push({
                         position: [tx, y],
@@ -151,11 +146,7 @@ class TextLayout {
             y += lineHeight;
             x = 0;
         })
-        this._linesTotal = lines.length;
-    }
-
-    asNumber(num: number | undefined, def = 0) {
-        return num !== undefined ? num : def;
+        // this._linesTotal = lines.length;
     }
 
     private _setupSpaceGlyphs(font: BMFont) {
@@ -174,7 +165,7 @@ class TextLayout {
             || font.chars[0];
         if (!space) return;
         /** and create a fallback for tab */
-        const tabSize: number = this._opt.tabSize || 4;
+        const tabSize: number = this._opt.tabSize!;
         const tabWidth: number = tabSize * space.xadvance;
         this._fallbackSpaceGlyph = { ...space };
         this._fallbackTabGlyph = Object.assign(space, {
