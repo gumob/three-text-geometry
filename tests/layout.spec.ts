@@ -1,15 +1,7 @@
 import fs from 'fs';
 import { BMFontChar, TextGlyph } from '~/types';
 import { TextLayout } from '~/layout';
-import { BMFontAsciiParser } from '~/parser';
-
-const config = {
-  headers: {
-    'Cache-Control': 'no-cache',
-    'Pragma': 'no-cache',
-    'Expires': '0',
-  }
-}
+import { BMFontAsciiParser, BMFontJsonParser } from '~/parser';
 
 function DefaultBMFontChar(): BMFontChar {
   return {
@@ -28,10 +20,10 @@ function DefaultBMFontChar(): BMFontChar {
   };
 }
 
-
 describe('TextLayout', () => {
 
   describe('Option', () => {
+
     test('No font option', () => {
       try {
         new TextLayout('')
@@ -39,19 +31,20 @@ describe('TextLayout', () => {
         expect(e).toEqual(new TypeError('Must specify a `font` in options'));
       }
     });
+
   });
 
   describe('Dimension', () => {
+
     /** Load Font */
-    // const ascii: string = fs.readFileSync('tests/fnt/Lato-Regular-16.fnt').toString();
-    // const ascii: string = fs.readFileSync('tests/fnt/Lato-Regular-24.fnt').toString();
-    const ascii: string = fs.readFileSync('tests/fnt/Lato-Regular-32.fnt').toString();
-    // const ascii: string = fs.readFileSync('tests/fnt/Lato-Regular-64.fnt').toString();
-    const font = new BMFontAsciiParser().parse(ascii);
+    // const ascii: string = fs.readFileSync('tests/fnt/Lato-Regular-32.fnt').toString();
+    // const font = new BMFontAsciiParser().parse(ascii);
+    const json = fs.readFileSync('tests/fnt/Lato-Regular-32.json').toString();
+    const font = new BMFontJsonParser().parse(json);
     let xIdx: number | undefined;
     let xGlyph: BMFontChar = DefaultBMFontChar();
     font.chars.forEach((val: BMFontChar) => {
-      if (val.char === 'x') {
+      if (val.id === 'x'.charCodeAt(0)) {
         xIdx = val.id;
         xGlyph = val;
         return;
@@ -68,79 +61,67 @@ describe('TextLayout', () => {
     font.common.base = baseline;
 
     /** Load Font */
-    const layout0 = new TextLayout('x', {font: font});
+    const layout0 = new TextLayout('x', { font: font });
 
-    /** Success */
     test('line height matches', () => {
       expect(layout0.height).toBe(lineHeight - descender);
     });
 
-    /** Fail */
     test('width matches', () => {
       expect(layout0.width).toBe(xGlyph.width + xGlyph.xoffset);
     });
 
-    /** Success */
     test('descender matches', () => {
       expect(layout0.descender).toBe(lineHeight - baseline);
     });
-    
-    /** Fail */
-    // test('ascender matches', () => {
-    //   expect(layout0.ascender).toBe(lineHeight - descender - xHeight);
-    // });
 
-    /** Fail */
-    // test('x-height matches', () => {
-    //   expect(layout0.xHeight).toBe(xHeight);
-    // });
+    test('ascender matches', () => {
+      expect(layout0.ascender).toBe(lineHeight - descender - xHeight);
+    });
 
-    /** Success */
+    test('x-height matches', () => {
+      expect(layout0.xHeight).toBe(xHeight);
+    });
+
     test('baseline matches', () => {
       expect(layout0.baseline).toBe(baseline);
     });
 
-    const layout1 = new TextLayout('xx', {font: font});
+    const layout1 = new TextLayout('xx', { font: font });
 
-    /** Fail */
-    // test('calculates whole width', () => {
-    //   expect(layout1.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset);
-    // });
+    test('calculates whole width', () => {
+      expect(layout1.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset);
+    });
 
-    const layout2 = new TextLayout('xx\nx', {font: font});
+    const layout2 = new TextLayout('xx\nx', { font: font });
 
-    /** Fail */
-    // test('multi line width matches', () => {
-    //   expect(layout2.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset);
-    // });
+    test('multi line width matches', () => {
+      expect(layout2.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset);
+    });
 
     const letterSpacing = 4;
-    const layout3 = new TextLayout('xx', {font: font, letterSpacing: letterSpacing});
+    const layout3 = new TextLayout('xx', { font: font, letterSpacing: letterSpacing });
 
-    /** Fail */
-    // test('letter spacing matches', () => {
-    //   expect(layout3.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset + letterSpacing);
-    // });
+    test('letter spacing matches', () => {
+      expect(layout3.width).toBe(xGlyph.xadvance + xGlyph.width + xGlyph.xoffset + letterSpacing);
+    });
 
-    const layout4 = new TextLayout('hx\nab', {font: font});
+    const layout4 = new TextLayout('hx\nab', { font: font });
 
-    /** Success */
     test('provides glyphs', () => {
       const result = layout4.glyphs.map((x: TextGlyph) => (String.fromCharCode(x.data.id))).join('');
       expect(result).toStrictEqual('hxab');
     });
 
-    /** Success */
     test('provides lines', () => {
       const result = layout4.glyphs.map((x: TextGlyph) => (x.line));
-      expect(result).toStrictEqual([ 0, 0, 1, 1 ]);
+      expect(result).toStrictEqual([0, 0, 1, 1]);
     });
 
-    /** Fail */
-    // test('provides indices', () => {
-    //   const result = layout4.glyphs.map((x: TextGlyph) => (String.fromCharCode(x.index)));
-    //   expect(result).toStrictEqual([ 0, 1, 3, 4 ]);
-    // });
+    test('provides indices', () => {
+      const result = layout4.glyphs.map((x: TextGlyph) => (x.index));
+      expect(result).toStrictEqual([0, 1, 3, 4]);
+    });
 
   });
 

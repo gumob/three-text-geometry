@@ -10,8 +10,9 @@ import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error';
  */
 
 class BMFontJsonParser {
-    public parse(json: object): BMFont {
+    public parse(json: object | string): BMFont {
         try {
+            if (typeof json === 'string') json = JSON.parse(json);
             const ajv = new Ajv();
             const validate = ajv.compile(schema);
             const valid: boolean = validate(json);

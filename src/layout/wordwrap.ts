@@ -127,7 +127,6 @@ function monospace(_: string, start: number, end: number, width: number): WordMe
         start: start,
         end: start + glyphs,
         width: 0
-        // width: width
     }
 }
 
