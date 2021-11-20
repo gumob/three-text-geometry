@@ -1,7 +1,8 @@
 import fs from 'fs';
-import { BMFontChar, TextGlyph } from '~/types';
+import { BMFontChar, TextGlyph, TextLayoutAlign, WordWrapMode } from '~/types';
 import { TextLayout } from '~/layout';
 import { BMFontAsciiParser, BMFontJsonParser } from '~/parser';
+import TextGeometry from '~/TextGeometry';
 
 function DefaultBMFontChar(): BMFontChar {
   return {
@@ -30,6 +31,26 @@ describe('TextLayout', () => {
       } catch (e) {
         expect(e).toEqual(new TypeError('Must specify a `font` in options'));
       }
+    });
+
+    test('Multiple option values', () => {
+      const json = fs.readFileSync('tests/fnt/Lato-Regular-32.json').toString();
+      const font = new BMFontJsonParser().parse(json);
+      const option = {
+        font: font, start: 1, end: 10, width: 3,
+        align: TextLayoutAlign.Left, mode: WordWrapMode.Pre,
+        letterSpacing: 1, lineHeight: font.common.lineHeight, tabSize: 1,
+      }
+      const layout = new TextLayout('Multiple option values', option);
+      expect(layout.option.font).toStrictEqual(option.font);
+      expect(layout.option.start).toStrictEqual(option.start);
+      expect(layout.option.end).toStrictEqual(option.end);
+      expect(layout.option.width).toStrictEqual(option.width);
+      expect(layout.option.align).toStrictEqual(option.align);
+      expect(layout.option.mode).toStrictEqual(option.mode);
+      expect(layout.option.letterSpacing).toStrictEqual(option.letterSpacing);
+      expect(layout.option.lineHeight).toStrictEqual(option.lineHeight);
+      expect(layout.option.tabSize).toStrictEqual(option.tabSize);
     });
 
   });

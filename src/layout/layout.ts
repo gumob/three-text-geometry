@@ -36,6 +36,7 @@ class TextLayout {
     private _capHeight = 0;
     private _lineHeight = 0;
 
+    public get option(): TextLayoutOption { return { ...this._opt } as TextLayoutOption }
     public get glyphs(): TextGlyph[] { return this._glyphs; }
     public get width(): number { return this._width; }
     public get height(): number { return this._height; }
@@ -64,6 +65,7 @@ class TextLayout {
         if (option.width !== undefined) this._opt.width = option.width;
         if (option.align !== undefined) this._opt.align = option.align;
         else this._opt.align = TextLayoutAlign.Left;
+        if (option.mode !== undefined) this._opt.mode = option.mode;
         if (option.letterSpacing !== undefined) this._opt.letterSpacing = option.letterSpacing;
         else this._opt.letterSpacing = 0;
         if (option.lineHeight !== undefined) this._opt.lineHeight = option.lineHeight;

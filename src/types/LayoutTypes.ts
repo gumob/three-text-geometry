@@ -31,33 +31,33 @@ enum WordWrapMode {
 }
 
 interface WordWrapOption {
-    start: number | undefined;
-    end: number | undefined;
-    width: number | undefined;
-    mode: WordWrapMode | undefined;
-    measure: ComputeMetrics | undefined;
+    start?: number | undefined;
+    end?: number | undefined;
+    width?: number | undefined;
+    mode?: WordWrapMode | undefined;
+    measure?: ComputeMetrics | undefined;
 }
 
 interface TextLayoutOption extends WordWrapOption {
-    font: BMFont | undefined;
-    letterSpacing: number | undefined;
-    tabSize: number | undefined;
-    lineHeight: number | undefined;
-    align: TextLayoutAlign | undefined;
+    font?: BMFont | undefined;
+    letterSpacing?: number | undefined;
+    tabSize?: number | undefined;
+    lineHeight?: number | undefined;
+    align?: TextLayoutAlign | undefined;
 }
 
 interface TextGeometryOption {
-    font: BMFont | undefined;
-    start: number | undefined;
-    end: number | undefined;
-    width: number | undefined;
-    mode: WordWrapMode | undefined;
-    letterSpacing: number | undefined;
-    tabSize: number | undefined;
-    lineHeight: number | undefined;
-    align: TextLayoutAlign | undefined;
-    flipY: boolean;
-    multipage: boolean;
+    font?: BMFont | undefined;
+    start?: number | undefined;
+    end?: number | undefined;
+    width?: number | undefined;
+    mode?: WordWrapMode | undefined;
+    letterSpacing?: number | undefined;
+    tabSize?: number | undefined;
+    lineHeight?: number | undefined;
+    align?: TextLayoutAlign | undefined;
+    flipY?: boolean;
+    multipage?: boolean;
 }
 
 export {
