@@ -42,29 +42,29 @@ describe('TextGeometry', () => {
       } catch (e) {
         expect(e).toEqual(new TypeError('Must specify a `font` in options'))
       }
+    })
 
-      test('All', async () => {
-        const option = {
-          font: font,
-          start: 1,
-          end: 10,
-          width: 3,
-          align: TextLayoutAlign.Left,
-          mode: WordWrapMode.Pre,
-          letterSpacing: 1,
-          lineHeight: font.common.lineHeight,
-          tabSize: 1,
-          flipY: true,
-          multipage: false,
-        }
-        const geometry = new TextGeometry('Hello World', option)
-        expect(geometry.option).toStrictEqual(option)
-      })
+    test('All', async () => {
+      const option = {
+        font: font,
+        start: 1,
+        end: 10,
+        width: 3,
+        align: TextLayoutAlign.Left,
+        mode: WordWrapMode.Pre,
+        letterSpacing: 1,
+        lineHeight: font.common.lineHeight,
+        tabSize: 1,
+        flipY: true,
+        multipage: false,
+      }
+      const geometry = new TextGeometry('Hello World', option)
+      expect(geometry.option).toStrictEqual(option)
+    })
 
-      test('TextGeometry', async () => {
-        const geometry = new TextGeometry('Hello World', { font: font })
-        expect(geometry).toBeInstanceOf(TextGeometry)
-      })
+    test('TextGeometry', async () => {
+      const geometry = new TextGeometry('Hello World', { font: font })
+      expect(geometry).toBeInstanceOf(TextGeometry)
     })
   })
 
