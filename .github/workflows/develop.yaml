@@ -38,10 +38,8 @@ jobs:
       - name: Run eslint
         run: yarn lint
       - name: Run test
-        run: xvfb-run --auto-servernum yarn test
-      - name: Jest coverage report
-        uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: xvfb-run --auto-servernum yarn test:ci
+      - name: Generating coverage badges
+        uses: jpb06/jest-badges-action@latest
         with:
-          test-command: "xvfb-run --auto-servernum yarn test"
+          branches: master,preprod,staging
