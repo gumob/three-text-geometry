@@ -1,20 +1,31 @@
 name: Development
 
 on:
-   push:
-      branches:
-        - develop
-        - feature/**
+  push:
+    branches:
+      - develop
+      - feature/**
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version:
+          - 12.x
+          - 14.x
+          - 16.x
+
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Install apt packages for headless-gl
+        run: sudo apt update && sudo apt install libxi-dev xvfb libgl1-mesa-dev
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
-          node-version: '14.17.6'
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - uses: actions/cache@v2
         with:
           path: ~/.cache/yarn
@@ -27,4 +38,8 @@ jobs:
       - name: Run eslint
         run: yarn lint
       - name: Run test
-        run: yarn test
+        run: xvfb-run --auto-servernum yarn test:ci
+      - name: Generating coverage badges
+        uses: jpb06/jest-badges-action@latest
+        with:
+          branches: develop
