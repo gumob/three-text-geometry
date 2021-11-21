@@ -4098,14 +4098,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-xml-parser@npm:^4.0.0-beta.0":
-  version: 4.0.0-beta.0
-  resolution: "fast-xml-parser@npm:4.0.0-beta.0"
+"fast-xml-parser@npm:^4.0.0-beta.2":
+  version: 4.0.0-beta.2
+  resolution: "fast-xml-parser@npm:4.0.0-beta.2"
   dependencies:
     strnum: ^1.0.4
   bin:
     fxparser: src/cli/cli.js
-  checksum: a103a09f4515cffcc86f62cc1f133dd519e298367bfa4aa186a7987fe1b68b52203c6778dfd59cf629eeed48812f106096289e77850669480c227871a486cf8c
+  checksum: 426e3b8cde587571cdfe2ed37ec620ae92c01c8f6a6e39ac1833791655f67057cd5bc2e9ae7da5e23bb02a53aeba177b7a0841e3d65848c0be2197c7a5e56b38
   languageName: node
   linkType: hard
 
@@ -9230,7 +9230,7 @@ fsevents@^2.3.2:
     eslint: 8.0.1
     eslint-config-prettier: 8.3.0
     eslint-plugin-only-warn: 1.0.3
-    fast-xml-parser: ^4.0.0-beta.0
+    fast-xml-parser: ^4.0.0-beta.2
     floggy: ^0.3.1
     format-imports: 2.4.1
     gl: ^4.9.2
