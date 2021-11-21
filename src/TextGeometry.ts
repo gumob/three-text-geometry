@@ -21,12 +21,9 @@ class TextGeometry extends THREE.BufferGeometry {
   private _layout: TextLayout | undefined
   private _visibleGlyphs: TextGlyph[] = []
 
-  public get layout(): TextLayout | undefined {
-    return this._layout
-  }
-  public get visibleGlyphs(): TextGlyph[] {
-    return this._visibleGlyphs
-  }
+  public get option(): TextGeometryOption { return { ...this._opt } as TextGeometryOption; }
+  public get layout(): TextLayout | undefined { return this._layout; }
+  public get visibleGlyphs(): TextGlyph[] { return this._visibleGlyphs; }
 
   constructor(text: string, option: any = {}) {
     super()

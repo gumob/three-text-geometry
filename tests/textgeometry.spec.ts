@@ -95,7 +95,7 @@ describe('TextGeometry', () => {
     }
   })
 
-  test('Option / start', async () => {
+  test('Option / All', async () => {
     const xml = fs.readFileSync('tests/fonts/Roboto-Regular.xml').toString()
     const font = new BMFontXMLParser().parse(xml)
     const option = {
@@ -111,8 +111,8 @@ describe('TextGeometry', () => {
       flipY: true,
       multipage: false,
     }
-    const geometry = new TextGeometry('Hello World', option)
-    expect(geometry.boundingSphere).toBeNull()
+    const geometry = new TextGeometry('Hello World', option);
+    expect(geometry.option).toStrictEqual(option);
   })
 
   test('XML / Cache / Valid Single Page', async () => {
@@ -123,7 +123,7 @@ describe('TextGeometry', () => {
     expect(geometry).toBeInstanceOf(TextGeometry)
   })
 
-  test('Bounding Box', async () => {
+  test('Text Geometry', async () => {
     const xml = fs.readFileSync('tests/fonts/Roboto-Regular.xml').toString()
     const font = new BMFontXMLParser().parse(xml)
     const geometry = new TextGeometry('Hello World\nHello Universe', { font: font })
