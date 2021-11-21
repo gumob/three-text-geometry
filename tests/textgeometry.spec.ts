@@ -135,7 +135,7 @@ describe('TextGeometry', () => {
   test("2d context should be exist", async () => {
     const xml = fs.readFileSync('tests/fnt/Roboto-Regular.xml').toString();
     const font = new BMFontXMLParser().parse(xml);
-    const geometry = new TextGeometry('Hello World', { font: font });
+    const geometry = new TextGeometry('Hello World\nHello Universe', { font: font });
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load('tests/fnt/Roboto-Regular.png');
     const material = new THREE.MeshBasicMaterial({
@@ -146,8 +146,6 @@ describe('TextGeometry', () => {
     const mesh = new THREE.Mesh(geometry, material);
     // console.log('mesh', mesh);
     scene.add(mesh);
-    // console.log('document', document);
-    // console.log('renderer', renderer);
     expect(true).toBe(true);
 
     renderer.render(scene, camera);

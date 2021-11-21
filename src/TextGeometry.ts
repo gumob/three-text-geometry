@@ -4,7 +4,6 @@ import { TextGeometryOption, TextGlyph, TextLayoutAlign, WordWrapMode } from '~/
 import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '~/utils'
 
 class TextGeometry extends THREE.BufferGeometry {
-  private _layout: TextLayout | undefined;
   private _opt: TextGeometryOption = {
     font: undefined,
     start: undefined,
@@ -18,6 +17,8 @@ class TextGeometry extends THREE.BufferGeometry {
     flipY: true,
     multipage: false,
   };
+
+  private _layout: TextLayout | undefined;
   private _visibleGlyphs: TextGlyph[] = [];
 
   public get layout(): TextLayout | undefined { return this._layout; }
