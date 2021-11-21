@@ -20,7 +20,7 @@ jobs:
           - 16.x
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install apt packages for headless-gl
         run: sudo apt update && sudo apt install libxi-dev xvfb libgl1-mesa-dev
@@ -43,8 +43,8 @@ jobs:
       - name: Run eslint
         run: yarn lint
       - name: Run test
-        run: xvfb-run --auto-servernum yarn test:ci
-      - name: Generating coverage badges
-        uses: jpb06/jest-badges-action@latest
+        run: xvfb-run --auto-servernum yarn test:coverage
+      - name: Upload coverage
+        uses: codecov/codecov-action@v1
         with:
-          branches: main,develop
+          token: ${{ secrets.CODECOV_TOKEN }}
