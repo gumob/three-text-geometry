@@ -13,7 +13,7 @@ const config = {
 describe('BMFontLoader', () => {
     test('XML / Cache / Valid Single Page', async () => {
         const uri =
-            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular.xml'
+            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml'
         const loader = new BMFontLoader()
         const font = await loader.loadXML(uri)
         expect(isBMFont(font)).toEqual(true)
@@ -21,7 +21,7 @@ describe('BMFontLoader', () => {
 
     test('XML / No-Cache / Valid Single Page', async () => {
         const uri =
-            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular.xml'
+            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml'
         const loader = new BMFontLoader()
         const font = await loader.loadXML(uri, config)
         expect(isBMFont(font)).toEqual(true)
@@ -29,7 +29,7 @@ describe('BMFontLoader', () => {
 
     test('XML / No-Cache / Valid Multiple Page', async () => {
         const uri =
-            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular-pages.xml'
+            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-pages.xml'
         const loader = new BMFontLoader()
         const font = await loader.loadXML(uri, config)
         expect(isBMFont(font)).toEqual(true)
@@ -38,7 +38,7 @@ describe('BMFontLoader', () => {
     test('XML / No-Cache / Invalid Single Page', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular-invalid.xml'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-invalid.xml'
             const loader = new BMFontLoader()
             const font = await loader.loadXML(uri, config)
         } catch (error: any) {
@@ -49,7 +49,7 @@ describe('BMFontLoader', () => {
     test('XML / No-Cache / Empty Single Page', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular-empty.xml'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-empty.xml'
             const loader = new BMFontLoader()
             await loader.loadXML(uri, config)
         } catch (error: any) {
@@ -60,7 +60,7 @@ describe('BMFontLoader', () => {
     test('XML / No-Cache / Not Found', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular-notfound.xml'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-notfound.xml'
             const loader = new BMFontLoader()
             await loader.loadXML(uri, config)
         } catch (error: any) {
@@ -70,7 +70,7 @@ describe('BMFontLoader', () => {
 
     test('Json / Cache / Valid', async () => {
         const uri =
-            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular.json'
+            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.json'
         const loader = new BMFontLoader()
         const font = await loader.loadJson(uri)
         expect(isBMFont(font)).toEqual(true)
@@ -78,7 +78,7 @@ describe('BMFontLoader', () => {
 
     test('Json / No-Cache / Valid', async () => {
         const uri =
-            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular.json'
+            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.json'
         const loader = new BMFontLoader()
         const font = await loader.loadJson(uri, config)
         expect(isBMFont(font)).toEqual(true)
@@ -87,7 +87,7 @@ describe('BMFontLoader', () => {
     test('Json / No-Cache / Empty', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular-empty.json'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-empty.json'
             const loader = new BMFontLoader()
             await loader.loadJson(uri, config)
         } catch (error: any) {
@@ -98,7 +98,7 @@ describe('BMFontLoader', () => {
     test('Json / No-Cache / Invalid', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular-invalid.json'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-invalid.json'
             const loader = new BMFontLoader()
             await loader.loadJson(uri, config)
         } catch (error: any) {
@@ -109,7 +109,7 @@ describe('BMFontLoader', () => {
     test('Json / No-Cache / Not Fouind', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular-notfound.json'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-notfound.json'
             const loader = new BMFontLoader()
             await loader.loadJson(uri, config)
         } catch (error: any) {
@@ -117,10 +117,10 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / Cache / Valid / DejaVu-sdf.fnt', async () => {
+    test('Ascii / Cache / Valid / DejaVu-sdf.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/DejaVu-sdf.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/DejaVu-sdf.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri)
             expect(isBMFont(font)).toEqual(true)
@@ -129,18 +129,18 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / No-Cache / Valid / DejaVu-sdf.fnt', async () => {
+    test('Ascii / No-Cache / Valid / DejaVu-sdf.fonts', async () => {
         const uri =
-            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/DejaVu-sdf.fnt'
+            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/DejaVu-sdf.fonts'
         const loader = new BMFontLoader()
         const font = await loader.loadAscii(uri, config)
         expect(isBMFont(font)).toEqual(true)
     })
 
-    test('Ascii / No-Cache / Invalid / DejaVu-sdf.fnt', async () => {
+    test('Ascii / No-Cache / Invalid / DejaVu-sdf.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/DejaVu-sdf-invalid.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/DejaVu-sdf-invalid.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri, config)
             expect(isBMFont(font)).toEqual(true)
@@ -149,10 +149,10 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / No-Cache / Empty / DejaVu-sdf.fnt', async () => {
+    test('Ascii / No-Cache / Empty / DejaVu-sdf.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/DejaVu-sdf-empty.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/DejaVu-sdf-empty.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri, config)
             expect(isBMFont(font)).toEqual(true)
@@ -161,10 +161,10 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / No-Cache / Not Found / DejaVu-sdf.fnt', async () => {
+    test('Ascii / No-Cache / Not Found / DejaVu-sdf.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/DejaVu-sdf-notfound.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/DejaVu-sdf-notfound.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri, config)
             expect(isBMFont(font)).toEqual(true)
@@ -173,10 +173,10 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / No-Cache / Valid / Lato-Regular-16.fnt', async () => {
+    test('Ascii / No-Cache / Valid / Lato-Regular-16.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-16.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-16.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri, config)
             expect(isBMFont(font)).toEqual(true)
@@ -185,10 +185,10 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / No-Cache / Valid / Lato-Regular-24.fnt', async () => {
+    test('Ascii / No-Cache / Valid / Lato-Regular-24.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-24.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-24.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri, config)
             expect(isBMFont(font)).toEqual(true)
@@ -197,10 +197,10 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / No-Cache / Valid / Lato-Regular-32.fnt', async () => {
+    test('Ascii / No-Cache / Valid / Lato-Regular-32.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-32.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-32.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri, config)
             expect(isBMFont(font)).toEqual(true)
@@ -209,10 +209,10 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / No-Cache / Valid / Lato-Regular-64.fnt', async () => {
+    test('Ascii / No-Cache / Valid / Lato-Regular-64.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Lato-Regular-64.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri, config)
             expect(isBMFont(font)).toEqual(true)
@@ -221,10 +221,10 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / No-Cache / Valid / Norwester-Multi-32.fnt', async () => {
+    test('Ascii / No-Cache / Valid / Norwester-Multi-32.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Norwester-Multi-32.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Norwester-Multi-32.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri, config)
             expect(isBMFont(font)).toEqual(true)
@@ -233,10 +233,10 @@ describe('BMFontLoader', () => {
         }
     })
 
-    test('Ascii / No-Cache / Valid / Norwester-Multi-64.fnt', async () => {
+    test('Ascii / No-Cache / Valid / Norwester-Multi-64.fonts', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Norwester-Multi-64.fnt'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Norwester-Multi-64.fonts'
             const loader = new BMFontLoader()
             const font = await loader.loadAscii(uri, config)
             expect(isBMFont(font)).toEqual(true)
@@ -246,7 +246,7 @@ describe('BMFontLoader', () => {
     })
 
     test('Binary / Valid / Cache', async () => {
-        const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Arial.bin'
+        const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Arial.bin'
         const loader = new BMFontLoader()
         const font = await loader.loadBinary(uri)
         expect(isBMFont(font)).toEqual(true)
@@ -255,7 +255,7 @@ describe('BMFontLoader', () => {
     test('Binary / Invalid / No-Cache', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Arial-invalid.bin'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Arial-invalid.bin'
             const loader = new BMFontLoader()
             await loader.loadBinary(uri, config)
         } catch (error: any) {
@@ -266,7 +266,7 @@ describe('BMFontLoader', () => {
     test('Binary / Empty / No-Cache', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Arial-empty.bin'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Arial-empty.bin'
             const loader = new BMFontLoader()
             await loader.loadBinary(uri, config)
         } catch (error: any) {
@@ -277,7 +277,7 @@ describe('BMFontLoader', () => {
     test('Binary / Not Found / No-Cache', async () => {
         try {
             const uri =
-                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Arial-notfound.bin'
+                'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Arial-notfound.bin'
             const loader = new BMFontLoader()
             await loader.loadBinary(uri, config)
         } catch (error: any) {
