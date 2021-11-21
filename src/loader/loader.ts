@@ -10,63 +10,63 @@ import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParse
 import { BMFont } from '~/types'
 
 class BMFontLoader {
-    constructor() {}
+  constructor() {}
 
-    loadJson(uri: string, config: AxiosRequestConfig | undefined = undefined): Promise<BMFont> {
-        return new Promise((resolve, reject) => {
-            axios
-                .get(uri, config)
-                .then((response: AxiosResponse<object>) => {
-                    resolve(new BMFontJsonParser().parse(response.data))
-                })
-                .catch((error: AxiosError) => {
-                    reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
-                })
+  loadJson(uri: string, config: AxiosRequestConfig | undefined = undefined): Promise<BMFont> {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(uri, config)
+        .then((response: AxiosResponse<object>) => {
+          resolve(new BMFontJsonParser().parse(response.data))
         })
-    }
+        .catch((error: AxiosError) => {
+          reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
+        })
+    })
+  }
 
-    loadXML(uri: string, config: AxiosRequestConfig | undefined = undefined): Promise<BMFont> {
-        return new Promise((resolve, reject) => {
-            axios
-                .get(uri, config)
-                .then((response: AxiosResponse<object>) => {
-                    resolve(new BMFontXMLParser().parse(response.data.toString()))
-                })
-                .catch((error: AxiosError) => {
-                    reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
-                })
+  loadXML(uri: string, config: AxiosRequestConfig | undefined = undefined): Promise<BMFont> {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(uri, config)
+        .then((response: AxiosResponse<object>) => {
+          resolve(new BMFontXMLParser().parse(response.data.toString()))
         })
-    }
+        .catch((error: AxiosError) => {
+          reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
+        })
+    })
+  }
 
-    loadAscii(uri: string, config: AxiosRequestConfig | undefined = undefined): Promise<BMFont> {
-        return new Promise((resolve, reject) => {
-            axios
-                .get(uri, config)
-                .then((response: AxiosResponse<object>) => {
-                    resolve(new BMFontAsciiParser().parse(response.data.toString()))
-                })
-                .catch((error: AxiosError) => {
-                    reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
-                })
+  loadAscii(uri: string, config: AxiosRequestConfig | undefined = undefined): Promise<BMFont> {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(uri, config)
+        .then((response: AxiosResponse<object>) => {
+          resolve(new BMFontAsciiParser().parse(response.data.toString()))
         })
-    }
+        .catch((error: AxiosError) => {
+          reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
+        })
+    })
+  }
 
-    loadBinary(uri: string, config: AxiosRequestConfig | undefined = undefined): Promise<BMFont> {
-        return new Promise((resolve, reject) => {
-            axios
-                .get(uri, config)
-                .then((response: AxiosResponse<object>) => {
-                    const data =
-                        typeof response.data === 'string'
-                            ? Buffer.from(response.data, 'binary')
-                            : (response.data as Buffer)
-                    resolve(new BMFontBinaryParser().parse(data))
-                })
-                .catch((error: AxiosError) => {
-                    reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
-                })
+  loadBinary(uri: string, config: AxiosRequestConfig | undefined = undefined): Promise<BMFont> {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(uri, config)
+        .then((response: AxiosResponse<object>) => {
+          const data =
+            typeof response.data === 'string'
+              ? Buffer.from(response.data, 'binary')
+              : (response.data as Buffer)
+          resolve(new BMFontBinaryParser().parse(data))
         })
-    }
+        .catch((error: AxiosError) => {
+          reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
+        })
+    })
+  }
 }
 
 export { BMFontLoader }
