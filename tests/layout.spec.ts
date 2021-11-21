@@ -59,7 +59,7 @@ describe('TextLayout', () => {
 
   describe('Dimension', () => {
     /** Load Font */
-    // const ascii: string = fs.readFileSync('tests/fonts/Lato-Regular-32.fonts').toString();
+    // const ascii: string = fs.readFileSync('tests/fonts/Lato-Regular-32.fnt').toString();
     // const font = new BMFontAsciiParser().parse(ascii);
     const json = fs.readFileSync('tests/fonts/Lato-Regular-32.json').toString()
     const font = new BMFontJsonParser().parse(json)
