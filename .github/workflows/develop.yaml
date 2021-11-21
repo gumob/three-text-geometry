@@ -39,3 +39,9 @@ jobs:
         run: yarn lint
       - name: Run test
         run: xvfb-run --auto-servernum yarn test
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          package-manager: yarn
+          test-script: yarn coverage:ci
