@@ -17,7 +17,8 @@ jobs:
           - 16.x
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Install apt packages for headless-gl
         run: sudo apt update && sudo apt install libxi-dev xvfb libgl1-mesa-dev
       - name: Use Node.js ${{ matrix.node-version }}
@@ -25,15 +26,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - uses: actions/cache@v2
+      - name: Cache node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2　
         with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-          restore-keys: ${{ runner.os }}-yarn-
+          path: node_modules
+          key: node-v${{ matrix.node-version }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
       - name: Export environment variables
         run: export TERM=xterm
       - name: Install dependencies
-        run: yarn install
+        if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
+        run: yarn --check-files --frozen-lockfile --non-interactive
       - name: Run eslint
         run: yarn lint
       - name: Run test
