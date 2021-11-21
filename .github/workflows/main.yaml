@@ -43,4 +43,4 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           package-manager: yarn
-          test-script: yarn coverage:ci
+          test-script: xvfb-run --auto-servernum yarn coverage:ci
