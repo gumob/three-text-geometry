@@ -71,6 +71,7 @@
     "@types/ts-nameof": "4.2.1",
     "@typescript-eslint/eslint-plugin": "5.1.0",
     "@typescript-eslint/parser": "5.1.0",
+    "budo": "^11.6.4",
     "canvas": "^2.8.0",
     "dripip": "0.10.0",
     "eslint": "8.0.1",
