@@ -1,4 +1,3 @@
-
 enum BMFontLoaderErrorType {
     LoadError = 'LoadError',
     ParseError = 'ParseError',
@@ -6,19 +5,19 @@ enum BMFontLoaderErrorType {
 
 class BMFontLoaderError extends Error {
     constructor(type: BMFontLoaderErrorType, message: string | undefined = undefined) {
-        let msg: string;
+        let msg: string
         switch (type) {
             case BMFontLoaderErrorType.ParseError:
-                msg = message ? message : 'Failed to parse data';
-                break;
+                msg = message ? message : 'Failed to parse data'
+                break
             case BMFontLoaderErrorType.LoadError:
-                msg = message ? message : 'Failed to load data';
-                break;
+                msg = message ? message : 'Failed to load data'
+                break
         }
-        super(msg);
-        this.name = type;
-        Object.setPrototypeOf(this, BMFontLoaderError.prototype);
+        super(msg)
+        this.name = type
+        Object.setPrototypeOf(this, BMFontLoaderError.prototype)
     }
 }
 
-export { BMFontLoaderError, BMFontLoaderErrorType };
+export { BMFontLoaderError, BMFontLoaderErrorType }
