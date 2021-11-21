@@ -39,14 +39,7 @@
                     "title": "kernings"
                 }
             },
-            "required": [
-                "chars",
-                "common",
-                "distanceField",
-                "info",
-                "kernings",
-                "pages"
-            ]
+            "required": ["chars", "common", "distanceField", "info", "kernings", "pages"]
         },
         "BMFontChar": {
             "title": "BMFontChar",
@@ -269,10 +262,7 @@
                     "title": "distanceRange"
                 }
             },
-            "required": [
-                "distanceRange",
-                "fieldType"
-            ]
+            "required": ["distanceRange", "fieldType"]
         },
         "BMFontKern": {
             "title": "BMFontKern",
@@ -291,11 +281,7 @@
                     "title": "amount"
                 }
             },
-            "required": [
-                "amount",
-                "first",
-                "second"
-            ]
+            "required": ["amount", "first", "second"]
         }
     }
 }

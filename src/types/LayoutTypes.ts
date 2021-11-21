@@ -1,18 +1,18 @@
-import { BMFont, BMFontChar } from '~/types';
+import { BMFont, BMFontChar } from '~/types'
 
 // declare function ComputeMetrics(text: string, start: number, end: number, width: number): WordMetrics;
-type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics;
+type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics
 
 interface TextGlyph {
-    position: [number, number];
-    data: BMFontChar,
-    index: number;
-    line: number;
+    position: [number, number]
+    data: BMFontChar
+    index: number
+    line: number
 }
 
 interface WordMetrics {
-    start: number,
-    end: number,
+    start: number
+    end: number
     width: number
 }
 
@@ -31,35 +31,42 @@ enum WordWrapMode {
 }
 
 interface WordWrapOption {
-    start?: number | undefined;
-    end?: number | undefined;
-    width?: number | undefined;
-    mode?: WordWrapMode | undefined;
-    measure?: ComputeMetrics | undefined;
+    start?: number | undefined
+    end?: number | undefined
+    width?: number | undefined
+    mode?: WordWrapMode | undefined
+    measure?: ComputeMetrics | undefined
 }
 
 interface TextLayoutOption extends WordWrapOption {
-    font?: BMFont | undefined;
-    letterSpacing?: number | undefined;
-    tabSize?: number | undefined;
-    lineHeight?: number | undefined;
-    align?: TextLayoutAlign | undefined;
+    font?: BMFont | undefined
+    letterSpacing?: number | undefined
+    tabSize?: number | undefined
+    lineHeight?: number | undefined
+    align?: TextLayoutAlign | undefined
 }
 
 interface TextGeometryOption {
-    font?: BMFont | undefined;
-    start?: number | undefined;
-    end?: number | undefined;
-    width?: number | undefined;
-    mode?: WordWrapMode | undefined;
-    letterSpacing?: number | undefined;
-    tabSize?: number | undefined;
-    lineHeight?: number | undefined;
-    align?: TextLayoutAlign | undefined;
-    flipY?: boolean;
-    multipage?: boolean;
+    font?: BMFont | undefined
+    start?: number | undefined
+    end?: number | undefined
+    width?: number | undefined
+    mode?: WordWrapMode | undefined
+    letterSpacing?: number | undefined
+    tabSize?: number | undefined
+    lineHeight?: number | undefined
+    align?: TextLayoutAlign | undefined
+    flipY?: boolean
+    multipage?: boolean
 }
 
 export {
-    ComputeMetrics, TextLayoutAlign, TextLayoutOption, TextGeometryOption, TextGlyph, WordMetrics, WordWrapMode, WordWrapOption,
+    ComputeMetrics,
+    TextGeometryOption,
+    TextGlyph,
+    TextLayoutAlign,
+    TextLayoutOption,
+    WordMetrics,
+    WordWrapMode,
+    WordWrapOption,
 }

@@ -1,21 +1,6 @@
-import { BMFontLoader } from "./loader";
-import TextGeometry from "./TextGeometry";
-import {
-  BMFont,
-  BMFontChar,
-  BMFontInfo,
-  BMFontCommon,
-  BMFontDistanceField,
-  BMFontKern
-} from "./types";
+import { BMFontLoader } from './loader'
+import TextGeometry from './TextGeometry'
+import { BMFont, BMFontChar, BMFontCommon, BMFontDistanceField, BMFontInfo, BMFontKern } from './types'
 
-export { BMFontLoader };
-export {
-  BMFont,
-  BMFontChar,
-  BMFontInfo,
-  BMFontCommon,
-  BMFontDistanceField,
-  BMFontKern
-};
-export default TextGeometry;
+export { BMFont, BMFontChar, BMFontCommon, BMFontDistanceField, BMFontInfo, BMFontKern, BMFontLoader }
+export default TextGeometry
