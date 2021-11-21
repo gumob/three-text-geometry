@@ -21,9 +21,11 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
       - name: Export environment variables
         run: export TERM=xterm
+      - name: Install apt packages for headless-gl
+        run: sudo apt-get install libxi-dev xvfb libgl1-mesa-dev
       - name: Install dependencies
         run: yarn install
       - name: Run eslint
         run: yarn lint
       - name: Run test
-        run: yarn test
+        run: xvfb-run --auto-servernum yarn test
