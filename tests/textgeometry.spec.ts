@@ -96,7 +96,7 @@ describe('TextGeometry', () => {
     })
 
     test('Option / start', async () => {
-        const xml = fs.readFileSync('tests/fnt/Roboto-Regular.xml').toString()
+        const xml = fs.readFileSync('tests/fonts/Roboto-Regular.xml').toString()
         const font = new BMFontXMLParser().parse(xml)
         const option = {
             font: font,
@@ -116,7 +116,7 @@ describe('TextGeometry', () => {
     })
 
     test('XML / Cache / Valid Single Page', async () => {
-        const xml = fs.readFileSync('tests/fnt/Roboto-Regular.xml').toString()
+        const xml = fs.readFileSync('tests/fonts/Roboto-Regular.xml').toString()
         const font = new BMFontXMLParser().parse(xml)
         expect(isBMFont(font)).toEqual(true)
         const geometry = new TextGeometry('Hello World', { font: font })
@@ -124,25 +124,25 @@ describe('TextGeometry', () => {
     })
 
     test('Bounding Box', async () => {
-        const xml = fs.readFileSync('tests/fnt/Roboto-Regular.xml').toString()
+        const xml = fs.readFileSync('tests/fonts/Roboto-Regular.xml').toString()
         const font = new BMFontXMLParser().parse(xml)
         const geometry = new TextGeometry('Hello World\nHello Universe', { font: font })
         expect(geometry.boundingBox).toBeNull()
     })
 
     test('Bounding Sphere', async () => {
-        const xml = fs.readFileSync('tests/fnt/Roboto-Regular.xml').toString()
+        const xml = fs.readFileSync('tests/fonts/Roboto-Regular.xml').toString()
         const font = new BMFontXMLParser().parse(xml)
         const geometry = new TextGeometry('Hello World', { font: font })
         expect(geometry.boundingSphere).toBeNull()
     })
 
     test('2d context should be exist', async () => {
-        const xml = fs.readFileSync('tests/fnt/Roboto-Regular.xml').toString()
+        const xml = fs.readFileSync('tests/fonts/Roboto-Regular.xml').toString()
         const font = new BMFontXMLParser().parse(xml)
         const geometry = new TextGeometry('Hello World\nHello Universe', { font: font })
         const textureLoader = new THREE.TextureLoader()
-        const texture = textureLoader.load('tests/fnt/Roboto-Regular.png')
+        const texture = textureLoader.load('tests/fonts/Roboto-Regular.png')
         const material = new THREE.MeshBasicMaterial({
             map: texture,
             transparent: true,
@@ -175,7 +175,7 @@ describe('TextGeometry', () => {
         geometry.computeBoundingSphere()
     })
     // test('Compare Bounding Box', async () => {
-    //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular.xml';
+    //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml';
     //   const loader = new BMFontLoader();
     //   const font = await loader.loadXML(uri, config);
 
@@ -200,7 +200,7 @@ describe('TextGeometry', () => {
     // });
 
     // test('Compare Bounding Box', async () => {
-    //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular.xml';
+    //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml';
     //   const loader = new BMFontLoader();
     //   const font = await loader.loadXML(uri, config);
     //   const geometry = new TextGeometry('Hello World', { font: font });
@@ -216,7 +216,7 @@ describe('TextGeometry', () => {
     // });
 
     // test('Compare Bounding Spheres', async () => {
-    //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fnt/Roboto-Regular.xml';
+    //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml';
     //   const loader = new BMFontLoader();
     //   const font = await loader.loadXML(uri, config);
     //   const geometry = new TextGeometry('Hello World', { font: font });

@@ -2,4 +2,4 @@ dist-cjs
 dist-esm
 .yarn
 coverage
-tests/fnt/
+tests/fonts/

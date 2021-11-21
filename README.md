@@ -195,17 +195,17 @@ npm install msdf-bmfont-xml -g
 ```
 msdf-bmfont \
     --output-type xml \
-    --filename './tests/fnt/Roboto-Regular' \
+    --filename './tests/fonts/Roboto-Regular' \
     --font-size 128 \
     --texture-size 4096,4096 \
-    './tests/fnt/Roboto-Regular.ttf'
+    './tests/fonts/Roboto-Regular.ttf'
 ```
 
 ```
 msdf-bmfont \
     --output-type json \
-    --filename './tests/fnt/Roboto-Regular' \
+    --filename './tests/fonts/Roboto-Regular' \
     --font-size 128 \
     --texture-size 4096,4096 \
-    './tests/fnt/Roboto-Regular.ttf'
+    './tests/fonts/Roboto-Regular.ttf'
 ```
