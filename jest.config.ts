@@ -19,7 +19,6 @@ const config: InitialOptionsTsJest = {
     'jest-watch-select-projects',
     'jest-watch-suspend',
   ],
-  // coverageReporters: ['json-summary'],
   globals: {
     'ts-jest': {
       diagnostics: Boolean(process.env.CI),

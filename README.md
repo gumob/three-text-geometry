@@ -1,5 +1,6 @@
 ![Main Workflow](https://github.com/gumob/three-text-geometry/actions/workflows/main.yaml/badge.svg)
 ![Development Workflow](https://github.com/gumob/three-text-geometry/actions/workflows/develop.yaml/badge.svg)
+[![codecov](https://codecov.io/gh/gumob/three-text-geometry/branch/main/graph/badge.svg?token=CL35QZ32NY)](https://codecov.io/gh/gumob/three-text-geometry)
 
 # three-text-geometry
 
