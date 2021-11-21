@@ -107,8 +107,10 @@ describe('TextGeometry', () => {
 
       geometry.computeBoundingSphere()
 
-      console.log('layout', layout)
-      console.log('visibleGlyphs', visibleGlyphs)
+      // console.log('layout', layout)
+      // console.log('visibleGlyphs', visibleGlyphs)
+      console.log('geometry.attributes', geometry.attributes)
+      console.log('mesh.geometry.attributes', mesh.geometry.attributes)
     })
     // test('Compare Bounding Box', async () => {
     //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml';
