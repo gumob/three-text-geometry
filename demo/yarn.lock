@@ -2544,6 +2544,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/three@npm:^0.134.0":
+  version: 0.134.0
+  resolution: "@types/three@npm:0.134.0"
+  checksum: 4dc0463b3833fb81ac3645af47404349af6a0e69e3dae37ae9e84dc1ac237689d77c28a6066375e85665191d037843f4adc22d345ab8fe90a5008591f78e86d1
+  languageName: node
+  linkType: hard
+
 "@types/uglify-js@npm:*":
   version: 3.12.0
   resolution: "@types/uglify-js@npm:3.12.0"
@@ -5479,6 +5486,28 @@ __metadata:
   checksum: a51744d9b53c164ba9c0492471a1a2ffa0b6727451bdc89e31627fdf4adda9d51277cfcbfb20f0a6f08ccb3c436f341df3e92631a3440226d93a8971724771fd
   languageName: node
   linkType: hard
+
+"demo@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "demo@workspace:."
+  dependencies:
+    "@testing-library/jest-dom": ^5.11.4
+    "@testing-library/react": ^11.1.0
+    "@testing-library/user-event": ^12.1.10
+    "@types/jest": ^26.0.15
+    "@types/node": ^12.0.0
+    "@types/react": ^17.0.0
+    "@types/react-dom": ^17.0.0
+    "@types/testing-library__jest-dom": ^5
+    "@types/three": ^0.134.0
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-scripts: 4.0.3
+    three: ^0.134.0
+    typescript: ^4.1.2
+    web-vitals: ^1.0.1
+  languageName: unknown
+  linkType: soft
 
 "depd@npm:^1.1.2, depd@npm:~1.1.2":
   version: 1.1.2
@@ -14199,25 +14228,12 @@ resolve@1.18.1:
   languageName: node
   linkType: hard
 
-"three-demo@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "three-demo@workspace:."
-  dependencies:
-    "@testing-library/jest-dom": ^5.11.4
-    "@testing-library/react": ^11.1.0
-    "@testing-library/user-event": ^12.1.10
-    "@types/jest": ^26.0.15
-    "@types/node": ^12.0.0
-    "@types/react": ^17.0.0
-    "@types/react-dom": ^17.0.0
-    "@types/testing-library__jest-dom": ^5
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    react-scripts: 4.0.3
-    typescript: ^4.1.2
-    web-vitals: ^1.0.1
-  languageName: unknown
-  linkType: soft
+"three@npm:^0.134.0":
+  version: 0.134.0
+  resolution: "three@npm:0.134.0"
+  checksum: 1b4e64f75b46666985db15ff3379ac9b6b21bb0e06d90748e4d4a2bc2a9374a2133bd27b28c54797bb368d2efb2806c48388c1b0ae88160f8ec57e116e351cf2
+  languageName: node
+  linkType: hard
 
 "throat@npm:^5.0.0":
   version: 5.0.0
