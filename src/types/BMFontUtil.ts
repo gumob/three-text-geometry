@@ -1,5 +1,5 @@
 function isBMFont(value: any) {
-    return 'chars' in value && 'info' in value && 'common' in value && 'kernings' in value;
+    return 'chars' in value && 'info' in value && 'common' in value && 'kernings' in value
 }
 
 function DefaultBMFont() {
@@ -9,8 +9,8 @@ function DefaultBMFont() {
         info: DefaultBMFontInfo(),
         common: DefaultBMFontCommon(),
         distanceField: DefaultBMFontDistanceField(),
-        kernings: []
-    };
+        kernings: [],
+    }
 }
 
 function DefaultBMFontInfo() {
@@ -27,8 +27,8 @@ function DefaultBMFontInfo() {
         padding: [],
         spacing: [],
         fixedHeight: 0,
-        outline: 0
-    };
+        outline: 0,
+    }
 }
 function DefaultBMFontCommon() {
     return {
@@ -41,30 +41,30 @@ function DefaultBMFontCommon() {
         alphaChnl: 0,
         redChnl: 0,
         greenChnl: 0,
-        blueChnl: 0
-    };
+        blueChnl: 0,
+    }
 }
 
 function DefaultBMFontKern() {
     return {
         first: 0,
         second: 0,
-        amount: 0
+        amount: 0,
     }
 }
 
 function DefaultBMFontDistanceField() {
     return {
         fieldType: '',
-        distanceRange: 0
-    };
+        distanceRange: 0,
+    }
 }
 
 export {
     DefaultBMFont,
-    DefaultBMFontInfo,
     DefaultBMFontCommon,
     DefaultBMFontDistanceField,
+    DefaultBMFontInfo,
     DefaultBMFontKern,
     isBMFont,
 }

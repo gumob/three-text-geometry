@@ -1,1 +1,1 @@
-export * from './BMFontLoaderError';
+export * from './BMFontLoaderError'

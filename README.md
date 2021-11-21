@@ -4,25 +4,25 @@
 
 <!-- toc -->
 
-- [template-typescript-lib](#template-typescript-lib)
-    - [Quickstart](#quickstart)
-    - [Features](#features)
-      - [TypeScript for Type Safety & Productivity](#typescript-for-type-safety--productivity)
-      - [ESLint For Linting](#eslint-for-linting)
-      - [`jest` for Testing](#jest-for-testing)
-      - [`dripip` for Releasing](#dripip-for-releasing)
-      - [Simple succinct friendly low-barrier issue templates](#simple-succinct-friendly-low-barrier-issue-templates)
-      - [Prettier for code formating](#prettier-for-code-formating)
-      - [`format-imports`](#format-imports)
-      - [npm scripts for development lifecycle](#npm-scripts-for-development-lifecycle)
-      - [CI with GitHub Actions](#ci-with-github-actions)
-      - [Renovate configuration](#renovate-configuration)
-      - [Yarn 2 for package management](#yarn-2-for-package-management)
-      - [CJS+ESM Hybrid package build (see Dr. Axel's article about this)](#cjsesm-hybrid-package-build-see-dr-axels-article-about-this)
-      - [VSCode Settings](#vscode-settings)
-      - [Readme Table of Contents](#readme-table-of-contents)
-  - [Generate Bitmap Font](#generate-bitmap-font)
-      - [Install msdf-bmfont-xml](#install-msdf-bmfont-xml)
+-   [template-typescript-lib](#template-typescript-lib)
+    -   [Quickstart](#quickstart)
+    -   [Features](#features)
+        -   [TypeScript for Type Safety & Productivity](#typescript-for-type-safety--productivity)
+        -   [ESLint For Linting](#eslint-for-linting)
+        -   [`jest` for Testing](#jest-for-testing)
+        -   [`dripip` for Releasing](#dripip-for-releasing)
+        -   [Simple succinct friendly low-barrier issue templates](#simple-succinct-friendly-low-barrier-issue-templates)
+        -   [Prettier for code formating](#prettier-for-code-formating)
+        -   [`format-imports`](#format-imports)
+        -   [npm scripts for development lifecycle](#npm-scripts-for-development-lifecycle)
+        -   [CI with GitHub Actions](#ci-with-github-actions)
+        -   [Renovate configuration](#renovate-configuration)
+        -   [Yarn 2 for package management](#yarn-2-for-package-management)
+        -   [CJS+ESM Hybrid package build (see Dr. Axel's article about this)](#cjsesm-hybrid-package-build-see-dr-axels-article-about-this)
+        -   [VSCode Settings](#vscode-settings)
+        -   [Readme Table of Contents](#readme-table-of-contents)
+    -   [Generate Bitmap Font](#generate-bitmap-font)
+        -   [Install msdf-bmfont-xml](#install-msdf-bmfont-xml)
 
 <!-- tocstop -->
 
@@ -32,19 +32,19 @@ Project template for TypeScript libraries
 
 1. Setup a clone of this repo:
 
-   ```
-   gh repo clone jasonkuhrt/template-typescript-lib <your package name> && cd <your package name> && yarn
-   ```
+    ```
+    gh repo clone jasonkuhrt/template-typescript-lib <your package name> && cd <your package name> && yarn
+    ```
 
 1. Run the bootstrapper script:
 
-   ```
-   yarn bootstrap \
-      --repoOrg '<your org>/<your repo>' \
-      --developerName '<your full name>' \
-      --packageName '<your package name>' \
-      --createGithubRepo
-   ```
+    ```
+    yarn bootstrap \
+       --repoOrg '<your org>/<your repo>' \
+       --developerName '<your full name>' \
+       --packageName '<your package name>' \
+       --createGithubRepo
+    ```
 
 1. [Setup a repo secret ](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) called `NPM_TOKEN` containing an [npm token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens) for CI package publishing.
 
@@ -68,17 +68,17 @@ gh repo clone jasonkuhrt/template-typescript-lib foobar \
 1.  Optimal settings for the safety of your implementation
     1. [`strict`](https://www.typescriptlang.org/tsconfig#strict) mode enabled.
     1. All lint flags enabled:
-       - [`noImplicitReturns`](https://www.typescriptlang.org/tsconfig#noImplicitReturns)
-       - [`noFallthroughCasesInSwitch`](https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch)
-       - [`noUncheckedIndexedAccess`](https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess)
-       - [`noPropertyAccessFromIndexSignature`](https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature)
-       - [`noImplicitOverride`](https://www.typescriptlang.org/tsconfig#noImplicitOverride)
+        - [`noImplicitReturns`](https://www.typescriptlang.org/tsconfig#noImplicitReturns)
+        - [`noFallthroughCasesInSwitch`](https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch)
+        - [`noUncheckedIndexedAccess`](https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess)
+        - [`noPropertyAccessFromIndexSignature`](https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature)
+        - [`noImplicitOverride`](https://www.typescriptlang.org/tsconfig#noImplicitOverride)
 1.  `.tsbuildinfo` cache setup, output discretely into `node_modules/.cache`
 1.  Base `tsconfig.json` shared across `tests`, `src`, and `ts-node`.
 1.  [`ts-patch`](https://github.com/nonara/ts-patch) setup for enhanced language features:
     1. [`ts-nameof`](https://github.com/dsherret/ts-nameof) for pulling the names of identifier down into your runtime!
     1. [`typescript-transform-paths`](https://github.com/LeDDGroup/typescript-transform-paths) for a **_working_** [tsconfig `paths` config](https://www.typescriptlang.org/tsconfig#paths)!
-       1. Jest configuration taken care of.
+        1. Jest configuration taken care of.
     1. `ts-node` configuration taken care of.
     1. Intentional avoidance of [`ttypescript`](https://github.com/microsoft/TypeScript/issues/38365#issuecomment-921889655)
 1.  Optimal output setup for your users
@@ -182,12 +182,12 @@ gh repo clone jasonkuhrt/template-typescript-lib foobar \
 
 1. Using [`markdown-toc`](https://github.com/jonschlinkert/markdown-toc)
 
-![Alt](https://repobeats.axiom.co/api/embed/3c932f1cb76da4ad21328bfdd0ad1c6fbbe76a0b.svg "Repobeats analytics image")
-
+![Alt](https://repobeats.axiom.co/api/embed/3c932f1cb76da4ad21328bfdd0ad1c6fbbe76a0b.svg 'Repobeats analytics image')
 
 ## Generate Bitmap Font
 
 #### Install msdf-bmfont-xml
+
 ```
 npm install msdf-bmfont-xml -g
 ```
@@ -195,17 +195,17 @@ npm install msdf-bmfont-xml -g
 ```
 msdf-bmfont \
     --output-type xml \
-    --filename './tests/fnt/Roboto-Regular' \
+    --filename './tests/fonts/Roboto-Regular' \
     --font-size 128 \
     --texture-size 4096,4096 \
-    './tests/fnt/Roboto-Regular.ttf'
+    './tests/fonts/Roboto-Regular.ttf'
 ```
 
 ```
 msdf-bmfont \
     --output-type json \
-    --filename './tests/fnt/Roboto-Regular' \
+    --filename './tests/fonts/Roboto-Regular' \
     --font-size 128 \
     --texture-size 4096,4096 \
-    './tests/fnt/Roboto-Regular.ttf'
+    './tests/fonts/Roboto-Regular.ttf'
 ```

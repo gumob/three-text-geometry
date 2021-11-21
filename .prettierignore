@@ -1,3 +1,5 @@
 dist-cjs
 dist-esm
 .yarn
+coverage
+tests/fonts/
