@@ -1,20 +1,31 @@
 name: Development
 
 on:
-   push:
-      branches:
-        - develop
-        - feature/**
+  push:
+    branches:
+      - develop
+      - feature/**
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version:
+          - 12.x
+          - 14.x
+          - 16.x
+
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Install apt packages for headless-gl
+        run: sudo apt-get install libxi-dev xvfb libgl1-mesa-dev
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
-          node-version: '14.17.6'
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - uses: actions/cache@v2
         with:
           path: ~/.cache/yarn
@@ -22,8 +33,6 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
       - name: Export environment variables
         run: export TERM=xterm
-      - name: Install apt packages for headless-gl
-        run: sudo apt-get install libxi-dev xvfb libgl1-mesa-dev
       - name: Install dependencies
         run: yarn install
       - name: Run eslint
