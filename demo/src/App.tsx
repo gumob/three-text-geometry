@@ -1,6 +1,6 @@
 import React from 'react'
 import * as THREE from 'three'
-import { TextGeometry, BMFontLoader, BMFont } from 'three-text-geometry'
+import TextGeometry, { BMFontLoader, BMFont } from 'three-text-geometry'
 
 import './App.css'
 
@@ -9,7 +9,7 @@ export class App extends React.Component {
   renderer?: THREE.WebGLRenderer
   scene?: THREE.Scene
   camera?: THREE.Camera
-  mesh?: TextGeometry
+  mesh?: THREE.Mesh
 
   constructor(props: any) {
     super(props)
