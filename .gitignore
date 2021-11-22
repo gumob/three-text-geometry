@@ -107,8 +107,8 @@ dist
 .DS_Store
 
 # This library
-dist-esm
-dist-cjs
+# dist-esm
+# dist-cjs
 
 # Yarn 2
 .pnp.*
@@ -118,3 +118,4 @@ dist-cjs
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+demo/.yarn

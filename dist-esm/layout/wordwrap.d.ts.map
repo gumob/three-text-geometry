@@ -1,0 +1,1 @@
+{"version":3,"file":"wordwrap.d.ts","sourceRoot":"","sources":["../../src/layout/wordwrap.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AACH,OAAO,EAAkB,WAAW,EAAgC,iBAAe;AAMnF,iBAAS,IAAI,CAAC,IAAI,EAAE,MAAM,EAAE,MAAM,GAAE,GAAQ,GAAG,MAAM,CAIpD;AAED,iBAAS,KAAK,CAAC,IAAI,EAAE,MAAM,EAAE,MAAM,GAAE,GAAQ,GAAG,WAAW,EAAE,CAsB5D;AAyGD,OAAO,EAAE,KAAK,EAAE,IAAI,EAAE,CAAA"}

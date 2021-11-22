@@ -1,0 +1,9 @@
+.App {
+  position: 'fixed';
+  z-index: 0;
+  top: '0px';
+  left: '50%';
+  transform: 'translate(-50%, 0%)';
+  height: 'calc(100% + 80px)';
+  width: '100%';
+}
