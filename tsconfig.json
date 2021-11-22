@@ -55,7 +55,7 @@
   },
   "include": ["src", "tests", "scripts"],
   // Prevent unwanted things like auto-import from built modules
-  "exclude": ["dist-*"],
+  "exclude": ["dist-*", "demo"],
   "plugins": [
     {
       "name": "typescript-snapshots-plugin"
