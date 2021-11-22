@@ -11,13 +11,15 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "three": "^0.134.0",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@types/testing-library__jest-dom": "^5"
+    "@types/testing-library__jest-dom": "^5",
+    "@types/three": "^0.134.0"
   },
   "scripts": {
     "start": "react-scripts start",
