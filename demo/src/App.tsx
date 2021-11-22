@@ -1,30 +1,33 @@
 import React from 'react'
 import * as THREE from 'three'
+import Stats from 'three/examples/jsm/libs/stats.module'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+// import { GPUStatsPanel } from 'three/examples/jsm/utils/GPUStatsPanel'
 import TextGeometry, { BMFontLoader, BMFont } from 'three-text-geometry'
 
 import './App.css'
 
 export class App extends React.Component {
 
+  stats?: Stats | undefined
+  control?: OrbitControls | undefined
+  // gpuPanel?: GPUStatsPanel | undefined;
+
   renderer?: THREE.WebGLRenderer
   scene?: THREE.Scene
   camera?: THREE.Camera
   mesh?: THREE.Mesh
 
-  constructor(props: any) {
-    super(props)
-  }
-
   componentDidMount() {
     const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml'
     new BMFontLoader().loadXML(uri)
-    .then((font: BMFont) => {
-      console.log('font', font)
-      this.initScene(font)
-    })
-    .catch((e) => {
-      console.error(e)
-    })
+      .then((font: BMFont) => {
+        console.log('font', font)
+        this.initScene(font)
+      })
+      .catch((e) => {
+        console.error(e)
+      })
   }
 
   initScene(font: BMFont) {
@@ -38,6 +41,13 @@ export class App extends React.Component {
     const container = document.querySelector("#App")
     container?.append(this.renderer.domElement)
     
+    /** Stats Panel */
+    // this.gpuPanel = new GPUStatsPanel(this.renderer.getContext());
+    this.stats = Stats();
+    // this.stats?.addPanel(this.gpuPanel);
+    this.stats?.showPanel(0);
+    document.body.appendChild(this.stats.dom)
+
     /** Scene */
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0x000000)
@@ -50,6 +60,10 @@ export class App extends React.Component {
     this.camera.position.set(eye.x, eye.y, eye.z)
     this.camera.lookAt(target)
     this.scene.add(this.camera)
+
+    /** Control */
+    this.control = new OrbitControls(this.camera!, this.renderer.domElement!)
+    // this.control.addEventListener('change', this.updateScene.bind(this))
 
     /** Text Mesh */
     const geometry = new TextGeometry('Hello World', { font: font })
@@ -66,12 +80,18 @@ export class App extends React.Component {
     /** Render scene */
     this.updateScene()
   }
-  
+
   updateScene() {
-    requestAnimationFrame(this.updateScene.bind(this));
+    // this.gpuPanel?.startQuery();
+
     this.renderer?.clear()
     this.renderer?.render(this.scene!, this.camera!)
     // console.log('geometry', this.mesh?.geometry);
+
+    this.stats?.update();
+    // this.gpuPanel?.endQuery();
+
+    requestAnimationFrame(this.updateScene.bind(this));
   }
 
   render() {
