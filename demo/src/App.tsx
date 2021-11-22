@@ -19,6 +19,7 @@ export class App extends React.Component {
     const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml'
     new BMFontLoader().loadXML(uri)
     .then((font: BMFont) => {
+      console.log('font', font)
       this.initScene(font)
     })
     .catch((e) => {
@@ -53,7 +54,7 @@ export class App extends React.Component {
     /** Text Mesh */
     const geometry = new TextGeometry('Hello World', { font: font })
     const textureLoader = new THREE.TextureLoader()
-    const texture = textureLoader.load('tests/fonts/Roboto-Regular.png')
+    const texture = textureLoader.load('https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.png')
     const material = new THREE.MeshBasicMaterial({
       map: texture,
       transparent: true,
@@ -61,11 +62,16 @@ export class App extends React.Component {
     })
     this.mesh = new THREE.Mesh(geometry, material)
     this.scene.add(this.mesh)
+
+    /** Render scene */
+    this.updateScene()
   }
   
   updateScene() {
+    requestAnimationFrame(this.updateScene.bind(this));
     this.renderer?.clear()
     this.renderer?.render(this.scene!, this.camera!)
+    // console.log('geometry', this.mesh?.geometry);
   }
 
   render() {
