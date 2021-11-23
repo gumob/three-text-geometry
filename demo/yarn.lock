@@ -3112,7 +3112,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ajv@npm:^8.8.1":
+"ajv@npm:^8.8.2":
   version: 8.8.2
   resolution: "ajv@npm:8.8.2"
   dependencies:
@@ -5525,7 +5525,7 @@ __metadata:
     react-dom: ^17.0.2
     react-scripts: 4.0.3
     three: ^0.134.0
-    three-text-geometry: gumob/three-text-geometry
+    three-text-geometry: "gumob/three-text-geometry#develop"
     typescript: ^4.1.2
     web-vitals: ^1.0.1
   languageName: unknown
@@ -14297,17 +14297,17 @@ resolve@1.18.1:
   languageName: node
   linkType: hard
 
-three-text-geometry@gumob/three-text-geometry:
+"three-text-geometry@gumob/three-text-geometry#develop":
   version: 0.0.0-dripip
-  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=e7826d898abe18bc61b6103cc4cda0a052c06168"
+  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=8989416edac4c53118dd959a0cf6b8797583f99b"
   dependencies:
-    ajv: ^8.8.1
+    ajv: ^8.8.2
     axios: ^0.24.0
     fast-xml-parser: ^4.0.0-beta.2
     floggy: ^0.3.1
     three: ^0.134.0
     tslib: ^2.3.1
-  checksum: f3dec282128602180cf8ce166edbc90d388e3e922aec83cd086859d5599dfc9af710d063b2d3b9320f4fa0ad5c23b2a08a7a72b8e2ba21a64a98018b9cc844b3
+  checksum: 784e3e39161cf1dd0d313ae864dc3137368afc99aa8828540c2acc5441813ae5e83ae3a482d3f83cf1d4afa4075be2f87f74a25fc1bc7378f8efb77c3b57b25a
   languageName: node
   linkType: hard
 

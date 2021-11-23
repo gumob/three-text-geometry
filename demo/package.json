@@ -12,7 +12,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "three": "^0.134.0",
-    "three-text-geometry": "gumob/three-text-geometry",
+    "three-text-geometry": "gumob/three-text-geometry#develop",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },

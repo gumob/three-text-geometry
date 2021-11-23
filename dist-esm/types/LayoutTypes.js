@@ -1,16 +1,16 @@
-var TextLayoutAlign;
-(function (TextLayoutAlign) {
-    TextLayoutAlign[TextLayoutAlign["Left"] = 0] = "Left";
-    TextLayoutAlign[TextLayoutAlign["Center"] = 1] = "Center";
-    TextLayoutAlign[TextLayoutAlign["Right"] = 2] = "Right";
+var TextAlign;
+(function (TextAlign) {
+    TextAlign[TextAlign["Left"] = 0] = "Left";
+    TextAlign[TextAlign["Center"] = 1] = "Center";
+    TextAlign[TextAlign["Right"] = 2] = "Right";
     // Left = 'left',
     // Center = 'center',
     // Right = 'right',
-})(TextLayoutAlign || (TextLayoutAlign = {}));
+})(TextAlign || (TextAlign = {}));
 var WordWrapMode;
 (function (WordWrapMode) {
     WordWrapMode["Pre"] = "pre";
     WordWrapMode["NoWrap"] = "nowrap";
 })(WordWrapMode || (WordWrapMode = {}));
-export { TextLayoutAlign, WordWrapMode, };
+export { TextAlign, WordWrapMode, };
 //# sourceMappingURL=LayoutTypes.js.map
