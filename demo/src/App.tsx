@@ -2,20 +2,19 @@ import React from 'react'
 import * as THREE from 'three'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-// import { GPUStatsPanel } from 'three/examples/jsm/utils/GPUStatsPanel'
 import TextGeometry, { BMFontLoader, BMFont, TextAlign } from 'three-text-geometry'
 
 import './App.css'
+import { Vector3 } from 'three'
 
 export class App extends React.Component {
   stats?: Stats | undefined
-  control?: OrbitControls | undefined
-  // gpuPanel?: GPUStatsPanel | undefined;
+  controls?: OrbitControls | undefined
 
   renderer?: THREE.WebGLRenderer
   scene?: THREE.Scene
-  camera?: THREE.OrthographicCamera
-  testMesh?: THREE.Mesh
+  camera?: THREE.PerspectiveCamera
+  textMesh?: THREE.Mesh
 
   componentDidMount() {
     const uri =
@@ -31,35 +30,42 @@ export class App extends React.Component {
       })
   }
 
+  initScene2(font: BMFont) {
+    /** Render scene */
+    this.updateScene()
+  }
+
   initScene(font: BMFont) {
     /** Renderer */
     this.renderer = new THREE.WebGLRenderer({ alpha: true })
     this.renderer.setClearColor(0xaaaaaa, 0)
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
-    this.renderer.autoClear = false
+    // this.renderer.autoClear = false
 
     const container = document.querySelector('#App')
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
-    // this.gpuPanel = new GPUStatsPanel(this.renderer.getContext());
     this.stats = Stats()
-    // this.stats?.addPanel(this.gpuPanel);
     this.stats?.showPanel(0)
     document.body.appendChild(this.stats.dom)
 
     /** Scene */
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0xaaaaaa)
-    this.scene.fog = new THREE.FogExp2(0x000104, 0.0000675)
 
     /** Camera */
-    this.camera = new THREE.OrthographicCamera(0, 0, 0, 0, -100, 100)
-    this.scene.add(this.camera)
+    // this.camera = new THREE.OrthographicCamera(0, 0, 0, 0, -100, 100)
+    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000)
+    this.camera.position.set(0, 0, 1000)
+    this.camera.lookAt(0, 0, 0)
+    // this.scene.add(this.camera)
 
     /** Control */
-    this.control = new OrbitControls(this.camera!, this.renderer.domElement!)
+    this.controls = new OrbitControls(this.camera!, this.renderer.domElement!)
+    this.controls.target.set(0, 0, 0)
+    this.controls.update()
     // this.control.addEventListener('change', this.updateScene.bind(this))
 
     /** Text Mesh */
@@ -67,46 +73,55 @@ export class App extends React.Component {
     const texture = textureLoader.load(
       'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png'
     )
-    const geometry = new TextGeometry('this bitmap text\nis rendered with \nan OrthographicCamera', {
+    const textGeometry = new TextGeometry('this bitmap text\nis rendered with \nan OrthographicCamera', {
       font: font,
       align: TextAlign.Left,
-      width: 700,
+      width: 1000,
       flipY: texture.flipY,
     })
-    console.log('geometry.attributes.position', geometry.attributes.position)
-    console.log('geometry.attributes.uv', geometry.attributes.uv)
-    const material = new THREE.MeshBasicMaterial({
+    const box = new Vector3
+    textGeometry.computeBoundingBox()
+    textGeometry.boundingBox?.getSize(box)
+    const textMaterial = new THREE.MeshBasicMaterial({
       map: texture,
+      side: THREE.DoubleSide,
       transparent: true,
       color: 0xaaffff,
     })
-    this.testMesh = new THREE.Mesh(geometry, material)
-    const layout = geometry.layout
-    const padding = 40
-    this.testMesh.position.set(padding, -layout!.descender + layout!.height + padding, 0)
-    // this.scene.add(this.mesh)
+    this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
+    // const layout = textGeometry.layout
+    // const padding = 40
+    // this.textMesh.position.set(padding, -layout!.descender + layout!.height + padding, 0)
+    this.textMesh.scale.multiply(new THREE.Vector3(1, -1, 1))
+    this.textMesh.position.set(-box.x / 2, -box.y / 2, 0)
+    this.scene.add(this.textMesh)
 
-    const textAnchor = new THREE.Object3D()
-    textAnchor.add(this.testMesh)
-    textAnchor.scale.multiplyScalar(1 / (window.devicePixelRatio || 1))
-    this.scene.add(textAnchor)
+    // const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff })
+    // const points = [new THREE.Vector3(-100, 0, 0), new THREE.Vector3(0, 100, 0), new THREE.Vector3(100, 0, 0)]
+    // const lineGeometry = new THREE.BufferGeometry().setFromPoints(points)
+    // const line = new THREE.Line(lineGeometry, lineMaterial)
+    // this.scene?.add(line)
+
+    this.scene?.add(new THREE.AxesHelper(1000))
+
+    window.addEventListener('resize', this.onWindowResize.bind(this))
 
     /** Render scene */
     this.updateScene()
   }
 
   updateScene() {
-    // this.gpuPanel?.startQuery();
-    this.control?.update()
-
-    this.renderer?.clear()
+    this.controls?.update()
     this.renderer?.render(this.scene!, this.camera!)
-    // console.log('geometry', this.testMesh?.geometry)
-
     this.stats?.update()
-    // this.gpuPanel?.endQuery();
 
     requestAnimationFrame(this.updateScene.bind(this))
+  }
+
+  onWindowResize() {
+    this.camera!.aspect = window.innerWidth / window.innerHeight;
+    this.camera?.updateProjectionMatrix()
+    this.renderer?.setSize(window.innerWidth, window.innerHeight)
   }
 
   render() {
