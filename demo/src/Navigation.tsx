@@ -5,6 +5,10 @@ import MenuList from '@mui/material/MenuList'
 import MenuItem from '@mui/material/MenuItem'
 // import ListItemIcon from '@mui/material/ListItemIcon'
 // import Check from '@mui/icons-material/Check';
+// import FormGroup from '@mui/material/FormGroup';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
+// import Typography from '@mui/material/Typography';
 
 import './Navigation.css'
 
@@ -34,6 +38,11 @@ export class Navigation extends React.Component {
           <MenuItem component={NavLink} to="/shuffleshader">
             Shuffle and Shader
           </MenuItem>
+          {/* <MenuItem>
+            <FormGroup>
+              <FormControlLabel control={<Checkbox defaultChecked size="small" />} label={<Typography variant="body2">Show Axes</Typography>} />
+            </FormGroup>
+          </MenuItem> */}
         </MenuList>
       </Paper>
     )
