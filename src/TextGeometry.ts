@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { TextLayout } from '~/layout'
-import { TextGeometryOption, TextGlyph, TextLayoutAlign } from '~/types'
+import { TextGeometryOption, TextGlyph, TextAlign } from '~/types'
 import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '~/utils'
 
 class TextGeometry extends THREE.BufferGeometry {
@@ -46,7 +46,7 @@ class TextGeometry extends THREE.BufferGeometry {
     else this._opt.end = text.length
     if (option.width !== undefined) this._opt.width = option.width
     if (option.align !== undefined) this._opt.align = option.align
-    else this._opt.align = TextLayoutAlign.Left
+    else this._opt.align = TextAlign.Left
     if (option.mode !== undefined) this._opt.mode = option.mode
     if (option.letterSpacing !== undefined) this._opt.letterSpacing = option.letterSpacing
     else this._opt.letterSpacing = 0
@@ -58,6 +58,7 @@ class TextGeometry extends THREE.BufferGeometry {
     if (option.multipage !== undefined) this._opt.multipage = option.multipage
 
     this._layout = new TextLayout(text, this._opt)
+    // console.log('this._layout', this._layout);
 
     /** determine texture size from font file */
     const texWidth = this._opt.font!.common.scaleW
@@ -68,6 +69,7 @@ class TextGeometry extends THREE.BufferGeometry {
       const bitmap = glyph.data
       return bitmap.width * bitmap.height > 0
     })
+    // console.log('glyphs', glyphs);
 
     /** provide visible glyphs for convenience */
     this._visibleGlyphs = glyphs
@@ -80,11 +82,16 @@ class TextGeometry extends THREE.BufferGeometry {
       type: 'uint16',
       count: glyphs.length,
     })
+    // console.log('positions', positions);
+    // console.log('uvs', uvs);
+    // console.log('indices', indices);
 
     /** update vertex data */
     this.setIndex(indices as number[])
     this.setAttribute('position', new THREE.BufferAttribute(positions, 2))
     this.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
+    // console.log('this.attributes.position', this.attributes.position);
+    // console.log('this.attributes.uv', this.attributes.uv);
 
     /** update multipage data */
     if (!this._opt.multipage && 'page' in this.attributes) {

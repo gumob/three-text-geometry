@@ -52,7 +52,7 @@ class TextGeometry extends THREE.BufferGeometry {
         if (option.align !== undefined)
             this._opt.align = option.align;
         else
-            this._opt.align = types_1.TextLayoutAlign.Left;
+            this._opt.align = types_1.TextAlign.Left;
         if (option.mode !== undefined)
             this._opt.mode = option.mode;
         if (option.letterSpacing !== undefined)
@@ -72,6 +72,7 @@ class TextGeometry extends THREE.BufferGeometry {
         if (option.multipage !== undefined)
             this._opt.multipage = option.multipage;
         this._layout = new layout_1.TextLayout(text, this._opt);
+        // console.log('this._layout', this._layout);
         /** determine texture size from font file */
         const texWidth = this._opt.font.common.scaleW;
         const texHeight = this._opt.font.common.scaleH;
@@ -80,6 +81,7 @@ class TextGeometry extends THREE.BufferGeometry {
             const bitmap = glyph.data;
             return bitmap.width * bitmap.height > 0;
         });
+        // console.log('glyphs', glyphs);
         /** provide visible glyphs for convenience */
         this._visibleGlyphs = glyphs;
         /** get common vertex data */
@@ -90,10 +92,15 @@ class TextGeometry extends THREE.BufferGeometry {
             type: 'uint16',
             count: glyphs.length,
         });
+        // console.log('positions', positions);
+        // console.log('uvs', uvs);
+        // console.log('indices', indices);
         /** update vertex data */
         this.setIndex(indices);
         this.setAttribute('position', new THREE.BufferAttribute(positions, 2));
         this.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+        // console.log('this.attributes.position', this.attributes.position);
+        // console.log('this.attributes.uv', this.attributes.uv);
         /** update multipage data */
         if (!this._opt.multipage && 'page' in this.attributes) {
             this.deleteAttribute('page'); /** disable multipage rendering */

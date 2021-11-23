@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { TextLayout } from '~/layout'
 import { BMFontJsonParser } from '~/parser'
-import { BMFontChar, TextGlyph, TextLayoutAlign, WordWrapMode } from '~/types'
+import { BMFontChar, TextGlyph, TextAlign, WordWrapMode } from '~/types'
 
 function DefaultBMFontChar(): BMFontChar {
   return {
@@ -38,7 +38,7 @@ describe('TextLayout', () => {
         start: 1,
         end: 10,
         width: 3,
-        align: TextLayoutAlign.Left,
+        align: TextAlign.Left,
         mode: WordWrapMode.Pre,
         letterSpacing: 1,
         lineHeight: font.common.lineHeight,

@@ -88,7 +88,7 @@ class TextLayout {
         if (option.align !== undefined)
             this._opt.align = option.align;
         else
-            this._opt.align = types_1.TextLayoutAlign.Left;
+            this._opt.align = types_1.TextAlign.Left;
         if (option.mode !== undefined)
             this._opt.mode = option.mode;
         if (option.letterSpacing !== undefined)
@@ -150,9 +150,9 @@ class TextLayout {
                     if (lastGlyph)
                         x += this.getKerning(font, lastGlyph.id, glyph.id);
                     let tx = x;
-                    if (align === types_1.TextLayoutAlign.Center)
+                    if (align === types_1.TextAlign.Center)
                         tx += (maxLineWidth - lineWidth) / 2;
-                    else if (align === types_1.TextLayoutAlign.Right)
+                    else if (align === types_1.TextAlign.Right)
                         tx += maxLineWidth - lineWidth;
                     this._glyphs.push({
                         position: [tx, y],
