@@ -6,7 +6,7 @@ import TextGeometry, { BMFontLoader, BMFont, TextAlign } from 'three-text-geomet
 
 import './Demo.css'
 
-export class DemoShuffle extends React.Component {
+export class DemoShader extends React.Component {
   stats?: Stats | undefined
   controls?: OrbitControls | undefined
 
@@ -38,7 +38,7 @@ export class DemoShuffle extends React.Component {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     // this.renderer.autoClear = false
 
-    const container = document.querySelector('#shuffle')
+    const container = document.querySelector('#shader')
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
@@ -73,7 +73,8 @@ export class DemoShuffle extends React.Component {
     )
     const text = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`
+    It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
     const textGeometry = new TextGeometry(text, {
       font: font,
       align: TextAlign.Left,
@@ -116,12 +117,12 @@ export class DemoShuffle extends React.Component {
 
   render() {
     return (
-      <div id="DemoShuffle" className="Demo">
+      <div id="DemoShader" className="Demo">
         {/* <Navigation /> */}
-        <div id="shuffle" />
+        <div id="shader" />
       </div>
     )
   }
 }
 
-export default DemoShuffle
+export default DemoShader

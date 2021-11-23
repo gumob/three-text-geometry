@@ -5,8 +5,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import TextGeometry, { BMFontLoader, BMFont, TextAlign } from 'three-text-geometry'
 
 import './Demo.css'
-import { Vector3 } from 'three'
-import Navigation from './Navigation'
 
 export class DemoSimple extends React.Component {
   stats?: Stats | undefined
@@ -83,7 +81,7 @@ export class DemoSimple extends React.Component {
       width: 1000,
       flipY: texture.flipY,
     })
-    const box = new Vector3()
+    const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
     const textMaterial = new THREE.MeshBasicMaterial({
@@ -120,7 +118,7 @@ export class DemoSimple extends React.Component {
   render() {
     return (
       <div id="DemoSimple" className="Demo">
-        <Navigation />
+        {/* <Navigation /> */}
         <div id="simple" />
       </div>
     )

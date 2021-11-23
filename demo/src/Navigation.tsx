@@ -1,14 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './Navigation.css'
 
 export class Navigation extends React.Component {
   render() {
     return (
-      <nav className="Navigation">
-        <Link to="/simple">Simple</Link> | <Link to="/shuffle">Shuffle</Link> |{' '}
-        <Link to="/shader">Shader</Link>
-      </nav>
+      <div className="Navigation">
+        <ul>
+          <li>
+            <NavLink to="/simple">Simple</NavLink>
+          </li>
+          <li>
+            <NavLink to="/shuffle">Shuffle</NavLink>
+          </li>
+          <li>
+            <NavLink to="/shader">Shader</NavLink>
+          </li>
+        </ul>
+      </div>
     )
   }
 }
