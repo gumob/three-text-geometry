@@ -62,9 +62,9 @@ interface TextGeometryOption {
 
 export {
   ComputeMetrics,
+  TextAlign,
   TextGeometryOption,
   TextGlyph,
-  TextAlign,
   TextLayoutOption,
   WordMetrics,
   WordWrapMode,

@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { TextLayout } from '~/layout'
 import { BMFontJsonParser } from '~/parser'
-import { BMFontChar, TextGlyph, TextAlign, WordWrapMode } from '~/types'
+import { BMFontChar, TextAlign, TextGlyph, WordWrapMode } from '~/types'
 
 function DefaultBMFontChar(): BMFontChar {
   return {

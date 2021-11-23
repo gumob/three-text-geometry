@@ -8,7 +8,6 @@ import TextGeometry, { BMFontLoader, BMFont, TextAlign } from 'three-text-geomet
 import './App.css'
 
 export class App extends React.Component {
-
   stats?: Stats | undefined
   control?: OrbitControls | undefined
   // gpuPanel?: GPUStatsPanel | undefined;
@@ -19,8 +18,10 @@ export class App extends React.Component {
   testMesh?: THREE.Mesh
 
   componentDidMount() {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
-    new BMFontLoader().loadAscii(uri)
+    const uri =
+      'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
+    new BMFontLoader()
+      .loadAscii(uri)
       .then((font: BMFont) => {
         console.log('font', font)
         this.initScene(font)
@@ -33,24 +34,24 @@ export class App extends React.Component {
   initScene(font: BMFont) {
     /** Renderer */
     this.renderer = new THREE.WebGLRenderer({ alpha: true })
-    this.renderer.setClearColor(0xAAAAAA, 0)
+    this.renderer.setClearColor(0xaaaaaa, 0)
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     this.renderer.autoClear = false
 
-    const container = document.querySelector("#App")
+    const container = document.querySelector('#App')
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
     // this.gpuPanel = new GPUStatsPanel(this.renderer.getContext());
-    this.stats = Stats();
+    this.stats = Stats()
     // this.stats?.addPanel(this.gpuPanel);
-    this.stats?.showPanel(0);
+    this.stats?.showPanel(0)
     document.body.appendChild(this.stats.dom)
 
     /** Scene */
     this.scene = new THREE.Scene()
-    this.scene.background = new THREE.Color(0xAAAAAA)
+    this.scene.background = new THREE.Color(0xaaaaaa)
     this.scene.fog = new THREE.FogExp2(0x000104, 0.0000675)
 
     /** Camera */
@@ -63,12 +64,14 @@ export class App extends React.Component {
 
     /** Text Mesh */
     const textureLoader = new THREE.TextureLoader()
-    const texture = textureLoader.load('https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png')
+    const texture = textureLoader.load(
+      'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png'
+    )
     const geometry = new TextGeometry('this bitmap text\nis rendered with \nan OrthographicCamera', {
       font: font,
       align: TextAlign.Left,
       width: 700,
-      flipY: texture.flipY
+      flipY: texture.flipY,
     })
     console.log('geometry.attributes.position', geometry.attributes.position)
     console.log('geometry.attributes.uv', geometry.attributes.uv)
@@ -94,23 +97,20 @@ export class App extends React.Component {
 
   updateScene() {
     // this.gpuPanel?.startQuery();
-    this.control?.update();
+    this.control?.update()
 
     this.renderer?.clear()
     this.renderer?.render(this.scene!, this.camera!)
-    // console.log('geometry', this.mesh?.geometry);
+    // console.log('geometry', this.testMesh?.geometry)
 
-    this.stats?.update();
+    this.stats?.update()
     // this.gpuPanel?.endQuery();
 
-    requestAnimationFrame(this.updateScene.bind(this));
+    requestAnimationFrame(this.updateScene.bind(this))
   }
 
   render() {
-    return (
-      <div id="App" className="App">
-      </div>
-    )
+    return <div id="App" className="App"></div>
   }
 }
 
