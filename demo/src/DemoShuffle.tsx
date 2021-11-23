@@ -18,7 +18,8 @@ export class DemoShuffle extends React.Component {
   textMesh?: THREE.Mesh
 
   componentDidMount() {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
+    const uri =
+      'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
     // const uri =
     //   'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.fnt'
     new BMFontLoader()
@@ -116,10 +117,12 @@ export class DemoShuffle extends React.Component {
   }
 
   render() {
-    return <div id="DemoSimple" className="Demo">
-      <Navigation />
-      <div id="shuffle" />
-    </div>
+    return (
+      <div id="DemoSimple" className="Demo">
+        <Navigation />
+        <div id="shuffle" />
+      </div>
+    )
   }
 }
 
