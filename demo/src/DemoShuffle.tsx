@@ -38,7 +38,7 @@ export class DemoShuffle extends React.Component {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     // this.renderer.autoClear = false
 
-    const container = document.querySelector('#shuffle')
+    const container = document.querySelector('#DemoShuffle')
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
@@ -117,8 +117,6 @@ export class DemoShuffle extends React.Component {
   render() {
     return (
       <div id="DemoShuffle" className="Demo">
-        {/* <Navigation /> */}
-        <div id="shuffle" />
       </div>
     )
   }

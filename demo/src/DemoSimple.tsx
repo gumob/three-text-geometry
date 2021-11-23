@@ -38,7 +38,7 @@ export class DemoSimple extends React.Component {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     // this.renderer.autoClear = false
 
-    const container = document.querySelector('#simple')
+    const container = document.querySelector('#DemoSimple')
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
@@ -118,8 +118,6 @@ export class DemoSimple extends React.Component {
   render() {
     return (
       <div id="DemoSimple" className="Demo">
-        {/* <Navigation /> */}
-        <div id="simple" />
       </div>
     )
   }

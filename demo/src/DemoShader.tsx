@@ -38,7 +38,7 @@ export class DemoShader extends React.Component {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     // this.renderer.autoClear = false
 
-    const container = document.querySelector('#shader')
+    const container = document.querySelector('#DemoShader')
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
@@ -118,7 +118,6 @@ export class DemoShader extends React.Component {
   render() {
     return (
       <div id="DemoShader" className="Demo">
-        {/* <Navigation /> */}
         <div id="shader" />
       </div>
     )
