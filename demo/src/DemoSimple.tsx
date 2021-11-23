@@ -4,10 +4,10 @@ import Stats from 'three/examples/jsm/libs/stats.module'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import TextGeometry, { BMFontLoader, BMFont, TextAlign } from 'three-text-geometry'
 
-import './App.css'
+import './Demo.css'
 import { Vector3 } from 'three'
 
-export class App extends React.Component {
+export class DemoSimple extends React.Component {
   stats?: Stats | undefined
   controls?: OrbitControls | undefined
 
@@ -17,8 +17,8 @@ export class App extends React.Component {
   textMesh?: THREE.Mesh
 
   componentDidMount() {
-    const uri =
-      'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
+    // const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
+    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.fnt'
     new BMFontLoader()
       .loadAscii(uri)
       .then((font: BMFont) => {
@@ -37,7 +37,7 @@ export class App extends React.Component {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     // this.renderer.autoClear = false
 
-    const container = document.querySelector('#App')
+    const container = document.querySelector('#DemoSimple')
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
@@ -67,7 +67,7 @@ export class App extends React.Component {
     /** Text Mesh */
     const textureLoader = new THREE.TextureLoader()
     const texture = textureLoader.load(
-      'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png'
+      'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.png'
     )
     const text = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -114,8 +114,8 @@ export class App extends React.Component {
   }
 
   render() {
-    return <div id="App" className="App"></div>
+    return <div id="DemoSimple" className="DemoSimple"></div>
   }
 }
 
-export default App
+export default DemoSimple
