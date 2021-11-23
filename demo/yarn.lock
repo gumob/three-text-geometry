@@ -14299,7 +14299,7 @@ resolve@1.18.1:
 
 "three-text-geometry@gumob/three-text-geometry#develop":
   version: 0.0.0-dripip
-  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=8989416edac4c53118dd959a0cf6b8797583f99b"
+  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=38c667442c80b13333429797bf2a12b3d8464158"
   dependencies:
     ajv: ^8.8.2
     axios: ^0.24.0
@@ -14307,7 +14307,7 @@ resolve@1.18.1:
     floggy: ^0.3.1
     three: ^0.134.0
     tslib: ^2.3.1
-  checksum: 784e3e39161cf1dd0d313ae864dc3137368afc99aa8828540c2acc5441813ae5e83ae3a482d3f83cf1d4afa4075be2f87f74a25fc1bc7378f8efb77c3b57b25a
+  checksum: 17bfb19cdec0ef783d21631c8e3a63b52f913fb3451c27a24d240fd0b74d8cb30cf0815a6cb018ca259d934759381dc9b75a383714363e42302787ae96c82ecc
   languageName: node
   linkType: hard
 
