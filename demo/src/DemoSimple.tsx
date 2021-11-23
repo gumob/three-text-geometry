@@ -116,10 +116,7 @@ export class DemoSimple extends React.Component {
   }
 
   render() {
-    return (
-      <div id="DemoSimple" className="Demo">
-      </div>
-    )
+    return <div id="DemoSimple" className="Demo"></div>
   }
 }
 

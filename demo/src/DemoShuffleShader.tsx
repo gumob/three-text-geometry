@@ -6,7 +6,7 @@ import TextGeometry, { BMFontLoader, BMFont, TextAlign } from 'three-text-geomet
 
 import './Demo.css'
 
-export class DemoShuffle extends React.Component {
+export class DemoShuffleShader extends React.Component {
   stats?: Stats | undefined
   controls?: OrbitControls | undefined
 
@@ -38,7 +38,7 @@ export class DemoShuffle extends React.Component {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     // this.renderer.autoClear = false
 
-    const container = document.querySelector('#DemoShuffle')
+    const container = document.querySelector('#DemoShuffleShader')
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
@@ -115,8 +115,8 @@ export class DemoShuffle extends React.Component {
   }
 
   render() {
-    return <div id="DemoShuffle" className="Demo"></div>
+    return <div id="DemoShuffleShader" className="Demo"></div>
   }
 }
 
-export default DemoShuffle
+export default DemoShuffleShader

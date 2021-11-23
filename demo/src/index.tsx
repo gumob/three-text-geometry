@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
 import './index.css'
+import Navigation from './Navigation'
 import App from './App'
 import DemoSimple from './DemoSimple'
 import DemoShuffle from './DemoShuffle'
 import DemoShader from './DemoShader'
-import Navigation from './Navigation'
+import DemoShuffleShader from './DemoShuffleShader'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Route path="/simple" element={<DemoSimple />} />
         <Route path="/shuffle" element={<DemoShuffle />} />
         <Route path="/shader" element={<DemoShader />} />
+        <Route path="/shuffleshader" element={<DemoShuffleShader />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
