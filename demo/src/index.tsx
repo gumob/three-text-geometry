@@ -1,21 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
-import './index.css'
 import Navigation from './Navigation'
-import App from './App'
 import DemoSimple from './DemoSimple'
 import DemoShuffle from './DemoShuffle'
 import DemoShader from './DemoShader'
 import DemoShuffleShader from './DemoShuffleShader'
+
+import './index.css'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Navigation />
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="*" element={<Navigate to="/simple" />} />
         <Route path="/simple" element={<DemoSimple />} />
         <Route path="/shuffle" element={<DemoShuffle />} />
         <Route path="/shader" element={<DemoShader />} />

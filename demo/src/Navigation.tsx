@@ -13,10 +13,6 @@ import MenuItem from '@mui/material/MenuItem'
 import './Navigation.css'
 
 export class Navigation extends React.Component {
-  constructor(props: any) {
-    super(props)
-  }
-
   render(): React.ReactNode {
     // const path = this.props.location.pathname;
     return (
