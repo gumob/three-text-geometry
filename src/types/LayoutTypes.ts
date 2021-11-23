@@ -16,7 +16,7 @@ interface WordMetrics {
   width: number
 }
 
-enum TextLayoutAlign {
+enum TextAlign {
   Left = 0,
   Center = 1,
   Right = 2,
@@ -43,7 +43,7 @@ interface TextLayoutOption extends WordWrapOption {
   letterSpacing?: number | undefined
   tabSize?: number | undefined
   lineHeight?: number | undefined
-  align?: TextLayoutAlign | undefined
+  align?: TextAlign | undefined
 }
 
 interface TextGeometryOption {
@@ -55,7 +55,7 @@ interface TextGeometryOption {
   letterSpacing?: number | undefined
   tabSize?: number | undefined
   lineHeight?: number | undefined
-  align?: TextLayoutAlign | undefined
+  align?: TextAlign | undefined
   flipY?: boolean
   multipage?: boolean
 }
@@ -64,7 +64,7 @@ export {
   ComputeMetrics,
   TextGeometryOption,
   TextGlyph,
-  TextLayoutAlign,
+  TextAlign,
   TextLayoutOption,
   WordMetrics,
   WordWrapMode,

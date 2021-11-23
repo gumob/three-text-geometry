@@ -19,9 +19,7 @@ const config: InitialOptionsTsJest = {
     'jest-watch-select-projects',
     'jest-watch-suspend',
   ],
-  modulePathIgnorePatterns: [
-    '<rootDir>/demo/'
-  ],
+  modulePathIgnorePatterns: ['<rootDir>/demo/'],
   globals: {
     'ts-jest': {
       diagnostics: Boolean(process.env.CI),

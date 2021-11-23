@@ -3112,6 +3112,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ajv@npm:^8.8.2":
+  version: 8.8.2
+  resolution: "ajv@npm:8.8.2"
+  dependencies:
+    fast-deep-equal: ^3.1.1
+    json-schema-traverse: ^1.0.0
+    require-from-string: ^2.0.2
+    uri-js: ^4.2.2
+  checksum: 90849ef03c4f4f7051d15f655120137b89e3205537d683beebd39d95f40c0ca00ea8476cd999602d2f433863e7e4bf1b81d1869d1e07f4dcf56d71b6430a605c
+  languageName: node
+  linkType: hard
+
 "alphanum-sort@npm:^1.0.0":
   version: 1.0.2
   resolution: "alphanum-sort@npm:1.0.2"
@@ -3522,6 +3534,15 @@ __metadata:
   version: 4.1.2
   resolution: "axe-core@npm:4.1.2"
   checksum: e26d155e1dcaa48dffcbded84739c96c350069e20c52cb1ebdeaa8e2881a6ce683961276b3de57ca66b6ba8bd4d2beaed54d504c818198757c98d790586f7a92
+  languageName: node
+  linkType: hard
+
+"axios@npm:^0.24.0":
+  version: 0.24.0
+  resolution: "axios@npm:0.24.0"
+  dependencies:
+    follow-redirects: ^1.14.4
+  checksum: 468cf496c08a6aadfb7e699bebdac02851e3043d4e7d282350804ea8900e30d368daa6e3cd4ab83b8ddb5a3b1e17a5a21ada13fc9cebd27b74828f47a4236316
   languageName: node
   linkType: hard
 
@@ -4344,7 +4365,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.1.0":
+"chalk@npm:^4.1.0, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -5504,6 +5525,7 @@ __metadata:
     react-dom: ^17.0.2
     react-scripts: 4.0.3
     three: ^0.134.0
+    three-text-geometry: "gumob/three-text-geometry#develop"
     typescript: ^4.1.2
     web-vitals: ^1.0.1
   languageName: unknown
@@ -6684,6 +6706,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-xml-parser@npm:^4.0.0-beta.2":
+  version: 4.0.0-beta.2
+  resolution: "fast-xml-parser@npm:4.0.0-beta.2"
+  dependencies:
+    strnum: ^1.0.4
+  bin:
+    fxparser: src/cli/cli.js
+  checksum: 426e3b8cde587571cdfe2ed37ec620ae92c01c8f6a6e39ac1833791655f67057cd5bc2e9ae7da5e23bb02a53aeba177b7a0841e3d65848c0be2197c7a5e56b38
+  languageName: node
+  linkType: hard
+
 "fastq@npm:^1.6.0":
   version: 1.10.1
   resolution: "fastq@npm:1.10.1"
@@ -6863,6 +6896,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"floggy@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "floggy@npm:0.3.1"
+  dependencies:
+    chalk: ^4.1.2
+    fp-ts: ^2.11.3
+    lodash: ^4.17.21
+    strip-ansi: 6
+  checksum: aa846b887357368fa32be84f5f83f4baba61708957b62a7eb93555ae9beba0b1b51e8a7241ee039281d6e2e1e0c1629772eb06cbe2108ccf5a89ed63dfd96fa1
+  languageName: node
+  linkType: hard
+
 "flush-write-stream@npm:^1.0.0":
   version: 1.1.1
   resolution: "flush-write-stream@npm:1.1.1"
@@ -6880,6 +6925,16 @@ __metadata:
     debug:
       optional: true
   checksum: c17f14c186e8a5cc9e6f179f87286306151017a919735d68e2d440fd353da9f9d15789e03ea057a1c2b49dda9d662b05bb4370c7350f70de43b18d3ead2b36a0
+  languageName: node
+  linkType: hard
+
+"follow-redirects@npm:^1.14.4":
+  version: 1.14.5
+  resolution: "follow-redirects@npm:1.14.5"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: f004a76b2ee3a849772c2816e30928253bf47537b0f00184d89f4966413add96a228a4d96ca8c702bc045a683c52c2ba41545c915cc1a5e33bf8fd9d07b59aee
   languageName: node
   linkType: hard
 
@@ -6927,6 +6982,13 @@ __metadata:
   version: 0.1.2
   resolution: "forwarded@npm:0.1.2"
   checksum: 54695c574292f9bc6bfa52111844337bc2e61cfcc5ec82f16b816d721a67a0c76b4849a34b57e38e51d64ddbb81aef974f393579f610ed1b990470e75abad2e0
+  languageName: node
+  linkType: hard
+
+"fp-ts@npm:^2.11.3":
+  version: 2.11.5
+  resolution: "fp-ts@npm:2.11.5"
+  checksum: 68a4884527abca782a2f664b13152cd797b92b6042538905af95fa0e9da2e884bc5b05bdfcfbb02fdabfe8536ae6a62a24159696545d8a263413e4c007326c4a
   languageName: node
   linkType: hard
 
@@ -9482,7 +9544,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lodash@npm:>=3.5 <5, lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.5":
+"lodash@npm:>=3.5 <5, lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.5":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -13884,6 +13946,15 @@ resolve@1.18.1:
   languageName: node
   linkType: hard
 
+"strip-ansi@npm:6, strip-ansi@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "strip-ansi@npm:6.0.1"
+  dependencies:
+    ansi-regex: ^5.0.1
+  checksum: f3cd25890aef3ba6e1a74e20896c21a46f482e93df4a06567cebf2b57edabb15133f1f94e57434e0a958d61186087b1008e89c94875d019910a213181a14fc8c
+  languageName: node
+  linkType: hard
+
 "strip-ansi@npm:6.0.0, strip-ansi@npm:^6.0.0":
   version: 6.0.0
   resolution: "strip-ansi@npm:6.0.0"
@@ -13908,15 +13979,6 @@ resolve@1.18.1:
   dependencies:
     ansi-regex: ^4.1.0
   checksum: bdb5f76ade97062bd88e7723aa019adbfacdcba42223b19ccb528ffb9fb0b89a5be442c663c4a3fb25268eaa3f6ea19c7c3fbae830bd1562d55adccae1fcec46
-  languageName: node
-  linkType: hard
-
-"strip-ansi@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "strip-ansi@npm:6.0.1"
-  dependencies:
-    ansi-regex: ^5.0.1
-  checksum: f3cd25890aef3ba6e1a74e20896c21a46f482e93df4a06567cebf2b57edabb15133f1f94e57434e0a958d61186087b1008e89c94875d019910a213181a14fc8c
   languageName: node
   linkType: hard
 
@@ -13971,6 +14033,13 @@ resolve@1.18.1:
   version: 3.1.1
   resolution: "strip-json-comments@npm:3.1.1"
   checksum: 492f73e27268f9b1c122733f28ecb0e7e8d8a531a6662efbd08e22cccb3f9475e90a1b82cab06a392f6afae6d2de636f977e231296400d0ec5304ba70f166443
+  languageName: node
+  linkType: hard
+
+"strnum@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "strnum@npm:1.0.4"
+  checksum: 91432c37fef1c4df4eb32e5ff9ae7962a4627f81001fee3f86c3f279226a54157b2a14d074d85265c6c36e5e93bdb45f4339e46bdba0f1325c5c27fae78007b1
   languageName: node
   linkType: hard
 
@@ -14228,6 +14297,20 @@ resolve@1.18.1:
   languageName: node
   linkType: hard
 
+"three-text-geometry@gumob/three-text-geometry#develop":
+  version: 0.0.0-dripip
+  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=8989416edac4c53118dd959a0cf6b8797583f99b"
+  dependencies:
+    ajv: ^8.8.2
+    axios: ^0.24.0
+    fast-xml-parser: ^4.0.0-beta.2
+    floggy: ^0.3.1
+    three: ^0.134.0
+    tslib: ^2.3.1
+  checksum: 784e3e39161cf1dd0d313ae864dc3137368afc99aa8828540c2acc5441813ae5e83ae3a482d3f83cf1d4afa4075be2f87f74a25fc1bc7378f8efb77c3b57b25a
+  languageName: node
+  linkType: hard
+
 "three@npm:^0.134.0":
   version: 0.134.0
   resolution: "three@npm:0.134.0"
@@ -14413,6 +14496,13 @@ resolve@1.18.1:
   version: 2.1.0
   resolution: "tslib@npm:2.1.0"
   checksum: aa189c8179de0427b0906da30926fd53c59d96ec239dff87d6e6bc831f608df0cbd6f77c61dabc074408bd0aa0b9ae4ec35cb2c15f729e32f37274db5730cb78
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "tslib@npm:2.3.1"
+  checksum: de17a98d4614481f7fcb5cd53ffc1aaf8654313be0291e1bfaee4b4bb31a20494b7d218ff2e15017883e8ea9626599b3b0e0229c18383ba9dce89da2adf15cb9
   languageName: node
   linkType: hard
 

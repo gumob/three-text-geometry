@@ -1,5 +1,5 @@
 import * as wordwrap from '~/layout'
-import { BMFont, BMFontChar, TextGlyph, TextLayoutAlign, TextLayoutOption, WordMetrics } from '~/types'
+import { BMFont, BMFontChar, TextGlyph, TextAlign, TextLayoutOption, WordMetrics } from '~/types'
 
 const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
 const M_WIDTHS = ['m', 'w']
@@ -83,7 +83,7 @@ class TextLayout {
     else this._opt.end = text.length
     if (option.width !== undefined) this._opt.width = option.width
     if (option.align !== undefined) this._opt.align = option.align
-    else this._opt.align = TextLayoutAlign.Left
+    else this._opt.align = TextAlign.Left
     if (option.mode !== undefined) this._opt.mode = option.mode
     if (option.letterSpacing !== undefined) this._opt.letterSpacing = option.letterSpacing
     else this._opt.letterSpacing = 0
@@ -115,7 +115,7 @@ class TextLayout {
     const descender: number = lineHeight - baseline
     const letterSpacing: number = this._opt.letterSpacing!
     const height: number = lineHeight * lines.length - descender
-    const align: TextLayoutAlign = this._opt.align!
+    const align: TextAlign = this._opt.align!
 
     /** draw text along baseline */
     y -= height
@@ -146,8 +146,8 @@ class TextLayout {
           if (lastGlyph) x += this.getKerning(font, lastGlyph.id, glyph.id)
 
           let tx = x
-          if (align === TextLayoutAlign.Center) tx += (maxLineWidth - lineWidth) / 2
-          else if (align === TextLayoutAlign.Right) tx += maxLineWidth - lineWidth
+          if (align === TextAlign.Center) tx += (maxLineWidth - lineWidth) / 2
+          else if (align === TextAlign.Right) tx += maxLineWidth - lineWidth
 
           this._glyphs.push({
             position: [tx, y],
