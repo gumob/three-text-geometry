@@ -50,7 +50,6 @@ export class App extends React.Component {
     this.scene.background = new THREE.Color(0x000000)
 
     /** Camera */
-    // this.camera = new THREE.OrthographicCamera(0, 0, 0, 0, -100, 100)
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000)
     this.camera.position.set(500, 500, 1000)
     this.camera.lookAt(0, 0, 0)
@@ -59,7 +58,6 @@ export class App extends React.Component {
     this.controls = new OrbitControls(this.camera!, this.renderer.domElement!)
     this.controls.target.set(0, 0, 0)
     this.controls.autoRotate = true
-    this.controls.autoRotateSpeed = Math.PI * 2
     this.controls.update()
     // this.control.addEventListener('change', this.updateScene.bind(this))
 
@@ -71,20 +69,20 @@ export class App extends React.Component {
     const texture = textureLoader.load(
       'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png'
     )
-    const textGeometry = new TextGeometry('this bitmap text\nis rendered with \nan OrthographicCamera', {
+    const textGeometry = new TextGeometry('this bitmap text\nis rendered with \nan PerspectiveCamera', {
       font: font,
       align: TextAlign.Left,
       width: 1000,
       flipY: texture.flipY,
     })
-    const box = new Vector3
+    const box = new Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
     const textMaterial = new THREE.MeshBasicMaterial({
       map: texture,
       side: THREE.DoubleSide,
       transparent: true,
-      color: 0xaaffff,
+      color: 0x666666,
     })
     this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
     this.textMesh.scale.multiply(new THREE.Vector3(1, -1, 1))
@@ -106,7 +104,7 @@ export class App extends React.Component {
   }
 
   onWindowResize() {
-    this.camera!.aspect = window.innerWidth / window.innerHeight;
+    this.camera!.aspect = window.innerWidth / window.innerHeight
     this.camera?.updateProjectionMatrix()
     this.renderer?.setSize(window.innerWidth, window.innerHeight)
   }
