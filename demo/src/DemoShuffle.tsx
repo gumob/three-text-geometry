@@ -8,7 +8,7 @@ import './Demo.css'
 import { Vector3 } from 'three'
 import Navigation from './Navigation'
 
-export class DemoSimple extends React.Component {
+export class DemoShuffle extends React.Component {
   stats?: Stats | undefined
   controls?: OrbitControls | undefined
 
@@ -39,7 +39,7 @@ export class DemoSimple extends React.Component {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     // this.renderer.autoClear = false
 
-    const container = document.querySelector('#simple')
+    const container = document.querySelector('#shuffle')
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
@@ -74,8 +74,7 @@ export class DemoSimple extends React.Component {
     )
     const text = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+    It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`
     const textGeometry = new TextGeometry(text, {
       font: font,
       align: TextAlign.Left,
@@ -119,9 +118,9 @@ export class DemoSimple extends React.Component {
   render() {
     return <div id="DemoSimple" className="Demo">
       <Navigation />
-      <div id="simple" />
+      <div id="shuffle" />
     </div>
   }
 }
 
-export default DemoSimple
+export default DemoShuffle

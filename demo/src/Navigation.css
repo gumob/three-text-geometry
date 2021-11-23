@@ -1,0 +1,8 @@
+.Navigation {
+  position: 'fixed';
+  z-index: 100;
+  top: '0px';
+  right: '0px';
+  /* background-color: yellow; */
+  background-color: transparent;
+}
