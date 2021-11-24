@@ -157,11 +157,24 @@ export default class ShuffleText {
 
   constructor(text: string, option: ShuffleOption, textStateHandler: ShuffleTextCallback) {
     if (text.length === 0) throw new ShuffleTextError('The `text` argument must not be empty.')
-    if (option.shuffleText.length === 0) throw new ShuffleTextError('The `option.delay.shuffleText` must not be empty.')
-    if (option.delay.min > option.delay.max) throw new ShuffleTextError('The `option.delay.max` must be greater than or equal to `option.delay.min`.')
-    if (option.fadeDuration.min > option.fadeDuration.max) throw new ShuffleTextError('The `option.fadeDuration.max` must be greater than or equal to `option.fadeDuration.min`.')
-    if (option.shuffleDuration.min > option.shuffleDuration.max) throw new ShuffleTextError('The `option.shuffleDuration.max` must be greater than or equal to `option.shuffleDuration.min`.')
-    if (option.interval.min > option.interval.max) throw new ShuffleTextError('The `option.interval.max` must be greater than or equal to `option.interval.min`.')
+    if (option.shuffleText.length === 0)
+      throw new ShuffleTextError('The `option.delay.shuffleText` must not be empty.')
+    if (option.delay.min > option.delay.max)
+      throw new ShuffleTextError(
+        'The `option.delay.max` must be greater than or equal to `option.delay.min`.'
+      )
+    if (option.fadeDuration.min > option.fadeDuration.max)
+      throw new ShuffleTextError(
+        'The `option.fadeDuration.max` must be greater than or equal to `option.fadeDuration.min`.'
+      )
+    if (option.shuffleDuration.min > option.shuffleDuration.max)
+      throw new ShuffleTextError(
+        'The `option.shuffleDuration.max` must be greater than or equal to `option.shuffleDuration.min`.'
+      )
+    if (option.interval.min > option.interval.max)
+      throw new ShuffleTextError(
+        'The `option.interval.max` must be greater than or equal to `option.interval.min`.'
+      )
     /* Set variables */
     this._originalText = text
     this._currentText = ''
@@ -185,14 +198,14 @@ export default class ShuffleText {
     this._state = ShuffleState.Updating
     this._timeStart = performance.now()
     const timeDiff = 0
-    this._chars.forEach((char) => char.start(timeDiff))
+    for (var i = 0; i < this._chars.length; i++) this._chars[i].start(timeDiff)
     this._update()
   }
 
   private _update() {
     if (this._state !== ShuffleState.Updating) return
     const timeDiff = performance.now() - this._timeStart!
-    this._chars.forEach((char) => char.update(timeDiff))
+    for (var i = 0; i < this._chars.length; i++) this._chars[i].update(timeDiff)
     this._currentText = this._chars.map((char: ShuffleChar) => char.currentChar).join('')
     if (this._state !== ShuffleState.Updating) return
     this._textStateHandler(this.currentText, this._state)
@@ -202,7 +215,7 @@ export default class ShuffleText {
   public cancel() {
     if (this._state !== ShuffleState.Updating) return
     this._state = ShuffleState.Cancelled
-    this._chars.forEach((char) => char.cancel())
+    for (var i = 0; i < this._chars.length; i++) this._chars[i].cancel()
     this._currentText = this._chars.map((char: ShuffleChar) => char.currentChar).join('')
     this._textStateHandler(this.currentText, this._state)
     cancelAnimationFrame(this._animationFrame)

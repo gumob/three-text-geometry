@@ -3,7 +3,6 @@ import TextGeometry from 'three-text-geometry'
 import DemoBase from './DemoBase'
 
 export class DemoShader extends DemoBase {
-
   initScene() {
     const textGeometry = new TextGeometry(this.text, this.textOption)
     const box = new THREE.Vector3()

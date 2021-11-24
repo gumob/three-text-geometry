@@ -50,8 +50,6 @@ export class DemoShuffle extends DemoBase {
     const self = this
     this.shuffle?.cancel()
     this.shuffle = new ShuffleText(this.text!, option, (text: string, state: ShuffleState) => {
-      console.log(state)
-      console.log(text)
       const geom = this.textMesh?.geometry as TextGeometry
       geom.update(text)
       if (state === ShuffleState.Completed) self.suffleText(3000)
