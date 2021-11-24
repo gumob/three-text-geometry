@@ -105,6 +105,7 @@ export class DemoBase extends React.Component {
     }
 
     window.addEventListener('resize', this.onWindowResize.bind(this))
+    window.addEventListener('click', this.onClicked.bind(this))
 
     this.initScene()
   }
@@ -118,10 +119,14 @@ export class DemoBase extends React.Component {
     this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this))
   }
 
-  onWindowResize() {
+  onWindowResize(e: any) {
     this.camera!.aspect = window.innerWidth / window.innerHeight
     this.camera?.updateProjectionMatrix()
     this.renderer?.setSize(window.innerWidth, window.innerHeight)
+  }
+  
+  onClicked(e: any) {
+    this.controls!.autoRotate = false
   }
 
   render() {
