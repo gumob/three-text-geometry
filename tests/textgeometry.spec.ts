@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import fs from 'fs'
 import gl from 'gl'
 import * as THREE from 'three'
