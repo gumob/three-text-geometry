@@ -5,6 +5,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import TextGeometry, { BMFontLoader, BMFont, TextAlign } from 'three-text-geometry'
 
 import './Demo.css'
+import ShuffleText, { ShuffleOption, ShuffleState } from './effects/shuffle'
+import { TextGeometryOption } from 'three-text-geometry/dist-cjs/types'
 
 export class DemoShuffle extends React.Component {
   stats?: Stats | undefined
@@ -14,6 +16,8 @@ export class DemoShuffle extends React.Component {
   scene?: THREE.Scene
   camera?: THREE.PerspectiveCamera
   textMesh?: THREE.Mesh
+  text?: string
+  textOption?: TextGeometryOption
 
   componentDidMount() {
     const uri =
@@ -71,15 +75,14 @@ export class DemoShuffle extends React.Component {
       'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png'
       // 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.png'
     )
-    const text = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-    It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`
-    const textGeometry = new TextGeometry(text, {
+    this.text = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.\nLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`
+    this.textOption = {
       font: font,
       align: TextAlign.Left,
       width: 1000,
       flipY: texture.flipY,
-    })
+    }
+    const textGeometry = new TextGeometry(this.text, this.textOption)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
@@ -98,6 +101,27 @@ export class DemoShuffle extends React.Component {
 
     /** Render scene */
     this.updateScene()
+
+    /** Shuffle text */
+    this.suffleText(1000)
+  }
+
+  suffleText(timeout: number) {
+    setTimeout(() => {
+      const option: ShuffleOption = {
+        shuffleText: this.text!,
+        delay: { min: 0, max: 0 },
+        fadeDuration: { min: 500, max: 700 },
+        shuffleDuration: { min: 1000, max: 2000 },
+        interval: { min: 20, max: 40 },
+      }
+      const shuffle = new ShuffleText(this.text!, option, (text: string, state: ShuffleState) => {
+        // console.log(state, text)
+        (this.textMesh?.geometry as TextGeometry).update(text)
+        if (state === ShuffleState.Completed) this.suffleText(3000)
+      })
+      shuffle.start()
+    }, timeout)
   }
 
   updateScene() {
