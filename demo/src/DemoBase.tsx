@@ -32,7 +32,7 @@ export class DemoBase extends React.Component {
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nVivamus eu mauris pretium, pellentesque justo at, sodales ligula.\nPraesent vitae dolor porttitor, laoreet metus ut, posuere ligula.\nMauris dolor ante, consectetur eu vulputate eget, tempus in nunc.\nMaecenas bibendum eleifend lacus in sodales.\nAenean mollis lorem a sem ultrices, nec lobortis erat eleifend.\nCurabitur ante eros, porta eget mi a, bibendum luctus ante.\nNulla est purus, posuere at rutrum sit amet, bibendum condimentum elit.\nNunc nec sem enim.`,
   ]
   get text(): string {
-    const index = Math.floor(Math.random() * (this.textList.length + 1))
+    const index = Math.floor(Math.random() * (this.textList.length))
     return this.textList[index]
 
   }
