@@ -6,6 +6,15 @@ function randFloat(min: number, max: number) {
   return min + Math.random() * (max - min)
 }
 
+class ShuffleTextError extends Error {
+  constructor(message: string | undefined = undefined) {
+    const msg: string = message ? message : 'Failed to parse data'
+    super(msg)
+    this.name = 'BMFontLoaderError'
+    Object.setPrototypeOf(this, ShuffleTextError.prototype)
+  }
+}
+
 export enum ShuffleState {
   Idle = 0,
   Updating,
@@ -147,9 +156,14 @@ export default class ShuffleText {
   private _textStateHandler: ShuffleTextCallback
 
   constructor(text: string, option: ShuffleOption, textStateHandler: ShuffleTextCallback) {
+    if (text.length === 0) throw new ShuffleTextError('The `text` argument must not be empty.')
+    if (option.shuffleText.length === 0) throw new ShuffleTextError('The `option.delay.shuffleText` must not be empty.')
+    if (option.delay.min > option.delay.max) throw new ShuffleTextError('The `option.delay.max` must be greater than or equal to `option.delay.min`.')
+    if (option.fadeDuration.min > option.fadeDuration.max) throw new ShuffleTextError('The `option.fadeDuration.max` must be greater than or equal to `option.fadeDuration.min`.')
+    if (option.shuffleDuration.min > option.shuffleDuration.max) throw new ShuffleTextError('The `option.shuffleDuration.max` must be greater than or equal to `option.shuffleDuration.min`.')
+    if (option.interval.min > option.interval.max) throw new ShuffleTextError('The `option.interval.max` must be greater than or equal to `option.interval.min`.')
     /* Set variables */
     this._originalText = text
-    console.log('text', text)
     this._currentText = ''
     option.shuffleText = option.shuffleText
       .split('')
