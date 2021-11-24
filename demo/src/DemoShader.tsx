@@ -3,6 +3,13 @@ import TextGeometry from 'three-text-geometry'
 import DemoBase from './DemoBase'
 
 export class DemoShader extends DemoBase {
+  swapTimeoutID?: any
+
+  componentWillUnmount() {
+    clearTimeout(this.swapTimeoutID)
+    cancelAnimationFrame(this.animationFrameID)
+  }
+
   initScene() {
     const textGeometry = new TextGeometry(this.text, this.textOption)
     const box = new THREE.Vector3()
@@ -21,6 +28,18 @@ export class DemoShader extends DemoBase {
 
     /** Render scene */
     this.updateScene()
+    this.swapText(3000)
+  }
+
+  swapText(timeout: number) {
+    const self = this
+    clearTimeout(this.swapTimeoutID)
+    this.swapTimeoutID = setTimeout(() => {
+      const text = self.textList[this.textIndex < this.textList.length - 1 ? this.textIndex++ : 0]
+      const geom = self.textMesh?.geometry as TextGeometry
+      geom.update(text)
+      this.swapText(3000)
+    }, timeout)
   }
 }
 
