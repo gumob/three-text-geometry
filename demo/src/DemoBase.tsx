@@ -81,6 +81,7 @@ export class DemoBase extends React.Component {
     /** Scene */
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0x000000)
+    this.scene.fog = new THREE.FogExp2(0x000104, 0.0001);
 
     /** Camera */
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000)
@@ -124,7 +125,7 @@ export class DemoBase extends React.Component {
     this.camera?.updateProjectionMatrix()
     this.renderer?.setSize(window.innerWidth, window.innerHeight)
   }
-  
+
   onClicked(e: any) {
     this.controls!.autoRotate = false
   }
