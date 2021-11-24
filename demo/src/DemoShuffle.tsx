@@ -19,6 +19,10 @@ export class DemoShuffle extends React.Component {
   text?: string
   textOption?: TextGeometryOption
 
+  animationFrameID?: any
+  timeoutID?: any
+  shuffle?: ShuffleText
+
   componentDidMount() {
     const uri =
       'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
@@ -32,6 +36,12 @@ export class DemoShuffle extends React.Component {
       .catch((e) => {
         console.error(e)
       })
+  }
+
+  componentWillUnmount() {
+    this.shuffle?.cancel()
+    clearTimeout(this.timeoutID)
+    cancelAnimationFrame(this.animationFrameID)
   }
 
   initScene(font: BMFont) {
@@ -107,20 +117,25 @@ export class DemoShuffle extends React.Component {
   }
 
   suffleText(timeout: number) {
-    setTimeout(() => {
-      const option: ShuffleOption = {
-        shuffleText: this.text!,
-        delay: { min: 0, max: 0 },
-        fadeDuration: { min: 500, max: 700 },
-        shuffleDuration: { min: 1000, max: 2000 },
-        interval: { min: 20, max: 40 },
-      }
-      const shuffle = new ShuffleText(this.text!, option, (text: string, state: ShuffleState) => {
-        // console.log(state, text)
-        (this.textMesh?.geometry as TextGeometry).update(text)
-        if (state === ShuffleState.Completed) this.suffleText(3000)
-      })
-      shuffle.start()
+    const option: ShuffleOption = {
+      shuffleText: this.text!,
+      delay: { min: 0, max: 0 },
+      fadeDuration: { min: 500, max: 700 },
+      shuffleDuration: { min: 1000, max: 2000 },
+      interval: { min: 20, max: 40 },
+    }
+    const self = this
+    this.shuffle?.cancel()
+    this.shuffle = new ShuffleText(this.text!, option, (text: string, state: ShuffleState) => {
+      console.log(state)
+      console.log(text)
+      const geom = this.textMesh?.geometry as TextGeometry
+      geom.update(text)
+      if (state === ShuffleState.Completed) self.suffleText(3000)
+    })
+    clearTimeout(this.timeoutID)
+    this.timeoutID = setTimeout(() => {
+      self.shuffle?.start()
     }, timeout)
   }
 
@@ -128,8 +143,7 @@ export class DemoShuffle extends React.Component {
     this.controls?.update()
     this.renderer?.render(this.scene!, this.camera!)
     this.stats?.update()
-
-    requestAnimationFrame(this.updateScene.bind(this))
+    this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this))
   }
 
   onWindowResize() {

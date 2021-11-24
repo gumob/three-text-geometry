@@ -15,6 +15,8 @@ export class DemoSimple extends React.Component {
   camera?: THREE.PerspectiveCamera
   textMesh?: THREE.Mesh
 
+  animationFrameID?: any
+
   componentDidMount() {
     const uri =
       'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
@@ -28,6 +30,10 @@ export class DemoSimple extends React.Component {
       .catch((e) => {
         console.error(e)
       })
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.animationFrameID)
   }
 
   initScene(font: BMFont) {
@@ -106,7 +112,7 @@ export class DemoSimple extends React.Component {
     this.renderer?.render(this.scene!, this.camera!)
     this.stats?.update()
 
-    requestAnimationFrame(this.updateScene.bind(this))
+    this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this))
   }
 
   onWindowResize() {

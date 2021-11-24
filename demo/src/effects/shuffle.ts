@@ -156,7 +156,6 @@ export default class ShuffleText {
       .filter((char: string, index: number, arr: string[]) => arr.indexOf(char) === index)
       .join('')
       .replaceAll(/\s|\t|\n|\r|(\n\r)/gi, '')
-    console.log('option.shuffleText', option.shuffleText)
     this._textStateHandler = textStateHandler
     /* Create character set */
     const letters: Array<string> = this._originalText.split('')
