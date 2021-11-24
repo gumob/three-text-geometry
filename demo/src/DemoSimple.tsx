@@ -4,6 +4,8 @@ import DemoBase from './DemoBase'
 
 export class DemoSimple extends DemoBase {
   initScene() {
+    super.initScene()
+    
     const textGeometry = new TextGeometry(this.text, this.textOption)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
