@@ -22,7 +22,6 @@ export class DemoBase extends React.Component {
   textureUri: string =
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png'
 
-
   textIndex: number = 0
   textList: string[] = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.\nDuis non sapien nulla.\nIn convallis nulla nec nulla varius rutrum.\nNunc augue augue, ornare in cursus egestas, cursus vel magna.\nFusce at felis vel tortor sagittis tincidunt nec vitae nisl.\nSed efficitur nibh consequat tortor pulvinar, dignissim tincidunt risus hendrerit.\nSuspendisse quis commodo nulla.\nUt orci urna, mollis non nisl id, molestie tristique purus.\nPhasellus efficitur laoreet eros vehicula convallis.\nSed imperdiet, lectus a facilisis tempus, elit orci varius ante, at lacinia odio massa et quam.\nQuisque vulputate nulla vitae feugiat aliquam.\nVivamus vel mauris sit amet est rhoncus molestie at quis neque.\nDuis faucibus laoreet tempus.\nMaecenas metus velit, lobortis sit amet mauris at, vehicula condimentum velit.\nVestibulum ornare eu turpis vel laoreet.\nNunc ac cursus nunc, non porttitor arcu.`,
@@ -32,9 +31,8 @@ export class DemoBase extends React.Component {
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nVivamus eu mauris pretium, pellentesque justo at, sodales ligula.\nPraesent vitae dolor porttitor, laoreet metus ut, posuere ligula.\nMauris dolor ante, consectetur eu vulputate eget, tempus in nunc.\nMaecenas bibendum eleifend lacus in sodales.\nAenean mollis lorem a sem ultrices, nec lobortis erat eleifend.\nCurabitur ante eros, porta eget mi a, bibendum luctus ante.\nNulla est purus, posuere at rutrum sit amet, bibendum condimentum elit.\nNunc nec sem enim.`,
   ]
   get text(): string {
-    const index = Math.floor(Math.random() * (this.textList.length))
+    const index = Math.floor(Math.random() * this.textList.length)
     return this.textList[index]
-
   }
   font?: BMFont
   texture?: THREE.Texture
@@ -81,7 +79,7 @@ export class DemoBase extends React.Component {
     /** Scene */
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0x000000)
-    this.scene.fog = new THREE.FogExp2(0x000104, 0.0001);
+    this.scene.fog = new THREE.FogExp2(0x000104, 0.0003)
 
     /** Camera */
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000)
@@ -95,7 +93,12 @@ export class DemoBase extends React.Component {
     this.controls.update()
 
     /** AxesHelper */
-    this.scene?.add(new THREE.AxesHelper(1000))
+    const axes = new THREE.AxesHelper(1000).setColors(
+      new THREE.Color(0.3, 0.2, 0.2),
+      new THREE.Color(0.2, 0.3, 0.2),
+      new THREE.Color(0.2, 0.2, 0.3)
+    )
+    this.scene?.add(axes)
 
     /** AxesHelper */
     this.textOption = {
@@ -111,7 +114,7 @@ export class DemoBase extends React.Component {
     this.initScene()
   }
 
-  initScene() { }
+  initScene() {}
 
   updateScene() {
     this.controls?.update()
@@ -131,7 +134,7 @@ export class DemoBase extends React.Component {
   }
 
   render() {
-    return <div id={this.divID} className='Demo'></div>
+    return <div id={this.divID} className="Demo"></div>
   }
 }
 
