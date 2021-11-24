@@ -1,5 +1,5 @@
 import * as wordwrap from '~/layout'
-import { BMFont, BMFontChar, TextGlyph, TextAlign, TextLayoutOption, WordMetrics } from '~/types'
+import { BMFont, BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordMetrics } from '~/types'
 
 const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
 const M_WIDTHS = ['m', 'w']

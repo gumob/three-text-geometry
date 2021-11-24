@@ -6,8 +6,7 @@ import fs from 'fs'
 import gl from 'gl'
 import * as THREE from 'three'
 import TextGeometry from '~/index'
-import { BMFontAsciiParser, BMFontXMLParser } from '~/parser'
-import { TextAlign, WordWrapMode } from '~/types'
+import { BMFontAsciiParser } from '~/parser'
 
 describe('TextGeometry', () => {
   /** Prepare Font */
@@ -88,7 +87,9 @@ describe('TextGeometry', () => {
     })
 
     test('Text Geometry', async () => {
-      const geometry = new TextGeometry('this bitmap text\nis rendered with \nan OrthographicCamera', { font: font })
+      const geometry = new TextGeometry('this bitmap text\nis rendered with \nan OrthographicCamera', {
+        font: font,
+      })
       // console.log('geometry', geometry)
       // console.log('geometry.attributes.position', geometry.attributes.position)
       // expect(geometry.attributes.position?.array.length).toEqual(4)
@@ -96,7 +97,9 @@ describe('TextGeometry', () => {
     })
 
     test('2d context should be exist', async () => {
-      const geometry = new TextGeometry('this bitmap text\nis rendered with \nan OrthographicCamera', { font: font })
+      const geometry = new TextGeometry('this bitmap text\nis rendered with \nan OrthographicCamera', {
+        font: font,
+      })
       const textureLoader = new THREE.TextureLoader()
       const texture = textureLoader.load('tests/fonts/Roboto-Regular.png')
       const material = new THREE.MeshBasicMaterial({
@@ -121,14 +124,14 @@ describe('TextGeometry', () => {
       // console.log('mesh.geometry.attributes', mesh.geometry.attributes)
 
       geometry.computeBoundingBox()
-      const prev = geometry.boundingBox?.clone();
-      expect(geometry.boundingBox).not.toBeNull();
-      geometry.update('Hello Universe');
-      geometry.computeBoundingBox();
-      const curr = geometry.boundingBox?.clone();
-      console.log('prev', prev);
-      console.log('curr', curr);
-      expect(prev).not.toStrictEqual(curr);
+      const prev = geometry.boundingBox?.clone()
+      expect(geometry.boundingBox).not.toBeNull()
+      geometry.update('Hello Universe')
+      geometry.computeBoundingBox()
+      const curr = geometry.boundingBox?.clone()
+      console.log('prev', prev)
+      console.log('curr', curr)
+      expect(prev).not.toStrictEqual(curr)
 
       // geometry.computeBoundingSphere()
 

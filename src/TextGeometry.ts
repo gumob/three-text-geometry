@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { TextLayout } from '~/layout'
-import { TextGeometryOption, TextGlyph, TextAlign } from '~/types'
+import { TextAlign, TextGeometryOption, TextGlyph } from '~/types'
 import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '~/utils'
 
 class TextGeometry extends THREE.BufferGeometry {

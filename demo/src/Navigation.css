@@ -1,0 +1,11 @@
+.Navigation {
+  position: fixed !important;
+  z-index: 100 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  top: 1em !important;
+  right: 1em !important;
+  /* width: 200px !important; */
+  /* background-color: yellow; */
+  /* background-color: transparent; */
+}
