@@ -1,4 +1,4 @@
-import { Browser, Page } from 'playwright'
+import { Browser, Page, chromium } from 'playwright'
 
 declare global {
   const browser: Browser;
@@ -8,7 +8,8 @@ declare global {
 
 describe(`Google Test Case`, () => {
   it("returns successful search", async () => {
-    await page.goto("https://www.google.com/");
+    await page.goto("https://www.google.com/", { waitUntil: 'networkidle' });
+    // await page.
     // Click input[aria-label="Search"]
     await page.click('input[aria-label="Search"]');
     // Fill input[aria-label="Search"]
@@ -20,34 +21,22 @@ describe(`Google Test Case`, () => {
   });
 });
 
-// let browser: Browser
-// let page: Page
-
+// let browser: Browser;
+// let page: Page;
+// let browserName: string;
 // beforeAll(async () => {
-//   browser = await chromium.launch()
-//   page = await browser.newPage()
-// })
-
-// test('2d context should be exist', async () => {
-//   await page.goto("https://www.carlrippon.com/");
-//   expect(await page.title()).toBe("All posts | Building SPAs");
-//   await expect(browser).not.toBeNull()
-//   await expect(true).toBe(true)
-// })
-
-// it('Home page should have the correct title', async () => {
-//   await page.goto('https://www.carlrippon.com/')
-//   expect(await page.title()).toBe('All posts | Building SPAs')
-// })
-
+//   browser = await chromium.launch();
+// });
 // afterAll(async () => {
-//   await browser.close()
-// })
-
-// import { test, expect } from '@playwright/test';
-
-// test('basic test', async ({ page }) => {
-//   await page.goto('https://playwright.dev/');
-//   const title = page.locator('.navbar__inner .navbar__title');
-//   await expect(title).toHaveText('Playwright');
+//   await browser.close();
+// });
+// beforeEach(async () => {
+//   page = await browser.newPage();
+// });
+// afterEach(async () => {
+//   await page.close();
+// });
+// it('should work', async () => {
+//   await page.goto('https://www.example.com');
+//   expect(await page.title()).toBe('Example Domain');
 // });

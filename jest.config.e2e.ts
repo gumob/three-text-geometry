@@ -28,10 +28,18 @@ const config = {
   testEnvironmentOptions: {
     'jest-playwright': {
       // browsers: ['chromium', 'firefox', 'webkit'],
-      browsers: ['chromium'],
+      // browsers: ['chromium'],,
+      devices: [],
       launchOptions: {
         headless: false,
         // slowMo: 600,
+      },
+      contextOptions: {
+        ignoreHTTPSErrors: true,
+        viewport: {
+          width: 1920,
+          height: 1080
+        }
       },
     },
   },
