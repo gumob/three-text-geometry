@@ -13,7 +13,10 @@ export class DemoShader extends DemoBase {
   initScene() {
     super.initScene()
 
-    const textGeometry = new TextGeometry(this.text, this.textOption)
+    const text = this.textList[0]
+    const textGeometry = new TextGeometry(text, this.textOption)
+    console.log('textGeometry.option', textGeometry.option)
+    console.log('textGeometry.layout', textGeometry.layout)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
@@ -37,9 +40,12 @@ export class DemoShader extends DemoBase {
     const self = this
     clearTimeout(this.swapTimeoutID)
     this.swapTimeoutID = setTimeout(() => {
-      const text = self.textList[this.textIndex < this.textList.length - 1 ? this.textIndex++ : 0]
+      // const text = self.textList[this.textIndex < this.textList.length - 1 ? this.textIndex++ : 0]
+      const text = self.textList[0]
       const geom = self.textMesh?.geometry as TextGeometry
       geom.update(text)
+      console.log('geom.option', geom.option)
+      console.log('geom.layout', geom.layout)
       this.swapText(3000)
     }, timeout)
   }
