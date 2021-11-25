@@ -17,7 +17,7 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "three": "^0.134.0",
-    "three-text-geometry": "gumob/three-text-geometry#develop",
+    "three-text-geometry": "link:../../three-text-geometry",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },

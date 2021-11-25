@@ -8,10 +8,15 @@ function exe () {
 	echo;
 }
 
+echo
+echo "Select a command to execute."
+
 ### Extract container names to a list
 choices=(
-    "develop"
-    "master"
+    "yarn add three-text-geometry@link:../../three-text-geometry"
+    "yarn add three-text-geometry@gumob/three-text-geometry#develop"
+    "yarn add three-text-geometry@gumob/three-text-geometry#master"
+    "yarn remove three-text-geometry"
 )
 
 ### Display a selection dialog
@@ -29,5 +34,4 @@ do
 done
 
 ### Execute a command
-exe yarn remove three-text-geometry
-exe yarn add three-text-geometry@gumob/three-text-geometry#${branch}
+exe ${branch}
