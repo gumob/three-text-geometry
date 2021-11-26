@@ -135,8 +135,8 @@ export default class Easing {
     const change = to - from
     return (
       change *
-      ((currentTime = currentTime / duration - 1) * currentTime * currentTime * currentTime * currentTime +
-        1) +
+        ((currentTime = currentTime / duration - 1) * currentTime * currentTime * currentTime * currentTime +
+          1) +
       from
     )
   }
@@ -262,16 +262,16 @@ export default class Easing {
     if (currentTime < 1)
       return (
         -0.5 *
-        (a *
-          Math.pow(2, 10 * (currentTime -= 1)) *
-          Math.sin(((currentTime * duration - s) * (2 * Math.PI)) / p)) +
+          (a *
+            Math.pow(2, 10 * (currentTime -= 1)) *
+            Math.sin(((currentTime * duration - s) * (2 * Math.PI)) / p)) +
         from
       )
     return (
       a *
-      Math.pow(2, -10 * (currentTime -= 1)) *
-      Math.sin(((currentTime * duration - s) * (2 * Math.PI)) / p) *
-      0.5 +
+        Math.pow(2, -10 * (currentTime -= 1)) *
+        Math.sin(((currentTime * duration - s) * (2 * Math.PI)) / p) *
+        0.5 +
       change +
       from
     )

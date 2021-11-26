@@ -8,7 +8,7 @@ export class DemoShuffleShader extends DemoBase {
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
   textureUri: string =
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
-    
+
   shuffleTimeoutID?: any
   shuffle?: ShuffleText
 
