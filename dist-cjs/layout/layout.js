@@ -36,15 +36,14 @@ class TextLayout {
         if (option.font === undefined)
             throw new TypeError('Must specify a `font` in options');
         this._opt.font = option.font;
-        this._opt.measure = this.computeMetrics.bind(this);
-        this._glyphs = [];
         this.update(text, option);
     }
     get option() {
         return { ...this._opt };
     }
     get glyphs() {
-        return this._glyphs;
+        var _a;
+        return (_a = this._glyphs) !== null && _a !== void 0 ? _a : [];
     }
     get width() {
         return this._width;
@@ -70,7 +69,31 @@ class TextLayout {
     get lineHeight() {
         return this._lineHeight;
     }
+    toString() {
+        return `{
+  glyphs: ${this.glyphs.length}
+  width: ${this.width}
+  height: ${this.height}
+  descender: ${this.descender}
+  ascender: ${this.ascender}
+  xHeight: ${this.xHeight}
+  baseline: ${this.baseline}
+  capHeight: ${this.capHeight}
+  lineHeight: ${this.lineHeight}
+}
+    `;
+    }
     update(text, option = {}) {
+        /** Initalize variables */
+        this._glyphs = [];
+        this._width = 0;
+        this._height = 0;
+        this._descender = 0;
+        this._ascender = 0;
+        this._xHeight = 0;
+        this._baseline = 0;
+        this._capHeight = 0;
+        this._lineHeight = 0;
         /** Initalize options */
         if (option.font !== undefined)
             this._opt.font = option.font;
@@ -102,12 +125,11 @@ class TextLayout {
             this._opt.tabSize = option.tabSize;
         else
             this._opt.tabSize = 4;
+        this._opt.measure = this.computeMetrics.bind(this);
         this._setupSpaceGlyphs(this._opt.font, this._opt.tabSize);
         const font = this._opt.font;
         const lines = new layout_1.WordWrap().lines(text, this._opt);
         const minWidth = this._opt.width || 0;
-        /** clear _glyphs */
-        this._glyphs = [];
         /** get max line width */
         const maxLineWidth = lines.reduce((prev, line) => {
             return Math.max(prev, line.width, minWidth);
@@ -167,6 +189,7 @@ class TextLayout {
             y += lineHeight;
             x = 0;
         }
+        console.log(this.toString());
     }
     _setupSpaceGlyphs(font, tabSize) {
         /** These are fallbacks, when the font doesn't include */
@@ -206,6 +229,9 @@ class TextLayout {
         return null;
     }
     computeMetrics(text, start, end, width) {
+        // console.log(
+        //   `[TextLayout] \t\t\t computeMetrics \t start: ${start} \t end: ${end} \t width: ${width}`,
+        // )
         const letterSpacing = this._opt.letterSpacing || 0;
         const font = this._opt.font;
         let curPen = 0;

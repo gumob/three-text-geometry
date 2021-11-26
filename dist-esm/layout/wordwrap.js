@@ -12,6 +12,8 @@ class WordWrap {
     }
     lines(text, option = {}) {
         console.log('');
+        console.log('');
+        console.log('');
         /** zero width results in nothing visible */
         const opt = {
             start: undefined,
@@ -72,7 +74,7 @@ class WordWrap {
         return lines;
     }
     greedy(measure, text, start, end, width, mode) {
-        console.log('greedy', '\ttext.length', text.length, '\tstart', start, '\tend', end, '\twidth', width, '\tmode', mode);
+        console.log(`\t text.length: ${text.length} \t start: ${start} \t end: ${end} \t width: ${width} \t mode: ${mode}`);
         /** A greedy word wrapper based on LibGDX algorithm */
         /** https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFontCache.java */
         const lines = [];
@@ -85,18 +87,23 @@ class WordWrap {
             debugCount0++;
             /** get next newline position */
             const newLine = this.idxOf(text, WordWrap.newlineChar, start, end);
-            console.log(`\twhile[${debugCount0}]`, '\tstart', start, '\tend', end, '\ttext.length', text.length, '\tnewLine', newLine);
+            if (debugCount0 < 4) {
+                console.log(`\t\t while[${debugCount0}] \t start: ${start} \t end: ${end} \t text.length: ${text.length} \t newLine: ${newLine}`);
+            }
             /** eat whitespace at start of line */
-            let debugCount1 = 0;
             while (start < newLine) {
-                console.log(`\t\twhile[${debugCount1}]`, '\t\tstart', start, '\t\tnewLine', newLine, '\t\tisWhitespace', !this.isWhitespace(text.charAt(start)));
-                debugCount1++;
                 if (!this.isWhitespace(text.charAt(start)))
                     break;
                 start++;
             }
             /** determine visible # of glyphs for the available width */
             const measured = measure(text, start, newLine, testWidth);
+            if (debugCount0 < 4) {
+                // console.log(
+                //   `\t\t while[${debugCount0}] \t measure: \t start: ${start} \t newLine: ${newLine} \t testWidth: ${testWidth}`,
+                // )
+                console.log(`\t\t while[${debugCount0}] \t measured: \t start: ${measured.start} \t end: ${measured.end} \t width: ${measured.width}`);
+            }
             let lineEnd = start + (measured.end - measured.start);
             let nextStart = lineEnd + WordWrap.newlineChar.length;
             /** if we had to cut the line before the next newline... */
@@ -127,7 +134,7 @@ class WordWrap {
             }
             start = nextStart;
         }
-        console.log('greedy', 'lines.length', lines.length, 'start', start);
+        console.log(`\t lines.length: ${lines.length} \t start: ${start} `);
         return lines;
     }
     /** determines the visible number of glyphs within a given width */

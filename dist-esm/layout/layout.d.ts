@@ -3,7 +3,7 @@ declare class TextLayout {
     private _opt;
     private _fallbackSpaceGlyph;
     private _fallbackTabGlyph;
-    private _glyphs;
+    private _glyphs?;
     private _width;
     private _height;
     private _descender;
@@ -22,6 +22,7 @@ declare class TextLayout {
     get baseline(): number;
     get capHeight(): number;
     get lineHeight(): number;
+    toString(): string;
     constructor(text: string, option?: any);
     update(text: string, option?: any): void;
     private _setupSpaceGlyphs;
