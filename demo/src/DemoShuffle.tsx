@@ -45,9 +45,8 @@ export class DemoShuffle extends DemoBase {
   }
 
   suffleText(timeout: number) {
-    const text = this.staticText()
     const option: ShuffleOption = {
-      shuffleText: text,
+      shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
       delay: { min: 0, max: 0 },
       fadeDuration: { min: 500, max: 700 },
       shuffleDuration: { min: 1000, max: 2000 },
@@ -55,7 +54,7 @@ export class DemoShuffle extends DemoBase {
     }
     const self = this
     this.shuffle?.cancel()
-    this.shuffle = new ShuffleText(text, option, (text: string, state: ShuffleState) => {
+    this.shuffle = new ShuffleText(this.staticText(), option, (text: string, state: ShuffleState) => {
       const geom = this.textMesh?.geometry as TextGeometry
       geom.update(text)
       if (state === ShuffleState.Completed) self.suffleText(3000)

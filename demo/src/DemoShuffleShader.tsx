@@ -22,7 +22,7 @@ export class DemoShuffleShader extends DemoBase {
     super.initScene()
 
     /** Text Mesh */
-    const textGeometry = new TextGeometry(this.staticText(), this.textOption)
+    const textGeometry = new TextGeometry(this.staticText().toUpperCase(), this.textOption)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
@@ -45,9 +45,9 @@ export class DemoShuffleShader extends DemoBase {
   }
 
   suffleText(timeout: number) {
-    const text = this.staticText()
     const option: ShuffleOption = {
-      shuffleText: text,
+      shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+      ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|\,)/,
       delay: { min: 0, max: 0 },
       fadeDuration: { min: 500, max: 700 },
       shuffleDuration: { min: 1000, max: 2000 },
@@ -55,7 +55,7 @@ export class DemoShuffleShader extends DemoBase {
     }
     const self = this
     this.shuffle?.cancel()
-    this.shuffle = new ShuffleText(text, option, (text: string, state: ShuffleState) => {
+    this.shuffle = new ShuffleText(this.staticText(), option, (text: string, state: ShuffleState) => {
       const geom = this.textMesh?.geometry as TextGeometry
       geom.update(text)
       if (state === ShuffleState.Completed) self.suffleText(3000)

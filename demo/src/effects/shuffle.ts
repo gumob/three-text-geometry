@@ -37,6 +37,7 @@ export interface ShuffleRange {
 
 export interface ShuffleOption {
   shuffleText: string
+  ignoreRegex?: RegExp
   delay: ShuffleRange
   fadeDuration: ShuffleRange
   shuffleDuration: ShuffleRange
@@ -49,11 +50,13 @@ class ShuffleChar {
   originalChar: string
   currentChar: string
 
+  shuffleText: string
+  ignoreRegex?: RegExp
+
   delay: number
   shuffleDuration: number
   fadeDuration: number
   interval: number
-  shuffleText: string
 
   timeUpdated: number = 0
 
@@ -72,6 +75,7 @@ class ShuffleChar {
     this.interval = randFloat(option.interval.min, option.interval.max)
     this.shuffleText =
       char === char.toLowerCase() ? option.shuffleText.toLocaleLowerCase() : option.shuffleText.toUpperCase()
+    this.ignoreRegex = option.ignoreRegex || /\s|\t|\n|\r|(\n\r)/
     this.onCharStateChanged = callback
   }
 
@@ -90,12 +94,12 @@ class ShuffleChar {
       case ShuffleState.Idle:
         break
       case ShuffleState.Updating:
-        if (/\s|\t|\n|\r|(\n\r)/.test(this.originalChar)) {
+        if (this.ignoreRegex!.test(this.originalChar)) {
           this.currentChar = this.originalChar
           return
         }
         if (localTime < this.shuffleDuration) {
-          this.currentChar = this.shuffleText.charAt(Math.round(Math.random() * this.shuffleText.length))
+          this.currentChar = this.shuffleText.charAt(Math.floor(Math.random() * this.shuffleText.length))
         } else {
           this.currentChar = this.originalChar
         }
