@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { WordWrap } from '~/layout'
-import { TextAlign, WordMetrics, WordWrapMode, WordWrapOption } from '~/types'
+import { WordMetrics, WordWrapMode } from '~/types'
 
 function compute2(_text: string, start: number, end: number, width: number): WordMetrics {
   /** assume each glyph is Npx monospace */
