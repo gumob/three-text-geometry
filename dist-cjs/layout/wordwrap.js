@@ -52,14 +52,14 @@ class WordWrap {
         return idx;
     }
     isWhitespace(chr) {
-        return /\s/.test(chr);
+        return WordWrap.whitespaceRegexp.test(chr);
     }
     pre(measure, text, start, end, width) {
         const lines = [];
         let lineStart = start;
         for (let i = start; i < end && i < text.length; i++) {
             const chr = text.charAt(i);
-            const isNewline = /\n/.test(chr);
+            const isNewline = WordWrap.newlineRegexp.test(chr);
             /** If we've reached a newline, then step down a line */
             /** Or if we've reached the EOF */
             if (isNewline || i === end - 1) {
@@ -72,7 +72,19 @@ class WordWrap {
         return lines;
     }
     greedy(measure, text, start, end, width, mode) {
-        console.log(`[WordWrap] \t text.length: ${text.length} \t start: ${start} \t end: ${end} \t width: ${width} \t mode: ${mode}`);
+        // console.log(
+        //   'greedy',
+        //   'text.length',
+        //   text.length,
+        //   'start',
+        //   start,
+        //   'end',
+        //   end,
+        //   'width',
+        //   width,
+        //   'mode',
+        //   mode
+        // )
         /** A greedy word wrapper based on LibGDX algorithm */
         /** https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFontCache.java */
         const lines = [];
@@ -80,12 +92,9 @@ class WordWrap {
         /** if WordWrapMode.NoWrap is specified, we only wrap on newline chars */
         if (mode === types_1.WordWrapMode.NoWrap)
             testWidth = Number.MAX_VALUE;
-        let debugCount0 = -1;
         while (start < end && start < text.length) {
-            debugCount0++;
             /** get next newline position */
             const newLine = this.idxOf(text, WordWrap.newlineChar, start, end);
-            console.log(`[WordWrap] \t\t while[${debugCount0}] \t start: ${start} \t end: ${end} \t text.length: ${text.length} \t newLine: ${newLine}`);
             /** eat whitespace at start of line */
             while (start < newLine) {
                 if (!this.isWhitespace(text.charAt(start)))
@@ -94,8 +103,6 @@ class WordWrap {
             }
             /** determine visible # of glyphs for the available width */
             const measured = measure(text, start, newLine, testWidth);
-            console.log(`[WordWrap] \t\t while[${debugCount0}] \t measure: \t start: ${start} \t newLine: ${newLine} \t testWidth: ${testWidth}`);
-            console.log(`[WordWrap] \t\t while[${debugCount0}] \t measured: \t start: ${measured.start} \t end: ${measured.end} \t width: ${measured.width}`);
             let lineEnd = start + (measured.end - measured.start);
             let nextStart = lineEnd + WordWrap.newlineChar.length;
             /** if we had to cut the line before the next newline... */
@@ -126,7 +133,7 @@ class WordWrap {
             }
             start = nextStart;
         }
-        console.log(`[WordWrap] \t lines.length: ${lines.length} \t start: ${start} `);
+        // console.log('greedy', 'lines.length', lines.length, 'start', start)
         return lines;
     }
     /** determines the visible number of glyphs within a given width */
@@ -140,5 +147,7 @@ class WordWrap {
     }
 }
 exports.WordWrap = WordWrap;
+WordWrap.newlineRegexp = /\n/;
+WordWrap.whitespaceRegexp = /\s/;
 WordWrap.newlineChar = '\n';
 //# sourceMappingURL=wordwrap.js.map
