@@ -15,8 +15,9 @@ export class DemoShader extends DemoBase {
 
     const text = this.textList[0]
     const textGeometry = new TextGeometry(text, this.textOption)
-    console.log('textGeometry.option', textGeometry.option)
-    console.log('textGeometry.layout', textGeometry.layout)
+    console.clear()
+    // console.log('textGeometry.option', textGeometry.option)
+    // console.log('textGeometry.layout', textGeometry.layout)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
@@ -31,9 +32,17 @@ export class DemoShader extends DemoBase {
     this.textMesh.position.set(-box.x / 2, -box.y / 2, 0)
     this.scene?.add(this.textMesh)
 
+    textGeometry.update(text, this.textOption)
+    textGeometry.update(text, this.textOption)
+    textGeometry.update(text, this.textOption)
+    textGeometry.update(text, this.textOption)
+    textGeometry.update(text, this.textOption)
+    textGeometry.update(text, this.textOption)
+    textGeometry.update(text, this.textOption)
+
     /** Render scene */
     this.updateScene()
-    this.swapText(3000)
+    // this.swapText(3000)
   }
 
   swapText(timeout: number) {
