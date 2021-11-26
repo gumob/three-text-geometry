@@ -33,6 +33,41 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// interface IEasingFunc {
+//   (currentTime: number, from: number, to: number, duration: number): number
+// }
+
+// export enum EasingCurve {
+//   Linear = 'Linear',
+//   EaseInQuad = 'EaseInQuad',
+//   EaseOutQuad = 'EaseOutQuad',
+//   EaseInOutQuad = 'EaseInOutQuad',
+//   EaseInCubic = 'EaseInCubic',
+//   EaseOutCubic = 'EaseOutCubic',
+//   EaseInOutCubic = 'EaseInOutCubic',
+//   EaseInQuart = 'EaseInQuart',
+//   EaseOutQuart = 'EaseOutQuart',
+//   EaseInOutQuart = 'EaseInOutQuart',
+//   EaseInQuint = 'EaseInQuint',
+//   EaseOutQuint = 'EaseOutQuint',
+//   EaseInOutQuint = 'EaseInOutQuint',
+//   EaseInSine = 'EaseInSine',
+//   EaseOutSine = 'EaseOutSine',
+//   EaseInOutSine = 'EaseInOutSine',
+//   EaseInExpo = 'EaseInExpo',
+//   EaseOutExpo = 'EaseOutExpo',
+//   EaseInOutExpo = 'EaseInOutExpo',
+//   EaseInCirc = 'EaseInCirc',
+//   EaseOutCirc = 'EaseOutCirc',
+//   EaseInOutCirc = 'EaseInOutCirc',
+//   EaseInElastic = 'EaseInElastic',
+//   EaseOutElastic = 'EaseOutElastic',
+//   EaseInOutElastic = 'EaseInOutElastic',
+//   EaseInBounce = 'EaseInBounce',
+//   EaseOutBounce = 'EaseOutBounce',
+//   EaseInOutBounce = 'EaseInOutBounce',
+// }
+
 export default class Easing {
   static linear(currentTime: number, from: number, to: number, duration: number): number {
     const change = to - from
@@ -100,8 +135,8 @@ export default class Easing {
     const change = to - from
     return (
       change *
-        ((currentTime = currentTime / duration - 1) * currentTime * currentTime * currentTime * currentTime +
-          1) +
+      ((currentTime = currentTime / duration - 1) * currentTime * currentTime * currentTime * currentTime +
+        1) +
       from
     )
   }
@@ -227,16 +262,16 @@ export default class Easing {
     if (currentTime < 1)
       return (
         -0.5 *
-          (a *
-            Math.pow(2, 10 * (currentTime -= 1)) *
-            Math.sin(((currentTime * duration - s) * (2 * Math.PI)) / p)) +
+        (a *
+          Math.pow(2, 10 * (currentTime -= 1)) *
+          Math.sin(((currentTime * duration - s) * (2 * Math.PI)) / p)) +
         from
       )
     return (
       a *
-        Math.pow(2, -10 * (currentTime -= 1)) *
-        Math.sin(((currentTime * duration - s) * (2 * Math.PI)) / p) *
-        0.5 +
+      Math.pow(2, -10 * (currentTime -= 1)) *
+      Math.sin(((currentTime * duration - s) * (2 * Math.PI)) / p) *
+      0.5 +
       change +
       from
     )
@@ -267,32 +302,3 @@ export default class Easing {
     return this.easeOutBounce(currentTime * 2 - duration, 0, change, duration) * 0.5 + change * 0.5 + from
   }
 }
-
-// export type EasingCurve =
-//     | 'linear'
-//     | 'easeInOutQuad'
-//     | 'easeOutQuad'
-//     | 'easeInCubic'
-//     | 'easeOutCubic'
-//     | 'easeInOutCubic'
-//     | 'easeInQuart'
-//     | 'easeOutQuart'
-//     | 'easeInOutQuart'
-//     | 'easeInQuint'
-//     | 'easeOutQuint'
-//     | 'easeInOutQuint'
-//     | 'easeInSine'
-//     | 'easeOutSine'
-//     | 'easeInOutSine'
-//     | 'easeInExpo'
-//     | 'easeOutExpo'
-//     | 'easeInOutExpo'
-//     | 'easeInCirc'
-//     | 'easeOutCirc'
-//     | 'easeInOutCirc'
-//     | 'easeInElastic'
-//     | 'easeOutElastic'
-//     | 'easeInOutElastic'
-//     | 'easeInBounce'
-//     | 'easeOutBounce'
-//     | 'easeInOutBounce';

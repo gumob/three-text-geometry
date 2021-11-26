@@ -68,15 +68,19 @@ class ShuffleChar {
   constructor(index: number, char: string, option: ShuffleOption, callback: ShuffleCharCallback) {
     this.index = index
     this.originalChar = char
-    this.currentChar = ''
+    this.shuffleText =
+      char === char.toLowerCase() ? option.shuffleText.toLocaleLowerCase() : option.shuffleText.toUpperCase()
+    this.ignoreRegex = option.ignoreRegex || /\s|\t|\n|\r|(\n\r)/
     this.delay = randFloat(option.delay.min, option.delay.max)
     this.fadeDuration = randFloat(option.fadeDuration.min, option.fadeDuration.max)
     this.shuffleDuration = randFloat(option.shuffleDuration.min, option.shuffleDuration.max)
     this.interval = randFloat(option.interval.min, option.interval.max)
-    this.shuffleText =
-      char === char.toLowerCase() ? option.shuffleText.toLocaleLowerCase() : option.shuffleText.toUpperCase()
-    this.ignoreRegex = option.ignoreRegex || /\s|\t|\n|\r|(\n\r)/
     this.onCharStateChanged = callback
+    if (this.ignoreRegex!.test(this.originalChar)) {
+      this.currentChar = this.originalChar
+    } else {
+      this.currentChar = this.shuffleText.charAt(Math.floor(Math.random() * this.shuffleText.length))
+    }
   }
 
   public start(time: number) {
