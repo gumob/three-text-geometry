@@ -22,7 +22,7 @@ export class DemoShuffleShader extends DemoBase {
     super.initScene()
 
     /** Text Mesh */
-    const textGeometry = new TextGeometry(this.staticText().toUpperCase(), this.textOption)
+    const textGeometry = new TextGeometry(this.staticText(), this.textOption)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)

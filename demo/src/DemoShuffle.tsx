@@ -47,6 +47,7 @@ export class DemoShuffle extends DemoBase {
   suffleText(timeout: number) {
     const option: ShuffleOption = {
       shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+      ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|\,)/,
       delay: { min: 0, max: 0 },
       fadeDuration: { min: 500, max: 700 },
       shuffleDuration: { min: 1000, max: 2000 },
