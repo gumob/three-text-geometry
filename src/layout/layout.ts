@@ -25,7 +25,7 @@ class TextLayout {
   private _fallbackSpaceGlyph: BMFontChar | null = null
   private _fallbackTabGlyph: BMFontChar | null = null
 
-  private _glyphs: TextGlyph[]
+  private _glyphs?: TextGlyph[]
   private _width = 0
   private _height = 0
   private _descender = 0
@@ -39,7 +39,7 @@ class TextLayout {
     return { ...this._opt } as TextLayoutOption
   }
   public get glyphs(): TextGlyph[] {
-    return this._glyphs
+    return this._glyphs ?? []
   }
   public get width(): number {
     return this._width
@@ -66,15 +66,37 @@ class TextLayout {
     return this._lineHeight
   }
 
+  public toString() {
+    return `{
+  glyphs: ${this.glyphs.length}
+  width: ${this.width}
+  height: ${this.height}
+  descender: ${this.descender}
+  ascender: ${this.ascender}
+  xHeight: ${this.xHeight}
+  baseline: ${this.baseline}
+  capHeight: ${this.capHeight}
+  lineHeight: ${this.lineHeight}
+}`
+  }
+
   constructor(text: string, option: any = {}) {
     if (option.font === undefined) throw new TypeError('Must specify a `font` in options')
     this._opt.font = option.font
-    this._opt.measure = this.computeMetrics.bind(this)
-    this._glyphs = []
     this.update(text, option)
   }
 
   public update(text: string, option: any = {}) {
+    /** Initalize variables */
+    this._glyphs = []
+    this._width = 0
+    this._height = 0
+    this._descender = 0
+    this._ascender = 0
+    this._xHeight = 0
+    this._baseline = 0
+    this._capHeight = 0
+    this._lineHeight = 0
     /** Initalize options */
     if (option.font !== undefined) this._opt.font = option.font
     if (option.start !== undefined) this._opt.start = Math.max(0, option.start)
@@ -91,15 +113,13 @@ class TextLayout {
     else this._opt.lineHeight = this._opt.font!.common.lineHeight
     if (option.tabSize !== undefined) this._opt.tabSize = option.tabSize
     else this._opt.tabSize = 4
+    this._opt.measure = this.computeMetrics.bind(this)
     this._setupSpaceGlyphs(this._opt.font!, this._opt.tabSize!)
 
     const font: BMFont = this._opt.font!
 
     const lines = new WordWrap().lines(text, this._opt)
     const minWidth = this._opt.width || 0
-
-    /** clear _glyphs */
-    this._glyphs = []
 
     /** get max line width */
     const maxLineWidth = lines.reduce((prev: number, line: WordMetrics) => {
