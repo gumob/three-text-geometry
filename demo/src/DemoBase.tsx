@@ -30,7 +30,12 @@ export class DemoBase extends React.Component {
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nDonec diam odio, efficitur sed efficitur vel, vestibulum vitae odio.\nAliquam semper, sem eget placerat ultricies, ligula sem faucibus magna, ut convallis est purus ac lectus.\nNam quis quam eget augue tristique efficitur nec nec quam.\nQuisque id turpis non magna mattis sagittis.\nInteger efficitur elementum congue.\nCurabitur ullamcorper rutrum orci a volutpat.\nIn quam est, hendrerit id lorem sed, semper eleifend purus.\nCras id sem mauris.`,
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nVivamus eu mauris pretium, pellentesque justo at, sodales ligula.\nPraesent vitae dolor porttitor, laoreet metus ut, posuere ligula.\nMauris dolor ante, consectetur eu vulputate eget, tempus in nunc.\nMaecenas bibendum eleifend lacus in sodales.\nAenean mollis lorem a sem ultrices, nec lobortis erat eleifend.\nCurabitur ante eros, porta eget mi a, bibendum luctus ante.\nNulla est purus, posuere at rutrum sit amet, bibendum condimentum elit.\nNunc nec sem enim.`,
   ]
-  get text(): string {
+
+  private _staticIndex = Math.floor(Math.random() * this.textList.length)
+  staticText(): string {
+    return this.textList[this._staticIndex]
+  }
+  randomText(): string {
     const index = Math.floor(Math.random() * this.textList.length)
     return this.textList[index]
   }

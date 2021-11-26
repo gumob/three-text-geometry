@@ -50,7 +50,6 @@ export class DemoShader extends DemoBase {
     const self = this
     clearTimeout(this.swapTimeoutID)
     this.swapTimeoutID = setTimeout(() => {
-      // const text = self.textList[this.textIndex < this.textList.length - 1 ? this.textIndex++ : 0]
       const text = self.textList[0]
       const geom = self.textMesh?.geometry as TextGeometry
       geom.update(text)

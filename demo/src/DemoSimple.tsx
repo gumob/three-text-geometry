@@ -6,7 +6,7 @@ export class DemoSimple extends DemoBase {
   initScene() {
     super.initScene()
 
-    const textGeometry = new TextGeometry(this.text, this.textOption)
+    const textGeometry = new TextGeometry(this.randomText(), this.textOption)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
