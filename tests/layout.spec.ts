@@ -156,52 +156,20 @@ describe('TextLayout', () => {
       width: 1000,
     }
     const layout = new TextLayout(text, option)
-    const option0 = layout.option
-    const height0 = layout.height
-    layout.update(text)
-    const option1 = layout.option
-    const height1 = layout.height
-    layout.update(text)
-    const option2 = layout.option
-    const height2 = layout.height
-    layout.update(text)
-    const option3 = layout.option
-    const height3 = layout.height
-    layout.update(text)
-    const option4 = layout.option
-    const height4 = layout.height
-    layout.update(text)
-    const option5 = layout.option
-    const height5 = layout.height
-    layout.update(text)
-    const option6 = layout.option
-    const height6 = layout.height
-    layout.update(text)
-    const option7 = layout.option
-    const height7 = layout.height
-    test('option0 === option1', () => {
-      expect(JSON.stringify(option0)).toEqual(JSON.stringify(option1))
-    })
-    test('option1 === option2', () => {
-      expect(JSON.stringify(option1)).toEqual(JSON.stringify(option2))
-    })
-    test('option2 === option3', () => {
-      expect(JSON.stringify(option2)).toEqual(JSON.stringify(option3))
-    })
-    // test('height0 === height1', () => {
-    //   expect(height0).toEqual(height1)
-    // })
-    // test('height1 === height2', () => {
-    //   expect(height1).toEqual(height2)
-    // })
-    // test('height2 === height3', () => {
-    //   expect(height2).toEqual(height3)
-    // })
-    // test('height3 === height4', () => {
-    //   expect(height3).toEqual(height4)
-    // })
-    // test('height4 === height5', () => {
-    //   expect(height4).toEqual(height5)
-    // })
+    let prevOption = layout.option
+    let prevHeight = layout.height
+    for (let i = 1; i <= 10; i++) {
+      layout.update(text)
+      const curOption = layout.option
+      const curHeight = layout.height
+      test(`prevOption === curOption`, () => {
+        expect(JSON.stringify(prevOption)).toEqual(JSON.stringify(curOption))
+      })
+      // test(`prevHeight === curHeight`, () => {
+      //   expect(prevHeight).toEqual(curHeight)
+      // })
+      prevOption = curOption
+      prevHeight = curHeight
+    }
   })
 })

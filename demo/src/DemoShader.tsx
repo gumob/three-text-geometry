@@ -54,7 +54,6 @@ export class DemoShader extends DemoBase {
       const geom = self.textMesh?.geometry as TextGeometry
       geom.update(text)
       console.log('geom.option', geom.option)
-      console.log('geom.layout', geom.layout)
       this.swapText(3000)
     }, timeout)
   }
