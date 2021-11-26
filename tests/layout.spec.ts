@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { TextLayout } from '~/layout'
-import { BMFontJsonParser } from '~/parser'
-import { BMFontChar, TextGlyph, TextAlign, WordWrapMode } from '~/types'
+import { BMFontAsciiParser, BMFontJsonParser } from '~/parser'
+import { BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordWrapMode } from '~/types'
 
 function DefaultBMFontChar(): BMFontChar {
   return {
@@ -144,5 +144,32 @@ describe('TextLayout', () => {
       const result = layout4.glyphs.map((x: TextGlyph) => x.index)
       expect(result).toStrictEqual([0, 1, 3, 4])
     })
+  })
+
+  describe('Update text multiple times', () => {
+    const str = fs.readFileSync('tests/fonts/Lato-Regular-64.fnt').toString()
+    const font = new BMFontAsciiParser().parse(str)
+    const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.`
+    const option: TextLayoutOption = {
+      font: font,
+      align: TextAlign.Left,
+      width: 1000,
+    }
+    const layout = new TextLayout(text, option)
+    let prevOption = layout.option
+    let prevHeight = layout.height
+    for (let i = 1; i <= 10; i++) {
+      layout.update(text)
+      const curOption = layout.option
+      const curHeight = layout.height
+      test(`prevOption === curOption`, () => {
+        expect(JSON.stringify(prevOption)).toEqual(JSON.stringify(curOption))
+      })
+      test(`prevHeight === curHeight`, () => {
+        expect(prevHeight).toEqual(curHeight)
+      })
+      prevOption = curOption
+      prevHeight = curHeight
+    }
   })
 })

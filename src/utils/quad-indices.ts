@@ -32,8 +32,7 @@ function createIndices(
     arr = array as QuadIndices
   }
 
-  if (typeof opt === 'number') opt = { count: opt }
-  else opt = opt || {}
+  opt = opt || {}
 
   const type = typeof opt.type === 'string' ? opt.type : 'uint16'
   const count = opt.count !== undefined ? opt.count : 1

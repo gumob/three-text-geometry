@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.1.1",
+    "@mui/material": "^5.1.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -10,15 +14,17 @@
     "@types/node": "^12.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "three": "^0.134.0",
-    "three-text-geometry": "gumob/three-text-geometry#develop",
+    "three-text-geometry": "link:../../three-text-geometry",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.3.2",
     "@types/testing-library__jest-dom": "^5",
     "@types/three": "^0.134.0"
   },

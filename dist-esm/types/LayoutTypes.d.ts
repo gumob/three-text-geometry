@@ -47,5 +47,5 @@ interface TextGeometryOption {
     flipY?: boolean;
     multipage?: boolean;
 }
-export { ComputeMetrics, TextGeometryOption, TextGlyph, TextAlign, TextLayoutOption, WordMetrics, WordWrapMode, WordWrapOption, };
+export { ComputeMetrics, TextAlign, TextGeometryOption, TextGlyph, TextLayoutOption, WordMetrics, WordWrapMode, WordWrapOption, };
 //# sourceMappingURL=LayoutTypes.d.ts.map

@@ -9,10 +9,7 @@ function createIndices(array = null, opt = null) {
     else {
         arr = array;
     }
-    if (typeof opt === 'number')
-        opt = { count: opt };
-    else
-        opt = opt || {};
+    opt = opt || {};
     const type = typeof opt.type === 'string' ? opt.type : 'uint16';
     const count = opt.count !== undefined ? opt.count : 1;
     const start = opt.start !== undefined ? opt.start : 0;

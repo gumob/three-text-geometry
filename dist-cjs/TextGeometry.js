@@ -30,9 +30,6 @@ class TextGeometry extends THREE.BufferGeometry {
     get option() {
         return { ...this._opt };
     }
-    get layout() {
-        return this._layout;
-    }
     get visibleGlyphs() {
         return this._visibleGlyphs;
     }
@@ -71,13 +68,12 @@ class TextGeometry extends THREE.BufferGeometry {
             this._opt.flipY = option.flipY;
         if (option.multipage !== undefined)
             this._opt.multipage = option.multipage;
-        this._layout = new layout_1.TextLayout(text, this._opt);
-        // console.log('this._layout', this._layout);
         /** determine texture size from font file */
         const texWidth = this._opt.font.common.scaleW;
         const texHeight = this._opt.font.common.scaleH;
         /** get visible glyphs */
-        const glyphs = this._layout.glyphs.filter(function (glyph) {
+        const layout = new layout_1.TextLayout(text, this._opt);
+        const glyphs = layout.glyphs.filter(function (glyph) {
             const bitmap = glyph.data;
             return bitmap.width * bitmap.height > 0;
         });

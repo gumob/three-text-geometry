@@ -1,14 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TextLayout = void 0;
-const tslib_1 = require("tslib");
-const wordwrap = (0, tslib_1.__importStar)(require("./"));
+const layout_1 = require("./");
 const types_1 = require("../types");
-const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
-const M_WIDTHS = ['m', 'w'];
-const CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-const TAB_ID = '\t'.charCodeAt(0);
-const SPACE_ID = ' '.charCodeAt(0);
 class TextLayout {
     constructor(text, option = {}) {
         this._opt = {
@@ -26,6 +20,66 @@ class TextLayout {
         // private _linesTotal = 0;
         this._fallbackSpaceGlyph = null;
         this._fallbackTabGlyph = null;
+        if (option.font === undefined)
+            throw new TypeError('Must specify a `font` in options');
+        this._opt.font = option.font;
+        this.update(text, option);
+    }
+    get option() {
+        return { ...this._opt };
+    }
+    get glyphs() {
+        var _a;
+        return (_a = this._glyphs) !== null && _a !== void 0 ? _a : [];
+    }
+    get width() {
+        var _a;
+        return (_a = this._width) !== null && _a !== void 0 ? _a : 0;
+    }
+    get height() {
+        var _a;
+        return (_a = this._height) !== null && _a !== void 0 ? _a : 0;
+    }
+    get descender() {
+        var _a;
+        return (_a = this._descender) !== null && _a !== void 0 ? _a : 0;
+    }
+    get ascender() {
+        var _a;
+        return (_a = this._ascender) !== null && _a !== void 0 ? _a : 0;
+    }
+    get xHeight() {
+        var _a;
+        return (_a = this._xHeight) !== null && _a !== void 0 ? _a : 0;
+    }
+    get baseline() {
+        var _a;
+        return (_a = this._baseline) !== null && _a !== void 0 ? _a : 0;
+    }
+    get capHeight() {
+        var _a;
+        return (_a = this._capHeight) !== null && _a !== void 0 ? _a : 0;
+    }
+    get lineHeight() {
+        var _a;
+        return (_a = this._lineHeight) !== null && _a !== void 0 ? _a : 0;
+    }
+    toString() {
+        return `{
+  glyphs: ${this.glyphs.length}
+  width: ${this.width}
+  height: ${this.height}
+  descender: ${this.descender}
+  ascender: ${this.ascender}
+  xHeight: ${this.xHeight}
+  baseline: ${this.baseline}
+  capHeight: ${this.capHeight}
+  lineHeight: ${this.lineHeight}
+}`;
+    }
+    update(text, option = {}) {
+        /** Initalize variables */
+        this._glyphs = [];
         this._width = 0;
         this._height = 0;
         this._descender = 0;
@@ -34,44 +88,6 @@ class TextLayout {
         this._baseline = 0;
         this._capHeight = 0;
         this._lineHeight = 0;
-        if (option.font === undefined)
-            throw new TypeError('Must specify a `font` in options');
-        this._opt.font = option.font;
-        this._opt.measure = this.computeMetrics.bind(this);
-        this._glyphs = [];
-        this.update(text, option);
-    }
-    get option() {
-        return { ...this._opt };
-    }
-    get glyphs() {
-        return this._glyphs;
-    }
-    get width() {
-        return this._width;
-    }
-    get height() {
-        return this._height;
-    }
-    get descender() {
-        return this._descender;
-    }
-    get ascender() {
-        return this._ascender;
-    }
-    get xHeight() {
-        return this._xHeight;
-    }
-    get baseline() {
-        return this._baseline;
-    }
-    get capHeight() {
-        return this._capHeight;
-    }
-    get lineHeight() {
-        return this._lineHeight;
-    }
-    update(text, option = {}) {
         /** Initalize options */
         if (option.font !== undefined)
             this._opt.font = option.font;
@@ -103,13 +119,11 @@ class TextLayout {
             this._opt.tabSize = option.tabSize;
         else
             this._opt.tabSize = 4;
+        this._opt.measure = this.computeMetrics.bind(this);
         this._setupSpaceGlyphs(this._opt.font, this._opt.tabSize);
         const font = this._opt.font;
-        const lines = wordwrap.lines(text, this._opt);
+        const lines = new layout_1.WordWrap().lines(text, this._opt);
         const minWidth = this._opt.width || 0;
-        /** clear _glyphs */
-        this._glyphs = [];
-        // this._glyphs.length = 0;
         /** get max line width */
         const maxLineWidth = lines.reduce((prev, line) => {
             return Math.max(prev, line.width, minWidth);
@@ -180,17 +194,17 @@ class TextLayout {
         /** try to get space glyph */
         /** then fall back to the 'm' or 'w' _glyphs */
         /** then fall back to the first glyph available */
-        const space = this.getGlyphById(font, SPACE_ID) || this.getMGlyph(font) || font.chars[0];
+        const space = this.getGlyphById(font, TextLayout.SPACE_ID) || this.getMGlyph(font) || font.chars[0];
         if (!space)
             return;
         /** and create a fallback for tab */
         const tabWidth = tabSize * space.xadvance;
         this._fallbackSpaceGlyph = { ...space };
-        this._fallbackTabGlyph = Object.assign(space, {
+        this._fallbackTabGlyph = Object.assign({ ...space }, {
             x: 0,
             y: 0,
             xadvance: tabWidth,
-            id: TAB_ID,
+            id: TextLayout.TAB_ID,
             xoffset: 0,
             yoffset: 0,
             width: 0,
@@ -201,9 +215,9 @@ class TextLayout {
         const glyph = this.getGlyphById(font, id);
         if (glyph)
             return glyph;
-        else if (id === TAB_ID)
+        else if (id === TextLayout.TAB_ID)
             return this._fallbackTabGlyph;
-        else if (id === SPACE_ID)
+        else if (id === TextLayout.SPACE_ID)
             return this._fallbackSpaceGlyph;
         return null;
     }
@@ -213,8 +227,6 @@ class TextLayout {
         let curPen = 0;
         let curWidth = 0;
         let count = 0;
-        // var glyph: BMFontChar | null;
-        let lastGlyph;
         if (!font || !font.chars || font.chars.length === 0) {
             return {
                 start: start,
@@ -223,6 +235,7 @@ class TextLayout {
             };
         }
         end = Math.min(text.length, end);
+        let lastGlyph;
         for (let i = start; i < end; i++) {
             const id = text.charCodeAt(i);
             const glyph = this.getGlyph(font, id);
@@ -261,8 +274,8 @@ class TextLayout {
         return undefined;
     }
     getXHeight(font) {
-        for (let i = 0; i < X_HEIGHTS.length; i++) {
-            const id = X_HEIGHTS[i].charCodeAt(0);
+        for (let i = 0; i < TextLayout.X_HEIGHTS.length; i++) {
+            const id = TextLayout.X_HEIGHTS[i].charCodeAt(0);
             const idx = this.findChar(font.chars, id);
             if (idx >= 0)
                 return font.chars[idx].height;
@@ -270,8 +283,8 @@ class TextLayout {
         return 0;
     }
     getMGlyph(font) {
-        for (let i = 0; i < M_WIDTHS.length; i++) {
-            const id = M_WIDTHS[i].charCodeAt(0);
+        for (let i = 0; i < TextLayout.M_WIDTHS.length; i++) {
+            const id = TextLayout.M_WIDTHS[i].charCodeAt(0);
             const idx = this.findChar(font.chars, id);
             if (idx >= 0)
                 return font.chars[idx];
@@ -279,8 +292,8 @@ class TextLayout {
         return undefined;
     }
     getCapHeight(font) {
-        for (let i = 0; i < CAP_HEIGHTS.length; i++) {
-            const id = CAP_HEIGHTS[i].charCodeAt(0);
+        for (let i = 0; i < TextLayout.CAP_HEIGHTS.length; i++) {
+            const id = TextLayout.CAP_HEIGHTS[i].charCodeAt(0);
             const idx = this.findChar(font.chars, id);
             if (idx >= 0)
                 return font.chars[idx].height;
@@ -307,4 +320,9 @@ class TextLayout {
     }
 }
 exports.TextLayout = TextLayout;
+TextLayout.X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
+TextLayout.M_WIDTHS = ['m', 'w'];
+TextLayout.CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+TextLayout.TAB_ID = '\t'.charCodeAt(0);
+TextLayout.SPACE_ID = ' '.charCodeAt(0);
 //# sourceMappingURL=layout.js.map

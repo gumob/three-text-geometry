@@ -1,13 +1,13 @@
-import * as wordwrap from '~/layout'
-import { BMFont, BMFontChar, TextGlyph, TextAlign, TextLayoutOption, WordMetrics } from '~/types'
-
-const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
-const M_WIDTHS = ['m', 'w']
-const CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-const TAB_ID = '\t'.charCodeAt(0)
-const SPACE_ID = ' '.charCodeAt(0)
+import { WordWrap } from '~/layout'
+import { BMFont, BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordMetrics } from '~/types'
 
 class TextLayout {
+  static readonly X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
+  static readonly M_WIDTHS = ['m', 'w']
+  static readonly CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+  static readonly TAB_ID = '\t'.charCodeAt(0)
+  static readonly SPACE_ID = ' '.charCodeAt(0)
+
   private _opt: TextLayoutOption = {
     font: undefined,
     letterSpacing: undefined,
@@ -25,56 +25,78 @@ class TextLayout {
   private _fallbackSpaceGlyph: BMFontChar | null = null
   private _fallbackTabGlyph: BMFontChar | null = null
 
-  private _glyphs: TextGlyph[]
-  private _width = 0
-  private _height = 0
-  private _descender = 0
-  private _ascender = 0
-  private _xHeight = 0
-  private _baseline = 0
-  private _capHeight = 0
-  private _lineHeight = 0
+  private _glyphs?: TextGlyph[]
+  private _width?: number
+  private _height?: number
+  private _descender?: number
+  private _ascender?: number
+  private _xHeight?: number
+  private _baseline?: number
+  private _capHeight?: number
+  private _lineHeight?: number
 
   public get option(): TextLayoutOption {
     return { ...this._opt } as TextLayoutOption
   }
   public get glyphs(): TextGlyph[] {
-    return this._glyphs
+    return this._glyphs ?? []
   }
   public get width(): number {
-    return this._width
+    return this._width ?? 0
   }
   public get height(): number {
-    return this._height
+    return this._height ?? 0
   }
   public get descender(): number {
-    return this._descender
+    return this._descender ?? 0
   }
   public get ascender(): number {
-    return this._ascender
+    return this._ascender ?? 0
   }
   public get xHeight(): number {
-    return this._xHeight
+    return this._xHeight ?? 0
   }
   public get baseline(): number {
-    return this._baseline
+    return this._baseline ?? 0
   }
   public get capHeight(): number {
-    return this._capHeight
+    return this._capHeight ?? 0
   }
   public get lineHeight(): number {
-    return this._lineHeight
+    return this._lineHeight ?? 0
+  }
+
+  public toString() {
+    return `{
+  glyphs: ${this.glyphs.length}
+  width: ${this.width}
+  height: ${this.height}
+  descender: ${this.descender}
+  ascender: ${this.ascender}
+  xHeight: ${this.xHeight}
+  baseline: ${this.baseline}
+  capHeight: ${this.capHeight}
+  lineHeight: ${this.lineHeight}
+}`
   }
 
   constructor(text: string, option: any = {}) {
     if (option.font === undefined) throw new TypeError('Must specify a `font` in options')
     this._opt.font = option.font
-    this._opt.measure = this.computeMetrics.bind(this)
-    this._glyphs = []
     this.update(text, option)
   }
 
   public update(text: string, option: any = {}) {
+    /** Initalize variables */
+    this._glyphs = []
+    this._width = 0
+    this._height = 0
+    this._descender = 0
+    this._ascender = 0
+    this._xHeight = 0
+    this._baseline = 0
+    this._capHeight = 0
+    this._lineHeight = 0
     /** Initalize options */
     if (option.font !== undefined) this._opt.font = option.font
     if (option.start !== undefined) this._opt.start = Math.max(0, option.start)
@@ -91,16 +113,13 @@ class TextLayout {
     else this._opt.lineHeight = this._opt.font!.common.lineHeight
     if (option.tabSize !== undefined) this._opt.tabSize = option.tabSize
     else this._opt.tabSize = 4
+    this._opt.measure = this.computeMetrics.bind(this)
     this._setupSpaceGlyphs(this._opt.font!, this._opt.tabSize!)
 
     const font: BMFont = this._opt.font!
 
-    const lines = wordwrap.lines(text, this._opt)
+    const lines = new WordWrap().lines(text, this._opt)
     const minWidth = this._opt.width || 0
-
-    /** clear _glyphs */
-    this._glyphs = []
-    // this._glyphs.length = 0;
 
     /** get max line width */
     const maxLineWidth = lines.reduce((prev: number, line: WordMetrics) => {
@@ -179,28 +198,31 @@ class TextLayout {
     /** try to get space glyph */
     /** then fall back to the 'm' or 'w' _glyphs */
     /** then fall back to the first glyph available */
-    const space = this.getGlyphById(font, SPACE_ID) || this.getMGlyph(font) || font.chars[0]
+    const space = this.getGlyphById(font, TextLayout.SPACE_ID) || this.getMGlyph(font) || font.chars[0]
     if (!space) return
     /** and create a fallback for tab */
     const tabWidth: number = tabSize * space.xadvance
     this._fallbackSpaceGlyph = { ...space }
-    this._fallbackTabGlyph = Object.assign(space, {
-      x: 0,
-      y: 0,
-      xadvance: tabWidth,
-      id: TAB_ID,
-      xoffset: 0,
-      yoffset: 0,
-      width: 0,
-      height: 0,
-    })
+    this._fallbackTabGlyph = Object.assign(
+      { ...space },
+      {
+        x: 0,
+        y: 0,
+        xadvance: tabWidth,
+        id: TextLayout.TAB_ID,
+        xoffset: 0,
+        yoffset: 0,
+        width: 0,
+        height: 0,
+      }
+    )
   }
 
   private getGlyph(font: BMFont, id: number): BMFontChar | null {
     const glyph = this.getGlyphById(font, id)
     if (glyph) return glyph
-    else if (id === TAB_ID) return this._fallbackTabGlyph
-    else if (id === SPACE_ID) return this._fallbackSpaceGlyph
+    else if (id === TextLayout.TAB_ID) return this._fallbackTabGlyph
+    else if (id === TextLayout.SPACE_ID) return this._fallbackSpaceGlyph
     return null
   }
 
@@ -210,8 +232,6 @@ class TextLayout {
     let curPen = 0
     let curWidth = 0
     let count = 0
-    // var glyph: BMFontChar | null;
-    let lastGlyph
 
     if (!font || !font.chars || font.chars.length === 0) {
       return {
@@ -222,6 +242,7 @@ class TextLayout {
     }
 
     end = Math.min(text.length, end)
+    let lastGlyph: BMFontChar | undefined
     for (let i = start; i < end; i++) {
       const id = text.charCodeAt(i)
       const glyph: BMFontChar | null = this.getGlyph(font, id)
@@ -263,8 +284,8 @@ class TextLayout {
   }
 
   private getXHeight(font: BMFont): number {
-    for (let i = 0; i < X_HEIGHTS.length; i++) {
-      const id = X_HEIGHTS[i]!.charCodeAt(0)
+    for (let i = 0; i < TextLayout.X_HEIGHTS.length; i++) {
+      const id = TextLayout.X_HEIGHTS[i]!.charCodeAt(0)
       const idx = this.findChar(font.chars, id)
       if (idx >= 0) return font.chars[idx]!.height
     }
@@ -272,8 +293,8 @@ class TextLayout {
   }
 
   private getMGlyph(font: BMFont): BMFontChar | undefined {
-    for (let i = 0; i < M_WIDTHS.length; i++) {
-      const id = M_WIDTHS[i]!.charCodeAt(0)
+    for (let i = 0; i < TextLayout.M_WIDTHS.length; i++) {
+      const id = TextLayout.M_WIDTHS[i]!.charCodeAt(0)
       const idx = this.findChar(font.chars, id)
       if (idx >= 0) return font.chars[idx]
     }
@@ -281,8 +302,8 @@ class TextLayout {
   }
 
   private getCapHeight(font: BMFont): number {
-    for (let i = 0; i < CAP_HEIGHTS.length; i++) {
-      const id = CAP_HEIGHTS[i]!.charCodeAt(0)
+    for (let i = 0; i < TextLayout.CAP_HEIGHTS.length; i++) {
+      const id = TextLayout.CAP_HEIGHTS[i]!.charCodeAt(0)
       const idx = this.findChar(font.chars, id)
       if (idx >= 0) return font.chars[idx]!.height
     }
