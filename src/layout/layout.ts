@@ -26,14 +26,14 @@ class TextLayout {
   private _fallbackTabGlyph: BMFontChar | null = null
 
   private _glyphs?: TextGlyph[]
-  private _width = 0
-  private _height = 0
-  private _descender = 0
-  private _ascender = 0
-  private _xHeight = 0
-  private _baseline = 0
-  private _capHeight = 0
-  private _lineHeight = 0
+  private _width?: number
+  private _height?: number
+  private _descender?: number
+  private _ascender?: number
+  private _xHeight?: number
+  private _baseline?: number
+  private _capHeight?: number
+  private _lineHeight?: number
 
   public get option(): TextLayoutOption {
     return { ...this._opt } as TextLayoutOption
@@ -42,28 +42,28 @@ class TextLayout {
     return this._glyphs ?? []
   }
   public get width(): number {
-    return this._width
+    return this._width ?? 0
   }
   public get height(): number {
-    return this._height
+    return this._height ?? 0
   }
   public get descender(): number {
-    return this._descender
+    return this._descender ?? 0
   }
   public get ascender(): number {
-    return this._ascender
+    return this._ascender ?? 0
   }
   public get xHeight(): number {
-    return this._xHeight
+    return this._xHeight ?? 0
   }
   public get baseline(): number {
-    return this._baseline
+    return this._baseline ?? 0
   }
   public get capHeight(): number {
-    return this._capHeight
+    return this._capHeight ?? 0
   }
   public get lineHeight(): number {
-    return this._lineHeight
+    return this._lineHeight ?? 0
   }
 
   public toString() {
