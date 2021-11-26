@@ -40,12 +40,10 @@ class WordWrap {
         opt.measure = option.measure || this.monospace;
         if (opt.width === 0 && opt.mode !== WordWrapMode.NoWrap)
             return [];
-        if (option.mode === WordWrapMode.Pre) {
+        if (option.mode === WordWrapMode.Pre)
             return this.pre(opt.measure, text, opt.start, opt.end, opt.width);
-        }
-        else {
+        else
             return this.greedy(opt.measure, text, opt.start, opt.end, opt.width, opt.mode);
-        }
     }
     idxOf(text, chr, start, end) {
         const idx = text.indexOf(chr, start);

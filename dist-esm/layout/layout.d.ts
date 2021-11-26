@@ -1,5 +1,10 @@
 import { TextGlyph, TextLayoutOption } from "../types";
 declare class TextLayout {
+    static readonly X_HEIGHTS: string[];
+    static readonly M_WIDTHS: string[];
+    static readonly CAP_HEIGHTS: string[];
+    static readonly TAB_ID: number;
+    static readonly SPACE_ID: number;
     private _opt;
     private _fallbackSpaceGlyph;
     private _fallbackTabGlyph;

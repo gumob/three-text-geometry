@@ -3,11 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TextLayout = void 0;
 const layout_1 = require("./");
 const types_1 = require("../types");
-const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
-const M_WIDTHS = ['m', 'w'];
-const CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-const TAB_ID = '\t'.charCodeAt(0);
-const SPACE_ID = ' '.charCodeAt(0);
 class TextLayout {
     constructor(text, option = {}) {
         this._opt = {
@@ -80,8 +75,7 @@ class TextLayout {
   baseline: ${this.baseline}
   capHeight: ${this.capHeight}
   lineHeight: ${this.lineHeight}
-}
-    `;
+}`;
     }
     update(text, option = {}) {
         /** Initalize variables */
@@ -201,7 +195,7 @@ class TextLayout {
         /** try to get space glyph */
         /** then fall back to the 'm' or 'w' _glyphs */
         /** then fall back to the first glyph available */
-        const space = this.getGlyphById(font, SPACE_ID) || this.getMGlyph(font) || font.chars[0];
+        const space = this.getGlyphById(font, TextLayout.SPACE_ID) || this.getMGlyph(font) || font.chars[0];
         if (!space)
             return;
         /** and create a fallback for tab */
@@ -211,7 +205,7 @@ class TextLayout {
             x: 0,
             y: 0,
             xadvance: tabWidth,
-            id: TAB_ID,
+            id: TextLayout.TAB_ID,
             xoffset: 0,
             yoffset: 0,
             width: 0,
@@ -222,9 +216,9 @@ class TextLayout {
         const glyph = this.getGlyphById(font, id);
         if (glyph)
             return glyph;
-        else if (id === TAB_ID)
+        else if (id === TextLayout.TAB_ID)
             return this._fallbackTabGlyph;
-        else if (id === SPACE_ID)
+        else if (id === TextLayout.SPACE_ID)
             return this._fallbackSpaceGlyph;
         return null;
     }
@@ -285,8 +279,8 @@ class TextLayout {
         return undefined;
     }
     getXHeight(font) {
-        for (let i = 0; i < X_HEIGHTS.length; i++) {
-            const id = X_HEIGHTS[i].charCodeAt(0);
+        for (let i = 0; i < TextLayout.X_HEIGHTS.length; i++) {
+            const id = TextLayout.X_HEIGHTS[i].charCodeAt(0);
             const idx = this.findChar(font.chars, id);
             if (idx >= 0)
                 return font.chars[idx].height;
@@ -294,8 +288,8 @@ class TextLayout {
         return 0;
     }
     getMGlyph(font) {
-        for (let i = 0; i < M_WIDTHS.length; i++) {
-            const id = M_WIDTHS[i].charCodeAt(0);
+        for (let i = 0; i < TextLayout.M_WIDTHS.length; i++) {
+            const id = TextLayout.M_WIDTHS[i].charCodeAt(0);
             const idx = this.findChar(font.chars, id);
             if (idx >= 0)
                 return font.chars[idx];
@@ -303,8 +297,8 @@ class TextLayout {
         return undefined;
     }
     getCapHeight(font) {
-        for (let i = 0; i < CAP_HEIGHTS.length; i++) {
-            const id = CAP_HEIGHTS[i].charCodeAt(0);
+        for (let i = 0; i < TextLayout.CAP_HEIGHTS.length; i++) {
+            const id = TextLayout.CAP_HEIGHTS[i].charCodeAt(0);
             const idx = this.findChar(font.chars, id);
             if (idx >= 0)
                 return font.chars[idx].height;
@@ -331,4 +325,9 @@ class TextLayout {
     }
 }
 exports.TextLayout = TextLayout;
+TextLayout.X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
+TextLayout.M_WIDTHS = ['m', 'w'];
+TextLayout.CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+TextLayout.TAB_ID = '\t'.charCodeAt(0);
+TextLayout.SPACE_ID = ' '.charCodeAt(0);
 //# sourceMappingURL=layout.js.map
