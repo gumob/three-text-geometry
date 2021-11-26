@@ -1,6 +1,6 @@
-import { dtype } from '~/utils'
+import { createIndices, dtype } from '~/utils'
 
-describe('Binary', () => {
+describe('Utils', () => {
   describe('dtype', () => {
     test('int8', () => {
       const array = new (dtype('int8') || ArrayBuffer)(10)
@@ -45,6 +45,19 @@ describe('Binary', () => {
     test('invalid', () => {
       const array = new (dtype('invalid') || ArrayBuffer)(10)
       expect(array).toBeInstanceOf(ArrayBuffer)
+    })
+  })
+
+  describe('QuadIndices', () => {
+    test('Option is empty', () => {
+      const indices = createIndices()
+      expect(indices).toBeInstanceOf(Uint16Array)
+      expect(indices.length).toEqual(6)
+    })
+    test('Array is buffer', () => {
+      const indices = createIndices(Buffer.alloc(6))
+      expect(indices).toBeInstanceOf(Buffer)
+      expect(indices.length).toEqual(6)
     })
   })
 })
