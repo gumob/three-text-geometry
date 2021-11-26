@@ -1,4 +1,4 @@
-import * as wordwrap from '~/layout'
+import { WordWrap } from '~/layout'
 import { BMFont, BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordMetrics } from '~/types'
 
 const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
