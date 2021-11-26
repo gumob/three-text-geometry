@@ -129,8 +129,6 @@ describe('TextGeometry', () => {
       geometry.update('Hello Universe')
       geometry.computeBoundingBox()
       const curr = geometry.boundingBox?.clone()
-      console.log('prev', prev)
-      console.log('curr', curr)
       expect(prev).not.toStrictEqual(curr)
 
       // geometry.computeBoundingSphere()
