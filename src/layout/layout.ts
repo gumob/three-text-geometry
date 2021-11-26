@@ -95,12 +95,11 @@ class TextLayout {
 
     const font: BMFont = this._opt.font!
 
-    const lines = wordwrap.lines(text, this._opt)
+    const lines = new WordWrap().lines(text, this._opt)
     const minWidth = this._opt.width || 0
 
     /** clear _glyphs */
     this._glyphs = []
-    // this._glyphs.length = 0;
 
     /** get max line width */
     const maxLineWidth = lines.reduce((prev: number, line: WordMetrics) => {
@@ -116,8 +115,6 @@ class TextLayout {
     const letterSpacing: number = this._opt.letterSpacing!
     const height: number = lineHeight * lines.length - descender
     const align: TextAlign = this._opt.align!
-
-    console.log('lineHeight', lineHeight, 'baseline', baseline, 'descender', descender, 'letterSpacing', letterSpacing, 'height', height, 'align', align, );
 
     /** draw text along baseline */
     y -= height
