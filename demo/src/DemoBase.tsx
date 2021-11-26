@@ -47,14 +47,34 @@ export class DemoBase extends React.Component {
   animationFrameID?: any
 
   componentDidMount() {
-    new BMFontLoader()
-      .loadAscii(this.fontUri)
-      .then((font: BMFont) => {
-        this.fontDidLoad(font)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    if (this.fontUri.endsWith('.fnt')) {
+      new BMFontLoader()
+        .loadAscii(this.fontUri)
+        .then((font: BMFont) => {
+          this.fontDidLoad(font)
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    } else if (this.fontUri.endsWith('.json')) {
+      new BMFontLoader()
+        .loadJson(this.fontUri)
+        .then((font: BMFont) => {
+          this.fontDidLoad(font)
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    } else if (this.fontUri.endsWith('.xml')) {
+      new BMFontLoader()
+        .loadXML(this.fontUri)
+        .then((font: BMFont) => {
+          this.fontDidLoad(font)
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    }
   }
 
   componentWillUnmount() {
@@ -119,7 +139,7 @@ export class DemoBase extends React.Component {
     this.initScene()
   }
 
-  initScene() {}
+  initScene() { }
 
   updateScene() {
     this.controls?.update()

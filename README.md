@@ -15,17 +15,19 @@ npm install msdf-bmfont-xml -g
 ```
 msdf-bmfont \
     --output-type xml \
-    --filename './tests/fonts/Roboto-Regular' \
+    --filename 'OdudoMono-Regular' \
     --font-size 128 \
-    --texture-size 4096,4096 \
-    './tests/fonts/Roboto-Regular.ttf'
+    --texture-size 1024,1024 \
+    --field-type 'sdf' \
+    'OdudoMono-Regular.otf'
 ```
 
 ```
 msdf-bmfont \
     --output-type json \
-    --filename './tests/fonts/Roboto-Regular' \
+    --filename 'OdudoMono-Regular' \
     --font-size 128 \
-    --texture-size 4096,4096 \
-    './tests/fonts/Roboto-Regular.ttf'
+    --texture-size 1024,1024 \
+    --field-type 'sdf' \
+    'OdudoMono-Regular.otf'
 ```
