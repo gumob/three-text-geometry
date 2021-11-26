@@ -11,6 +11,7 @@ class WordWrap {
             .join('\n');
     }
     lines(text, option = {}) {
+        console.log('');
         /** zero width results in nothing visible */
         const opt = {
             start: undefined,
@@ -37,10 +38,12 @@ class WordWrap {
         opt.measure = option.measure || this.monospace;
         if (opt.width === 0 && opt.mode !== WordWrapMode.NoWrap)
             return [];
-        if (option.mode === WordWrapMode.Pre)
+        if (option.mode === WordWrapMode.Pre) {
             return this.pre(opt.measure, text, opt.start, opt.end, opt.width);
-        else
+        }
+        else {
             return this.greedy(opt.measure, text, opt.start, opt.end, opt.width, opt.mode);
+        }
     }
     idxOf(text, chr, start, end) {
         const idx = text.indexOf(chr, start);
@@ -49,14 +52,14 @@ class WordWrap {
         return idx;
     }
     isWhitespace(chr) {
-        return WordWrap.whitespaceRegexp.test(chr);
+        return /\s/.test(chr);
     }
     pre(measure, text, start, end, width) {
         const lines = [];
         let lineStart = start;
         for (let i = start; i < end && i < text.length; i++) {
             const chr = text.charAt(i);
-            const isNewline = WordWrap.newlineRegexp.test(chr);
+            const isNewline = /\n/.test(chr);
             /** If we've reached a newline, then step down a line */
             /** Or if we've reached the EOF */
             if (isNewline || i === end - 1) {
@@ -69,7 +72,7 @@ class WordWrap {
         return lines;
     }
     greedy(measure, text, start, end, width, mode) {
-        console.log('greedy', 'text.length', text.length, 'start', start, 'end', end, 'width', width, 'mode', mode);
+        console.log('greedy', '\ttext.length', text.length, '\tstart', start, '\tend', end, '\twidth', width, '\tmode', mode);
         /** A greedy word wrapper based on LibGDX algorithm */
         /** https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFontCache.java */
         const lines = [];
@@ -77,9 +80,12 @@ class WordWrap {
         /** if WordWrapMode.NoWrap is specified, we only wrap on newline chars */
         if (mode === WordWrapMode.NoWrap)
             testWidth = Number.MAX_VALUE;
+        let debugCount = -1;
         while (start < end && start < text.length) {
+            debugCount++;
             /** get next newline position */
             const newLine = this.idxOf(text, WordWrap.newlineChar, start, end);
+            console.log(`\twhile[${debugCount}]`, '\tstart', start, '\tend', end, '\ttext.length', text.length, '\tnewLine', newLine);
             /** eat whitespace at start of line */
             while (start < newLine) {
                 if (!this.isWhitespace(text.charAt(start)))
@@ -131,8 +137,6 @@ class WordWrap {
         };
     }
 }
-WordWrap.newlineRegexp = /\n/;
-WordWrap.whitespaceRegexp = /\s/;
 WordWrap.newlineChar = '\n';
 export { WordWrap };
 //# sourceMappingURL=wordwrap.js.map
