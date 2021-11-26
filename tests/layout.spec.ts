@@ -146,7 +146,7 @@ describe('TextLayout', () => {
       })
     })
 
-  describe('MultipleUpdateText', () => {
+  describe('Update text multiple times', () => {
     const str = fs.readFileSync('tests/fonts/Lato-Regular-64.fnt').toString()
     const font = new BMFontAsciiParser().parse(str)
     const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.`
