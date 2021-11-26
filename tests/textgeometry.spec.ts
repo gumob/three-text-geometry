@@ -13,6 +13,7 @@ describe('TextGeometry', () => {
   // const font = new BMFontXMLParser().parse(xml)
   const ascii = fs.readFileSync('tests/fonts/Lato-Regular-64.fnt').toString()
   const font = new BMFontAsciiParser().parse(ascii)
+  const texture = new THREE.TextureLoader().load('tests/font/lato.png')
 
   /** Prepare WebGL */
   /** https://github.com/cognitedata/reveal/blob/9c248458a0c582a9a5f9f381323bfd2683648e82/viewer/test-utilities/src/createGlContext.ts */
@@ -137,6 +138,27 @@ describe('TextGeometry', () => {
       // console.log('layout', layout)
       // console.log('visibleGlyphs', visibleGlyphs)
     })
+
+    // describe('Multiple text updates', () => {
+    //   const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.\nDuis non sapien nulla.\nIn convallis nulla nec nulla varius rutrum.\nNunc augue augue, ornare in cursus egestas, cursus vel magna.\nFusce at felis vel tortor sagittis tincidunt nec vitae nisl.\nSed efficitur nibh consequat tortor pulvinar, dignissim tincidunt risus hendrerit.\nSuspendisse quis commodo nulla.\nUt orci urna, mollis non nisl id, molestie tristique purus.\nPhasellus efficitur laoreet eros vehicula convallis.\nSed imperdiet, lectus a facilisis tempus, elit orci varius ante, at lacinia odio massa et quam.\nQuisque vulputate nulla vitae feugiat aliquam.\nVivamus vel mauris sit amet est rhoncus molestie at quis neque.\nDuis faucibus laoreet tempus.\nMaecenas metus velit, lobortis sit amet mauris at, vehicula condimentum velit.\nVestibulum ornare eu turpis vel laoreet.\nNunc ac cursus nunc, non porttitor arcu.`
+    //   const option = {
+    //     font: font,
+    //     align: TextAlign.Left,
+    //     width: 1000,
+    //     flipY: texture.flipY,
+    //   }
+    //   const geometry = new TextGeometry(text, option)
+    //   const material = new THREE.MeshBasicMaterial({
+    //     map: texture,
+    //     transparent: true,
+    //     color: 0xaaffff,
+    //   })
+    //   let mesh: THREE.Mesh = new THREE.Mesh(geometry, material)
+    //   const geom = mesh.geometry as TextGeometry
+    //   test('Cuts text with variable glyph width', () => {
+    //     expect(geom.layout.)
+    //   })
+    // })
 
     // test('Compare Bounding Box', async () => {
     //   const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml';

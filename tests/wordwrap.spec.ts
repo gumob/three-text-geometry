@@ -1,6 +1,6 @@
 import fs from 'fs'
-import * as wordwrap from '~/layout'
-import { WordMetrics, WordWrapMode } from '~/types'
+import { WordWrap } from '~/layout'
+import { TextAlign, WordMetrics, WordWrapMode, WordWrapOption } from '~/types'
 
 function compute2(_text: string, start: number, end: number, width: number): WordMetrics {
   /** assume each glyph is Npx monospace */
@@ -25,113 +25,113 @@ function chop(text: string, width: number) {
 }
 
 describe('WordWrap', () => {
-  describe('wraps monospace glyphs by columns', () => {
+  describe('Wraps monospace glyphs by columns', () => {
     let json = fs.readFileSync('package.json', 'utf8')
     json = JSON.stringify(JSON.parse(json), undefined, 2)
 
-    test('pre does not change text', () => {
-      expect(wordwrap.wrap(json, { mode: WordWrapMode.Pre })).toEqual(json)
+    test('Pre does not change text', () => {
+      expect(new WordWrap().wrap(json, { mode: WordWrapMode.Pre })).toEqual(json)
     })
 
-    test('pre with width will clip text', () => {
-      expect(wordwrap.wrap(json, { width: 20, mode: WordWrapMode.Pre })).toEqual(chop(json, 20))
+    test('Pre with width will clip text', () => {
+      expect(new WordWrap().wrap(json, { width: 20, mode: WordWrapMode.Pre })).toEqual(chop(json, 20))
     })
 
     const text = 'lorem   ipsum \t dolor sit amet'
     const multi = 'lorem\nipsum dolor sit amet'
 
-    test('text with no width is unchanged', () => {
-      expect(wordwrap.wrap(text)).toEqual(text)
+    test('Text with no width is unchanged', () => {
+      expect(new WordWrap().wrap(text)).toEqual(text)
     })
 
-    test('text with newlines is multi-lined', () => {
-      expect(wordwrap.wrap(multi)).toEqual(multi)
+    test('Text with newlines is multi-lined', () => {
+      expect(new WordWrap().wrap(multi)).toEqual(multi)
     })
 
-    test('word-wordwrap with N width', () => {
-      expect(wordwrap.wrap(text, { width: 10 })).toEqual('lorem\nipsum\ndolor sit\namet')
+    test('Word-new WordWrap() with N width', () => {
+      expect(new WordWrap().wrap(text, { width: 10 })).toEqual('lorem\nipsum\ndolor sit\namet')
     })
 
     const overflow = 'it overflows'
 
-    test('overflow text pushed to next line', () => {
-      expect(wordwrap.wrap(overflow, { width: 5 })).toEqual('it\noverf\nlows')
+    test('Overflow text pushed to next line', () => {
+      expect(new WordWrap().wrap(overflow, { width: 5 })).toEqual('it\noverf\nlows')
     })
 
     const nowrap = 'this text  \n  only wraps \nnewlines'
 
-    test('eats starting whitespace', () => {
-      expect(wordwrap.wrap(nowrap, { mode: WordWrapMode.NoWrap })).toEqual(
+    test('Eats starting whitespace', () => {
+      expect(new WordWrap().wrap(nowrap, { mode: WordWrapMode.NoWrap })).toEqual(
         'this text  \nonly wraps \nnewlines'
       )
     })
 
-    test('zero width results in empty string', () => {
-      expect(wordwrap.wrap('this is not visible', { width: 0 })).toEqual('')
+    test('Zero width results in empty string', () => {
+      expect(new WordWrap().wrap('this is not visible', { width: 0 })).toEqual('')
     })
 
-    test('zero width results in empty string', () => {
-      expect(wordwrap.wrap('this is not visible', { width: 0, mode: WordWrapMode.Pre })).toEqual('')
+    test('Zero width results in empty string', () => {
+      expect(new WordWrap().wrap('this is not visible', { width: 0, mode: WordWrapMode.Pre })).toEqual('')
     })
 
-    test('zero width nowrap does not result in empty string', () => {
-      expect(wordwrap.wrap('this is not\nvisible', { width: 0, mode: WordWrapMode.NoWrap })).toEqual(
+    test('Zero width nowrap does not result in empty string', () => {
+      expect(new WordWrap().wrap('this is not\nvisible', { width: 0, mode: WordWrapMode.NoWrap })).toEqual(
         'this is not\nvisible'
       )
     })
 
-    test('test some text', () => {
-      expect(wordwrap.wrap('test some text')).toEqual('test some text')
+    test('Test some text', () => {
+      expect(new WordWrap().wrap('test some text')).toEqual('test some text')
     })
   })
 
-  describe('wrap a sub-section', () => {
+  describe('Wrap a sub-section', () => {
     const str = 'the quick brown fox jumps over the lazy dog'
 
     /** word-wrap the entire sentence */
-    const text = wordwrap.wrap(str, { width: 10 })
+    const text = new WordWrap().wrap(str, { width: 10 })
 
     /** bits at a time */
     const start = 20
     const end = 30
 
-    const text0 = wordwrap.wrap(str, { start: start, end: end, width: 10 })
-    const text1 = wordwrap.wrap(str, { start: end, width: 10 })
+    const text0 = new WordWrap().wrap(str, { start: start, end: end, width: 10 })
+    const text1 = new WordWrap().wrap(str, { start: end, width: 10 })
 
-    test('only word-wraps a sub-section of text', () => {
+    test('Only word-wraps a sub-section of text', () => {
       expect(text0).toEqual('jumps over')
     })
 
-    test('only word-wraps a sub-section of text', () => {
+    test('Only word-wraps a sub-section of text', () => {
       expect(text1).toEqual('the lazy\ndog')
     })
   })
 
-  describe('custom compute function', () => {
+  describe('Custom compute function', () => {
     /** a custom compute function that assumes pixel width instead of monospace char width */
     const word = 'words'
 
-    test('test compute', () => {
+    test('Test compute', () => {
       expect(compute2(word, 0, word.length, 4)).toStrictEqual({ end: 0, start: 0, width: 0 })
     })
 
-    test('test compute', () => {
+    test('Test compute', () => {
       expect(compute2(word, 0, word.length, 5)).toStrictEqual({ end: 1, start: 0, width: 5 })
     })
 
-    test('cuts text with variable glyph width', () => {
+    test('Cuts text with variable glyph width', () => {
       const text = 'some lines'
-      expect(wordwrap.wrap(text, { width: 20, measure: compute2 })).toEqual('some\nline\ns')
+      expect(new WordWrap().wrap(text, { width: 20, measure: compute2 })).toEqual('some\nline\ns')
     })
   })
 
-  describe('wraps text to a list of lines', () => {
-    test('cuts text with variable glyph width', () => {
+  describe('Wraps text to a list of lines', () => {
+    test('Cuts text with variable glyph width', () => {
       const expected = [
         { end: 9, start: 0, width: 0 },
         { end: 15, start: 10, width: 0 },
       ]
-      expect(wordwrap.lines('the quick brown', { width: 10 })).toEqual(expected)
+      expect(new WordWrap().lines('the quick brown', { width: 10 })).toEqual(expected)
     })
   })
 })

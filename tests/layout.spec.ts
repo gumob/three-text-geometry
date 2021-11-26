@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { TextLayout } from '~/layout'
 import { BMFontJsonParser } from '~/parser'
-import { BMFontChar, TextAlign, TextGlyph, WordWrapMode } from '~/types'
+import { BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordWrapMode } from '~/types'
 
 function DefaultBMFontChar(): BMFontChar {
   return {
@@ -144,5 +144,43 @@ describe('TextLayout', () => {
       const result = layout4.glyphs.map((x: TextGlyph) => x.index)
       expect(result).toStrictEqual([0, 1, 3, 4])
     })
+  })
+
+  describe('Multiple text updates with same word sets', () => {
+    const json = fs.readFileSync('tests/fonts/Lato-Regular-32.json').toString()
+    const font = new BMFontJsonParser().parse(json)
+    const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.\nDuis non sapien nulla.\nIn convallis nulla nec nulla varius rutrum.\nNunc augue augue, ornare in cursus egestas, cursus vel magna.\nFusce at felis vel tortor sagittis tincidunt nec vitae nisl.\nSed efficitur nibh consequat tortor pulvinar, dignissim tincidunt risus hendrerit.\nSuspendisse quis commodo nulla.\nUt orci urna, mollis non nisl id, molestie tristique purus.\nPhasellus efficitur laoreet eros vehicula convallis.\nSed imperdiet, lectus a facilisis tempus, elit orci varius ante, at lacinia odio massa et quam.\nQuisque vulputate nulla vitae feugiat aliquam.\nVivamus vel mauris sit amet est rhoncus molestie at quis neque.\nDuis faucibus laoreet tempus.\nMaecenas metus velit, lobortis sit amet mauris at, vehicula condimentum velit.\nVestibulum ornare eu turpis vel laoreet.\nNunc ac cursus nunc, non porttitor arcu.`
+    const option: TextLayoutOption = {
+      font: font,
+      align: TextAlign.Left,
+      width: 1000,
+    }
+    const layout = new TextLayout(text, option)
+    const height0 = layout.height
+    layout.update(text)
+    const height1 = layout.height
+    layout.update(text)
+    const height2 = layout.height
+    layout.update(text)
+    const height3 = layout.height
+    layout.update(text)
+    const height4 = layout.height
+    layout.update(text)
+    const height5 = layout.height
+    test('height0 === height1', () => {
+      expect(height0).toEqual(height1)
+    })
+    // test('height1 === height2', () => {
+    //   expect(height1).toEqual(height2)
+    // })
+    // test('height2 === height3', () => {
+    //   expect(height2).toEqual(height3)
+    // })
+    // test('height3 === height4', () => {
+    //   expect(height3).toEqual(height4)
+    // })
+    // test('height4 === height5', () => {
+    //   expect(height4).toEqual(height5)
+    // })
   })
 })
