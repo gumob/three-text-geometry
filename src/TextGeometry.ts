@@ -18,14 +18,10 @@ class TextGeometry extends THREE.BufferGeometry {
     multipage: false,
   }
 
-  private _layout: TextLayout | undefined
   private _visibleGlyphs: TextGlyph[] = []
 
   public get option(): TextGeometryOption {
     return { ...this._opt } as TextGeometryOption
-  }
-  public get layout(): TextLayout | undefined {
-    return this._layout
   }
   public get visibleGlyphs(): TextGlyph[] {
     return this._visibleGlyphs
@@ -57,15 +53,13 @@ class TextGeometry extends THREE.BufferGeometry {
     if (option.flipY !== undefined) this._opt.flipY = option.flipY
     if (option.multipage !== undefined) this._opt.multipage = option.multipage
 
-    this._layout = new TextLayout(text, this._opt)
-    // console.log('this._layout', this._layout);
-
     /** determine texture size from font file */
     const texWidth = this._opt.font!.common.scaleW
     const texHeight = this._opt.font!.common.scaleH
 
     /** get visible glyphs */
-    const glyphs = this._layout.glyphs.filter(function (glyph) {
+    const layout = new TextLayout(text, this._opt)
+    const glyphs = layout.glyphs.filter(function (glyph) {
       const bitmap = glyph.data
       return bitmap.width * bitmap.height > 0
     })
