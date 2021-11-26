@@ -117,6 +117,8 @@ class TextLayout {
     const height: number = lineHeight * lines.length - descender
     const align: TextAlign = this._opt.align!
 
+    console.log('lineHeight', lineHeight, 'baseline', baseline, 'descender', descender, 'letterSpacing', letterSpacing, 'height', height, 'align', align, );
+
     /** draw text along baseline */
     y -= height
 

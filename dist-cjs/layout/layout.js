@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TextLayout = void 0;
-const tslib_1 = require("tslib");
-const wordwrap = (0, tslib_1.__importStar)(require("./"));
+const layout_1 = require("./");
 const types_1 = require("../types");
 const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z'];
 const M_WIDTHS = ['m', 'w'];
@@ -105,7 +104,11 @@ class TextLayout {
             this._opt.tabSize = 4;
         this._setupSpaceGlyphs(this._opt.font, this._opt.tabSize);
         const font = this._opt.font;
-        const lines = wordwrap.lines(text, this._opt);
+        console.log('');
+        console.log('font', this._opt.font);
+        console.log('this._opt', 'start', this._opt.start, 'end', this._opt.end, 'width', this._opt.width, 'mode', this._opt.mode);
+        const lines = new layout_1.WordWrap().lines(text, this._opt);
+        console.log('lines', lines.length);
         const minWidth = this._opt.width || 0;
         /** clear _glyphs */
         this._glyphs = [];
@@ -123,6 +126,7 @@ class TextLayout {
         const letterSpacing = this._opt.letterSpacing;
         const height = lineHeight * lines.length - descender;
         const align = this._opt.align;
+        console.log('maxLineWidth', maxLineWidth, 'lineHeight', lineHeight, 'baseline', baseline, 'descender', descender, 'letterSpacing', letterSpacing, 'height', height, 'align', align);
         /** draw text along baseline */
         y -= height;
         /** the metrics for this text layout */
