@@ -225,16 +225,11 @@ class TextLayout {
   }
 
   private computeMetrics(text: string, start: number, end: number, width: number): WordMetrics {
-    // console.log(
-    //   `[TextLayout] \t\t\t computeMetrics \t start: ${start} \t end: ${end} \t width: ${width}`,
-    // )
     const letterSpacing = this._opt.letterSpacing || 0
     const font = this._opt.font
     let curPen = 0
     let curWidth = 0
     let count = 0
-    // var glyph: BMFontChar | null;
-    let lastGlyph
 
     if (!font || !font.chars || font.chars.length === 0) {
       return {
@@ -245,6 +240,7 @@ class TextLayout {
     }
 
     end = Math.min(text.length, end)
+    let lastGlyph: BMFontChar | undefined
     for (let i = start; i < end; i++) {
       const id = text.charCodeAt(i)
       const glyph: BMFontChar | null = this.getGlyph(font, id)
