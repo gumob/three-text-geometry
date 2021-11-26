@@ -69,19 +69,6 @@ class WordWrap {
         return lines;
     }
     greedy(measure, text, start, end, width, mode) {
-        // console.log(
-        //   'greedy',
-        //   'text.length',
-        //   text.length,
-        //   'start',
-        //   start,
-        //   'end',
-        //   end,
-        //   'width',
-        //   width,
-        //   'mode',
-        //   mode
-        // )
         /** A greedy word wrapper based on LibGDX algorithm */
         /** https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFontCache.java */
         const lines = [];
@@ -130,7 +117,6 @@ class WordWrap {
             }
             start = nextStart;
         }
-        // console.log('greedy', 'lines.length', lines.length, 'start', start)
         return lines;
     }
     /** determines the visible number of glyphs within a given width */

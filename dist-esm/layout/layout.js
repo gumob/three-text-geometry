@@ -75,10 +75,6 @@ class TextLayout {
 }`;
     }
     update(text, option = {}) {
-        var _a;
-        console.log('');
-        console.log('');
-        console.log('');
         /** Initalize variables */
         this._glyphs = [];
         this._width = 0;
@@ -122,11 +118,6 @@ class TextLayout {
             this._opt.tabSize = 4;
         this._opt.measure = this.computeMetrics.bind(this);
         this._setupSpaceGlyphs(this._opt.font, this._opt.tabSize);
-        console.log(JSON.stringify((_a = this._opt.font) === null || _a === void 0 ? void 0 : _a.chars) + '\n', true, 10);
-        // process.stdout.write(JSON.stringify(this._opt.font?.chars) + '\n')
-        // console.log('this._opt.font?.chars', JSON.stringify(this._opt.font?.chars))
-        // console.log('this._fallbackSpaceGlyph', this._fallbackSpaceGlyph)
-        // console.log('this._fallbackTabGlyph', this._fallbackTabGlyph)
         const font = this._opt.font;
         const lines = new WordWrap().lines(text, this._opt);
         const minWidth = this._opt.width || 0;
@@ -189,7 +180,6 @@ class TextLayout {
             y += lineHeight;
             x = 0;
         }
-        // console.log(this.toString())
     }
     _setupSpaceGlyphs(font, tabSize) {
         /** These are fallbacks, when the font doesn't include */
@@ -207,7 +197,7 @@ class TextLayout {
         /** and create a fallback for tab */
         const tabWidth = tabSize * space.xadvance;
         this._fallbackSpaceGlyph = { ...space };
-        this._fallbackTabGlyph = Object.assign(space, {
+        this._fallbackTabGlyph = Object.assign({ ...space }, {
             x: 0,
             y: 0,
             xadvance: tabWidth,
@@ -220,9 +210,6 @@ class TextLayout {
     }
     getGlyph(font, id) {
         const glyph = this.getGlyphById(font, id);
-        // console.log(
-        //   `[TextLayout] \t\t\t\t getGlyph() id: ${id}`,
-        // )
         if (glyph)
             return glyph;
         else if (id === TextLayout.TAB_ID)
@@ -232,15 +219,11 @@ class TextLayout {
         return null;
     }
     computeMetrics(text, start, end, width) {
-        // console.log(
-        //   `[TextLayout] \t\t\t computeMetrics \t start: ${start} \t end: ${end} \t width: ${width}`,
-        // )
         const letterSpacing = this._opt.letterSpacing || 0;
         const font = this._opt.font;
         let curPen = 0;
         let curWidth = 0;
         let count = 0;
-        // var glyph: BMFontChar | null;
         if (!font || !font.chars || font.chars.length === 0) {
             return {
                 start: start,
@@ -253,9 +236,6 @@ class TextLayout {
         for (let i = start; i < end; i++) {
             const id = text.charCodeAt(i);
             const glyph = this.getGlyph(font, id);
-            // console.log(
-            //   `[TextLayout] \t\t\t i: ${i} \t glyph => id: ${glyph?.id} \t index: ${glyph?.index} \t width: ${glyph?.width}`,
-            // )
             if (glyph) {
                 /** move pen forward */
                 // const xoff = glyph.xoffset;
@@ -263,9 +243,6 @@ class TextLayout {
                 curPen += kern;
                 const nextPen = curPen + glyph.xadvance + letterSpacing;
                 const nextWidth = curPen + glyph.width;
-                // console.log(
-                //   `[TextLayout] \t\t\t i: ${i} \t kern: ${kern} \t nextPen: ${nextPen} \t nextWidth: ${nextWidth}`,
-                // )
                 /** we've hit our limit; we can't move onto the next glyph */
                 if (nextWidth >= width || nextPen >= width)
                     break;
@@ -273,15 +250,9 @@ class TextLayout {
                 curPen = nextPen;
                 curWidth = nextWidth;
                 lastGlyph = glyph;
-                // console.log(
-                //   `[TextLayout] \t\t\t i: ${i} \t curPen: ${curPen} \t curWidth: ${curWidth} \t lastGlyph => id: ${glyph?.id} \t index: ${glyph?.index} \t width: ${glyph?.width}`,
-                // )
             }
             count++;
         }
-        // console.log(
-        //   `[TextLayout] \t\t\t curPen: ${curPen} \t curWidth: ${curWidth} \t count: ${count}`,
-        // )
         /** make sure rightmost edge lines up with rendered _glyphs */
         if (lastGlyph)
             curWidth += lastGlyph.xoffset;
@@ -295,9 +266,6 @@ class TextLayout {
         if (!font.chars || font.chars.length === 0)
             return undefined;
         const glyphIdx = this.findChar(font.chars, id);
-        // console.log(
-        //   `[TextLayout] \t\t\t\t getGlyphById() id: ${id} \t glyphIdx: ${glyphIdx}`,
-        // )
         if (glyphIdx >= 0)
             return font.chars[glyphIdx];
         return undefined;
@@ -315,7 +283,6 @@ class TextLayout {
         for (let i = 0; i < TextLayout.M_WIDTHS.length; i++) {
             const id = TextLayout.M_WIDTHS[i].charCodeAt(0);
             const idx = this.findChar(font.chars, id);
-            // console.log('getMGlyph()', 'id:', id, '\tidx:', idx)
             if (idx >= 0)
                 return font.chars[idx];
         }
@@ -343,9 +310,6 @@ class TextLayout {
     }
     findChar(array, value) {
         for (let i = 0; i < array.length; i++) {
-            // if (value === 109 || value === 119) {
-            //   console.log('findChar()', 'i:', i, '\tid:', array[i]!.id, '\tvalue:', value)
-            // }
             if (array[i].id === value)
                 return i;
         }
