@@ -76,19 +76,6 @@ class WordWrap {
     width: number,
     mode: string
   ): WordMetrics[] {
-    console.log(
-      'greedy',
-      'text.length',
-      text.length,
-      'start',
-      start,
-      'end',
-      end,
-      'width',
-      width,
-      'mode',
-      mode
-    )
     /** A greedy word wrapper based on LibGDX algorithm */
     /** https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/BitmapFontCache.java */
     const lines: WordMetrics[] = []
@@ -137,7 +124,6 @@ class WordWrap {
       }
       start = nextStart
     }
-    console.log('greedy', 'lines.length', lines.length, 'start', start)
     return lines
   }
 
