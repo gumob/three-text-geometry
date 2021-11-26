@@ -83,14 +83,17 @@ class WordWrap {
         /** if WordWrapMode.NoWrap is specified, we only wrap on newline chars */
         if (mode === types_1.WordWrapMode.NoWrap)
             testWidth = Number.MAX_VALUE;
-        let debugCount = -1;
+        let debugCount0 = -1;
         while (start < end && start < text.length) {
-            debugCount++;
+            debugCount0++;
             /** get next newline position */
             const newLine = this.idxOf(text, WordWrap.newlineChar, start, end);
-            console.log(`\twhile[${debugCount}]`, '\tstart', start, '\tend', end, '\ttext.length', text.length, '\tnewLine', newLine);
+            console.log(`\twhile[${debugCount0}]`, '\tstart', start, '\tend', end, '\ttext.length', text.length, '\tnewLine', newLine);
             /** eat whitespace at start of line */
+            let debugCount1 = 0;
             while (start < newLine) {
+                console.log(`\t\twhile[${debugCount1}]`, '\t\tstart', start, '\t\tnewLine', newLine, '\t\tisWhitespace', !this.isWhitespace(text.charAt(start)));
+                debugCount1++;
                 if (!this.isWhitespace(text.charAt(start)))
                     break;
                 start++;
