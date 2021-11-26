@@ -185,7 +185,6 @@ class TextLayout {
       y += lineHeight
       x = 0
     }
-    console.log(this.toString())
   }
 
   private _setupSpaceGlyphs(font: BMFont, tabSize: number) {
