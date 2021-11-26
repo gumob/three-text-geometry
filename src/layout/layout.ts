@@ -1,13 +1,13 @@
 import { WordWrap } from '~/layout'
 import { BMFont, BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordMetrics } from '~/types'
 
-const X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
-const M_WIDTHS = ['m', 'w']
-const CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-const TAB_ID = '\t'.charCodeAt(0)
-const SPACE_ID = ' '.charCodeAt(0)
-
 class TextLayout {
+  static readonly X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
+  static readonly M_WIDTHS = ['m', 'w']
+  static readonly CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+  static readonly TAB_ID = '\t'.charCodeAt(0)
+  static readonly SPACE_ID = ' '.charCodeAt(0)
+
   private _opt: TextLayoutOption = {
     font: undefined,
     letterSpacing: undefined,
@@ -185,6 +185,7 @@ class TextLayout {
       y += lineHeight
       x = 0
     }
+    console.log(this.toString())
   }
 
   private _setupSpaceGlyphs(font: BMFont, tabSize: number) {
@@ -198,7 +199,7 @@ class TextLayout {
     /** try to get space glyph */
     /** then fall back to the 'm' or 'w' _glyphs */
     /** then fall back to the first glyph available */
-    const space = this.getGlyphById(font, SPACE_ID) || this.getMGlyph(font) || font.chars[0]
+    const space = this.getGlyphById(font, TextLayout.SPACE_ID) || this.getMGlyph(font) || font.chars[0]
     if (!space) return
     /** and create a fallback for tab */
     const tabWidth: number = tabSize * space.xadvance
@@ -207,7 +208,7 @@ class TextLayout {
       x: 0,
       y: 0,
       xadvance: tabWidth,
-      id: TAB_ID,
+      id: TextLayout.TAB_ID,
       xoffset: 0,
       yoffset: 0,
       width: 0,
@@ -218,12 +219,15 @@ class TextLayout {
   private getGlyph(font: BMFont, id: number): BMFontChar | null {
     const glyph = this.getGlyphById(font, id)
     if (glyph) return glyph
-    else if (id === TAB_ID) return this._fallbackTabGlyph
-    else if (id === SPACE_ID) return this._fallbackSpaceGlyph
+    else if (id === TextLayout.TAB_ID) return this._fallbackTabGlyph
+    else if (id === TextLayout.SPACE_ID) return this._fallbackSpaceGlyph
     return null
   }
 
   private computeMetrics(text: string, start: number, end: number, width: number): WordMetrics {
+    // console.log(
+    //   `[TextLayout] \t\t\t computeMetrics \t start: ${start} \t end: ${end} \t width: ${width}`,
+    // )
     const letterSpacing = this._opt.letterSpacing || 0
     const font = this._opt.font
     let curPen = 0
@@ -282,8 +286,8 @@ class TextLayout {
   }
 
   private getXHeight(font: BMFont): number {
-    for (let i = 0; i < X_HEIGHTS.length; i++) {
-      const id = X_HEIGHTS[i]!.charCodeAt(0)
+    for (let i = 0; i < TextLayout.X_HEIGHTS.length; i++) {
+      const id = TextLayout.X_HEIGHTS[i]!.charCodeAt(0)
       const idx = this.findChar(font.chars, id)
       if (idx >= 0) return font.chars[idx]!.height
     }
@@ -291,8 +295,8 @@ class TextLayout {
   }
 
   private getMGlyph(font: BMFont): BMFontChar | undefined {
-    for (let i = 0; i < M_WIDTHS.length; i++) {
-      const id = M_WIDTHS[i]!.charCodeAt(0)
+    for (let i = 0; i < TextLayout.M_WIDTHS.length; i++) {
+      const id = TextLayout.M_WIDTHS[i]!.charCodeAt(0)
       const idx = this.findChar(font.chars, id)
       if (idx >= 0) return font.chars[idx]
     }
@@ -300,8 +304,8 @@ class TextLayout {
   }
 
   private getCapHeight(font: BMFont): number {
-    for (let i = 0; i < CAP_HEIGHTS.length; i++) {
-      const id = CAP_HEIGHTS[i]!.charCodeAt(0)
+    for (let i = 0; i < TextLayout.CAP_HEIGHTS.length; i++) {
+      const id = TextLayout.CAP_HEIGHTS[i]!.charCodeAt(0)
       const idx = this.findChar(font.chars, id)
       if (idx >= 0) return font.chars[idx]!.height
     }
