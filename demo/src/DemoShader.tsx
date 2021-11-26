@@ -13,7 +13,8 @@ export class DemoShader extends DemoBase {
   initScene() {
     super.initScene()
 
-    const text = this.textList[0]
+    // const text = this.textList[0]
+    const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.`
     const textGeometry = new TextGeometry(text, this.textOption)
     console.clear()
     // console.log('textGeometry.option', textGeometry.option)
