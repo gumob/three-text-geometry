@@ -204,16 +204,19 @@ class TextLayout {
     /** and create a fallback for tab */
     const tabWidth: number = tabSize * space.xadvance
     this._fallbackSpaceGlyph = { ...space }
-    this._fallbackTabGlyph = Object.assign(space, {
-      x: 0,
-      y: 0,
-      xadvance: tabWidth,
-      id: TextLayout.TAB_ID,
-      xoffset: 0,
-      yoffset: 0,
-      width: 0,
-      height: 0,
-    })
+    this._fallbackTabGlyph = Object.assign(
+      { ...space },
+      {
+        x: 0,
+        y: 0,
+        xadvance: tabWidth,
+        id: TextLayout.TAB_ID,
+        xoffset: 0,
+        yoffset: 0,
+        width: 0,
+        height: 0,
+      }
+    )
   }
 
   private getGlyph(font: BMFont, id: number): BMFontChar | null {
