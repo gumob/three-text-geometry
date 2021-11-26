@@ -52,14 +52,14 @@ class WordWrap {
         return idx;
     }
     isWhitespace(chr) {
-        return WordWrap.whitespace.test(chr);
+        return WordWrap.whitespaceRegexp.test(chr);
     }
     pre(measure, text, start, end, width) {
         const lines = [];
         let lineStart = start;
         for (let i = start; i < end && i < text.length; i++) {
             const chr = text.charAt(i);
-            const isNewline = WordWrap.newline.test(chr);
+            const isNewline = WordWrap.newlineRegexp.test(chr);
             /** If we've reached a newline, then step down a line */
             /** Or if we've reached the EOF */
             if (isNewline || i === end - 1) {
@@ -135,7 +135,7 @@ class WordWrap {
     }
 }
 exports.WordWrap = WordWrap;
-WordWrap.newline = /\n/;
-WordWrap.whitespace = /\s/;
+WordWrap.newlineRegexp = /\n/;
+WordWrap.whitespaceRegexp = /\s/;
 WordWrap.newlineChar = '\n';
 //# sourceMappingURL=wordwrap.js.map

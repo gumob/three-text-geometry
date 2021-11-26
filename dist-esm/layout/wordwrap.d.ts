@@ -5,8 +5,8 @@
  */
 import { ComputeMetrics, WordMetrics } from "../types";
 declare class WordWrap {
-    static readonly newline: RegExp;
-    static readonly whitespace: RegExp;
+    static readonly newlineRegexp: RegExp;
+    static readonly whitespaceRegexp: RegExp;
     static readonly newlineChar: string;
     wrap(text: string, option?: any): string;
     lines(text: string, option?: any): WordMetrics[];

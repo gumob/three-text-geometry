@@ -101,15 +101,10 @@ class TextLayout {
             this._opt.tabSize = 4;
         this._setupSpaceGlyphs(this._opt.font, this._opt.tabSize);
         const font = this._opt.font;
-        console.log('');
-        console.log('font', this._opt.font);
-        console.log('this._opt', 'start', this._opt.start, 'end', this._opt.end, 'width', this._opt.width, 'mode', this._opt.mode);
         const lines = new WordWrap().lines(text, this._opt);
-        console.log('lines', lines.length);
         const minWidth = this._opt.width || 0;
         /** clear _glyphs */
         this._glyphs = [];
-        // this._glyphs.length = 0;
         /** get max line width */
         const maxLineWidth = lines.reduce((prev, line) => {
             return Math.max(prev, line.width, minWidth);
@@ -123,7 +118,6 @@ class TextLayout {
         const letterSpacing = this._opt.letterSpacing;
         const height = lineHeight * lines.length - descender;
         const align = this._opt.align;
-        console.log('maxLineWidth', maxLineWidth, 'lineHeight', lineHeight, 'baseline', baseline, 'descender', descender, 'letterSpacing', letterSpacing, 'height', height, 'align', align);
         /** draw text along baseline */
         y -= height;
         /** the metrics for this text layout */
