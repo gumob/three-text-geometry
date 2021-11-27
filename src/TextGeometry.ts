@@ -3,7 +3,15 @@ import { TextLayout } from '~/layout'
 import { TextAlign, TextGeometryOption, TextGlyph } from '~/types'
 import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '~/utils'
 
+
+/**
+ * The class that generates THREE.BufferGeometry from a BMFont data.
+ *
+ * @class TextGeometry
+ * @extends {THREE.BufferGeometry}
+ */
 class TextGeometry extends THREE.BufferGeometry {
+
   private _opt: TextGeometryOption = {
     font: undefined,
     start: undefined,
@@ -20,13 +28,36 @@ class TextGeometry extends THREE.BufferGeometry {
 
   private _visibleGlyphs: TextGlyph[] = []
 
+
+  /**
+   * The option conforms to the TextGeometryOption interface.
+   *
+   * @readonly
+   * @type {TextGeometryOption}
+   * @memberof TextGeometry
+   */
   public get option(): TextGeometryOption {
     return { ...this._opt } as TextGeometryOption
   }
+
+  /**
+   * The array to store TextGlyph objects. 
+   *
+   * @readonly
+   * @type {TextGlyph[]}
+   * @memberof TextGeometry
+   */
   public get visibleGlyphs(): TextGlyph[] {
     return this._visibleGlyphs
   }
 
+
+  /**
+   * The constructor to creates an instance of TextGeometry.
+   * @param {string} text Text to layout.
+   * @param {*} [option={}] An object comforms to `TextGeometryOption`.
+   * @memberof TextGeometry
+   */
   constructor(text: string, option: any = {}) {
     super()
     if (option.font === undefined) throw new TypeError('Must specify a `font` in options')
@@ -34,6 +65,14 @@ class TextGeometry extends THREE.BufferGeometry {
     this.update(text, option)
   }
 
+
+  /**
+   * The function to update text.
+   *
+   * @param {string} text Text to layout.
+   * @param {*} [option={}] An object comforms to `TextGeometryOption`.
+   * @memberof TextGeometry
+   */
   public update(text: string, option: any = {}) {
     if (option.font !== undefined) this._opt.font = option.font
     if (option.start !== undefined) this._opt.start = Math.max(0, option.start)
@@ -98,6 +137,12 @@ class TextGeometry extends THREE.BufferGeometry {
     }
   }
 
+  
+  /**
+   * The function that computes bounding box of the geometry.
+   *
+   * @memberof TextGeometry
+   */
   public override computeBoundingSphere() {
     if (this.boundingSphere === null) this.boundingSphere = new THREE.Sphere()
     if (!this.attributes.position) return
@@ -118,6 +163,11 @@ class TextGeometry extends THREE.BufferGeometry {
     }
   }
 
+  /**
+   * The function that computes bounding sphere of the geometry.
+   *
+   * @memberof TextGeometry
+   */
   public override computeBoundingBox() {
     if (this.boundingBox === null) this.boundingBox = new THREE.Box3()
     const bbox = this.boundingBox
