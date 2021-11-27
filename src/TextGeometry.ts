@@ -3,15 +3,15 @@ import { TextLayout } from '~/layout'
 import { TextAlign, TextGeometryOption, TextGlyph } from '~/types'
 import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '~/utils'
 
-
 /**
  * The class that generates THREE.BufferGeometry from a BMFont data.
  *
  * @class TextGeometry
- * @extends {THREE.BufferGeometry}
+ * @augments {THREE.BufferGeometry}
+ * 
+ * @alpha
  */
 class TextGeometry extends THREE.BufferGeometry {
-
   private _opt: TextGeometryOption = {
     font: undefined,
     start: undefined,
@@ -28,34 +28,33 @@ class TextGeometry extends THREE.BufferGeometry {
 
   private _visibleGlyphs: TextGlyph[] = []
 
-
   /**
    * The option conforms to the TextGeometryOption interface.
    *
-   * @readonly
    * @type {TextGeometryOption}
    * @memberof TextGeometry
+   * @readonly
    */
   public get option(): TextGeometryOption {
     return { ...this._opt } as TextGeometryOption
   }
 
   /**
-   * The array to store TextGlyph objects. 
+   * The array to store TextGlyph objects.
    *
-   * @readonly
    * @type {TextGlyph[]}
    * @memberof TextGeometry
+   * @readonly
    */
   public get visibleGlyphs(): TextGlyph[] {
     return this._visibleGlyphs
   }
 
-
   /**
    * The constructor to creates an instance of TextGeometry.
-   * @param {string} text Text to layout.
-   * @param {*} [option={}] An object comforms to `TextGeometryOption`.
+   *
+   * @param {string} text         Text to layout.
+   * @param {*}      [option={}]  An object comforms to `TextGeometryOption`.
    * @memberof TextGeometry
    */
   constructor(text: string, option: any = {}) {
@@ -65,12 +64,11 @@ class TextGeometry extends THREE.BufferGeometry {
     this.update(text, option)
   }
 
-
   /**
    * The function to update text.
    *
-   * @param {string} text Text to layout.
-   * @param {*} [option={}] An object comforms to `TextGeometryOption`.
+   * @param {string} text         Text to layout.
+   * @param {*}      [option={}]  An object comforms to `TextGeometryOption`.
    * @memberof TextGeometry
    */
   public update(text: string, option: any = {}) {
@@ -137,7 +135,6 @@ class TextGeometry extends THREE.BufferGeometry {
     }
   }
 
-  
   /**
    * The function that computes bounding box of the geometry.
    *

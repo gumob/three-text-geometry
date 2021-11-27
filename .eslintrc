@@ -4,7 +4,7 @@
   "parserOptions": {
     "project": ["tsconfig.json"]
   },
-  "plugins": ["@typescript-eslint", "only-warn"],
+  "plugins": ["@typescript-eslint", "eslint-plugin-tsdoc", "only-warn"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -23,6 +23,8 @@
     // Same approach used by TypeScript noUnusedLocals
     "@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
     // Allow force unwrap
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    // Avoid error for TSDoc
+    "tsdoc/syntax": "warn"
   }
 }
