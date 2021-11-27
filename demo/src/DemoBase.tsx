@@ -103,7 +103,7 @@ export class DemoBase extends React.Component {
     /** Scene */
     this.scene = new THREE.Scene()
     this.scene.background = new THREE.Color(0x000000)
-    this.scene.fog = new THREE.FogExp2(0x000104, 0.0004)
+    this.scene.fog = new THREE.FogExp2(0x000104, 0.00035)
 
     /** Camera */
     this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000)

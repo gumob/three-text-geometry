@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
 import Navigation from './Navigation'
+import DemoMultipage from './DemoMultipage'
 import DemoSimple from './DemoSimple'
 import DemoShuffle from './DemoShuffle'
 import DemoShader from './DemoShader'
@@ -17,6 +18,7 @@ ReactDOM.render(
       <Routes>
         <Route path="*" element={<Navigate to="/simple" />} />
         <Route path="/simple" element={<DemoSimple />} />
+        <Route path="/multipage" element={<DemoMultipage />} />
         <Route path="/shuffle" element={<DemoShuffle />} />
         <Route path="/shader" element={<DemoShader />} />
         <Route path="/shuffleshader" element={<DemoShuffleShader />} />
