@@ -4,8 +4,7 @@
 
 # three-text-geometry
 
-<!-- ![demo.gif](README-assets/demo.gif) -->
-<img src="README-assets/demo.gif" alt="demo.gif" style="width:1200px;"/>
+<img src="https://raw.githubusercontent.com/gumob/three-text-geometry/main/README-assets/demo.gif" alt="demo.gif" style="width:1200px;"/>
 
 The port of the JavaScript versions of [three-bmfont-text](https://github.com/Jam3/three-bmfont-text), [layout-bmfont-text](https://github.com/Jam3/layout-bmfont-text), [load-bmfont](https://github.com/Jam3/load-bmfont), and [word-wrapper](https://github.com/mattdesl/word-wrapper) to Pure Typescript, this library enables fast text rendering with Three.js and bitmap font.<br/>
 The difference in rendering speed is noticeable when animations are enabled, and it runs 10x faster than canvas texture based text rendering.

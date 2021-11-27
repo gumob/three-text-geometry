@@ -52,7 +52,8 @@
     "release:stable": "dripip stable",
     "prepublishOnly": "yarn build",
     "prepare": "ts-patch install -s",
-    "upgrade": "yarn up '*' '@*/*'"
+    "upgrade": "yarn up '*' '@*/*'",
+    "typedoc": "typedoc --out ./docs ./src"
   },
   "dependencies": {
     "ajv": "^8.8.2",
@@ -99,6 +100,7 @@
     "ts-nameof": "^5.0.0",
     "ts-node": "^10.4.0",
     "ts-patch": "^2.0.1",
+    "typedoc": "^0.22.10",
     "typescript": "^4.5.2",
     "typescript-snapshots-plugin": "^1.7.0",
     "typescript-transform-paths": "^3.3.1"
