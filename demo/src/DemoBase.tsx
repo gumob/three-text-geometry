@@ -35,11 +35,10 @@ export class DemoBase extends React.Component {
     return this.textList[index]
   }
 
-
   fontUri: string =
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
   textureUri: string[] = [
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png',
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
   ]
   font?: BMFont
   textures: THREE.Texture[] = []

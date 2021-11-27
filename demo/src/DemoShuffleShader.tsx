@@ -4,12 +4,6 @@ import ShuffleText, { ShuffleOption, ShuffleState } from './effects/shuffle'
 import DemoBase from './DemoBase'
 
 export class DemoShuffleShader extends DemoBase {
-  fontUri: string =
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
-  textureUri: string[] = [
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
-  ]
-
   shuffleTimeoutID?: any
   shuffle?: ShuffleText
 
