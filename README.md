@@ -8,7 +8,7 @@
 <img src="README-assets/demo.gif" alt="demo.gif" style="width:1200px;"/>
 
 
-The port of the JavaScript versions of [three-bmfont-text](https://github.com/Jam3/three-bmfont-text), [layout-bmfont-text](https://github.com/Jam3/layout-bmfont-text), [load-bmfont](https://github.com/Jam3/load-bmfont), and [word-wrapper](https://github.com/mattdesl/word-wrapper) to Pure Typescript, this library enables fast text rendering with Three.js and bitmap font.
+The port of the JavaScript versions of [three-bmfont-text](https://github.com/Jam3/three-bmfont-text), [layout-bmfont-text](https://github.com/Jam3/layout-bmfont-text), [load-bmfont](https://github.com/Jam3/load-bmfont), and [word-wrapper](https://github.com/mattdesl/word-wrapper) to Pure Typescript, this library enables fast text rendering with Three.js and bitmap font.<br/>
 The difference in rendering speed is noticeable when animations are enabled, and it runs 10x faster than canvas texture based text rendering.
 
 
@@ -31,6 +31,91 @@ node install three-text-geometry
 ```
 
 ## Usage
+
+#### Sample code
+```TypeScript
+import * as THREE from 'three'
+import TextGeometry, { BMFontLoader, BMFont, TextGeometryOption, TextAlign } from 'three-text-geometry'
+
+class TextGeometryRendere extends React.Component {
+
+    renderer?: THREE.WebGLRenderer
+    scene?: THREE.Scene
+    camera?: THREE.PerspectiveCamera
+
+    componentDidMount() {
+        const fontUri: string = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
+        const textureUri: string = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
+        Promise.all([
+            new BMFontLoader().loadJson(fontUri),
+            new THREE.TextureLoader().loadAsync(textureUri)
+        ]).then((values: [BMFont, THREE.Texture]) => {
+            let font: BMFont
+            let texture: THREE.Texture
+            values.forEach((value: BMFont | THREE.Texture) => {
+                if (value instanceof THREE.Texture) texture = value as THREE.Texture
+                else font = value as BMFont
+            })
+            this.initScene(font, texture)
+        })
+    }
+
+    initScene(font: BMFont, texture: THREE.Texture) {
+        /** Renderer */
+        this.renderer = new THREE.WebGLRenderer({ alpha: true })
+        this.renderer.setClearColor(0x000000, 0)
+        this.renderer.setPixelRatio(window.devicePixelRatio)
+        this.renderer.setSize(window.innerWidth, window.innerHeight)
+
+        const container = document.querySelector('#demo')
+        container?.append(this.renderer.domElement)
+
+        /** Scene */
+        this.scene = new THREE.Scene()
+        this.scene.background = new THREE.Color(0x000000)
+
+        /** Camera */
+        this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000)
+        this.camera.position.set(1000, 1000, 2000)
+        this.camera.lookAt(0, 0, 0)
+
+        /** Geometry */
+        const textOption: TextGeometryOption = {
+            font: font,
+            align: TextAlign.Left,
+            width: 1600,
+            flipY: textures.flipY,
+            multipage: true
+        }
+        const textGeometry = new TextGeometry('Hollo World.\nHello Universe.', textOption)
+
+        /** Material */
+        const textMaterial = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.DoubleSide,
+            transparent: true,
+            color: 0x666666,
+        })
+
+        /** Mesh */
+        const mesth = new THREE.Mesh(textGeometry, textMaterial)
+        this.scene!.add(mesth)
+
+        this.updateScene()
+    }
+
+    updateScene() {
+        this.renderer?.render(this.scene!, this.camera!)
+        this.stats?.update()
+        requestAnimationFrame(this.updateScene.bind(this))
+    }
+
+    render() {
+        return <div id='demo'></div>
+    }
+}
+
+```
 
 
 #### Usage of `TextGeometryOption`
