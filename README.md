@@ -15,13 +15,13 @@ The difference in rendering speed is noticeable when animations are enabled, and
 
 ## Installation
 
-#### Yarn
+### Yarn
 
 ```
 $ yarn add three-text-geometry
 ```
 
-#### Node
+### Node
 
 ```
 $ node install three-text-geometry
@@ -29,7 +29,7 @@ $ node install three-text-geometry
 
 ## Usage
 
-#### How to run the demo
+### How to run the demo
 
 The demo is written in TypeScript using React, so you will need to check out the repository to run the demo app.
 The source code for the demo is available [here](https://github.com/gumob/three-text-geometry/tree/develop/demo).
@@ -41,7 +41,7 @@ $ yarn install
 $ yarn start
 ```
 
-#### The sample code using [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/default.html), [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html), and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader)
+### The sample code using [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/default.html), [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html), and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader)
 
 - [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html) and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader) can be combined by using [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 - For detailed information, read the [documentation](https://gumob.github.io/three-text-geometry/).
@@ -134,7 +134,7 @@ class TextGeometryRenderer extends React.Component {
 
 ```
 
-#### The table of `TextGeometryOption`
+### The table of `TextGeometryOption`
 
 | key               |                                         type                                          | description                                                                                                                                                                                                                                                                                                                                                                                                         |                                                     default                                                     | required |
 | ----------------- | :-----------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------: | :------: |
@@ -160,7 +160,7 @@ The following tools can be used to convert fonts to a bitmap font:
 
 Read the [Three.js documentation](https://threejs.org/docs/index.html#manual/en/introduction/Creating-text) about a bitmap font.
 
-#### Using msdf-bmfont-xml
+### Using msdf-bmfont-xml
 
 Install [msdf-bmfont-xml](https://github.com/soimy/msdf-bmfont-xml)
 
@@ -168,7 +168,7 @@ Install [msdf-bmfont-xml](https://github.com/soimy/msdf-bmfont-xml)
 npm install msdf-bmfont-xml -g
 ```
 
-Generat a BMFont
+Generate a bitmap font
 
 ```
 msdf-bmfont \
