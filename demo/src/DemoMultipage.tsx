@@ -1,13 +1,14 @@
 import * as THREE from 'three'
-import TextGeometry from 'three-text-geometry'
+import TextGeometry, { TextAlign } from 'three-text-geometry'
 import ShuffleText, { ShuffleOption, ShuffleState } from './effects/shuffle'
 import DemoBase from './DemoBase'
 
 export class DemoMultipage extends DemoBase {
   fontUri: string =
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
-  textureUri: string =
+  textureUri: string[]= [
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
+  ]
 
   shuffleTimeoutID?: any
   shuffle?: ShuffleText
@@ -20,6 +21,13 @@ export class DemoMultipage extends DemoBase {
 
   initScene() {
     super.initScene()
+    /** TextGeometryOption */
+    this.textOption = {
+      font: this.font,
+      align: TextAlign.Left,
+      width: 1600,
+      flipY: this.textures[0].flipY,
+    }
 
     /** Text Mesh */
     const textGeometry = new TextGeometry(this.staticText(), this.textOption)
@@ -27,7 +35,7 @@ export class DemoMultipage extends DemoBase {
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
     const textMaterial = new THREE.MeshBasicMaterial({
-      map: this.texture,
+      map: this.textures[0],
       side: THREE.DoubleSide,
       transparent: true,
       color: 0x666666,

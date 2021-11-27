@@ -1,17 +1,25 @@
 import * as THREE from 'three'
-import TextGeometry from 'three-text-geometry'
+import TextGeometry, { TextAlign } from 'three-text-geometry'
 import DemoBase from './DemoBase'
 
 export class DemoSimple extends DemoBase {
   initScene() {
     super.initScene()
 
+    /** TextGeometryOption */
+    this.textOption = {
+      font: this.font,
+      align: TextAlign.Left,
+      width: 1600,
+      flipY: this.textures[0].flipY,
+    }
+
     const textGeometry = new TextGeometry(this.randomText(), this.textOption)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
     const textMaterial = new THREE.MeshBasicMaterial({
-      map: this.texture,
+      map: this.textures[0],
       side: THREE.DoubleSide,
       transparent: true,
       color: 0x666666,

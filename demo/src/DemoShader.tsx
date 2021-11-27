@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import TextGeometry from 'three-text-geometry'
+import TextGeometry, { TextAlign } from 'three-text-geometry'
 import DemoBase from './DemoBase'
 
 export class DemoShader extends DemoBase {
@@ -13,6 +13,14 @@ export class DemoShader extends DemoBase {
   initScene() {
     super.initScene()
 
+    /** TextGeometryOption */
+    this.textOption = {
+      font: this.font,
+      align: TextAlign.Left,
+      width: 1600,
+      flipY: this.textures[0].flipY,
+    }
+
     // const text = this.textList[0]
     const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.`
     const textGeometry = new TextGeometry(text, this.textOption)
@@ -23,7 +31,7 @@ export class DemoShader extends DemoBase {
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
     const textMaterial = new THREE.MeshBasicMaterial({
-      map: this.texture,
+      map: this.textures[0],
       side: THREE.DoubleSide,
       transparent: true,
       color: 0x666666,

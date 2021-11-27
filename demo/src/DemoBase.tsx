@@ -17,11 +17,6 @@ export class DemoBase extends React.Component {
   scene?: THREE.Scene
   camera?: THREE.PerspectiveCamera
 
-  fontUri: string =
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
-  textureUri: string =
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png'
-
   textIndex: number = 0
   textList: string[] = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.\nDuis non sapien nulla.\nIn convallis nulla nec nulla varius rutrum.\nNunc augue augue, ornare in cursus egestas, cursus vel magna.\nFusce at felis vel tortor sagittis tincidunt nec vitae nisl.\nSed efficitur nibh consequat tortor pulvinar, dignissim tincidunt risus hendrerit.\nSuspendisse quis commodo nulla.\nUt orci urna, mollis non nisl id, molestie tristique purus.\nPhasellus efficitur laoreet eros vehicula convallis.\nSed imperdiet, lectus a facilisis tempus, elit orci varius ante, at lacinia odio massa et quam.\nQuisque vulputate nulla vitae feugiat aliquam.\nVivamus vel mauris sit amet est rhoncus molestie at quis neque.\nDuis faucibus laoreet tempus.\nMaecenas metus velit, lobortis sit amet mauris at, vehicula condimentum velit.\nVestibulum ornare eu turpis vel laoreet.\nNunc ac cursus nunc, non porttitor arcu.`,
@@ -39,53 +34,72 @@ export class DemoBase extends React.Component {
     const index = Math.floor(Math.random() * this.textList.length)
     return this.textList[index]
   }
+
+
+  fontUri: string =
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt'
+  textureUri: string[] = [
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png',
+  ]
   font?: BMFont
-  texture?: THREE.Texture
+  textures: THREE.Texture[] = []
+
   textOption?: TextGeometryOption
   textMesh?: THREE.Mesh
 
   animationFrameID?: any
 
   componentDidMount() {
-    if (this.fontUri.endsWith('.fnt')) {
-      new BMFontLoader()
-        .loadAscii(this.fontUri)
-        .then((font: BMFont) => {
-          this.fontDidLoad(font)
+    // this.loadFont()
+    const self = this
+    this.loadAssets(this.fontUri, this.textureUri)
+      .then((values: (BMFont | THREE.Texture)[]) => {
+        values.forEach((value: BMFont | THREE.Texture) => {
+          if (value instanceof THREE.Texture) {
+            self.textures.push(value as THREE.Texture)
+          } else {
+            self.font = value as BMFont
+          }
         })
-        .catch((e) => {
-          console.error(e)
-        })
-    } else if (this.fontUri.endsWith('.json')) {
-      new BMFontLoader()
-        .loadJson(this.fontUri)
-        .then((font: BMFont) => {
-          this.fontDidLoad(font)
-        })
-        .catch((e) => {
-          console.error(e)
-        })
-    } else if (this.fontUri.endsWith('.xml')) {
-      new BMFontLoader()
-        .loadXML(this.fontUri)
-        .then((font: BMFont) => {
-          this.fontDidLoad(font)
-        })
-        .catch((e) => {
-          console.error(e)
-        })
-    }
+        self.assetsDidLoad()
+      })
+      .catch((e) => {
+        console.error(e)
+      })
   }
 
   componentWillUnmount() {
     cancelAnimationFrame(this.animationFrameID)
   }
 
-  private fontDidLoad(font: BMFont) {
-    /** Dwnloaded data */
-    this.font = font
-    this.texture = new THREE.TextureLoader().load(this.textureUri)
+  loadAssets(fontUri: string, textureUri: string[]): Promise<(BMFont | THREE.Texture)[]> {
+    const createFontLoader = (uri: string) => {
+      if (uri.endsWith('.fnt')) {
+        return new BMFontLoader().loadAscii(uri)
+      } else if (uri.endsWith('.json')) {
+        return new BMFontLoader().loadJson(uri)
+      } else if (uri.endsWith('.xml')) {
+        return new BMFontLoader().loadXML(uri)
+      } else {
+        return new BMFontLoader().loadBinary(uri)
+      }
+    }
+    // const textureLoaders: Promise<THREE.Texture[]> = Promise.all(textureUri.map((uri: string)=>{
+    //   return new THREE.TextureLoader().loadAsync(uri)
+    // }))
+    const textureLoaders: Promise<BMFont | THREE.Texture>[] = textureUri.map((uri: string) => {
+      return new THREE.TextureLoader().loadAsync(uri)
+    })
+    textureLoaders.push(createFontLoader(fontUri))
+    return Promise.all(textureLoaders)
+  }
 
+  assetsDidLoad() {
+    this.initBaseScene()
+    this.initScene()
+  }
+
+  private initBaseScene() {
     /** Renderer */
     this.renderer = new THREE.WebGLRenderer({ alpha: true })
     this.renderer.setClearColor(0x000000, 0)
@@ -124,18 +138,8 @@ export class DemoBase extends React.Component {
     )
     this.scene?.add(axes)
 
-    /** AxesHelper */
-    this.textOption = {
-      font: this.font,
-      align: TextAlign.Left,
-      width: 1600,
-      flipY: this.texture.flipY,
-    }
-
     window.addEventListener('resize', this.onWindowResize.bind(this))
     window.addEventListener('click', this.onClicked.bind(this))
-
-    this.initScene()
   }
 
   initScene() {}
