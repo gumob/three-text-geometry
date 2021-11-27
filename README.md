@@ -4,23 +4,18 @@
 
 # three-text-geometry
 
+<!-- ![demo.gif](README-assets/demo.gif) -->
+<img src="README-assets/demo.gif" alt="demo.gif" style="width:1200px;"/>
+
 ## Generate Bitmap Font
 
-#### Install msdf-bmfont-xml
+#### Install [msdf-bmfont-xml](https://github.com/soimy/msdf-bmfont-xml)
 
 ```
 npm install msdf-bmfont-xml -g
 ```
 
-```
-msdf-bmfont \
-    --output-type xml \
-    --filename 'OdudoMono-Regular' \
-    --font-size 128 \
-    --texture-size 1024,1024 \
-    --field-type 'sdf' \
-    'OdudoMono-Regular.otf'
-```
+#### Generat Bitmap Font
 
 ```
 msdf-bmfont \
