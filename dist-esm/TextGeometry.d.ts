@@ -14,7 +14,6 @@ declare class TextGeometry extends THREE.BufferGeometry {
      * @type {TextGeometryOption}
      * @access private
      * @memberof TextGeometry
-     * @privateRemarks
      */
     private _opt;
     private _visibleGlyphs;

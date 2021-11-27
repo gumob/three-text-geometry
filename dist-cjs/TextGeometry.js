@@ -28,7 +28,6 @@ class TextGeometry extends THREE.BufferGeometry {
          * @type {TextGeometryOption}
          * @access private
          * @memberof TextGeometry
-         * @privateRemarks
          */
         this._opt = {
             font: undefined,
