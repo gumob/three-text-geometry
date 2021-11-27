@@ -44,7 +44,7 @@ $ yarn start
 #### The sample code using `TextGeometry`, `BMFontLoader`, and `THREE.TextureLoader`
 
 - `BMFontLoader` and `THREE.TextureLoader` can be combined by using Promise.
-- For detaild information, read the [documentation](https://github.com/gumob/three-text-geometry/docs).
+- For detaild information, read the [documentation](https://gumob.github.io/three-text-geometry/).
 
 ```TypeScript
 import * as THREE from 'three'
