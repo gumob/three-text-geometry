@@ -2,10 +2,8 @@ import React from 'react'
 import * as THREE from 'three'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { BMFontLoader, BMFont } from 'three-text-geometry'
-
+import { BMFontLoader, BMFont, TextGeometryOption } from 'three-text-geometry'
 import './Demo.css'
-import { TextGeometryOption } from 'three-text-geometry/dist-cjs/types'
 
 export class DemoBase extends React.Component {
   stats?: Stats | undefined

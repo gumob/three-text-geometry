@@ -9,6 +9,8 @@ import {
   BMFontInfo,
   BMFontKern,
   TextAlign,
+  TextGeometryOption,
+  TextGlyph,
   WordWrapMode,
 } from './types'
 
@@ -21,6 +23,8 @@ export {
   BMFontKern,
   BMFontLoader,
   TextAlign,
+  TextGeometryOption,
+  TextGlyph,
   WordWrapMode,
   MultiPageShaderMaterial,
   MultiPageShaderMaterialParameters,
