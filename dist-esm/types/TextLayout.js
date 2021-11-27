@@ -12,17 +12,5 @@ var TextAlign;
     /** Text aligns to right. */
     TextAlign[TextAlign["Right"] = 2] = "Right";
 })(TextAlign || (TextAlign = {}));
-/**
- * The enums to specify word wrapping.
- *
- * @enum {number}
- */
-var WordWrapMode;
-(function (WordWrapMode) {
-    /** Wrap text to pre. */
-    WordWrapMode["Pre"] = "pre";
-    /** No wrapping. */
-    WordWrapMode["NoWrap"] = "nowrap";
-})(WordWrapMode || (WordWrapMode = {}));
-export { TextAlign, WordWrapMode, };
-//# sourceMappingURL=options.js.map
+export { TextAlign };
+//# sourceMappingURL=TextLayout.js.map

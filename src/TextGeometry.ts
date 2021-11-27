@@ -8,18 +8,15 @@ import { computeBox, computeSphere, createIndices, extractPages, extractPosition
  *
  * @class TextGeometry
  * @augments {THREE.BufferGeometry}
- * 
  * @alpha
  */
 class TextGeometry extends THREE.BufferGeometry {
-
   /**
    * The option that conforms to TextGeometryOption.
    *
-   * @private
    * @type {TextGeometryOption}
+   * @access private
    * @memberof TextGeometry
-   * 
    * @privateRemarks
    */
   private _opt: TextGeometryOption = {

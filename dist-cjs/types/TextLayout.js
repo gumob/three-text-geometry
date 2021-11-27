@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WordWrapMode = exports.TextAlign = void 0;
+exports.TextAlign = void 0;
 /**
  * The enums to specify text alignment.
  *
@@ -16,17 +16,4 @@ var TextAlign;
     TextAlign[TextAlign["Right"] = 2] = "Right";
 })(TextAlign || (TextAlign = {}));
 exports.TextAlign = TextAlign;
-/**
- * The enums to specify word wrapping.
- *
- * @enum {number}
- */
-var WordWrapMode;
-(function (WordWrapMode) {
-    /** Wrap text to pre. */
-    WordWrapMode["Pre"] = "pre";
-    /** No wrapping. */
-    WordWrapMode["NoWrap"] = "nowrap";
-})(WordWrapMode || (WordWrapMode = {}));
-exports.WordWrapMode = WordWrapMode;
-//# sourceMappingURL=options.js.map
+//# sourceMappingURL=TextLayout.js.map

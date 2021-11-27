@@ -10,7 +10,6 @@ const utils_1 = require("./utils");
  *
  * @class TextGeometry
  * @augments {THREE.BufferGeometry}
- *
  * @alpha
  */
 class TextGeometry extends THREE.BufferGeometry {
@@ -26,10 +25,9 @@ class TextGeometry extends THREE.BufferGeometry {
         /**
          * The option that conforms to TextGeometryOption.
          *
-         * @private
          * @type {TextGeometryOption}
+         * @access private
          * @memberof TextGeometry
-         *
          * @privateRemarks
          */
         this._opt = {

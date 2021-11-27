@@ -1,4 +1,5 @@
 export * from './BMFont'
 export * from './BMFontUtil'
 export * from './TextGeometryOption'
-export * from './options'
+export * from './TextLayout'
+export * from './WordWrap'

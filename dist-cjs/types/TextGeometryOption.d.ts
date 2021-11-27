@@ -8,88 +8,92 @@ export interface TextGeometryOption {
     /**
      * The BMFont definition which holds chars, kernings, etc.
      *
-     * @type {(BMFont | undefined)}
+     * @type {BMFont | undefined}
      * @memberof TextGeometryOption
      */
     font?: BMFont | undefined;
     /**
      * The starting index into the text to layout.
      *
-     * @defaultValue 0
-     * @type {(number | undefined)}
+     * @type {number | undefined}
      * @memberof WordWrapOption
+     * @defaultValue 0
      */
     start?: number | undefined;
     /**
      * The ending index (exclusive) into the text to layout.
      *
-     * @defaultValue text.length
-     * @type {(number | undefined)}
+     * @type {number | undefined}
      * @memberof WordWrapOption
+     * @defaultValue text.length
      */
     end?: number | undefined;
     /**
-     * The desired width of the text box, causes word-wrapping and clipping in WordWrapMode mode. Leave as undefined to remove word-wrapping (default behaviour).
+     * The desired width of the text box, causes word-wrapping and clipping in WordWrapMode mode. Leave as
+     * undefined to remove word-wrapping (default behaviour).
      *
-     * @defaultValue undefined
-     * @type {(number | undefined)}
+     * @type {number | undefined}
      * @memberof TextGeometryOption
+     * @defaultValue undefined
      */
     width?: number | undefined;
     /**
-     * A mode for word-wrapper; can be WordWrapMode.Pre (maintain spacing), or WordWrapMode.NoWrap (collapse whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse whitespace, break at width or newlines).
+     * A mode for word-wrapper; can be WordWrapMode.Pre (maintain spacing), or WordWrapMode.NoWrap (collapse
+     * whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour
+     * (collapse whitespace, break at width or newlines).
      *
-     * @defaultValue undefined
-     * @type {(WordWrapMode | undefined)}
+     * @type {WordWrapMode | undefined}
      * @memberof TextGeometryOption
+     * @defaultValue undefined
      */
     mode?: WordWrapMode | undefined;
     /**
      * The letter spacing in pixels.
      *
-     * @defaultValue 0
-     * @type {(number | undefined)}
+     * @type {number | undefined}
      * @memberof TextGeometryOption
+     * @defaultValue 0
      */
     letterSpacing?: number | undefined;
     /**
      * The number of spaces to use in a single tab	.
      *
-     * @defaultValue 4
-     * @type {(number | undefined)}
+     * @type {number | undefined}
      * @memberof TextGeometryOption
+     * @defaultValue 4
      */
     tabSize?: number | undefined;
     /**
-     * The line height in pixels
+     * The line height in pixels.
      *
-     * @defaultValue font.common.lineHeight.
-     * @type {(number | undefined)}
+     * @type {number | undefined}
      * @memberof TextGeometryOption
+     * @defaultValue font.common.lineHeight.
      */
     lineHeight?: number | undefined;
     /**
      * This can be TextAlign.left, TextAlign.center or TextAlign.right.
      *
-     * @defaultValue TextAlign.left
-     * @type {(TextAlign | undefined)}
+     * @type {TextAlign | undefined}
      * @memberof TextGeometryOption
+     * @defaultValue TextAlign.left
      */
     align?: TextAlign | undefined;
     /**
      * Whether the texture will be Y-flipped.
      *
-     * @defaultValue true
      * @type {boolean}
      * @memberof TextGeometryOption
+     * @defaultValue true
      */
     flipY?: boolean;
     /**
-     * Whether to construct this geometry with an extra buffer containing page IDs. This is necessary for multi-texture fonts.
+     * Whether to construct this geometry with an extra buffer containing page IDs. This is necessary for
+     * multi-texture fonts.
      *
-     * @defaultValue false
      * @type {boolean}
      * @memberof TextGeometryOption
+     * @defaultValue false
      */
     multipage?: boolean;
 }
