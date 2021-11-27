@@ -1,9 +1,12 @@
 import * as THREE from 'three'
 import TextGeometry, { TextAlign } from 'three-text-geometry'
 import DemoBase from './DemoBase'
+import { fragmentShader, vertexShader } from './shaders/effect'
 
 export class DemoShader extends DemoBase {
   swapTimeoutID?: any
+  time: number = 0
+  textMaterial?: THREE.RawShaderMaterial
 
   componentWillUnmount() {
     clearTimeout(this.swapTimeoutID)
@@ -21,36 +24,43 @@ export class DemoShader extends DemoBase {
       flipY: this.textures[0].flipY,
     }
 
-    // const text = this.textList[0]
-    const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.`
-    const textGeometry = new TextGeometry(text, this.textOption)
-    console.clear()
-    // console.log('textGeometry.option', textGeometry.option)
-    // console.log('textGeometry.layout', textGeometry.layout)
+    /** Geometry */
+    const textGeometry = new TextGeometry(this.staticText(), this.textOption)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
-    const textMaterial = new THREE.MeshBasicMaterial({
-      map: this.textures[0],
-      side: THREE.DoubleSide,
+    /** Material */
+    this.textMaterial = new THREE.RawShaderMaterial({
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      uniforms: {
+        animate: { value: 1 },
+        iGlobalTime: { value: 0 },
+        map: { value: this.textures[0] },
+        color: { value: new THREE.Color(0x000000) },
+      },
       transparent: true,
-      color: 0x666666,
+      side: THREE.DoubleSide,
+      depthTest: false
     })
-    this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
+    this.textMaterial.side = THREE.DoubleSide
+    this.textMesh = new THREE.Mesh(textGeometry, this.textMaterial)
     this.textMesh.scale.multiply(new THREE.Vector3(1, -1, 1))
     this.textMesh.position.set(-box.x / 2, -box.y / 2, 0)
     this.scene?.add(this.textMesh)
+  }
 
-    textGeometry.update(text, this.textOption)
-    textGeometry.update(text, this.textOption)
-    textGeometry.update(text, this.textOption)
-    textGeometry.update(text, this.textOption)
-    textGeometry.update(text, this.textOption)
-    textGeometry.update(text, this.textOption)
-    textGeometry.update(text, this.textOption)
-
-    /** Render scene */
-    // this.swapText(3000)
+  updateScene(): void {
+    const dt = performance.now()
+    const duration = 3
+    this.time += dt / 1000
+    this.textMaterial!.uniforms.iGlobalTime.value = this.time
+    this.textMaterial!.uniforms.animate.value = this.time / duration
+    this.textMaterial!.needsUpdate = true
+    if (this.time > duration) {
+      this.time = 0
+    }
+    super.updateScene()
   }
 
   swapText(timeout: number) {

@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import TextGeometry, { TextAlign, MultiPageShaderMaterialParameters } from 'three-text-geometry'
-import ShuffleText, { ShuffleOption, ShuffleState } from './effects/shuffle'
 import DemoBase from './DemoBase'
 
 export class DemoMultipage extends DemoBase {
@@ -9,15 +8,10 @@ export class DemoMultipage extends DemoBase {
   textureUri: string[]= [
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64-Multipage-0.png',
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64-Multipage-1.png',
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64-Multipage-2.png',
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64-Multipage-2.png'
   ]
 
-  shuffleTimeoutID?: any
-  shuffle?: ShuffleText
-
   componentWillUnmount() {
-    this.shuffle?.cancel()
-    clearTimeout(this.shuffleTimeoutID)
     cancelAnimationFrame(this.animationFrameID)
   }
 
@@ -29,7 +23,7 @@ export class DemoMultipage extends DemoBase {
       align: TextAlign.Left,
       width: 1600,
       flipY: this.textures[0].flipY,
-      multipage: true,
+      multipage: true
     }
 
     /** Geometry */
