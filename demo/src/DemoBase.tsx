@@ -36,7 +36,7 @@ export class DemoBase extends React.Component {
   fontUri: string =
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
   textureUri: string[] = [
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png',
   ]
   font?: BMFont
   textures: THREE.Texture[] = []

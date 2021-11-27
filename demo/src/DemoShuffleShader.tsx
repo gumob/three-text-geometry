@@ -9,8 +9,8 @@ export class DemoShuffleShader extends DemoBase {
   swapTimeoutID?: any
   time: number = 0
   textMaterial?: THREE.Material
-  clock: THREE.Clock = new THREE.Clock();
-  
+  clock: THREE.Clock = new THREE.Clock()
+
   componentWillUnmount() {
     this.shuffle?.cancel()
     cancelAnimationFrame(this.animationFrameID)
@@ -44,7 +44,7 @@ export class DemoShuffleShader extends DemoBase {
       },
       transparent: true,
       side: THREE.DoubleSide,
-      depthTest: false
+      depthTest: false,
     })
     this.textMaterial.side = THREE.DoubleSide
     this.textMesh = new THREE.Mesh(textGeometry, this.textMaterial)

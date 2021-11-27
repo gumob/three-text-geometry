@@ -33,7 +33,7 @@ export class DemoShuffle extends DemoBase {
       map: this.textures[0],
       side: THREE.DoubleSide,
       transparent: true,
-      color: 0x666666
+      color: 0x666666,
     })
     this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
     this.textMesh.scale.multiply(new THREE.Vector3(1, -1, 1))
@@ -51,7 +51,7 @@ export class DemoShuffle extends DemoBase {
       delay: { min: 0, max: 0 },
       fadeDuration: { min: 500, max: 700 },
       shuffleDuration: { min: 1000, max: 2000 },
-      interval: { min: 20, max: 40 }
+      interval: { min: 20, max: 40 },
     }
     const self = this
     this.shuffle?.cancel()

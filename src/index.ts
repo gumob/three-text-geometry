@@ -22,11 +22,11 @@ export {
   BMFontInfo,
   BMFontKern,
   BMFontLoader,
+  MultiPageShaderMaterial,
+  MultiPageShaderMaterialParameters,
   TextAlign,
   TextGeometryOption,
   TextGlyph,
   WordWrapMode,
-  MultiPageShaderMaterial,
-  MultiPageShaderMaterialParameters,
 }
 export default TextGeometry
