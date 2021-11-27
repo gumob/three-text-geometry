@@ -44,8 +44,10 @@ class TextGeometryRendere extends React.Component {
     camera?: THREE.PerspectiveCamera
 
     componentDidMount() {
-        const fontUri: string = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
-        const textureUri: string = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
+        const fontUri: string =
+            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
+        const textureUri: string =
+            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
         Promise.all([
             new BMFontLoader().loadJson(fontUri),
             new THREE.TextureLoader().loadAsync(textureUri)
@@ -75,7 +77,8 @@ class TextGeometryRendere extends React.Component {
         this.scene.background = new THREE.Color(0x000000)
 
         /** Camera */
-        this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100000)
+        const aspect = window.innerWidth / window.innerHeight
+        this.camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000)
         this.camera.position.set(1000, 1000, 2000)
         this.camera.lookAt(0, 0, 0)
 
