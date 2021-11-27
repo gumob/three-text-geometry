@@ -101,7 +101,7 @@ export class MultiPageShaderMaterialParameters implements THREE.ShaderMaterialPa
                 precision ${precision} float;
                 uniform float opacity;
                 uniform vec3 color;
-                ${samplers},
+                ${samplers}
                 varying float vPage;
                 varying vec2 vUv;
                 void main() {

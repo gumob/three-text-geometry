@@ -46,9 +46,6 @@ export class DemoShuffle extends DemoBase {
     this.textMesh.position.set(-box.x / 2, -box.y / 2, 0)
     this.scene?.add(this.textMesh)
 
-    /** Render scene */
-    this.updateScene()
-
     /** Shuffle text */
     this.suffleText(1000)
   }

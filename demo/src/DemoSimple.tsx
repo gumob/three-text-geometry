@@ -28,9 +28,6 @@ export class DemoSimple extends DemoBase {
     this.textMesh.scale.multiply(new THREE.Vector3(1, -1, 1))
     this.textMesh.position.set(-box.x / 2, -box.y / 2, 0)
     this.scene?.add(this.textMesh)
-
-    /** Render scene */
-    this.updateScene()
   }
 }
 

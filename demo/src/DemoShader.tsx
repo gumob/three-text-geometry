@@ -50,7 +50,6 @@ export class DemoShader extends DemoBase {
     textGeometry.update(text, this.textOption)
 
     /** Render scene */
-    this.updateScene()
     // this.swapText(3000)
   }
 

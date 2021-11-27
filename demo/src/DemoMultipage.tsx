@@ -1,13 +1,16 @@
 import * as THREE from 'three'
-import TextGeometry, { TextAlign } from 'three-text-geometry'
+import TextGeometry, { TextAlign, MultiPageShaderMaterialParameters } from 'three-text-geometry'
 import ShuffleText, { ShuffleOption, ShuffleState } from './effects/shuffle'
 import DemoBase from './DemoBase'
 
 export class DemoMultipage extends DemoBase {
   fontUri: string =
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Norwester-Multi-64.fnt'
   textureUri: string[]= [
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Norwester-Multi_0.png',
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Norwester-Multi_1.png',
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Norwester-Multi_2.png',
+    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Norwester-Multi_3.png',
   ]
 
   shuffleTimeoutID?: any
@@ -27,51 +30,29 @@ export class DemoMultipage extends DemoBase {
       align: TextAlign.Left,
       width: 1600,
       flipY: this.textures[0].flipY,
+      multipage: true,
     }
 
-    /** Text Mesh */
+    /** Geometry */
     const textGeometry = new TextGeometry(this.staticText(), this.textOption)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
-    const textMaterial = new THREE.MeshBasicMaterial({
-      map: this.textures[0],
-      side: THREE.DoubleSide,
+
+    /** Material */
+    const params: MultiPageShaderMaterialParameters = new MultiPageShaderMaterialParameters({
+      textures: this.textures,
       transparent: true,
-      color: 0x666666,
+      opacity: 0.95,
+      color: new THREE.Color(0x666666),
     })
+    const textMaterial = new THREE.RawShaderMaterial(params)
+    textMaterial.side = THREE.DoubleSide
+
     this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
     this.textMesh.scale.multiply(new THREE.Vector3(1, -1, 1))
     this.textMesh.position.set(-box.x / 2, -box.y / 2, 0)
     this.scene?.add(this.textMesh)
-
-    /** Render scene */
-    this.updateScene()
-
-    /** Shuffle text */
-    this.suffleText(1000)
-  }
-
-  suffleText(timeout: number) {
-    const option: ShuffleOption = {
-      shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
-      ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|\,)/,
-      delay: { min: 0, max: 0 },
-      fadeDuration: { min: 500, max: 700 },
-      shuffleDuration: { min: 1000, max: 2000 },
-      interval: { min: 20, max: 40 },
-    }
-    const self = this
-    this.shuffle?.cancel()
-    this.shuffle = new ShuffleText(this.staticText(), option, (text: string, state: ShuffleState) => {
-      const geom = this.textMesh?.geometry as TextGeometry
-      geom.update(text)
-      if (state === ShuffleState.Completed) self.suffleText(3000)
-    })
-    clearTimeout(this.shuffleTimeoutID)
-    this.shuffleTimeoutID = setTimeout(() => {
-      self.shuffle?.start()
-    }, timeout)
   }
 }
 
