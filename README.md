@@ -43,8 +43,8 @@ $ yarn start
 
 #### The sample code using [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/default.html), [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html), and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader)
 
-- [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html) and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader) can be combined by using Promise.
-- For detaild information, read the [documentation](https://gumob.github.io/three-text-geometry/).
+- [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html) and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader) can be combined by using [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+- For detailed information, read the [documentation](https://gumob.github.io/three-text-geometry/).
 
 ```TypeScript
 import * as THREE from 'three'
