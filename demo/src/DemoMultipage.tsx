@@ -43,7 +43,8 @@ export class DemoMultipage extends DemoBase {
       textures: this.textures,
       transparent: true,
       opacity: 0.95,
-      color: new THREE.Color(0x666666),
+      alphaTest: 0.5,
+      color: new THREE.Color(0x666666)
     })
     const textMaterial = new THREE.RawShaderMaterial(params)
     textMaterial.side = THREE.DoubleSide

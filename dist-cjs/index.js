@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MultiPageShaderMaterialParameters = exports.WordWrapMode = exports.TextAlign = exports.BMFontLoader = void 0;
+exports.MultiPageShaderMaterialParameters = exports.MultiPageShaderMaterial = exports.WordWrapMode = exports.TextAlign = exports.BMFontLoader = void 0;
 const tslib_1 = require("tslib");
 const loader_1 = require("./loader");
 Object.defineProperty(exports, "BMFontLoader", { enumerable: true, get: function () { return loader_1.BMFontLoader; } });
 const shader_1 = require("./shader");
+Object.defineProperty(exports, "MultiPageShaderMaterial", { enumerable: true, get: function () { return shader_1.MultiPageShaderMaterial; } });
 Object.defineProperty(exports, "MultiPageShaderMaterialParameters", { enumerable: true, get: function () { return shader_1.MultiPageShaderMaterialParameters; } });
 const TextGeometry_1 = (0, tslib_1.__importDefault)(require("./TextGeometry"));
 const types_1 = require("./types");
