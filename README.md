@@ -83,6 +83,7 @@ class TextGeometryRendere extends React.Component {
         this.camera.lookAt(0, 0, 0)
 
         /** Geometry */
+        const text: string = 'Hollo World.\nHello Universe.'
         const textOption: TextGeometryOption = {
             font: font,
             align: TextAlign.Left,
@@ -90,7 +91,7 @@ class TextGeometryRendere extends React.Component {
             flipY: textures.flipY,
             multipage: true
         }
-        const textGeometry = new TextGeometry('Hollo World.\nHello Universe.', textOption)
+        const textGeometry = new TextGeometry(text, textOption)
 
         /** Material */
         const textMaterial = new THREE.MeshBasicMaterial({
