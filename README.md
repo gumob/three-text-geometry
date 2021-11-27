@@ -51,7 +51,7 @@ $ yarn start
 import * as THREE from 'three'
 import TextGeometry, { BMFontLoader, BMFont, TextGeometryOption, TextAlign } from 'three-text-geometry'
 
-class TextGeometryRendere extends React.Component {
+class TextGeometryRenderer extends React.Component {
 
     renderer?: THREE.WebGLRenderer
     scene?: THREE.Scene
