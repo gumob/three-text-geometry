@@ -322,4 +322,4 @@ TextLayout.CAP_HEIGHTS = ['H', 'I', 'N', 'E', 'F', 'K', 'L', 'T', 'U', 'V', 'W',
 TextLayout.TAB_ID = '\t'.charCodeAt(0);
 TextLayout.SPACE_ID = ' '.charCodeAt(0);
 export { TextLayout };
-//# sourceMappingURL=layout.js.map
+//# sourceMappingURL=TextLayout.js.map

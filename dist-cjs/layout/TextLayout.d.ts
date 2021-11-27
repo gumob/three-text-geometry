@@ -41,4 +41,4 @@ declare class TextLayout {
     private findChar;
 }
 export { TextLayout };
-//# sourceMappingURL=layout.d.ts.map
+//# sourceMappingURL=TextLayout.d.ts.map

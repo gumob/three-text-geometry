@@ -29,7 +29,6 @@ export interface TextGeometryOption {
    * @defaultValue text.length
    */
   end?: number | undefined
-
   /**
    * The desired width of the text box, causes word-wrapping and clipping in WordWrapMode mode. Leave as
    * undefined to remove word-wrapping (default behaviour).
@@ -41,8 +40,8 @@ export interface TextGeometryOption {
   width?: number | undefined
   /**
    * A mode for word-wrapper; can be WordWrapMode.Pre (maintain spacing), or WordWrapMode.NoWrap (collapse
-   * whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour
-   * (collapse whitespace, break at width or newlines).
+   * whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse
+   * whitespace, break at width or newlines).
    *
    * @type {WordWrapMode | undefined}
    * @memberof TextGeometryOption

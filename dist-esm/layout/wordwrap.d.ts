@@ -18,4 +18,4 @@ declare class WordWrap {
     monospace(_: string, start: number, end: number, width: number): WordMetrics;
 }
 export { WordWrap };
-//# sourceMappingURL=wordwrap.d.ts.map
+//# sourceMappingURL=WordWrap.d.ts.map

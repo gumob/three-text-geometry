@@ -136,4 +136,4 @@ exports.WordWrap = WordWrap;
 WordWrap.newlineRegexp = /\n/;
 WordWrap.whitespaceRegexp = /\s/;
 WordWrap.newlineChar = '\n';
-//# sourceMappingURL=wordwrap.js.map
+//# sourceMappingURL=WordWrap.js.map

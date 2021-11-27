@@ -1,3 +1,3 @@
-export * from './wordwrap';
-export * from './layout';
+export * from './TextLayout';
+export * from './WordWrap';
 //# sourceMappingURL=index.js.map
