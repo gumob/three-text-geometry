@@ -41,7 +41,7 @@ $ yarn install
 $ yarn start
 ```
 
-#### The sample code using `TextGeometry`, `BMFontLoader`, and `THREE.TextureLoader`
+#### The sample code using [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/default.html), [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html), and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader)
 
 - `BMFontLoader` and `THREE.TextureLoader` can be combined by using Promise.
 - For detaild information, read the [documentation](https://gumob.github.io/three-text-geometry/).

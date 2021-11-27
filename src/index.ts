@@ -1,6 +1,6 @@
-import { BMFontLoader } from './loader'
-import { MultiPageShaderMaterial, MultiPageShaderMaterialParameters } from './shader'
-import TextGeometry from './TextGeometry'
+import { BMFontLoader } from '~/loader'
+import { MultiPageShaderMaterial, MultiPageShaderMaterialParameters } from '~/shader'
+import TextGeometry from '~/TextGeometry'
 import {
   BMFont,
   BMFontChar,
@@ -12,7 +12,7 @@ import {
   TextGeometryOption,
   TextGlyph,
   WordWrapMode,
-} from './types'
+} from '~/types'
 
 export {
   BMFont,
