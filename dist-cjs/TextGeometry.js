@@ -5,9 +5,33 @@ const THREE = (0, tslib_1.__importStar)(require("three"));
 const layout_1 = require("./layout");
 const types_1 = require("./types");
 const utils_1 = require("./utils");
+/**
+ * The class that generates THREE.BufferGeometry from a BMFont data.
+ *
+ * @class TextGeometry
+ * @augments {THREE.BufferGeometry}
+ *
+ * @alpha
+ */
 class TextGeometry extends THREE.BufferGeometry {
+    /**
+     * The constructor to creates an instance of TextGeometry.
+     *
+     * @param {string} text         Text to layout.
+     * @param {*}      [option={}]  An object comforms to `TextGeometryOption`.
+     * @memberof TextGeometry
+     */
     constructor(text, option = {}) {
         super();
+        /**
+         * The option that conforms to TextGeometryOption.
+         *
+         * @private
+         * @type {TextGeometryOption}
+         * @memberof TextGeometry
+         *
+         * @privateRemarks
+         */
         this._opt = {
             font: undefined,
             start: undefined,
@@ -27,12 +51,33 @@ class TextGeometry extends THREE.BufferGeometry {
         this._opt.font = option.font;
         this.update(text, option);
     }
+    /**
+     * The option conforms to the TextGeometryOption interface.
+     *
+     * @type {TextGeometryOption}
+     * @memberof TextGeometry
+     * @readonly
+     */
     get option() {
         return { ...this._opt };
     }
+    /**
+     * The array to store TextGlyph objects.
+     *
+     * @type {TextGlyph[]}
+     * @memberof TextGeometry
+     * @readonly
+     */
     get visibleGlyphs() {
         return this._visibleGlyphs;
     }
+    /**
+     * The function to update text.
+     *
+     * @param {string} text         Text to layout.
+     * @param {*}      [option={}]  An object comforms to `TextGeometryOption`.
+     * @memberof TextGeometry
+     */
     update(text, option = {}) {
         if (option.font !== undefined)
             this._opt.font = option.font;
@@ -105,6 +150,11 @@ class TextGeometry extends THREE.BufferGeometry {
             this.setAttribute('page', new THREE.BufferAttribute((0, utils_1.extractPages)(glyphs), 1)); /** enable multipage rendering */
         }
     }
+    /**
+     * The function that computes bounding box of the geometry.
+     *
+     * @memberof TextGeometry
+     */
     computeBoundingSphere() {
         if (this.boundingSphere === null)
             this.boundingSphere = new THREE.Sphere();
@@ -124,6 +174,11 @@ class TextGeometry extends THREE.BufferGeometry {
                 '"position" attribute is likely to have NaN values.');
         }
     }
+    /**
+     * The function that computes bounding sphere of the geometry.
+     *
+     * @memberof TextGeometry
+     */
     computeBoundingBox() {
         if (this.boundingBox === null)
             this.boundingBox = new THREE.Box3();

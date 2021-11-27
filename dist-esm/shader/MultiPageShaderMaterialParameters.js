@@ -20,7 +20,7 @@ export class MultiPageShaderMaterialParameters {
             .join('\n');
         const body = textures
             .map(function (tex, i) {
-            var cond = i === 0 ? 'if' : 'else if';
+            const cond = i === 0 ? 'if' : 'else if';
             return [
                 cond + ' (vPage == ' + i + '.0) {',
                 'sampleColor = texture2D(texture' + i + ', vUv);',

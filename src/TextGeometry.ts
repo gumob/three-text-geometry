@@ -12,6 +12,16 @@ import { computeBox, computeSphere, createIndices, extractPages, extractPosition
  * @alpha
  */
 class TextGeometry extends THREE.BufferGeometry {
+
+  /**
+   * The option that conforms to TextGeometryOption.
+   *
+   * @private
+   * @type {TextGeometryOption}
+   * @memberof TextGeometry
+   * 
+   * @privateRemarks
+   */
   private _opt: TextGeometryOption = {
     font: undefined,
     start: undefined,
