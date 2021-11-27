@@ -2,14 +2,17 @@ import * as THREE from 'three'
 import TextGeometry, { TextAlign } from 'three-text-geometry'
 import ShuffleText, { ShuffleOption, ShuffleState } from './effects/shuffle'
 import DemoBase from './DemoBase'
+import { fragmentShader, vertexShader } from './shaders/effect'
 
 export class DemoShuffleShader extends DemoBase {
-  shuffleTimeoutID?: any
   shuffle?: ShuffleText
-
+  swapTimeoutID?: any
+  time: number = 0
+  textMaterial?: THREE.Material
+  clock: THREE.Clock = new THREE.Clock();
+  
   componentWillUnmount() {
     this.shuffle?.cancel()
-    clearTimeout(this.shuffleTimeoutID)
     cancelAnimationFrame(this.animationFrameID)
   }
 
@@ -24,46 +27,66 @@ export class DemoShuffleShader extends DemoBase {
       flipY: this.textures[0].flipY,
     }
 
-    /** Text Mesh */
+    /** Geometry */
     const textGeometry = new TextGeometry(this.staticText(), this.textOption)
     const box = new THREE.Vector3()
     textGeometry.computeBoundingBox()
     textGeometry.boundingBox?.getSize(box)
-    const textMaterial = new THREE.MeshBasicMaterial({
-      map: this.textures[0],
-      side: THREE.DoubleSide,
+    /** Material */
+    this.textMaterial = new THREE.RawShaderMaterial({
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      uniforms: {
+        animate: { value: 1 },
+        iGlobalTime: { value: 0 },
+        map: { value: this.textures[0] },
+        color: { value: new THREE.Color(0x666666) },
+      },
       transparent: true,
-      color: 0x666666,
+      side: THREE.DoubleSide,
+      depthTest: false
     })
-    this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
+    this.textMaterial.side = THREE.DoubleSide
+    this.textMesh = new THREE.Mesh(textGeometry, this.textMaterial)
     this.textMesh.scale.multiply(new THREE.Vector3(1, -1, 1))
     this.textMesh.position.set(-box.x / 2, -box.y / 2, 0)
     this.scene?.add(this.textMesh)
 
-    /** Shuffle text */
-    this.suffleText(1000)
+    this.clock.start()
   }
 
-  suffleText(timeout: number) {
+  updateScene(): void {
+    const dt = this.clock.getDelta()
+    const duration = 5
+    this.time += dt
+    const mat = this.textMaterial as THREE.RawShaderMaterial
+    mat.uniforms.iGlobalTime.value = this.time
+    mat.uniforms.animate.value = this.time / duration
+    mat.needsUpdate = true
+    if (this.time > duration) {
+      this.time = 0
+      this.shuffleText()
+    }
+    super.updateScene()
+  }
+
+  shuffleText() {
     const option: ShuffleOption = {
       shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
       ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|,)/,
       delay: { min: 0, max: 0 },
       fadeDuration: { min: 500, max: 700 },
-      shuffleDuration: { min: 1000, max: 2000 },
-      interval: { min: 20, max: 40 },
+      shuffleDuration: { min: 1000, max: 2500 },
+      interval: { min: 20, max: 60 },
     }
     const self = this
     this.shuffle?.cancel()
     this.shuffle = new ShuffleText(this.staticText(), option, (text: string, state: ShuffleState) => {
       const geom = this.textMesh?.geometry as TextGeometry
       geom.update(text)
-      if (state === ShuffleState.Completed) self.suffleText(3000)
     })
-    clearTimeout(this.shuffleTimeoutID)
-    this.shuffleTimeoutID = setTimeout(() => {
-      self.shuffle?.start()
-    }, timeout)
+    self.shuffle?.cancel()
+    self.shuffle?.start()
   }
 }
 

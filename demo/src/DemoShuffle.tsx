@@ -41,10 +41,10 @@ export class DemoShuffle extends DemoBase {
     this.scene?.add(this.textMesh)
 
     /** Shuffle text */
-    this.suffleText(1000)
+    this.shuffleText(1000)
   }
 
-  suffleText(timeout: number) {
+  shuffleText(timeout: number) {
     const option: ShuffleOption = {
       shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
       ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|,)/,
@@ -58,7 +58,7 @@ export class DemoShuffle extends DemoBase {
     this.shuffle = new ShuffleText(this.staticText(), option, (text: string, state: ShuffleState) => {
       const geom = this.textMesh?.geometry as TextGeometry
       geom.update(text)
-      if (state === ShuffleState.Completed) self.suffleText(3000)
+      if (state === ShuffleState.Completed) self.shuffleText(3000)
     })
     clearTimeout(this.shuffleTimeoutID)
     this.shuffleTimeoutID = setTimeout(() => {

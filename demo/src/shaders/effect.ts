@@ -137,8 +137,9 @@ void main() {
   float alpha = 0.0;
   float animValue = pow(abs(animate * 2.0 - 1.0), 12.0 - vLine * 5.0);
   float threshold = animValue * 0.5 + 0.5;
-  alpha += 0.15 * aastep(threshold, sdf + 0.4 * snoise(vec3(vUv * 10.0, iGlobalTime)));
-  alpha += 0.35 * aastep(threshold, sdf + 0.1 * snoise(vec3(vUv * 50.0, iGlobalTime)));
+  float mult = 3.0;
+  alpha += 0.15 * aastep(threshold, sdf + 0.4 * snoise(vec3(vUv * 10.0, iGlobalTime)) * mult);
+  alpha += 0.35 * aastep(threshold, sdf + 0.1 * snoise(vec3(vUv * 50.0, iGlobalTime)) * mult);
   alpha += 0.15 * aastep(threshold, sdf);
 
   gl_FragColor = vec4(color, alpha);

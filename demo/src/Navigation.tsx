@@ -25,9 +25,9 @@ export class Navigation extends React.Component {
             </ListItemIcon> */}
             Simple
           </MenuItem>
-          <MenuItem component={NavLink} to="/multipage">
+          {/* <MenuItem component={NavLink} to="/multipage">
           Multipage
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem component={NavLink} to="/shuffle">
             Shuffle
           </MenuItem>

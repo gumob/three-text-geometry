@@ -6,11 +6,13 @@ import { fragmentShader, vertexShader } from './shaders/effect'
 export class DemoShader extends DemoBase {
   swapTimeoutID?: any
   time: number = 0
-  textMaterial?: THREE.RawShaderMaterial
-
+  textMaterial?: THREE.Material
+  clock: THREE.Clock = new THREE.Clock();
+  
   componentWillUnmount() {
     clearTimeout(this.swapTimeoutID)
     cancelAnimationFrame(this.animationFrameID)
+    this.clock?.stop()
   }
 
   initScene() {
@@ -37,7 +39,7 @@ export class DemoShader extends DemoBase {
         animate: { value: 1 },
         iGlobalTime: { value: 0 },
         map: { value: this.textures[0] },
-        color: { value: new THREE.Color(0x000000) },
+        color: { value: new THREE.Color(0x666666) },
       },
       transparent: true,
       side: THREE.DoubleSide,
@@ -48,31 +50,32 @@ export class DemoShader extends DemoBase {
     this.textMesh.scale.multiply(new THREE.Vector3(1, -1, 1))
     this.textMesh.position.set(-box.x / 2, -box.y / 2, 0)
     this.scene?.add(this.textMesh)
+
+    this.clock.start()
   }
 
   updateScene(): void {
-    const dt = performance.now()
+    const dt = this.clock.getDelta()
     const duration = 3
-    this.time += dt / 1000
-    this.textMaterial!.uniforms.iGlobalTime.value = this.time
-    this.textMaterial!.uniforms.animate.value = this.time / duration
-    this.textMaterial!.needsUpdate = true
+    this.time += dt
+    const mat = this.textMaterial as THREE.RawShaderMaterial
+    mat.uniforms.iGlobalTime.value = this.time
+    mat.uniforms.animate.value = this.time / duration
+    mat.needsUpdate = true
     if (this.time > duration) {
       this.time = 0
+      this.swapText()
     }
     super.updateScene()
   }
 
-  swapText(timeout: number) {
-    const self = this
-    clearTimeout(this.swapTimeoutID)
-    this.swapTimeoutID = setTimeout(() => {
-      const text = self.textList[0]
-      const geom = self.textMesh?.geometry as TextGeometry
-      geom.update(text)
-      console.log('geom.option', geom.option)
-      this.swapText(3000)
-    }, timeout)
+  swapText() {
+    const geom = this.textMesh?.geometry as TextGeometry
+    geom.update(this.randomText())
+    const box = new THREE.Vector3()
+    this.textMesh!.geometry.computeBoundingBox()
+    this.textMesh!.geometry.boundingBox?.getSize(box)
+    this.textMesh!.position.set(-box.x / 2, -box.y / 2, 0)
   }
 }
 
