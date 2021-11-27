@@ -1,3 +1,8 @@
+/**
+ * This interface defines BMFont.
+ *
+ * @interface BMFont
+ */
 interface BMFont {
   pages: string[]
   chars: BMFontChar[]
@@ -7,6 +12,11 @@ interface BMFont {
   kernings: BMFontKern[]
 }
 
+/**
+ * This interface defines BMFontChar.
+ *
+ * @interface BMFontChar
+ */
 interface BMFontChar {
   id: number
   index: number
@@ -22,6 +32,11 @@ interface BMFontChar {
   page: number
 }
 
+/**
+ * This interface defines BMFontInfo.
+ *
+ * @interface BMFontInfo
+ */
 interface BMFontInfo {
   face: string
   size: number
@@ -38,6 +53,11 @@ interface BMFontInfo {
   outline: number
 }
 
+/**
+ * This interface defines BMFontCommon.
+ *
+ * @interface BMFontCommon
+ */
 interface BMFontCommon {
   lineHeight: number
   base: number
@@ -51,11 +71,21 @@ interface BMFontCommon {
   blueChnl: number
 }
 
+/**
+ * This interface defines BMFontDistanceField.
+ *
+ * @interface BMFontDistanceField
+ */
 interface BMFontDistanceField {
   fieldType: string
   distanceRange: number
 }
 
+/**
+ * This interface defines BMFontKern.
+ *
+ * @interface BMFontKern
+ */
 interface BMFontKern {
   first: number
   second: number
