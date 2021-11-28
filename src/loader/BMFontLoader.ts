@@ -26,8 +26,7 @@ class BMFontLoader {
   /**
    * The function for loading bitmap font data in JSON format.
    *
-   * ```typescript
-   * import { BMFontLoader } from 'three-text-geometry'
+   * ```typescript import { BMFontLoader } from 'three-text-geometry'
    *
    * const uri = 'https://example.com/font_dir/font_file.json'
    * const loader = new BMFontLoader();
@@ -60,8 +59,7 @@ class BMFontLoader {
   /**
    * The function for loading bitmap font data in XML format.
    *
-   * ```typescript
-   * import { BMFontLoader } from 'three-text-geometry'
+   * ```typescript import { BMFontLoader } from 'three-text-geometry'
    *
    * const uri = 'https://example.com/font_dir/font_file.xml'
    * const loader = new BMFontLoader();
@@ -94,8 +92,7 @@ class BMFontLoader {
   /**
    * The function for loading bitmap font data in ASCII format.
    *
-   * ```typescript
-   * import { BMFontLoader } from 'three-text-geometry'
+   * ```typescript import { BMFontLoader } from 'three-text-geometry'
    *
    * const uri = 'https://example.com/font_dir/font_file.fnt'
    * const loader = new BMFontLoader();
@@ -128,8 +125,7 @@ class BMFontLoader {
   /**
    * The function for loading bitmap font data in Binary format.
    *
-   * ```typescript
-   * import { BMFontLoader } from 'three-text-geometry'
+   * ```typescript import { BMFontLoader } from 'three-text-geometry'
    *
    * const uri = 'https://example.com/font_dir/font_file.bin'
    * const loader = new BMFontLoader();

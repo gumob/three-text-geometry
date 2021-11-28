@@ -16,6 +16,7 @@ import {
   DefaultBMFontCommon,
   DefaultBMFontInfo,
   DefaultBMFontKern,
+  IBMFontParser,
 } from '~/types'
 
 /**
@@ -23,21 +24,27 @@ import {
  *
  * @class BMFontBinaryParser
  */
-class BMFontBinaryParser {
+class BMFontBinaryParser implements IBMFontParser<Buffer> {
   private static HEADER = [66, 77, 70]
   /**
    * The function that parses font data from `Buffer` data.
    *
-   * ```typescript
-   * import { BMFontBinaryParser } from 'three-text-geometry'
+   * ```typescript import { BMFontBinaryParser } from 'three-text-geometry'
    *
    * const data: Binary = ...binary data...
    * const parser = new BMFontBinaryParser();
    * const font: BMFont = parser.parse(data)
    * ```
    *
-   * @param {Buffer} buf `Buffer` that contains font data.
-   * @return {BMFont} A parsed data that conforms to the `BMFont` interface.
+   * @param {Buffer} buf  `Buffer` that contains font data.
+   * @returns {BMFont} A.                                                                                     Parsed
+   *                                                                                                          data
+   *                                                                                                          that
+   *                                                                                                          conforms
+   *                                                                                                          to
+   *                                                                                                          the
+   *                                                                                                          `BMFont`
+   *                                                                                                          interface.
    * @memberof BMFontBinaryParser
    */
   public parse(buf: Buffer): BMFont {

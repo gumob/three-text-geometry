@@ -6,8 +6,7 @@ import { computeBox, computeSphere, createIndices, extractPages, extractPosition
 /**
  * The class that generates THREE.BufferGeometry from a BMFont data.
  *
- * ```typescript
- * import * as THREE from 'three'
+ * ```typescript import * as THREE from 'three'
  * import TextGeometry from 'three-text-geometry'
  *
  * const text: string = '.....text to layout.....'

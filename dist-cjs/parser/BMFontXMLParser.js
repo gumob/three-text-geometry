@@ -4,11 +4,32 @@ exports.BMFontXMLParser = void 0;
 const fast_xml_parser_1 = require("fast-xml-parser");
 const error_1 = require("../error");
 /**
- * # How to create a json schema
- * npm install -g quicktype
- * quicktype ./src/types/BMFont.ts -o ./src/parser/BMFontJsonSchema.json --lang schema
+ * The class for parsing font data in XML format.
+ *
+ * @class BMFontXMLParser
  */
 class BMFontXMLParser {
+    /**
+     * The function that parses font data from a XML string.
+     *
+     * ```typescript import { BMFontXMLParser } from 'three-text-geometry'
+     *
+     * const data: string = ...xml data...
+     * const parser = new BMFontXMLParser();
+     * const font: BMFont = parser.parse(data)
+     * ```
+     *
+     * @param {string} xml  `string` that contains font data.
+     * @returns {BMFont} A.                                                                                     Parsed
+     *                                                                                                          data
+     *                                                                                                          that
+     *                                                                                                          conforms
+     *                                                                                                          to
+     *                                                                                                          the
+     *                                                                                                          `BMFont`
+     *                                                                                                          interface.
+     * @memberof BMFontXMLParser
+     */
     parse(xml) {
         try {
             const options = {

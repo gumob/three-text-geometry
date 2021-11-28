@@ -1,6 +1,6 @@
 import Ajv from 'ajv'
 import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error'
-import { BMFont } from '~/types'
+import { BMFont, IBMFontParser } from '~/types'
 import schema from './BMFontJsonSchema.json'
 
 /**
@@ -14,20 +14,26 @@ import schema from './BMFontJsonSchema.json'
  *
  * @class BMFontJsonParser
  */
-class BMFontJsonParser {
+class BMFontJsonParser implements IBMFontParser<object | string> {
   /**
    * The function that parses font data from a JSON string or object.
    *
-   * ```typescript
-   * import { BMFontJsonParser } from 'three-text-geometry'
+   * ```typescript import { BMFontJsonParser } from 'three-text-geometry'
    *
    * const data: object | string = ...json data...
    * const parser = new BMFontJsonParser();
    * const font: BMFont = parser.parse(data)
    * ```
    *
-   * @param {(object | string)} json `object` or `string` that contains font data.
-   * @return {BMFont} A parsed data that conforms to the `BMFont` interface.
+   * @param {Object | string} json  `object` or `string` that contains font data.
+   * @returns {BMFont} A.                                                                                     Parsed
+   *                                                                                                          data
+   *                                                                                                          that
+   *                                                                                                          conforms
+   *                                                                                                          to
+   *                                                                                                          the
+   *                                                                                                          `BMFont`
+   *                                                                                                          interface.
    * @memberof BMFontJsonParser
    */
   public parse(json: object | string): BMFont {

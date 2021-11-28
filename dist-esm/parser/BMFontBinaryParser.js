@@ -5,7 +5,33 @@
  */
 import { BMFontLoaderError, BMFontLoaderErrorType } from "../error";
 import { DefaultBMFont, DefaultBMFontCommon, DefaultBMFontInfo, DefaultBMFontKern, } from "../types";
+/**
+ * The class for parsing font data in Binary format.
+ *
+ * @class BMFontBinaryParser
+ */
 class BMFontBinaryParser {
+    /**
+     * The function that parses font data from `Buffer` data.
+     *
+     * ```typescript import { BMFontBinaryParser } from 'three-text-geometry'
+     *
+     * const data: Binary = ...binary data...
+     * const parser = new BMFontBinaryParser();
+     * const font: BMFont = parser.parse(data)
+     * ```
+     *
+     * @param {Buffer} buf  `Buffer` that contains font data.
+     * @returns {BMFont} A.                                                                                     Parsed
+     *                                                                                                          data
+     *                                                                                                          that
+     *                                                                                                          conforms
+     *                                                                                                          to
+     *                                                                                                          the
+     *                                                                                                          `BMFont`
+     *                                                                                                          interface.
+     * @memberof BMFontBinaryParser
+     */
     parse(buf) {
         if (buf.length < 6)
             throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Invalid buffer length for BMFont');

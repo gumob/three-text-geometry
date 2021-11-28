@@ -8,7 +8,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BMFontBinaryParser = void 0;
 const error_1 = require("../error");
 const types_1 = require("../types");
+/**
+ * The class for parsing font data in Binary format.
+ *
+ * @class BMFontBinaryParser
+ */
 class BMFontBinaryParser {
+    /**
+     * The function that parses font data from `Buffer` data.
+     *
+     * ```typescript import { BMFontBinaryParser } from 'three-text-geometry'
+     *
+     * const data: Binary = ...binary data...
+     * const parser = new BMFontBinaryParser();
+     * const font: BMFont = parser.parse(data)
+     * ```
+     *
+     * @param {Buffer} buf  `Buffer` that contains font data.
+     * @returns {BMFont} A.                                                                                     Parsed
+     *                                                                                                          data
+     *                                                                                                          that
+     *                                                                                                          conforms
+     *                                                                                                          to
+     *                                                                                                          the
+     *                                                                                                          `BMFont`
+     *                                                                                                          interface.
+     * @memberof BMFontBinaryParser
+     */
     parse(buf) {
         if (buf.length < 6)
             throw new error_1.BMFontLoaderError(error_1.BMFontLoaderErrorType.ParseError, 'Invalid buffer length for BMFont');
