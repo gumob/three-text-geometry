@@ -4,11 +4,11 @@
     --dark-color-text: #B5BAC4;
     --dark-color-text-aside: var(--dark-color-text);
     --dark-color-link: #00aff4;
-    --dark-color-menu-divider: #eee;
-    --dark-color-menu-divider-focus: #000;
+    --dark-color-menu-divider: #272E36;
+    --dark-color-menu-divider-focus: #272E36;
     --dark-color-menu-label: #707070;
     --dark-color-panel: #262E35;
-    --dark-color-panel-divider: #252D34;
+    --dark-color-panel-divider: #272E36;
     --dark-color-comment-tag: #dcddde;
     --dark-color-comment-tag-text: #2f3136;
     --dark-color-ts: #c97dff;
