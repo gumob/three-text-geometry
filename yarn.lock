@@ -8443,6 +8443,8 @@ resolve@~1.19.0:
     ts-patch: ^2.0.1
     tslib: ^2.3.1
     typedoc: ^0.22.10
+    typedoc-plugin-merge-modules: ^3.0.2
+    typedoc-plugin-rename-defaults: ^0.4.0
     typescript: ^4.5.2
     typescript-snapshots-plugin: ^1.7.0
     typescript-transform-paths: ^3.3.1
@@ -8785,6 +8787,24 @@ resolve@~1.19.0:
   version: 0.0.6
   resolution: "typedarray@npm:0.0.6"
   checksum: 33b39f3d0e8463985eeaeeacc3cb2e28bc3dfaf2a5ed219628c0b629d5d7b810b0eb2165f9f607c34871d5daa92ba1dc69f49051cf7d578b4cbd26c340b9d1b1
+  languageName: node
+  linkType: hard
+
+"typedoc-plugin-merge-modules@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "typedoc-plugin-merge-modules@npm:3.0.2"
+  peerDependencies:
+    typedoc: 0.21.x || 0.22.x
+  checksum: f45125e1113160526480a09e47e89d026abdebbc51dc32f554f4cba9da89aaf4bb32f9e57ca1868ef2e377fef6cd52bdc3db28c8f14473d14e26dfbb7d8b7dee
+  languageName: node
+  linkType: hard
+
+"typedoc-plugin-rename-defaults@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "typedoc-plugin-rename-defaults@npm:0.4.0"
+  peerDependencies:
+    typedoc: 0.22.x
+  checksum: 41787d3bb99952c3cf5e4850ac34400d7fc4b8ded87b69a371a777ee9c9813e6290b3466b63a0c8c37e834108c12281ef08433c72c9ce17032234db906d275ea
   languageName: node
   linkType: hard
 
