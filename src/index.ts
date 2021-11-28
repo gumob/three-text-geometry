@@ -13,7 +13,8 @@ import {
   TextGlyph,
   WordWrapMode,
 } from '~/types'
-import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from './parser'
+import { BMFontLoaderError, TextGeometryError } from '~/error'
+import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '~/parser'
 
 export {
   BMFont,
@@ -27,6 +28,8 @@ export {
   BMFontKern,
   BMFontLoader,
   BMFontXMLParser,
+  BMFontLoaderError,
+  TextGeometryError,
   MultiPageShaderMaterial,
   MultiPageShaderMaterialParameters,
   TextAlign,
