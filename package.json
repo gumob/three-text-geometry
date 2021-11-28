@@ -53,7 +53,7 @@
     "prepublishOnly": "yarn build",
     "prepare": "ts-patch install -s",
     "upgrade": "yarn up '*' '@*/*'",
-    "typedoc": "yarn lint && typedoc --out ./docs ./src"
+    "typedoc": "yarn lint && typedoc --excludePrivate --out ./docs ./src"
   },
   "dependencies": {
     "ajv": "^8.8.2",
