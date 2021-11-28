@@ -22,11 +22,7 @@ do
     sourcemap_out="${basepath}.js.map"
     js_in="${basepath}.js"
     js_out="${basepath}.js"
-    echo "sourcemap in: ${sourcemap_in}"
-    echo "sourcemap out: ${sourcemap_out}"
-    echo "js in: ${js_in}"
-    echo "js out: ${js_out}"
-    echo ""
+    echo "minifying... ${path}"
     yarn uglifyjs \
         --compress \
         --mangle \
