@@ -61,3 +61,5 @@ function minify_js() {
 
 minify_js
 # minify_ts
+
+exit 0
