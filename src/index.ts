@@ -13,15 +13,20 @@ import {
   TextGlyph,
   WordWrapMode,
 } from '~/types'
+import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from './parser'
 
 export {
   BMFont,
+  BMFontAsciiParser,
+  BMFontBinaryParser,
   BMFontChar,
   BMFontCommon,
   BMFontDistanceField,
   BMFontInfo,
+  BMFontJsonParser,
   BMFontKern,
   BMFontLoader,
+  BMFontXMLParser,
   MultiPageShaderMaterial,
   MultiPageShaderMaterialParameters,
   TextAlign,

@@ -5,21 +5,19 @@ import { computeBox, computeSphere, createIndices, extractPages, extractPosition
 
 /**
  * The class that generates THREE.BufferGeometry from a BMFont data.
- * 
+ *
  * ```typescript
  * import * as THREE from 'three'
  * import TextGeometry from 'three-text-geometry'
- * 
+ *
  * const text: string = '.....text to layout.....'
  * const option: TextGeometryOption = {
- *    font: font, // BMFont data
- * }
+ * font: font, // BMFont data }
  * const geometry = new TextGeometry(text, option)
  * const material = new THREE.MeshBasicMaterial({
- *    map: texture, // THREE.Texture data
- *    side: THREE.DoubleSide,
- *    transparent: true,
- *    color: 0x666666,
+ * map: texture, // THREE.Texture data side: THREE.DoubleSide,
+ * transparent: true,
+ * color: 0x666666,
  * )
  * const mesth = new THREE.Mesh(geometry, material)
  * ```

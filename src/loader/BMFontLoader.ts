@@ -25,16 +25,16 @@ class BMFontLoader {
 
   /**
    * The function for loading bitmap font data in JSON format.
-   * 
+   *
    * ```typescript
    * import { BMFontLoader } from 'three-text-geometry'
-   * 
+   *
    * const uri = 'https://example.com/font_dir/font_file.json'
    * const loader = new BMFontLoader();
    * loader.loadJson(uri).then((font: BMFont) => {
-   *    // Do something here...
+   * // Do something here...
    * }).catch((e: BMFontLoaderError) => {
-   *    console.error(e)
+   * console.error(e)
    * })
    * ```
    *
@@ -59,16 +59,16 @@ class BMFontLoader {
 
   /**
    * The function for loading bitmap font data in XML format.
-   * 
+   *
    * ```typescript
    * import { BMFontLoader } from 'three-text-geometry'
-   * 
+   *
    * const uri = 'https://example.com/font_dir/font_file.xml'
    * const loader = new BMFontLoader();
    * loader.loadXML(uri).then((font: BMFont) => {
-   *    // Do something here...
+   * // Do something here...
    * }).catch((e: BMFontLoaderError) => {
-   *    console.error(e)
+   * console.error(e)
    * })
    * ```
    *
@@ -93,16 +93,16 @@ class BMFontLoader {
 
   /**
    * The function for loading bitmap font data in ASCII format.
-   * 
+   *
    * ```typescript
    * import { BMFontLoader } from 'three-text-geometry'
-   * 
+   *
    * const uri = 'https://example.com/font_dir/font_file.fnt'
    * const loader = new BMFontLoader();
    * loader.loadASCII(uri).then((font: BMFont) => {
-   *    // Do something here...
+   * // Do something here...
    * }).catch((e: BMFontLoaderError) => {
-   *    console.error(e)
+   * console.error(e)
    * })
    * ```
    *
@@ -127,16 +127,16 @@ class BMFontLoader {
 
   /**
    * The function for loading bitmap font data in Binary format.
-   * 
+   *
    * ```typescript
    * import { BMFontLoader } from 'three-text-geometry'
-   * 
+   *
    * const uri = 'https://example.com/font_dir/font_file.bin'
    * const loader = new BMFontLoader();
    * loader.loadBinary(uri).then((font: BMFont) => {
-   *    // Do something here...
+   * // Do something here...
    * }).catch((e: BMFontLoaderError) => {
-   *    console.error(e)
+   * console.error(e)
    * })
    * ```
    *

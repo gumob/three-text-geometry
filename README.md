@@ -134,7 +134,41 @@ class TextGeometryRenderer extends React.Component {
 
 ```
 
-### The table of `TextGeometryOption`
+#### If you want to use your own classes or functions to load fonts, use the BMFontParser interface to parse the font data.
+
+Parse font data in JSON format
+```TypeScript
+import * as THREE from 'three'
+import { BMFontJsonParser } from 'three-text-geometry'
+
+const font: BMFont = new BMFontJsonParser().parse(/** `string` or `object` data JSON format */)
+```
+
+Parse font data in XML format
+```TypeScript
+import * as THREE from 'three'
+import { BMFontXMLParser } from 'three-text-geometry'
+
+const font: BMFont = new BMFontXMLParser().parse(/** `string` data in XML format */)
+```
+
+Parse font data in ASCII format
+```TypeScript
+import * as THREE from 'three'
+import { BMFontAsciiParser } from 'three-text-geometry'
+
+const font: BMFont = new BMFontAsciiParser().parse(/** `string` data in ASCII format */)
+```
+
+Parse font data in Binary format
+```TypeScript
+import * as THREE from 'three'
+import { BMFontBinaryParser } from 'three-text-geometry'
+
+const font: BMFont = new BMFontBinaryParser().parse(/** `string` data in ASCII Binary */)
+```
+
+### The value list of `TextGeometryOption`
 
 <!-- prettier-ignore-start -->
 | key | type | description | default | required |

@@ -18,9 +18,28 @@ import {
   DefaultBMFontKern,
 } from '~/types'
 
+/**
+ * The class for parsing font data in Binary format.
+ *
+ * @class BMFontBinaryParser
+ */
 class BMFontBinaryParser {
   private static HEADER = [66, 77, 70]
-
+  /**
+   * The function that parses font data from `Buffer` data.
+   *
+   * ```typescript
+   * import { BMFontBinaryParser } from 'three-text-geometry'
+   *
+   * const data: Binary = ...binary data...
+   * const parser = new BMFontBinaryParser();
+   * const font: BMFont = parser.parse(data)
+   * ```
+   *
+   * @param {Buffer} buf `Buffer` that contains font data.
+   * @return {BMFont} A parsed data that conforms to the `BMFont` interface.
+   * @memberof BMFontBinaryParser
+   */
   public parse(buf: Buffer): BMFont {
     if (buf.length < 6)
       throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Invalid buffer length for BMFont')
@@ -165,11 +184,11 @@ class BMFontBinaryParser {
     return kernings
   }
 
-  readStringNT(buf: Buffer, offset: number): string {
+  private readStringNT(buf: Buffer, offset: number): string {
     return this.readNameNT(buf, offset).toString('utf8')
   }
 
-  readNameNT(buf: Buffer, offset: number): Buffer {
+  private readNameNT(buf: Buffer, offset: number): Buffer {
     let pos = offset
     for (; pos < buf.length; pos++) {
       if (buf[pos] === 0x00) break
