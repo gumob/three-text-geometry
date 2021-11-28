@@ -1,0 +1,37 @@
+:root {
+    --dark-color-background: #1F252B;
+    --dark-color-secondary-background: #1F252B;
+    --dark-color-text: #B5BAC4;
+    --dark-color-text-aside: var(--dark-color-text);
+    --dark-color-link: #00aff4;
+    --dark-color-menu-divider: #eee;
+    --dark-color-menu-divider-focus: #000;
+    --dark-color-menu-label: #707070;
+    --dark-color-panel: #262E35;
+    --dark-color-panel-divider: #252D34;
+    --dark-color-comment-tag: #dcddde;
+    --dark-color-comment-tag-text: #2f3136;
+    --dark-color-ts: #c97dff;
+    --dark-color-ts-interface: #7EC470;
+    --dark-color-ts-enum: #C4AE70;
+    --dark-color-ts-class: #708CC4;
+    --dark-color-ts-private: #C4709A;
+    --dark-color-toolbar: #1F252B;
+    --dark-color-toolbar-text: var(--dark-color-text);
+    --dark-icon-filter: invert(1);
+
+    --dark-code-background: #1E2229;
+}
+
+.tsd-kind-class-member.tsd-kind-icon:before {
+    filter: invert(56%) sepia(28%) saturate(625%) hue-rotate(182deg) brightness(92%) contrast(89%);
+}
+.tsd-kind-enum-member.tsd-kind-icon:before {
+    filter: invert(78%) sepia(11%) saturate(1214%) hue-rotate(7deg) brightness(89%) contrast(90%);
+}
+.tsd-kind-interface-member.tsd-kind-icon:before {
+    filter: invert(68%) sepia(17%) saturate(968%) hue-rotate(64deg) brightness(100%) contrast(91%);
+}
+.tsd-panel, .tsd-page-title {
+    box-shadow: unset;
+}

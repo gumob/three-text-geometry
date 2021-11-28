@@ -7,5 +7,6 @@
     "excludeProtected": true,
     "excludeInternal": true,
     "categorizeByGroup": true,
-    "cleanOutputDir": true
+    "cleanOutputDir": true,
+    "customCss": "typedoc.css"
 }
