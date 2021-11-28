@@ -60,7 +60,7 @@
     "axios": "^0.24.0",
     "fast-xml-parser": "^4.0.0-beta.2",
     "floggy": "^0.3.1",
-    "three": "^0.134.0",
+    "three": "^0.135.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
@@ -71,10 +71,12 @@
     "@types/ajv": "^1.0.0",
     "@types/gl": "^4.1.0",
     "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.9",
+    "@types/node": "^16.11.10",
     "@types/offscreencanvas": "^2019.6.4",
     "@types/three": "^0.134.0",
     "@types/ts-nameof": "^4.2.1",
+    "@types/uglify-es": "^3.0.0",
+    "@types/uglify-js": "^3.13.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "canvas": "^2.8.0",
@@ -93,7 +95,7 @@
     "jest-watch-typeahead": "^1.0.0",
     "markdown-toc": "^1.2.0",
     "playwright": "^1.16.3",
-    "prettier": "^2.4.1",
+    "prettier": "^2.5.0",
     "ts-jest": "^27.0.7",
     "ts-jest-resolver": "^2.0.0",
     "ts-nameof": "^5.0.0",
@@ -104,7 +106,9 @@
     "typedoc-plugin-rename-defaults": "^0.4.0",
     "typescript": "^4.5.2",
     "typescript-snapshots-plugin": "^1.7.0",
-    "typescript-transform-paths": "^3.3.1"
+    "typescript-transform-paths": "^3.3.1",
+    "uglify-es": "^3.3.9",
+    "uglify-js": "^3.14.3"
   },
   "importSorter": {
     "emptyLinesBetweenGroups": 0,
