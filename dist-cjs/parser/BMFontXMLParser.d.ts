@@ -8,7 +8,8 @@ declare class BMFontXMLParser implements IBMFontParser<string> {
     /**
      * The function that parses font data from a XML string.
      *
-     * ```typescript import { BMFontXMLParser } from 'three-text-geometry'
+     * ```typescript
+     * import { BMFontXMLParser } from 'three-text-geometry'
      *
      * const data: string = ...xml data...
      * const parser = new BMFontXMLParser();
@@ -16,14 +17,7 @@ declare class BMFontXMLParser implements IBMFontParser<string> {
      * ```
      *
      * @param {string} xml  `string` that contains font data.
-     * @returns {BMFont} A.                                                                                     Parsed
-     *                                                                                                          data
-     *                                                                                                          that
-     *                                                                                                          conforms
-     *                                                                                                          to
-     *                                                                                                          the
-     *                                                                                                          `BMFont`
-     *                                                                                                          interface.
+     * @returns {BMFont} Parsed data that conforms to the `BMFont` interface.
      * @memberof BMFontXMLParser
      */
     parse(xml: string): BMFont;

@@ -9,7 +9,8 @@ class BMFontAsciiParser {
     /**
      * The function that parses font data from an ASCII string.
      *
-     * ```typescript import { BMFontAsciiParser } from 'three-text-geometry'
+     * ```typescript
+     * import { BMFontAsciiParser } from 'three-text-geometry'
      *
      * const data: string = ...ascii data...
      * const parser = new BMFontAsciiParser();
@@ -17,14 +18,7 @@ class BMFontAsciiParser {
      * ```
      *
      * @param {string} data  `string` that contains font data.
-     * @returns {BMFont} A.                                                                                     Parsed
-     *                                                                                                          data
-     *                                                                                                          that
-     *                                                                                                          conforms
-     *                                                                                                          to
-     *                                                                                                          the
-     *                                                                                                          `BMFont`
-     *                                                                                                          interface.
+     * @returns {BMFont} Parsed data that conforms to the `BMFont` interface.
      * @memberof BMFontAsciiParser
      */
     parse(data) {

@@ -31,7 +31,7 @@ $ node install three-text-geometry
 
 ### How to run the demo
 
-The demo is written in TypeScript using React, so you will need to check out the repository to run the demo app.
+The demo is written in TypeScript using React, so you need to check out the repository and build sources to run the demo app.
 The source code for the demo is available [here](https://github.com/gumob/three-text-geometry/tree/develop/demo).
 
 ```
@@ -139,7 +139,6 @@ class TextGeometryRenderer extends React.Component {
 Parse font data in JSON format
 
 ```TypeScript
-import * as THREE from 'three'
 import { BMFontJsonParser } from 'three-text-geometry'
 
 const font: BMFont = new BMFontJsonParser().parse(/** `string` or `object` data JSON format */)
@@ -148,7 +147,6 @@ const font: BMFont = new BMFontJsonParser().parse(/** `string` or `object` data 
 Parse font data in XML format
 
 ```TypeScript
-import * as THREE from 'three'
 import { BMFontXMLParser } from 'three-text-geometry'
 
 const font: BMFont = new BMFontXMLParser().parse(/** `string` data in XML format */)
@@ -157,7 +155,6 @@ const font: BMFont = new BMFontXMLParser().parse(/** `string` data in XML format
 Parse font data in ASCII format
 
 ```TypeScript
-import * as THREE from 'three'
 import { BMFontAsciiParser } from 'three-text-geometry'
 
 const font: BMFont = new BMFontAsciiParser().parse(/** `string` data in ASCII format */)
@@ -166,7 +163,6 @@ const font: BMFont = new BMFontAsciiParser().parse(/** `string` data in ASCII fo
 Parse font data in Binary format
 
 ```TypeScript
-import * as THREE from 'three'
 import { BMFontBinaryParser } from 'three-text-geometry'
 
 const font: BMFont = new BMFontBinaryParser().parse(/** `string` data in ASCII Binary */)

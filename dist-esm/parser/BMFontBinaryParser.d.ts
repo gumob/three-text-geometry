@@ -16,7 +16,8 @@ declare class BMFontBinaryParser implements IBMFontParser<Buffer> {
     /**
      * The function that parses font data from `Buffer` data.
      *
-     * ```typescript import { BMFontBinaryParser } from 'three-text-geometry'
+     * ```typescript
+     * import { BMFontBinaryParser } from 'three-text-geometry'
      *
      * const data: Binary = ...binary data...
      * const parser = new BMFontBinaryParser();
@@ -24,14 +25,7 @@ declare class BMFontBinaryParser implements IBMFontParser<Buffer> {
      * ```
      *
      * @param {Buffer} buf  `Buffer` that contains font data.
-     * @returns {BMFont} A.                                                                                     Parsed
-     *                                                                                                          data
-     *                                                                                                          that
-     *                                                                                                          conforms
-     *                                                                                                          to
-     *                                                                                                          the
-     *                                                                                                          `BMFont`
-     *                                                                                                          interface.
+     * @returns {BMFont} Parsed data that conforms to the `BMFont` interface.
      * @memberof BMFontBinaryParser
      */
     parse(buf: Buffer): BMFont;

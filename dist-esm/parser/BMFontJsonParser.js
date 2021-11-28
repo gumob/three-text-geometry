@@ -15,7 +15,8 @@ class BMFontJsonParser {
     /**
      * The function that parses font data from a JSON string or object.
      *
-     * ```typescript import { BMFontJsonParser } from 'three-text-geometry'
+     * ```typescript
+     * import { BMFontJsonParser } from 'three-text-geometry'
      *
      * const data: object | string = ...json data...
      * const parser = new BMFontJsonParser();
@@ -23,14 +24,7 @@ class BMFontJsonParser {
      * ```
      *
      * @param {Object | string} json  `object` or `string` that contains font data.
-     * @returns {BMFont} A.                                                                                     Parsed
-     *                                                                                                          data
-     *                                                                                                          that
-     *                                                                                                          conforms
-     *                                                                                                          to
-     *                                                                                                          the
-     *                                                                                                          `BMFont`
-     *                                                                                                          interface.
+     * @returns {BMFont} Parsed data that conforms to the `BMFont` interface.
      * @memberof BMFontJsonParser
      */
     parse(json) {
