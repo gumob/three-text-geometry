@@ -1,0 +1,11 @@
+{
+    "out": "docs",
+    "entryPoints": ["./src/index.ts"],
+    "entryPointStrategy": "expand",
+    "mergeModulesMergeMode": "module",
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeInternal": true,
+    "categorizeByGroup": true,
+    "cleanOutputDir": true
+}
