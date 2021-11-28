@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "https",
-    "url": "https://github.com/gumob/three-bmfont-text-ts.git"
+    "url": "https://github.com/gumob/three-text-geometry.git"
   },
-  "homepage": "https://github.com/gumob/three-bmfont-text-ts",
+  "homepage": "https://github.com/gumob/three-text-geometry",
   "bugs": {
-    "url": "https://github.com/gumob/three-bmfont-text-ts/issues"
+    "url": "https://github.com/gumob/three-text-geometry/issues"
   },
   "files": [
     "dist-cjs",
