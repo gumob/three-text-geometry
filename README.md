@@ -102,7 +102,7 @@ class TextGeometryRenderer extends React.Component {
             align: TextAlign.Left,
             width: 1600,
             flipY: textures.flipY,
-            multipage: true
+            multipage: false
         }
         const textGeometry = new TextGeometry(text, textOption)
 
