@@ -35,3 +35,88 @@
 .tsd-panel, .tsd-page-title {
     box-shadow: unset;
 }
+
+* {
+    --scrollbar-size: 8px;
+    --scrollbar-thumb-color: #4F575F;
+}
+/*
+ * Vertical
+ */
+*::-webkit-scrollbar {
+    width: var(--scrollbar-size) !important;
+}
+
+
+/* Thumb */
+*::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color) !important;
+    background-image: none !important;
+    width: var(--scrollbar-size) !important;
+    border-radius: calc(var(--scrollbar-size) * 0.5) !important;
+}
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-color) !important;
+    background-image: none !important;
+}
+*::-webkit-scrollbar-thumb:active {
+    background-color: var(--scrollbar-thumb-color) !important;
+    background-image: none !important;
+}
+
+
+/* Track */
+*::-webkit-scrollbar-track {
+    background: transparent !important;
+    background-image: none !important;
+    width: var(--scrollbar-size) !important;
+    border-radius: calc(var(--scrollbar-size) * 0.5) !important;
+}
+
+
+
+/*
+ * Horizontal
+ */
+/* Thumb */
+*::-webkit-scrollbar:horizontal {
+    height: var(--scrollbar-size) !important;
+}
+
+
+/* Thumb */
+*::-webkit-scrollbar-thumb:horizontal {
+    background-color: var(--scrollbar-thumb-color) !important;
+    background-image: none !important;
+    width: var(--scrollbar-size) !important;
+    border-radius: calc(var(--scrollbar-size) * 0.5) !important;
+}
+*::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: var(--scrollbar-thumb-color) !important;
+    background-image: none !important;
+}
+*::-webkit-scrollbar-thumb:horizontal:active {
+    background-color: var(--scrollbar-thumb-color) !important;
+    background-image: none !important;
+}
+
+
+/* Track */
+*::-webkit-scrollbar-track:horizontal {
+    background: transparent !important;
+    background-image: none !important;
+    width: var(--scrollbar-size) !important;
+    border-radius: calc(var(--scrollbar-size) * 0.5) !important;
+}
+
+
+/* Selection */
+::-moz-selection {
+    color: #d2e0e6;
+    background: #0186b5;
+}
+
+::selection {
+    color: #d2e0e6;
+    background: #0186b5;
+}
