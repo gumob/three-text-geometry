@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/layout/index.ts"],"names":[],"mappings":";;;AAAA,4DAA4B;AAC5B,0DAA0B"}
+{"version":3,"file":"dist-cjs/layout/index.js.map","sources":["../../src/layout/index.ts"],"names":["tslib_1","__exportStar","require","exports"],"mappings":"oGAAA,EAAAA,QAAAC,cAAAC,QAAA,gBAAAC,UACA,EAAAH,QAAAC,cAAAC,QAAA,cAAAC"}

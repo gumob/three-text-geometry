@@ -1,3 +1,1 @@
-export * from './BMFontLoaderError';
-export * from './TextGeometryError';
-//# sourceMappingURL=index.js.map
+export*from"./BMFontLoaderError";export*from"./TextGeometryError";

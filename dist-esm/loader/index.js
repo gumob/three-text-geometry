@@ -1,2 +1,1 @@
-export * from './BMFontLoader';
-//# sourceMappingURL=index.js.map
+export*from"./BMFontLoader";

@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/parser/index.ts"],"names":[],"mappings":";;;AAAA,oEAAoC;AACpC,kEAAkC;AAClC,iEAAiC;AACjC,mEAAmC"}
+{"version":3,"file":"dist-cjs/parser/index.js.map","sources":["../../src/parser/index.ts"],"names":["tslib_1","__exportStar","require","exports"],"mappings":"oGAAA,EAAAA,QAAAC,cAAAC,QAAA,wBAAAC,UACA,EAAAH,QAAAC,cAAAC,QAAA,sBAAAC,UACA,EAAAH,QAAAC,cAAAC,QAAA,qBAAAC,UACA,EAAAH,QAAAC,cAAAC,QAAA,uBAAAC"}
