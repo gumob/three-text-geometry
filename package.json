@@ -52,6 +52,19 @@
     "upgrade": "yarn up '*' '@*/*'",
     "typedoc": "yarn lint && typedoc --options typedoc.json"
   },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/github",
+      "@semantic-release/git",
+      "@semantic-release/npm"
+    ],
+    "branches": [
+      "main"
+    ]
+  },
   "dependencies": {
     "ajv": "^8.8.2",
     "axios": "^0.24.0",
@@ -65,6 +78,12 @@
     "@microsoft/tsdoc-config": "^0.15.2",
     "@playwright/test": "^1.16.3",
     "@prisma-labs/prettier-config": "^0.1.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.2",
+    "@semantic-release/npm": "^8.0.3",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/ajv": "^1.0.0",
     "@types/gl": "^4.1.0",
     "@types/jest": "^27.0.3",
