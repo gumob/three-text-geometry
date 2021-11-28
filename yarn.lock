@@ -971,17 +971,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@homer0/prettier-plugin-jsdoc@npm:^4.0.6":
-  version: 4.0.6
-  resolution: "@homer0/prettier-plugin-jsdoc@npm:4.0.6"
-  dependencies:
-    comment-parser: ^1.2.4
-    prettier: ^2.4.1
-    ramda: 0.27.1
-  checksum: 52258d51a8bde6d7f1457f41e9a936beb3a1d64e4f1e3149bd19b41e910c4bb604cc4f59db896aadad5c4052bc83b459d899f59e5b1220538dc1d12b8da51a67
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.5.0":
   version: 0.5.0
   resolution: "@humanwhocodes/config-array@npm:0.5.0"
@@ -3058,13 +3047,6 @@ __metadata:
   version: 8.3.0
   resolution: "commander@npm:8.3.0"
   checksum: 0f82321821fc27b83bd409510bb9deeebcfa799ff0bf5d102128b500b7af22872c0c92cb6a0ebc5a4cf19c6b550fba9cedfa7329d18c6442a625f851377bacf0
-  languageName: node
-  linkType: hard
-
-"comment-parser@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "comment-parser@npm:1.2.4"
-  checksum: 36ac280bce4c472fac22b3ec4d8aebb4d3d7c22c6808c70174f4deabee3b82144db66f8bd61eca9c514a6d0f12f6087ddab99e7d531e660d0da793b4730fd445
   languageName: node
   linkType: hard
 
@@ -7414,13 +7396,6 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
-"ramda@npm:0.27.1":
-  version: 0.27.1
-  resolution: "ramda@npm:0.27.1"
-  checksum: 31a0c0ef739b2525d7615f84cbb5d3cb89ee0c795469b711f729ea1d8df0dccc3cd75d3717a1e9742d42315ce86435680b7c87743eb7618111c60c144a5b8059
-  languageName: node
-  linkType: hard
-
 "randomatic@npm:^3.0.0":
   version: 3.1.1
   resolution: "randomatic@npm:3.1.1"
@@ -8400,7 +8375,6 @@ resolve@~1.19.0:
   version: 0.0.0-use.local
   resolution: "three-text-geometry@workspace:."
   dependencies:
-    "@homer0/prettier-plugin-jsdoc": ^4.0.6
     "@microsoft/tsdoc": ^0.13.2
     "@microsoft/tsdoc-config": ^0.15.2
     "@playwright/test": ^1.16.3
