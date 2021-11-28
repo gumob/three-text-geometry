@@ -41,7 +41,7 @@ $ yarn install
 $ yarn start
 ```
 
-### The sample code using [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/default.html), [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html), and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader)
+### The sample code using [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html), [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html), and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader)
 
 - [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html) and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader) can be combined by using [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 - For detailed information, read the [documentation](https://gumob.github.io/three-text-geometry/).
@@ -185,7 +185,7 @@ const font: BMFont = new BMFontBinaryParser().parse(/** `string` data in ASCII B
 | **lineHeight** | `number` | The line height in pixels | [`font.common.lineHeight`](https://gumob.github.io/three-text-geometry/interfaces/BMFontCommon.html#lineHeight) | false   |
 | **tabSize** | `number` | The number of spaces to use in a single tab | 4 | false   |
 | **start** | `number` | The starting index into the text to layout | 0 | false   |
-| **end** | `number` | The ending index (exclusive) into the text to layout | [`text.length`](https://gumob.github.io/three-text-geometry/classes/default.html#constructor) | false   |
+| **end** | `number` | The ending index (exclusive) into the text to layout | [`text.length`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html#constructor) | false   |
 | **flipY** | `boolean` | Whether the texture will be Y-flipped | true | false   |
 | **multipage** | `boolean` | Whether to construct this geometry with an extra buffer containing page IDs. This is necessary for multi-texture fonts | false | false   |
 <!-- prettier-ignore-end -->
