@@ -37,14 +37,8 @@ class BMFontBinaryParser implements IBMFontParser<Buffer> {
    * ```
    *
    * @param {Buffer} buf  `Buffer` that contains font data.
-   * @returns {BMFont} A.                                                                                     Parsed
-   *                                                                                                          data
-   *                                                                                                          that
-   *                                                                                                          conforms
-   *                                                                                                          to
-   *                                                                                                          the
-   *                                                                                                          `BMFont`
-   *                                                                                                          interface.
+   * @returns {BMFont} A. Parsed data that conforms to the `BMFont`
+   *                   interface.
    * @memberof BMFontBinaryParser
    */
   public parse(buf: Buffer): BMFont {

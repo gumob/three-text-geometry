@@ -19,14 +19,8 @@ class BMFontXMLParser implements IBMFontParser<string> {
    * ```
    *
    * @param {string} xml  `string` that contains font data.
-   * @returns {BMFont} A.                                                                                     Parsed
-   *                                                                                                          data
-   *                                                                                                          that
-   *                                                                                                          conforms
-   *                                                                                                          to
-   *                                                                                                          the
-   *                                                                                                          `BMFont`
-   *                                                                                                          interface.
+   * @returns {BMFont} A. Parsed data that conforms to the `BMFont`
+   *                   interface.
    * @memberof BMFontXMLParser
    */
   public parse(xml: string): BMFont {

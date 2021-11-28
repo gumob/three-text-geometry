@@ -26,14 +26,8 @@ class BMFontJsonParser implements IBMFontParser<object | string> {
    * ```
    *
    * @param {Object | string} json  `object` or `string` that contains font data.
-   * @returns {BMFont} A.                                                                                     Parsed
-   *                                                                                                          data
-   *                                                                                                          that
-   *                                                                                                          conforms
-   *                                                                                                          to
-   *                                                                                                          the
-   *                                                                                                          `BMFont`
-   *                                                                                                          interface.
+   * @returns {BMFont} A. Parsed data that conforms to the `BMFont`
+   *                   interface.
    * @memberof BMFontJsonParser
    */
   public parse(json: object | string): BMFont {

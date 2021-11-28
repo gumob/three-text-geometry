@@ -1,4 +1,6 @@
+import { BMFontLoaderError, TextGeometryError } from '~/error'
 import { BMFontLoader } from '~/loader'
+import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '~/parser'
 import { MultiPageShaderMaterial, MultiPageShaderMaterialParameters } from '~/shader'
 import TextGeometry from '~/TextGeometry'
 import {
@@ -13,8 +15,6 @@ import {
   TextGlyph,
   WordWrapMode,
 } from '~/types'
-import { BMFontLoaderError, TextGeometryError } from '~/error'
-import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '~/parser'
 
 export {
   BMFont,
@@ -27,12 +27,12 @@ export {
   BMFontJsonParser,
   BMFontKern,
   BMFontLoader,
-  BMFontXMLParser,
   BMFontLoaderError,
-  TextGeometryError,
+  BMFontXMLParser,
   MultiPageShaderMaterial,
   MultiPageShaderMaterialParameters,
   TextAlign,
+  TextGeometryError,
   TextGeometryOption,
   TextGlyph,
   WordWrapMode,

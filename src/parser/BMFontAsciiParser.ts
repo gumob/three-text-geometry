@@ -29,14 +29,8 @@ class BMFontAsciiParser implements IBMFontParser<string> {
    * ```
    *
    * @param {string} data  `string` that contains font data.
-   * @returns {BMFont} A.                                                                                     Parsed
-   *                                                                                                          data
-   *                                                                                                          that
-   *                                                                                                          conforms
-   *                                                                                                          to
-   *                                                                                                          the
-   *                                                                                                          `BMFont`
-   *                                                                                                          interface.
+   * @returns {BMFont} A. Parsed data that conforms to the `BMFont`
+   *                   interface.
    * @memberof BMFontAsciiParser
    */
   parse(data: string): BMFont {
