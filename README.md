@@ -205,13 +205,13 @@ Read the [Three.js documentation](https://threejs.org/docs/index.html#manual/en/
 Install [msdf-bmfont-xml](https://github.com/soimy/msdf-bmfont-xml)
 
 ```
-npm install msdf-bmfont-xml -g
+$ npm install msdf-bmfont-xml -g
 ```
 
 Generate a bitmap font
 
 ```
-msdf-bmfont \
+$ msdf-bmfont \
     --output-type json \
     --filename 'OdudoMono-Regular-128' \
     --font-size 128 \
