@@ -1,1 +1,0 @@
-{"version":3,"file":"TextGeometryError.d.ts","sourceRoot":"","sources":["../../src/error/TextGeometryError.ts"],"names":[],"mappings":"AAAA,aAAK,qBAAqB;IACxB,SAAS,cAAc;IACvB,UAAU,eAAe;CAC1B;AAED,cAAM,iBAAkB,SAAQ,KAAK;gBACvB,IAAI,EAAE,qBAAqB,EAAE,OAAO,GAAE,MAAM,GAAG,SAAqB;CAcjF;AAED,OAAO,EAAE,iBAAiB,EAAE,qBAAqB,EAAE,CAAA"}

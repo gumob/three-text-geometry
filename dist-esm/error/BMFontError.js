@@ -1,0 +1,1 @@
+class BMFontError extends Error{constructor(r){super(r),Object.setPrototypeOf(this,BMFontError.prototype)}}BMFontError.LoadError="LoadError",BMFontError.ParseError="ParseError";export{BMFontError};

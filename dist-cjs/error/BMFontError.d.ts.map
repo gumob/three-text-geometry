@@ -1,0 +1,1 @@
+{"version":3,"file":"BMFontError.d.ts","sourceRoot":"","sources":["../../src/error/BMFontError.ts"],"names":[],"mappings":"AAAA,cAAM,WAAY,SAAQ,KAAK;IAC7B,MAAM,CAAC,QAAQ,CAAC,SAAS,EAAE,MAAM,CAAc;IAC/C,MAAM,CAAC,QAAQ,CAAC,UAAU,EAAE,MAAM,CAAe;gBAErC,OAAO,EAAE,MAAM;CAI5B;AAED,OAAO,EAAE,WAAW,EAAE,CAAA"}

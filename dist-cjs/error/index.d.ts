@@ -1,3 +1,2 @@
-export * from './BMFontLoaderError';
-export * from './TextGeometryError';
+export * from './BMFontError';
 //# sourceMappingURL=index.d.ts.map
