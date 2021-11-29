@@ -16,7 +16,7 @@ function extractPages(glyphs: TextGlyph[]): Float32Array {
 function extractUVs(glyphs: TextGlyph[], texWidth: number, texHeight: number, flipY: boolean): Float32Array {
   const uvs = new Float32Array(glyphs.length * 4 * 2)
   let i = 0
-  glyphs.forEach(function (glyph) {
+  glyphs.forEach((glyph: TextGlyph) => {
     const bitmap = glyph.data
     const bw = bitmap.x + bitmap.width
     const bh = bitmap.y + bitmap.height
@@ -51,7 +51,7 @@ function extractUVs(glyphs: TextGlyph[], texWidth: number, texHeight: number, fl
 function extractPositions(glyphs: TextGlyph[]): Float32Array {
   const positions = new Float32Array(glyphs.length * 4 * 2)
   let i = 0
-  glyphs.forEach(function (glyph) {
+  glyphs.forEach((glyph: TextGlyph) => {
     const bitmap = glyph.data
 
     /** bottom left position */
