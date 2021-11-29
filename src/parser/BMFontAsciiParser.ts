@@ -1,4 +1,4 @@
-import { BMFontError, BMFontErrorType } from '~/error'
+import { BMFontError } from '~/error'
 import {
   BMFont,
   BMFontChar,
@@ -37,7 +37,7 @@ class BMFontAsciiParser implements IBMFontParser<string> {
     data = data.trim()
 
     const lines: string[] = data.split(/\r\n?|\n/g)
-    if (lines.length === 0) throw new BMFontError(BMFontErrorType.ParseError, 'No data in BMFont file')
+    if (lines.length === 0) throw new BMFontError('No data in BMFont file')
 
     const result: BMFont = DefaultBMFont()
 
@@ -46,7 +46,7 @@ class BMFontAsciiParser implements IBMFontParser<string> {
       if (!line) return
 
       const space = line.indexOf(' ')
-      if (space === -1) throw new BMFontError(BMFontErrorType.ParseError, 'No page data')
+      if (space === -1) throw new BMFontError('No page data')
 
       const rootKey = line.substring(0, space)
       const keyValues: any = {}
@@ -91,15 +91,15 @@ class BMFontAsciiParser implements IBMFontParser<string> {
       }
     })
     if (JSON.stringify(result.info) === JSON.stringify(DefaultBMFontInfo()))
-      throw new BMFontError(BMFontErrorType.ParseError, `No info data. \n${JSON.stringify(result)}`)
+      throw new BMFontError(`No info data. \n${JSON.stringify(result)}`)
     if (JSON.stringify(result.common) === JSON.stringify(DefaultBMFontCommon()))
-      throw new BMFontError(BMFontErrorType.ParseError, `No common data. \n${JSON.stringify(result)}`)
+      throw new BMFontError(`No common data. \n${JSON.stringify(result)}`)
     if (result.pages.length == 0)
-      throw new BMFontError(BMFontErrorType.ParseError, `No page data. \n${JSON.stringify(result)}`)
+      throw new BMFontError(`No page data. \n${JSON.stringify(result)}`)
     if (result.chars.length == 0)
-      throw new BMFontError(BMFontErrorType.ParseError, `No char data. \n${JSON.stringify(result)}`)
+      throw new BMFontError(`No char data. \n${JSON.stringify(result)}`)
     // if (result.kernings.length == 0)
-    //     throw new BMFontError(BMFontErrorType.ParseError, `No kernings data. \n${JSON.stringify(result)}`);
+    //     throw new BMFontError(`No kernings data. \n${JSON.stringify(result)}`);
     // console.log(result);
     return result
   }

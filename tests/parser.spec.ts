@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { BMFontErrorType } from '~/error'
+import { BMFontError } from '~/error'
 import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '~/parser'
 import { isBMFont } from '~/types'
 
@@ -39,7 +39,7 @@ describe('BMFontParser', () => {
       const res = await fetchData(uri)
       new BMFontXMLParser().parse(res.data)
     } catch (error: any) {
-      expect(error.name).toBe(BMFontErrorType.ParseError)
+      expect(error instanceof BMFontError).toBe(true)
     }
   })
 
@@ -50,7 +50,7 @@ describe('BMFontParser', () => {
       const res = await fetchData(uri)
       new BMFontXMLParser().parse(res.data)
     } catch (error: any) {
-      expect(error.name).toBe(BMFontErrorType.ParseError)
+      expect(error instanceof BMFontError).toBe(true)
     }
   })
 
@@ -69,7 +69,7 @@ describe('BMFontParser', () => {
       const res = await fetchData(uri)
       new BMFontJsonParser().parse(res.data)
     } catch (error: any) {
-      expect(error.name).toBe(BMFontErrorType.ParseError)
+      expect(error instanceof BMFontError).toBe(true)
     }
   })
 
@@ -80,7 +80,7 @@ describe('BMFontParser', () => {
       const res = await fetchData(uri)
       new BMFontJsonParser().parse(res.data)
     } catch (error: any) {
-      expect(error.name).toBe(BMFontErrorType.ParseError)
+      expect(error instanceof BMFontError).toBe(true)
     }
   })
 
@@ -99,7 +99,7 @@ describe('BMFontParser', () => {
       const res = await fetchData(uri)
       new BMFontAsciiParser().parse(res.data)
     } catch (error: any) {
-      expect(error.name).toBe(BMFontErrorType.ParseError)
+      expect(error instanceof BMFontError).toBe(true)
     }
   })
 
@@ -110,7 +110,7 @@ describe('BMFontParser', () => {
       const res = await fetchData(uri)
       new BMFontAsciiParser().parse(res.data)
     } catch (error: any) {
-      expect(error.name).toBe(BMFontErrorType.ParseError)
+      expect(error instanceof BMFontError).toBe(true)
     }
   })
 
@@ -178,7 +178,7 @@ describe('BMFontParser', () => {
       const data = typeof res.data === 'string' ? Buffer.from(res.data, 'binary') : (res.data as Buffer)
       new BMFontBinaryParser().parse(data)
     } catch (error: any) {
-      expect(error.name).toBe(BMFontErrorType.ParseError)
+      expect(error instanceof BMFontError).toBe(true)
     }
   })
 
@@ -190,7 +190,7 @@ describe('BMFontParser', () => {
       const data = typeof res.data === 'string' ? Buffer.from(res.data, 'binary') : (res.data as Buffer)
       new BMFontBinaryParser().parse(data)
     } catch (error: any) {
-      expect(error.name).toBe(BMFontErrorType.ParseError)
+      expect(error instanceof BMFontError).toBe(true)
     }
   })
 })
