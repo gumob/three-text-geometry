@@ -94,10 +94,8 @@ class BMFontAsciiParser implements IBMFontParser<string> {
       throw new BMFontError(`No info data. \n${JSON.stringify(result)}`)
     if (JSON.stringify(result.common) === JSON.stringify(DefaultBMFontCommon()))
       throw new BMFontError(`No common data. \n${JSON.stringify(result)}`)
-    if (result.pages.length == 0)
-      throw new BMFontError(`No page data. \n${JSON.stringify(result)}`)
-    if (result.chars.length == 0)
-      throw new BMFontError(`No char data. \n${JSON.stringify(result)}`)
+    if (result.pages.length == 0) throw new BMFontError(`No page data. \n${JSON.stringify(result)}`)
+    if (result.chars.length == 0) throw new BMFontError(`No char data. \n${JSON.stringify(result)}`)
     // if (result.kernings.length == 0)
     //     throw new BMFontError(`No kernings data. \n${JSON.stringify(result)}`);
     // console.log(result);
