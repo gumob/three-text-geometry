@@ -136,9 +136,7 @@ class TextGeometry extends THREE.BufferGeometry {
       type: 'uint16',
       count: glyphs.length,
     })
-    // console.log('positions', positions);
-    // console.log('uvs', uvs);
-    // console.log('indices', indices);
+    // console.log('positions', positions)
 
     /** Update vertex data */
     this.setIndex(indices as number[])
