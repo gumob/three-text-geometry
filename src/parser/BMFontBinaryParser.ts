@@ -5,7 +5,7 @@
  */
 
 import { Buffer } from 'buffer'
-import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error'
+import { BMFontError, BMFontErrorType } from '~/error'
 import {
   BMFont,
   BMFontChar,
@@ -42,22 +42,20 @@ class BMFontBinaryParser implements IBMFontParser<Buffer> {
    * @memberof BMFontBinaryParser
    */
   public parse(buf: Buffer): BMFont {
-    if (buf.length < 6)
-      throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Invalid buffer length for BMFont')
+    if (buf.length < 6) throw new BMFontError(BMFontErrorType.ParseError, 'Invalid buffer length for BMFont')
     const header = BMFontBinaryParser.HEADER.every((byte, i) => {
       return buf.readUInt8(i) === byte
     })
-    if (!header)
-      throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'BMFont missing BMF byte header')
+    if (!header) throw new BMFontError(BMFontErrorType.ParseError, 'BMFont missing BMF byte header')
     let i = 3
     const vers = buf.readUInt8(i++)
-    if (vers > 3)
-      throw new BMFontLoaderError(
-        BMFontLoaderErrorType.ParseError,
-        'Only supports BMFont Binary v3 (BMFont App v1.10)'
-      )
+    if (vers > 3) throw new BMFontError(BMFontErrorType.ParseError, 'Only supports bitmap font binary v3')
     const target: BMFont = DefaultBMFont()
-    for (let b = 0; b < 5; b++) i += this.readBlock(target, buf, i)
+    try {
+      for (let b = 0; b < 5; b++) i += this.readBlock(target, buf, i)
+    } catch (e: any) {
+      throw new BMFontError(BMFontErrorType.ParseError, e.message)
+    }
     return target
   }
 

@@ -1,4 +1,4 @@
-import { BMFontLoaderError, TextGeometryError } from '~/error'
+import { BMFontError, TextGeometryError } from '~/error'
 import { BMFontLoader } from '~/loader'
 import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '~/parser'
 import { MultiPageShaderMaterial, MultiPageShaderMaterialParameters } from '~/shader'
@@ -23,11 +23,11 @@ export {
   BMFontChar,
   BMFontCommon,
   BMFontDistanceField,
+  BMFontError,
   BMFontInfo,
   BMFontJsonParser,
   BMFontKern,
   BMFontLoader,
-  BMFontLoaderError,
   BMFontXMLParser,
   MultiPageShaderMaterial,
   MultiPageShaderMaterialParameters,

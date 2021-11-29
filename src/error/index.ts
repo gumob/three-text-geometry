@@ -1,2 +1,2 @@
-export * from './BMFontLoaderError'
+export * from './BMFontError'
 export * from './TextGeometryError'

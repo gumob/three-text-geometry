@@ -10,7 +10,7 @@ class ShuffleTextError extends Error {
   constructor(message: string | undefined = undefined) {
     const msg: string = message ? message : 'Failed to parse data'
     super(msg)
-    this.name = 'BMFontLoaderError'
+    this.name = 'BMFontError'
     Object.setPrototypeOf(this, ShuffleTextError.prototype)
   }
 }

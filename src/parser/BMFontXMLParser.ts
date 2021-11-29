@@ -1,5 +1,5 @@
 import { XMLParser } from 'fast-xml-parser'
-import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error'
+import { BMFontError, BMFontErrorType } from '~/error'
 import { BMFont, BMFontChar, BMFontCommon, BMFontInfo, BMFontKern, IBMFontParser } from '~/types'
 
 /**
@@ -32,15 +32,11 @@ class BMFontXMLParser implements IBMFontParser<string> {
       const parser = new XMLParser(options)
       const json: any = parser.parse(xml)
       const font = json.font
-      if (!font) throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No font data in BMFont file')
-      if (!font.pages)
-        throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No font data in BMFont file')
-      if (!font.chars)
-        throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No chars data in BMFont file')
-      if (!font.info)
-        throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No info data in BMFont file')
-      if (!font.common)
-        throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'No common data in BMFont file')
+      if (!font) throw new BMFontError(BMFontErrorType.ParseError, 'No font data in BMFont file')
+      if (!font.pages) throw new BMFontError(BMFontErrorType.ParseError, 'No font data in BMFont file')
+      if (!font.chars) throw new BMFontError(BMFontErrorType.ParseError, 'No chars data in BMFont file')
+      if (!font.info) throw new BMFontError(BMFontErrorType.ParseError, 'No info data in BMFont file')
+      if (!font.common) throw new BMFontError(BMFontErrorType.ParseError, 'No common data in BMFont file')
       // console.log('font.pages.page', font.pages.page);
       let pages: string[]
       if (Array.isArray(font.pages.page)) {
@@ -105,7 +101,7 @@ class BMFontXMLParser implements IBMFontParser<string> {
       return bmFont
     } catch (error: any) {
       // console.error(error);
-      throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, error.message)
+      throw new BMFontError(BMFontErrorType.ParseError, error.message)
     }
   }
 }

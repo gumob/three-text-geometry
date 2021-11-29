@@ -1380,7 +1380,7 @@
             Object(l.a)(this, n)
             var a = i || 'Failed to parse data'
             return (
-              ((t = e.call(this, a)).name = 'BMFontLoaderError'),
+              ((t = e.call(this, a)).name = 'BMFontError'),
               Object.setPrototypeOf(Object(B.a)(t), n.prototype),
               t
             )

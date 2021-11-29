@@ -5,7 +5,7 @@
 /* eslint @typescript-eslint/no-unsafe-argument: 0 */
 
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
-import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error'
+import { BMFontError, BMFontErrorType } from '~/error'
 import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '~/parser'
 import { BMFont } from '~/types'
 
@@ -33,7 +33,7 @@ class BMFontLoader {
    * const loader = new BMFontLoader();
    * loader.loadJson(uri).then((font: BMFont) => {
    * // Do something here...
-   * }).catch((e: BMFontLoaderError) => {
+   * }).catch((e: BMFontError) => {
    * console.error(e)
    * })
    * ```
@@ -52,7 +52,7 @@ class BMFontLoader {
           resolve(new BMFontJsonParser().parse(response.data))
         })
         .catch((error: AxiosError) => {
-          reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
+          reject(new BMFontError(BMFontErrorType.LoadError, error.message))
         })
     })
   }
@@ -67,7 +67,7 @@ class BMFontLoader {
    * const loader = new BMFontLoader();
    * loader.loadXML(uri).then((font: BMFont) => {
    * // Do something here...
-   * }).catch((e: BMFontLoaderError) => {
+   * }).catch((e: BMFontError) => {
    * console.error(e)
    * })
    * ```
@@ -86,7 +86,7 @@ class BMFontLoader {
           resolve(new BMFontXMLParser().parse(response.data.toString()))
         })
         .catch((error: AxiosError) => {
-          reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
+          reject(new BMFontError(BMFontErrorType.LoadError, error.message))
         })
     })
   }
@@ -101,7 +101,7 @@ class BMFontLoader {
    * const loader = new BMFontLoader();
    * loader.loadASCII(uri).then((font: BMFont) => {
    * // Do something here...
-   * }).catch((e: BMFontLoaderError) => {
+   * }).catch((e: BMFontError) => {
    * console.error(e)
    * })
    * ```
@@ -120,7 +120,7 @@ class BMFontLoader {
           resolve(new BMFontAsciiParser().parse(response.data.toString()))
         })
         .catch((error: AxiosError) => {
-          reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
+          reject(new BMFontError(BMFontErrorType.LoadError, error.message))
         })
     })
   }
@@ -135,7 +135,7 @@ class BMFontLoader {
    * const loader = new BMFontLoader();
    * loader.loadBinary(uri).then((font: BMFont) => {
    * // Do something here...
-   * }).catch((e: BMFontLoaderError) => {
+   * }).catch((e: BMFontError) => {
    * console.error(e)
    * })
    * ```
@@ -158,7 +158,7 @@ class BMFontLoader {
           resolve(new BMFontBinaryParser().parse(data))
         })
         .catch((error: AxiosError) => {
-          reject(new BMFontLoaderError(BMFontLoaderErrorType.LoadError, error.message))
+          reject(new BMFontError(BMFontErrorType.LoadError, error.message))
         })
     })
   }

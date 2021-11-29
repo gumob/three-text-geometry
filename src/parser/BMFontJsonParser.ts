@@ -1,5 +1,5 @@
 import Ajv from 'ajv'
-import { BMFontLoaderError, BMFontLoaderErrorType } from '~/error'
+import { BMFontError, BMFontErrorType } from '~/error'
 import { BMFont, IBMFontParser } from '~/types'
 import schema from './BMFontJsonSchema.json'
 
@@ -39,10 +39,10 @@ class BMFontJsonParser implements IBMFontParser<object | string> {
       if (valid) {
         return json as BMFont
       } else {
-        throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, 'Invalid json data')
+        throw new BMFontError(BMFontErrorType.ParseError, 'Invalid json data')
       }
     } catch (error: any) {
-      throw new BMFontLoaderError(BMFontLoaderErrorType.ParseError, error.message)
+      throw new BMFontError(BMFontErrorType.ParseError, error.message)
     }
   }
 }
