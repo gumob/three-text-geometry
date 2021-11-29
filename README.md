@@ -31,6 +31,8 @@ $ node install three-text-geometry
 
 ## Usage
 
+For detailed information, read the [documentation](https://gumob.github.io/three-text-geometry/) and check the [demo](https://github.com/gumob/three-text-geometry/tree/develop/demo).
+
 ### How to run the demo
 
 The demo is written in TypeScript using React, so you need to check out the repository and build sources to run the demo app.
@@ -43,14 +45,17 @@ $ yarn install
 $ yarn start
 ```
 
-### The sample code using [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html), [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html), and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader)
+### Sample code
 
-- [`BMFontLoader`](https://gumob.github.io/three-text-geometry/classes/BMFontLoader.html) and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader) can be combined by using [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
-- For detailed information, read the [documentation](https://gumob.github.io/three-text-geometry/).
+1. Combine [`Axios`](https://github.com/axios/axios) and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader) to load assets asynchronously.
+2. Instantiate [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) using the loaded [`BMFont`](https://gumob.github.io/three-text-geometry/interfaces/BMFont.html) and [`THREE.Texture`](https://threejs.org/docs/#api/en/textures/Texture) data.
+
+[`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) supports word wrapping, text aligning, letter spacing, kerning. see [the list](#option-list) to see how each option works.
 
 ```TypeScript
 import * as THREE from 'three'
-import TextGeometry, { BMFontLoader, BMFont, TextGeometryOption, TextAlign } from 'three-text-geometry'
+import axios from 'axios'
+import TextGeometry, { BMFont, BMFontJsonParser, TextGeometryOption, TextAlign } from 'three-text-geometry'
 
 class TextGeometryRenderer extends React.Component {
 
@@ -64,7 +69,7 @@ class TextGeometryRenderer extends React.Component {
         const textureUri: string =
             'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
         Promise.all([
-            new BMFontLoader().loadJson(fontUri), /** Load a font */
+            axios.get(fontUri)then(res => new BMFontJsonParser().parse(res.data)), /** Load a font */
             new THREE.TextureLoader().loadAsync(textureUri) /** Load a texture */
         ]).then((values: [BMFont, THREE.Texture]) => {
             let font: BMFont
@@ -136,13 +141,12 @@ class TextGeometryRenderer extends React.Component {
 
 ```
 
-#### If you want to use your own classes or functions to load fonts, use the BMFontParser interface to parse the font data.
+#### BMFontParser interface supports JSON, XML, ACII, and Binary fromat
 
 Parse font data in JSON format
 
 ```TypeScript
 import { BMFontJsonParser } from 'three-text-geometry'
-
 const font: BMFont = new BMFontJsonParser().parse(/** `string` or `object` data JSON format */)
 ```
 
@@ -150,7 +154,6 @@ Parse font data in XML format
 
 ```TypeScript
 import { BMFontXMLParser } from 'three-text-geometry'
-
 const font: BMFont = new BMFontXMLParser().parse(/** `string` data in XML format */)
 ```
 
@@ -158,7 +161,6 @@ Parse font data in ASCII format
 
 ```TypeScript
 import { BMFontAsciiParser } from 'three-text-geometry'
-
 const font: BMFont = new BMFontAsciiParser().parse(/** `string` data in ASCII format */)
 ```
 
@@ -166,11 +168,10 @@ Parse font data in Binary format
 
 ```TypeScript
 import { BMFontBinaryParser } from 'three-text-geometry'
-
 const font: BMFont = new BMFontBinaryParser().parse(/** `string` data in ASCII Binary */)
 ```
 
-### The value list of `TextGeometryOption`
+### <a name="option-list"></a>The value list of `TextGeometryOption`
 
 <!-- prettier-ignore-start -->
 | key | type | description | default | required |
