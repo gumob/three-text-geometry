@@ -50,7 +50,8 @@
     "prepublishOnly": "yarn build",
     "prepare": "ts-patch install -s",
     "upgrade": "yarn up '*' '@*/*'",
-    "typedoc": "yarn lint && typedoc --options typedoc.json"
+    "typedoc": "yarn lint && typedoc --options typedoc.json",
+    "all": "rm -rf docs dist-cjs dist-esm && yarn lint && yarn format && yarn build && yarn test:coverage && yarn typedoc"
   },
   "dependencies": {
     "ajv": "^8.8.2",
