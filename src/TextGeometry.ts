@@ -113,11 +113,11 @@ class TextGeometry extends THREE.BufferGeometry {
     if (option.flipY !== undefined) this._opt.flipY = option.flipY
     if (option.multipage !== undefined) this._opt.multipage = option.multipage
 
-    /** determine texture size from font file */
+    /** Determine texture size from font file */
     const texWidth = this._opt.font!.common.scaleW
     const texHeight = this._opt.font!.common.scaleH
 
-    /** get visible glyphs */
+    /** Get visible glyphs */
     const layout = new TextLayout(text, this._opt)
     const glyphs = layout.glyphs.filter(function (glyph) {
       const bitmap = glyph.data
@@ -125,10 +125,10 @@ class TextGeometry extends THREE.BufferGeometry {
     })
     // console.log('glyphs', glyphs);
 
-    /** provide visible glyphs for convenience */
+    /** Provide visible glyphs for convenience */
     this._visibleGlyphs = glyphs
 
-    /** get common vertex data */
+    /** Get common vertex data */
     const positions = extractPositions(glyphs)
     const uvs = extractUVs(glyphs, texWidth, texHeight, this._opt.flipY!)
     const indices = createIndices([], {
@@ -140,21 +140,20 @@ class TextGeometry extends THREE.BufferGeometry {
     // console.log('uvs', uvs);
     // console.log('indices', indices);
 
-    /** update vertex data */
+    /** Update vertex data */
     this.setIndex(indices as number[])
     this.setAttribute('position', new THREE.BufferAttribute(positions, 2))
     this.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
     // console.log('this.attributes.position', this.attributes.position);
     // console.log('this.attributes.uv', this.attributes.uv);
 
-    /** update multipage data */
+    /** Update multipage data */
     if (!this._opt.multipage && 'page' in this.attributes) {
-      this.deleteAttribute('page') /** disable multipage rendering */
+      /** Disable multipage rendering */
+      this.deleteAttribute('page')
     } else if (this._opt.multipage) {
-      this.setAttribute(
-        'page',
-        new THREE.BufferAttribute(extractPages(glyphs), 1)
-      ) /** enable multipage rendering */
+      /** Enable multipage rendering */
+      this.setAttribute('page', new THREE.BufferAttribute(extractPages(glyphs), 1))
     }
   }
 
