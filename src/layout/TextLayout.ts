@@ -137,7 +137,7 @@ class TextLayout {
     const align: TextAlign = this._opt.align!
 
     /** draw text along baseline */
-    y -= height
+    // y -= height
 
     /** the metrics for this text layout */
     this._width = maxLineWidth
