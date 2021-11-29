@@ -47,14 +47,15 @@
     "test:coverage": "jest --clearCache && jest --coverage",
     "test:e2e": "jest --config jest.config.e2e.ts",
     "_test:e2e": "playwright test ./tests/demo.e2e.ts",
-    "clean": "rm -rf dist-cjs dist-esm node_modules/.cache",
+    "clean": "rm -rf dist-cjs dist-esm && yarn cache clean",
+    "clean:node_modules": "node_modules/.cache",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable",
-    "prepare": "ts-patch install -s",
+    "prepare": "ts-patch install -s && husky install",
     "upgrade": "yarn up '*' '@*/*'",
-    "typedoc": "yarn lint && typedoc --options typedoc.json",
-    "all": "rm -rf docs dist-cjs dist-esm && yarn lint && yarn format && yarn build && yarn test:coverage && yarn typedoc"
+    "typedoc": "yarn format && yarn lint && typedoc --options typedoc.json",
+    "all": "rm -rf docs dist-cjs dist-esm && yarn format && yarn lint && yarn build && yarn test:coverage && yarn typedoc"
   },
   "dependencies": {
     "ajv": "^8.8.2",
