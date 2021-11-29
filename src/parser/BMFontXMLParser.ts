@@ -37,16 +37,16 @@ class BMFontXMLParser implements IBMFontParser<string> {
       if (!font.chars) throw new BMFontError('No chars data in BMFont file')
       if (!font.info) throw new BMFontError('No info data in BMFont file')
       if (!font.common) throw new BMFontError('No common data in BMFont file')
-      // console.log('font.pages.page', font.pages.page);
+
       let pages: string[]
       if (Array.isArray(font.pages.page)) {
         pages = font.pages.page.map((element: any) => element.file)
       } else {
         pages = [font.pages.page.file]
       }
-      // console.log('pages', pages);
+
       const chars: BMFontChar[] = font.chars.char.map((element: object) => element)
-      // console.log('chars', chars);
+
       const info: BMFontInfo = {
         face: font.info.face,
         size: +font.info.size || 0,
@@ -62,7 +62,7 @@ class BMFontXMLParser implements IBMFontParser<string> {
         fixedHeight: +font.info.fixedHeight || 0,
         outline: +font.info.outline || 0,
       }
-      // console.log('info', info);
+
       const common: BMFontCommon = {
         lineHeight: +font.common.lineHeight || 0,
         base: +font.common.base || 0,
@@ -75,7 +75,7 @@ class BMFontXMLParser implements IBMFontParser<string> {
         greenChnl: +font.common.greenChnl || 0,
         blueChnl: +font.common.blueChn || 0,
       }
-      // console.log('common', common);
+
       const kernings: BMFontKern[] = font.kernings.kerning.map(
         (element: any) =>
           ({
@@ -84,12 +84,12 @@ class BMFontXMLParser implements IBMFontParser<string> {
             amount: +element.amount || 0,
           } as BMFontKern)
       )
-      // console.log('kernings', kernings);
+
       const distanceField = {
         fieldType: font.distanceField.fieldType,
         distanceRange: +font.distanceField.distanceRange || 0,
       }
-      // console.log('distanceField', distanceField);
+
       const bmFont: BMFont = {
         pages: pages,
         chars: chars,
@@ -100,7 +100,6 @@ class BMFontXMLParser implements IBMFontParser<string> {
       }
       return bmFont
     } catch (error: any) {
-      // console.error(error);
       throw new BMFontError(error.message)
     }
   }
