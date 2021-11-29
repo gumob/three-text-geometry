@@ -123,6 +123,10 @@ class TextGeometryRenderer extends React.Component {
 
         /** Mesh */
         const mesth = new THREE.Mesh(textGeometry, textMaterial)
+            .rotateY(Math.PI)
+            .rotateZ(Math.PI)
+            .translateX(-box.x / 2)
+            .translateY(-box.y / 2)
         this.scene!.add(mesth)
 
         this.updateScene()
@@ -140,6 +144,13 @@ class TextGeometryRenderer extends React.Component {
 }
 
 ```
+
+#### Screen coordinate system and Three.js coordinate system
+TextGeometry places text based on the screen coordinate system.
+Therefore, when [`THREE.Mesh`](https://threejs.org/docs/#api/en/objects/Mesh) is added to the scene, the text will be placed inverted when viewed from the positive direction of the Z axis.
+To make the text visible from the positive z-axis, you need apply toransformations.
+
+![coord-conversion.webp](https://raw.githubusercontent.com/gumob/three-text-geometry/develop/README-assets/coord-conversion.webp)
 
 #### BMFontParser interface supports JSON, XML, ACII, and Binary fromat
 
