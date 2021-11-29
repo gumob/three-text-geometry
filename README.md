@@ -150,7 +150,7 @@ TextGeometry places text based on the screen coordinate system.
 Therefore, when [`THREE.Mesh`](https://threejs.org/docs/#api/en/objects/Mesh) is added to the scene, the text will be placed inverted when viewed from the positive direction of the Z axis.
 To make the text visible from the positive z-axis, you need apply toransformations.
 
-![coord-conversion.webp](https://raw.githubusercontent.com/gumob/three-text-geometry/master/README-assets/coord-conversion.webp)
+![coord-conversion.webp](https://raw.githubusercontent.com/gumob/three-text-geometry/main/README-assets/coord-conversion.webp)
 
 #### BMFontParser interface supports JSON, XML, ACII, and Binary fromat
 
