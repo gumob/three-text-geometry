@@ -36,10 +36,10 @@ export class DemoShuffle extends DemoBase {
       color: 0x666666,
     })
     this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
-    .rotateY(Math.PI)
-    .rotateZ(Math.PI)
-    .translateX(-box.x / 2)
-    .translateY(-box.y / 2)
+      .rotateY(Math.PI)
+      .rotateZ(Math.PI)
+      .translateX(-box.x / 2)
+      .translateY(-box.y / 2)
     this.scene?.add(this.textMesh)
 
     /** Shuffle text */

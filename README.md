@@ -146,6 +146,7 @@ class TextGeometryRenderer extends React.Component {
 ```
 
 #### Screen coordinate system and Three.js coordinate system
+
 TextGeometry places text based on the screen coordinate system.
 Therefore, when [`THREE.Mesh`](https://threejs.org/docs/#api/en/objects/Mesh) is added to the scene, the text will be placed inverted when viewed from the positive direction of the Z axis.
 To make the text visible from the positive z-axis, you need apply transformation.

@@ -153,7 +153,7 @@ export class DemoBase extends React.Component {
     window.addEventListener('click', this.onClicked.bind(this))
   }
 
-  initScene() { }
+  initScene() {}
 
   updateScene() {
     this.controls?.update()
