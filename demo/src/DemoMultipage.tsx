@@ -44,8 +44,10 @@ export class DemoMultipage extends DemoBase {
     textMaterial.side = THREE.DoubleSide
 
     this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
-    this.textMesh.scale.multiply(new THREE.Vector3(1, -1, 1))
-    this.textMesh.position.set(-box.x / 2, -box.y / 2, 0)
+      .rotateY(Math.PI)
+      .rotateZ(Math.PI)
+      .translateX(-box.x / 2)
+      .translateY(-box.y / 2)
     this.scene?.add(this.textMesh)
   }
 }

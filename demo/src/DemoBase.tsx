@@ -141,18 +141,19 @@ export class DemoBase extends React.Component {
     this.controls.update()
 
     /** AxesHelper */
-    // const axes = new THREE.AxesHelper(1000).setColors(
-    //   new THREE.Color(0.3, 0.2, 0.2),
-    //   new THREE.Color(0.2, 0.3, 0.2),
-    //   new THREE.Color(0.2, 0.2, 0.3)
-    // )
+    // const axes = new THREE.AxesHelper(1000)
+    //   .setColors(
+    //     new THREE.Color(0.3, 0.2, 0.2),
+    //     new THREE.Color(0.2, 0.3, 0.2),
+    //     new THREE.Color(0.2, 0.2, 0.3)
+    //   )
     // this.scene?.add(axes)
 
     window.addEventListener('resize', this.onWindowResize.bind(this))
     window.addEventListener('click', this.onClicked.bind(this))
   }
 
-  initScene() {}
+  initScene() { }
 
   updateScene() {
     this.controls?.update()

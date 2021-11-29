@@ -123,7 +123,6 @@ class TextGeometry extends THREE.BufferGeometry {
       const bitmap = glyph.data
       return bitmap.width * bitmap.height > 0
     })
-    // console.log('glyphs', glyphs);
 
     /** Provide visible glyphs for convenience */
     this._visibleGlyphs = glyphs
@@ -136,14 +135,11 @@ class TextGeometry extends THREE.BufferGeometry {
       type: 'uint16',
       count: glyphs.length,
     })
-    // console.log('positions', positions)
 
     /** Update vertex data */
     this.setIndex(indices as number[])
     this.setAttribute('position', new THREE.BufferAttribute(positions, 2))
     this.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
-    // console.log('this.attributes.position', this.attributes.position);
-    // console.log('this.attributes.uv', this.attributes.uv);
 
     /** Update multipage data */
     if (!this._opt.multipage && 'page' in this.attributes) {
