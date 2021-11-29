@@ -2,8 +2,9 @@ import React from 'react'
 import * as THREE from 'three'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { BMFontLoader, BMFont, TextGeometryOption } from 'three-text-geometry'
+import { BMFont, BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser, TextGeometryOption } from 'three-text-geometry'
 import './Demo.css'
+import axios from 'axios'
 
 export class DemoBase extends React.Component {
   stats?: Stats | undefined
@@ -70,25 +71,32 @@ export class DemoBase extends React.Component {
   }
 
   loadAssets(fontUri: string, textureUri: string[]): Promise<(BMFont | THREE.Texture)[]> {
-    const createFontLoader = (uri: string) => {
-      if (uri.endsWith('.fnt')) {
-        return new BMFontLoader().loadAscii(uri)
-      } else if (uri.endsWith('.json')) {
-        return new BMFontLoader().loadJson(uri)
-      } else if (uri.endsWith('.xml')) {
-        return new BMFontLoader().loadXML(uri)
+    const fontLoader: Promise<BMFont> = new Promise((resolve, reject) => {
+      if (fontUri.endsWith('.fnt')) {
+        axios.get(fontUri)
+          .then((res) => resolve(new BMFontAsciiParser().parse(res.data)))
+          .catch(e => reject(e))
+      } else if (fontUri.endsWith('.json')) {
+        axios.get(fontUri)
+          .then((res) => resolve(new BMFontJsonParser().parse(res.data)))
+          .catch(e => reject(e))
+      } else if (fontUri.endsWith('.xml')) {
+        axios.get(fontUri)
+          .then((res) => resolve(new BMFontXMLParser().parse(res.data)))
+          .catch(e => reject(e))
       } else {
-        return new BMFontLoader().loadBinary(uri)
+        axios.get(fontUri)
+          .then((res) => resolve(new BMFontBinaryParser().parse(typeof res.data === 'string' ? Buffer.from(res.data, 'binary') : (res.data as Buffer))))
+          .catch(e => reject(e))
       }
-    }
-    // const textureLoaders: Promise<THREE.Texture[]> = Promise.all(textureUri.map((uri: string)=>{
-    //   return new THREE.TextureLoader().loadAsync(uri)
-    // }))
-    const textureLoaders: Promise<BMFont | THREE.Texture>[] = textureUri.map((uri: string) => {
+    })
+    const textureLoaders: Promise<THREE.Texture>[] = textureUri.map((uri: string) => {
       return new THREE.TextureLoader().loadAsync(uri)
     })
-    textureLoaders.push(createFontLoader(fontUri))
-    return Promise.all(textureLoaders)
+    const loaders: Promise<BMFont | THREE.Texture>[] = []
+    loaders.push(fontLoader)
+    loaders.push(...textureLoaders)
+    return Promise.all(loaders)
   }
 
   assetsDidLoad() {
@@ -140,7 +148,7 @@ export class DemoBase extends React.Component {
     window.addEventListener('click', this.onClicked.bind(this))
   }
 
-  initScene() {}
+  initScene() { }
 
   updateScene() {
     this.controls?.update()
