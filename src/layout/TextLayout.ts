@@ -159,7 +159,6 @@ class TextLayout {
       /** for each glyph in that line... */
       for (let i = start; i < end; i++) {
         const id = text.charCodeAt(i)
-        // const glyph = wthis.deref()?.getGlyph(font, id);
         const glyph = this.getGlyph(font, id)
         if (glyph) {
           if (lastGlyph) x += this.getKerning(font, lastGlyph.id, glyph.id)
