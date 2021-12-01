@@ -47,4 +47,4 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #   run: chmod +x minify.sh && yarn run semantic-release
+      #   run: chmod +x minify.sh && yarn run semantic-release --dry-run
