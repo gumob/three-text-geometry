@@ -69,7 +69,7 @@ class TextGeometryRenderer extends React.Component {
         const textureUri: string =
             'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
         Promise.all([
-            axios.get(fontUri)then(res => new BMFontJsonParser().parse(res.data)), /** Load a font */
+            axios.get(fontUri).then(res => new BMFontJsonParser().parse(res.data)), /** Load a font */
             new THREE.TextureLoader().loadAsync(textureUri) /** Load a texture */
         ]).then((values: [BMFont, THREE.Texture]) => {
             let font: BMFont
