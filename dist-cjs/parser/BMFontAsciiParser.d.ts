@@ -1,4 +1,4 @@
-import { BMFont, IBMFontParser } from "../types";
+import { BMFont, IBMFontParser } from '~/types';
 declare class BMFontAsciiParser implements IBMFontParser<string> {
     parse(data: string): BMFont;
 }

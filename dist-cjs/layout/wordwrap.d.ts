@@ -1,4 +1,4 @@
-import { ComputeMetrics, WordMetrics } from "../types";
+import { ComputeMetrics, WordMetrics } from '~/types';
 declare class WordWrap {
     static readonly newlineRegexp: RegExp;
     static readonly whitespaceRegexp: RegExp;

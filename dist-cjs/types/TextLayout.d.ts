@@ -1,4 +1,4 @@
-import { BMFont, BMFontChar, WordWrapOption } from "./";
+import { BMFont, BMFontChar, WordWrapOption } from '~/types';
 interface TextGlyph {
     position: [number, number];
     data: BMFontChar;
