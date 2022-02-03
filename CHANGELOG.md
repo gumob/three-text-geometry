@@ -1,3 +1,10 @@
+## [0.0.1-beta.2](https://github.com/gumob/three-text-geometry/compare/0.0.1-beta.1...0.0.1-beta.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* set needsUpdate to true ([6afb9b6](https://github.com/gumob/three-text-geometry/commit/6afb9b6bdcb814e626faede63958609ff8062eed))
+
 ## [0.0.1-beta.1](https://github.com/gumob/three-text-geometry/compare/0.0.0...0.0.1-beta.1) (2021-12-09)
 
 
