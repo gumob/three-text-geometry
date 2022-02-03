@@ -1,3 +1,10 @@
+## [0.0.1-beta.3](https://github.com/gumob/three-text-geometry/compare/0.0.1-beta.2...0.0.1-beta.3) (2022-02-03)
+
+
+### Bug Fixes
+
+* build source ([bcfa80c](https://github.com/gumob/three-text-geometry/commit/bcfa80cef3d21d69f6234f244ab78284410b6869))
+
 ## [0.0.1-beta.2](https://github.com/gumob/three-text-geometry/compare/0.0.1-beta.1...0.0.1-beta.2) (2022-02-03)
 
 
