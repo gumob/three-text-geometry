@@ -173,6 +173,7 @@ class TextGeometry extends THREE.BufferGeometry {
   public override computeBoundingSphere() {
     if (this.boundingSphere === null) this.boundingSphere = new THREE.Sphere()
     if (!this.attributes.position) return
+    this.attributes.position.needsUpdate = true
     const positions = this.attributes.position.array
     const itemSize = this.attributes.position.itemSize
     if (!positions || !itemSize || positions.length < 2) {
@@ -199,6 +200,7 @@ class TextGeometry extends THREE.BufferGeometry {
     if (this.boundingBox === null) this.boundingBox = new THREE.Box3()
     const bbox = this.boundingBox
     if (!this.attributes.position) return
+    this.attributes.position.needsUpdate = true
     const positions = this.attributes.position.array
     const itemSize = this.attributes.position.itemSize
     if (!positions || !itemSize || positions.length < 2) {
