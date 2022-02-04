@@ -1,3 +1,10 @@
+## [0.0.1-beta.5](https://github.com/gumob/three-text-geometry/compare/0.0.1-beta.4...0.0.1-beta.5) (2022-02-04)
+
+
+### Bug Fixes
+
+* error UnhandledPromiseRejectionWarning caused by chalk ([fa030f4](https://github.com/gumob/three-text-geometry/commit/fa030f409ab20c00d7a5041aba2f5f8fb5169c56))
+
 ## [0.0.1-beta.4](https://github.com/gumob/three-text-geometry/compare/0.0.1-beta.3...0.0.1-beta.4) (2022-02-03)
 
 
