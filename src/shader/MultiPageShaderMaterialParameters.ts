@@ -18,14 +18,14 @@ export class MultiPageShaderMaterialParameters implements THREE.ShaderMaterialPa
   wireframeLinewidth?: number | undefined
   lights?: boolean | undefined
   clipping?: boolean | undefined
-  extensions?:
-    | {
-        derivatives?: boolean | undefined
-        fragDepth?: boolean | undefined
-        drawBuffers?: boolean | undefined
-        shaderTextureLOD?: boolean | undefined
-      }
-    | undefined
+  extensions?: {
+    derivatives?: boolean | undefined
+    fragDepth?: boolean | undefined
+    drawBuffers?: boolean | undefined
+    shaderTextureLOD?: boolean | undefined
+    clipCullDistance?: boolean | undefined // Added
+    multiDraw?: boolean | undefined // Added
+  } | undefined
   glslVersion?: THREE.GLSLVersion | undefined
 
   constructor(param: IMultipageShaderOption) {
