@@ -194,7 +194,7 @@ export default class ShuffleText {
     this._textStateHandler = textStateHandler
     /* Create character set */
     const letters: Array<string> = this._originalText.split('')
-    for (var i = 0; i < letters.length; i++) {
+    for (let i = 0; i < letters.length; i++) {
       const letter = letters[i]
       const char: ShuffleChar = new ShuffleChar(i, letter, option, this._onCharStateChanged.bind(this))
       this._chars.push(char)
@@ -206,14 +206,14 @@ export default class ShuffleText {
     this._state = ShuffleState.Updating
     this._timeStart = performance.now()
     const timeDiff = 0
-    for (var i = 0; i < this._chars.length; i++) this._chars[i].start(timeDiff)
+    for (let i = 0; i < this._chars.length; i++) this._chars[i].start(timeDiff)
     this._update()
   }
 
   private _update() {
     if (this._state !== ShuffleState.Updating) return
     const timeDiff = performance.now() - this._timeStart!
-    for (var i = 0; i < this._chars.length; i++) this._chars[i].update(timeDiff)
+    for (let i = 0; i < this._chars.length; i++) this._chars[i].update(timeDiff)
     this._currentText = this._chars.map((char: ShuffleChar) => char.currentChar).join('')
     if (this._state !== ShuffleState.Updating) return
     this._textStateHandler(this.currentText, this._state)
@@ -223,7 +223,7 @@ export default class ShuffleText {
   public cancel() {
     if (this._state !== ShuffleState.Updating) return
     this._state = ShuffleState.Cancelled
-    for (var i = 0; i < this._chars.length; i++) this._chars[i].cancel()
+    for (let i = 0; i < this._chars.length; i++) this._chars[i].cancel()
     this._currentText = this._chars.map((char: ShuffleChar) => char.currentChar).join('')
     this._textStateHandler(this.currentText, this._state)
     cancelAnimationFrame(this._animationFrame)
