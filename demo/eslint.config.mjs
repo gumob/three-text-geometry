@@ -8,8 +8,8 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   {
     rules: {
-      "no-unused-vars": "off",                     // Disable the rule for unused variables
-      "no-this-alias": "off",                      // Disable the rule for aliasing 'this'
+      "no-unused-vars": 0,                         // Disable the rule for unused variables
+      "no-this-alias": 0,                          // Disable the rule for aliasing 'this'
       "@typescript-eslint/no-unused-vars": 0,      // Disable TypeScript rule for unused variables
       "@typescript-eslint/no-this-alias": 0,       // Disable TypeScript rule for aliasing 'this'
       "@typescript-eslint/no-explicit-any": 0,     // Disable TypeScript rule for using 'any' type
