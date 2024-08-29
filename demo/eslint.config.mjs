@@ -14,5 +14,9 @@ export default tseslint.config(
       "@typescript-eslint/no-this-alias": 0,       // Disable TypeScript rule for aliasing 'this'
       "@typescript-eslint/no-explicit-any": 0,     // Disable TypeScript rule for using 'any' type
     },
+  },
+  {
+    files: ['src/**/*.ts', 'src/**/*.tsx'],
+    ...tseslint.configs.disableTypeChecked,
   }
 );

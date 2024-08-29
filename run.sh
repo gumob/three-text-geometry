@@ -12,6 +12,7 @@ local setup_yarn() {
     corepack enable
     yarn set version stable
     yarn -v
+    yarn dlx @yarnpkg/sdks vscode
 }
 
 local option_list=(

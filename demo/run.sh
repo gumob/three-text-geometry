@@ -9,11 +9,15 @@ if ! command -v fzf &> /dev/null; then
 fi
 
 local option_list=(
-	"yarn remove three-text-geometry && yarn add three-text-geometry@link:../../three-text-geometry"
 	"yarn add three-text-geometry@link:../../three-text-geometry"
 	"yarn add three-text-geometry@gumob/three-text-geometry#develop"
 	"yarn add three-text-geometry@gumob/three-text-geometry#main"
+	" "
+	"yarn remove three-text-geometry && yarn add three-text-geometry@link:../../three-text-geometry"
+	" "
 	"yarn remove three-text-geometry"
+	" "
+	"yarn dlx @yarnpkg/sdks vscode"
 )
 
 local selected_option=$(printf "%s\n" "${option_list[@]}" | fzf --ansi --prompt="Select a job to execute > ")
