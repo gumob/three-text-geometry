@@ -114,3 +114,6 @@ dist
 .pnp.*
 .yarn
 demo/.yarn
+
+# VSCode
+.vscode
