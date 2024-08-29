@@ -733,7 +733,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.9.1":
+"@eslint/js@npm:9.9.1, @eslint/js@npm:^9.9.1":
   version: 9.9.1
   resolution: "@eslint/js@npm:9.9.1"
   checksum: 10c0/a3a91de2ce78469f7c4eee78c1eba77360706e1d0fa0ace2e19102079bcf237b851217c85ea501dc92c4c3719d60d9df966977abc8554d4c38e3638c1f53dcb2
@@ -2150,7 +2150,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^8.3.0":
+"@typescript-eslint/eslint-plugin@npm:8.3.0, @typescript-eslint/eslint-plugin@npm:^8.3.0":
   version: 8.3.0
   resolution: "@typescript-eslint/eslint-plugin@npm:8.3.0"
   dependencies:
@@ -2173,7 +2173,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^8.3.0":
+"@typescript-eslint/parser@npm:8.3.0, @typescript-eslint/parser@npm:^8.3.0":
   version: 8.3.0
   resolution: "@typescript-eslint/parser@npm:8.3.0"
   dependencies:
@@ -9614,6 +9614,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:^19.4.1"
     "@commitlint/config-conventional": "npm:^19.4.1"
+    "@eslint/js": "npm:^9.9.1"
     "@microsoft/tsdoc": "npm:^0.15.0"
     "@microsoft/tsdoc-config": "npm:^0.17.0"
     "@playwright/test": "npm:^1.46.1"
@@ -9669,6 +9670,7 @@ __metadata:
     typedoc-plugin-merge-modules: "npm:^6.0.0"
     typedoc-plugin-rename-defaults: "npm:^0.7.1"
     typescript: "npm:^5.5.4"
+    typescript-eslint: "npm:^8.3.0"
     typescript-snapshots-plugin: "npm:^1.7.0"
     typescript-transform-paths: "npm:^3.5.0"
     uglify-es: "npm:3.3.9"
@@ -10060,6 +10062,20 @@ __metadata:
   bin:
     typedoc: bin/typedoc
   checksum: 10c0/95e7aefd500d057e0b73afbe4e76d9ddb2617516f890fbe5ce690bddfccc2f73a6279eb7d6e510347ca8347078d7cbbbdf416b9432b156708eaf1a1f34f7a4f0
+  languageName: node
+  linkType: hard
+
+"typescript-eslint@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "typescript-eslint@npm:8.3.0"
+  dependencies:
+    "@typescript-eslint/eslint-plugin": "npm:8.3.0"
+    "@typescript-eslint/parser": "npm:8.3.0"
+    "@typescript-eslint/utils": "npm:8.3.0"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10c0/90134b4b601d6fa582a95c9bee23c254f6ac2ca38aed07986d0a3bb75e1ddfdceeb9650c8647b34148696115d5fe0ce281413e4a8ec001e1e928356242a1756d
   languageName: node
   linkType: hard
 
