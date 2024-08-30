@@ -190,7 +190,8 @@ export default class ShuffleText {
       .split('')
       .filter((char: string, index: number, arr: string[]) => arr.indexOf(char) === index)
       .join('')
-      .replaceAll(/\s|\t|\n|\r|(\n\r)/gi, '')
+      // .replaceAll(/\s|\t|\n|\r|(\n\r)/gi, '')
+      .replace(/\s|\t|\n|\r|(\n\r)/gi, '')
     this._textStateHandler = textStateHandler
     /* Create character set */
     const letters: Array<string> = this._originalText.split('')
@@ -229,7 +230,7 @@ export default class ShuffleText {
     cancelAnimationFrame(this._animationFrame)
   }
 
-  private _onCharStateChanged(index: number, state: ShuffleState) {
+  private _onCharStateChanged(_: number, state: ShuffleState) {
     switch (state) {
       case ShuffleState.Idle:
       case ShuffleState.Updating:
