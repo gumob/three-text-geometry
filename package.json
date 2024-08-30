@@ -86,7 +86,7 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^22.5.1",
     "@types/offscreencanvas": "^2019.7.3",
-    "@types/three": "^0.167.2",
+    "@types/three": "^0.167.1",
     "@types/ts-nameof": "^4.2.5",
     "@types/uglify-es": "^3.0.3",
     "@types/uglify-js": "^3.17.5",

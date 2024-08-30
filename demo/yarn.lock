@@ -1305,7 +1305,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/three@npm:^0.167.2":
+"@types/three@npm:^0.167.1":
   version: 0.167.2
   resolution: "@types/three@npm:0.167.2"
   dependencies:
@@ -1898,7 +1898,7 @@ __metadata:
     "@types/react": "npm:^18.3.4"
     "@types/react-dom": "npm:^18.3.0"
     "@types/react-router-dom": "npm:^5.3.3"
-    "@types/three": "npm:^0.167.2"
+    "@types/three": "npm:^0.167.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.3.0"
     "@typescript-eslint/parser": "npm:^8.3.0"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"

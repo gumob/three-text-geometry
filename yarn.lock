@@ -2073,7 +2073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/three@npm:^0.167.2":
+"@types/three@npm:^0.167.1":
   version: 0.167.2
   resolution: "@types/three@npm:0.167.2"
   dependencies:
@@ -9630,7 +9630,7 @@ __metadata:
     "@types/jest": "npm:^29.5.12"
     "@types/node": "npm:^22.5.1"
     "@types/offscreencanvas": "npm:^2019.7.3"
-    "@types/three": "npm:^0.167.2"
+    "@types/three": "npm:^0.167.1"
     "@types/ts-nameof": "npm:^4.2.5"
     "@types/uglify-es": "npm:^3.0.3"
     "@types/uglify-js": "npm:^3.17.5"
