@@ -9,6 +9,8 @@ if ! command -v fzf &> /dev/null; then
 fi
 
 local option_list=(
+	"yarn cache clean && rm -rf node_modules && yarn install && yarn build"
+	" "
 	"yarn add three-text-geometry@link:../../three-text-geometry"
 	"yarn add three-text-geometry@gumob/three-text-geometry#develop"
 	"yarn add three-text-geometry@gumob/three-text-geometry#main"
