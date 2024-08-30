@@ -1,20 +1,7 @@
 {
-  "compilerOptions": {
-    "target": "ES2019",                                   // Target ECMAScript version for compatibility
-    "lib": ["dom", "dom.iterable", "esnext"],             // Include libraries for modern JavaScript features
-    "allowJs": true,                                      // Allow JavaScript files to compile with TypeScript
-    "skipLibCheck": true,                                 // Skip type checking of declaration files for speed
-    "esModuleInterop": true,                              // Enable interoperability between CommonJS and ES Modules
-    "allowSyntheticDefaultImports": true,                 // Allow default imports from modules without default export
-    "strict": true,                                       // Enable all strict type-checking options for quality
-    "forceConsistentCasingInFileNames": true,             // Disallow inconsistent casing in file references
-    "noFallthroughCasesInSwitch": true,                   // Report errors for fallthrough cases in switch statements
-    "module": "esnext",                                   // Specify the latest module code generation method
-    "moduleResolution": "node",                           // Align module resolution with Node.js strategy
-    "resolveJsonModule": true,                            // Allow importing JSON files as modules directly
-    "isolatedModules": true,                              // Ensure safe independent transpilation of each file
-    "noEmit": true,                                       // Do not emit output files, only type-checking
-    "jsx": "react-jsx"                                    // Specify JSX generation mode for React 17+
-  },
-  "include": ["src"]                                      // Include all TypeScript files in the 'src' directory
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

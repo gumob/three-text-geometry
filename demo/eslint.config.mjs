@@ -2,20 +2,30 @@
 
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import globals from 'globals'
 import tsParser from "@typescript-eslint/parser";
 import "eslint-plugin-only-warn";
 import eslintConfigPrettier from "eslint-config-prettier";
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default tseslint.config(
-  eslint.configs.recommended,                      // Use recommended ESLint settings
-  ...tseslint.configs.recommended,                 // Spread recommended settings
-  eslintConfigPrettier,                            // Integrate Prettier with ESLint
   {
+    ignores: ['dist']
+  },
+  {
+    extends: [
+      eslint.configs.recommended,                      // Use recommended ESLint settings
+      ...tseslint.configs.recommended,                 // Spread recommended settings
+      eslintConfigPrettier,                            // Integrate Prettier with ESLint
+    ],
     languageOptions: {
-      parser: tsParser,                            // TypeScript parser for ESLint
-      parserOptions: {
-        project: "tsconfig.json",                  // Path to the TypeScript configuration file
-      },
+      // parser: tsParser,                            // TypeScript parser for ESLint
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      // parserOptions: {
+      //   project: "tsconfig.json",                  // Path to the TypeScript configuration file
+      // },
     },
     settings: {
       "import/resolver": {
@@ -24,24 +34,22 @@ export default tseslint.config(
         },
       },
     },
-    rules: {
-      "no-unused-vars": 0,                         // Disable the rule for unused variables
-      "no-this-alias": 0,                          // Disable the rule for aliasing 'this'
-      "@typescript-eslint/no-unused-vars": 0,      // Disable TypeScript rule for unused variables
-      "@typescript-eslint/no-this-alias": 0,       // Disable TypeScript rule for aliasing 'this'
-      "@typescript-eslint/no-explicit-any": 0,     // Disable TypeScript rule for using 'any' type
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
     },
-    files: [
-      'src/**/*.ts',                               // Include all TypeScript files in src
-      'src/**/*.tsx',                              // Include all TSX files in src
-    ],
-    ignores: [
-      ".build",                                    // Ignore build directory
-      ".vscode",                                   // Ignore VSCode settings directory
-      ".yarn",                                     // Ignore Yarn directory
-      "eslint.config.mjs",                         // Ignore ESLint configuration file
-      "node_modules",                              // Ignore node_modules directory
-      "public",                                    // Ignore public directory
-    ]
-  }
+    rules: {
+      "no-unused-vars": "off",                         // Disable the rule for unused variables
+      "no-this-alias": "off",                          // Disable the rule for aliasing 'this'
+      "@typescript-eslint/no-unused-vars": "off",      // Disable TypeScript rule for unused variables
+      "@typescript-eslint/no-this-alias": "off",       // Disable TypeScript rule for aliasing 'this'
+      "@typescript-eslint/no-explicit-any": "off",     // Disable TypeScript rule for using 'any' type
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
+    files: ['src/**/*.{ts,tsx}']
+  },
 );
