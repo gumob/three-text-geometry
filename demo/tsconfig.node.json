@@ -16,7 +16,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* TypeRoots */
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "include": ["vite.config.ts"]
 }
