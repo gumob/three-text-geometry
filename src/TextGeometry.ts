@@ -4,7 +4,7 @@ import { TextAlign, TextGeometryOption, TextGlyph } from '~/types'
 import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '~/utils'
 
 /**
- * The class that generates THREE.BufferGeometry from a BMFont data.
+ * The class that generates THREE.BufferGeometry from BMFont data.
  *
  * ```typescript
  * import * as THREE from 'three'
@@ -16,11 +16,12 @@ import { computeBox, computeSphere, createIndices, extractPages, extractPosition
  * }
  * const geometry = new TextGeometry(text, option)
  * const material = new THREE.MeshBasicMaterial({
- *    map: texture, // THREE.Texture data side: THREE.DoubleSide,
+ *    map: texture, // THREE.Texture data
+ *    side: THREE.DoubleSide,
  *    transparent: true,
  *    color: 0x666666,
- * )
- * const mesth = new THREE.Mesh(geometry, material)
+ * })
+ * const mesh = new THREE.Mesh(geometry, material)
  * ```
  *
  * @class TextGeometry
@@ -29,7 +30,7 @@ import { computeBox, computeSphere, createIndices, extractPages, extractPosition
  */
 class TextGeometry extends THREE.BufferGeometry {
   /**
-   * The option that conforms to TextGeometryOption.
+   * The options that conform to TextGeometryOption.
    *
    * @type {TextGeometryOption}
    * @access private
@@ -52,7 +53,7 @@ class TextGeometry extends THREE.BufferGeometry {
   private _visibleGlyphs: TextGlyph[] = []
 
   /**
-   * The option conforms to the TextGeometryOption interface.
+   * The options conforming to the TextGeometryOption interface.
    *
    * @type {TextGeometryOption}
    * @memberof TextGeometry
@@ -74,10 +75,10 @@ class TextGeometry extends THREE.BufferGeometry {
   }
 
   /**
-   * The constructor to creates an instance of TextGeometry.
+   * The constructor to create an instance of TextGeometry.
    *
    * @param {string} text         Text to layout.
-   * @param {*}      [option={}]  An object comforms to `TextGeometryOption`.
+   * @param {*}      [option={}]  An object conforming to `TextGeometryOption`.
    * @memberof TextGeometry
    */
   constructor(text: string, option: any = {}) {
@@ -106,10 +107,10 @@ class TextGeometry extends THREE.BufferGeometry {
   }
 
   /**
-   * The function to update text.
+   * The function to update the text.
    *
    * @param {string} text         Text to layout.
-   * @param {*}      [option={}]  An object comforms to `TextGeometryOption`.
+   * @param {*}      [option={}]  An object conforming to `TextGeometryOption`.
    * @memberof TextGeometry
    */
   public update(text: string, option: any = {}) {
@@ -166,7 +167,7 @@ class TextGeometry extends THREE.BufferGeometry {
   }
 
   /**
-   * The function that computes bounding box of the geometry.
+   * The function that computes the bounding sphere of the geometry.
    *
    * @memberof TextGeometry
    */
@@ -192,7 +193,7 @@ class TextGeometry extends THREE.BufferGeometry {
   }
 
   /**
-   * The function that computes bounding sphere of the geometry.
+   * The function that computes the bounding box of the geometry.
    *
    * @memberof TextGeometry
    */
