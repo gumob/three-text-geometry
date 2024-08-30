@@ -7,9 +7,9 @@ import "eslint-plugin-only-warn";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
-  eslintConfigPrettier,
+  eslint.configs.recommended,                      // Use recommended ESLint settings
+  ...tseslint.configs.recommended,                 // Spread recommended settings
+  eslintConfigPrettier,                            // Integrate Prettier with ESLint
   {
     languageOptions: {
       parser: tsParser,                            // TypeScript parser for ESLint
@@ -32,16 +32,16 @@ export default tseslint.config(
       "@typescript-eslint/no-explicit-any": 0,     // Disable TypeScript rule for using 'any' type
     },
     files: [
-      'src/**/*.ts',
-      'src/**/*.tsx',
+      'src/**/*.ts',                               // Include all TypeScript files in src
+      'src/**/*.tsx',                              // Include all TSX files in src
     ],
     ignores: [
-      ".build",
-      ".vscode",
-      ".yarn",
-      "eslint.config.mjs",
-      "node_modules",
-      "public",
+      ".build",                                    // Ignore build directory
+      ".vscode",                                   // Ignore VSCode settings directory
+      ".yarn",                                     // Ignore Yarn directory
+      "eslint.config.mjs",                         // Ignore ESLint configuration file
+      "node_modules",                              // Ignore node_modules directory
+      "public",                                    // Ignore public directory
     ]
   }
 );
