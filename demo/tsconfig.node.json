@@ -19,7 +19,10 @@
     "noFallthroughCasesInSwitch": true,
 
     /* TypeRoots */
-    "typeRoots": ["node_modules/@types", "src/@types"]
+    "typeRoots": ["src/@types", ".yarn/cache/@types", ".yarn/unplugged"]
   },
-  "include": ["vite.config.ts"]
+  "include": [
+    "src",
+    "vite.config.ts"
+  ]
 }
