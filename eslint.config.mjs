@@ -2,6 +2,7 @@
 
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import tsParser from "@typescript-eslint/parser";
 import tsdoc from 'eslint-plugin-tsdoc';
 import "eslint-plugin-only-warn";
 import eslintConfigPrettier from "eslint-config-prettier";
@@ -12,7 +13,20 @@ export default tseslint.config(
   eslintConfigPrettier,
   {
     plugins: {
-      "tsdoc": tsdoc,
+      "tsdoc": tsdoc, // TSDoc plugin for linting TSDoc comments
+    },
+    languageOptions: {
+      parser: tsParser,     // TypeScript parser for ESLint
+      parserOptions: {
+        project: "tsconfig.json", // Path to the TypeScript configuration file
+      },
+    },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          project: "tsconfig.json", // Path to the TypeScript configuration for import resolution
+        },
+      },
     },
     rules: {
       "no-unused-vars": "off",                             // Disable the rule for unused variables
