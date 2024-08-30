@@ -1,44 +1,44 @@
 {
   "ts-node": {
-    "transpileOnly": true,
-    "require": ["typescript-transform-paths/register"],
+    "transpileOnly": true,                                   // Only transpile files without type checking
+    "require": ["typescript-transform-paths/register"],      // Register the typescript-transform-paths module
     "compilerOptions": {
       /** Sometimes projects (e.g. Nextjs) will want code to emit ESM but ts-node will not work with that. */
-      "module": "CommonJS"
+      "module": "CommonJS"                                   // See https://www.typescriptlang.org/tsconfig#module
     }
   },
   "compilerOptions": {
     /** Make the compiler stricter, catch more errors */
-    "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "forceConsistentCasingInFileNames": true,
+    "strict": true,                                          // Enable all strict type-checking options to catch more errors
+    "noImplicitReturns": true,                               // Ensure that all functions return a value or explicitly return undefined
+    "noFallthroughCasesInSwitch": true,                      // Report errors for fallthrough cases in switch statements
+    "noUncheckedIndexedAccess": true,                        // Enable error reporting for accessing properties of arrays and objects without type checks
+    "noImplicitOverride": true,                              // Ensure that methods in derived classes explicitly override base class methods
+    "forceConsistentCasingInFileNames": true,                // Disallow inconsistently-cased references to the same file
     /** We handle these with ESLint: */
-    // "noUnusedLocals": false,
-    // "noUnusedParameters": false,
+    // "noUnusedLocals": false,                               // Disable the rule for unused local variables
+    // "noUnusedParameters": false,                           // Disable the rule for unused function parameters
 
     /** Output */
-    "target": "ES2019",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "commonjs",
-    "moduleResolution": "Node",
-    "importHelpers": true,
+    "target": "ES2019",                                      // Specify the target ECMAScript version for the output code
+    "lib": ["dom", "dom.iterable", "esnext"],                // Include library files for DOM, iterable DOM, and the latest ECMAScript features
+    "module": "commonjs",                                    // Specify the module code generation method as CommonJS
+    "moduleResolution": "Node",                              // Specify the module resolution strategy to Node
+    "importHelpers": true,                                   // Enable the use of helper functions from the TypeScript library to reduce output size
 
     /** DX */
-    "incremental": true,
-    "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
-    "noErrorTruncation": true,
-    "baseUrl": "./",
+    "incremental": true,                                     // Enable incremental compilation to improve build performance
+    "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",   // Specify the path for the TypeScript build information file
+    "noErrorTruncation": true,                               // Disable error truncation to show full error messages
+    "baseUrl": "./",                                         // Set the base URL for module resolution
     "paths": {
       "~/*": ["./src/*"],
       "@/*": ["./tests/*"]
     },
 
     /** Enable importing json */
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
+    "resolveJsonModule": true,                               // Enable importing JSON modules
+    "esModuleInterop": true,                                 // Enable interoperability between CommonJS and ES Modules
 
     /** Other */
     /** Only enable this for applications. */
@@ -47,19 +47,16 @@
 
     /** Transformer Plugins made possible by https://github.com/nonara/ts-patch */
     "plugins": [
-      /** https://github.com/dsherret/ts-nameof */
-      { "transform": "ts-nameof", "type": "raw" },
-      /** https://github.com/LeDDGroup/typescript-transform-paths */
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+      { "transform": "ts-nameof", "type": "raw" },           // Transform using ts-nameof with raw type <https://github.com/dsherret/ts-nameof>
+      { "transform": "typescript-transform-paths" },         // Transform paths in TypeScript files <https://github.com/LeDDGroup/typescript-transform-paths>
+      { "transform": "typescript-transform-paths", "afterDeclarations": true } // Transform paths after declarations
     ]
   },
-  "include": ["src", "tests", "scripts"],
-  /** Prevent unwanted things like auto-import from built modules */
-  "exclude": ["dist-*", "demo"],
+  "include": ["src", "tests", "scripts"],                    // Specify directories to include for TypeScript compilation
+  "exclude": ["dist-*", "demo"],                             // Prevent unwanted things like auto-import from built modules
   "plugins": [
     {
-      "name": "typescript-snapshots-plugin"
+      "name": "typescript-snapshots-plugin"                  // Name of the TypeScript snapshots plugin
     }
   ]
 }
