@@ -1,7 +1,7 @@
 import React from 'react'
 import * as THREE from 'three'
-import Stats from 'three/examples/jsm/libs/stats.module'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import Stats from 'three/addons/libs/stats.module.js'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import {
   BMFont,
   BMFontAsciiParser,
@@ -120,7 +120,7 @@ export class DemoBase extends React.Component {
     container?.append(this.renderer.domElement)
 
     /** Stats Panel */
-    this.stats = Stats()
+    this.stats = new Stats()
     this.stats?.showPanel(0)
     document.body.appendChild(this.stats.dom)
 
@@ -162,13 +162,13 @@ export class DemoBase extends React.Component {
     this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this))
   }
 
-  onWindowResize(e: any) {
+  onWindowResize(_: any) {
     this.camera!.aspect = window.innerWidth / window.innerHeight
     this.camera?.updateProjectionMatrix()
     this.renderer?.setSize(window.innerWidth, window.innerHeight)
   }
 
-  onClicked(e: any) {
+  onClicked(_: any) {
     this.controls!.autoRotate = false
   }
 
