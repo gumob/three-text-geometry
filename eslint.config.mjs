@@ -8,13 +8,12 @@ import "eslint-plugin-only-warn";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
-  eslintConfigPrettier,
   {
-    plugins: {
-      "tsdoc": tsdoc,                                      // TSDoc plugin for linting TSDoc comments
-    },
+    extends: [
+      eslint.configs.recommended,                      // Use recommended ESLint settings
+      ...tseslint.configs.recommended,                 // Spread recommended settings
+      eslintConfigPrettier,                            // Integrate Prettier with ESLint
+    ],
     languageOptions: {
       parser: tsParser,                                    // TypeScript parser for ESLint
       parserOptions: {
@@ -27,6 +26,9 @@ export default tseslint.config(
           project: "tsconfig.json",                        // Path to the TypeScript configuration for import resolution
         },
       },
+    },
+    plugins: {
+      "tsdoc": tsdoc,                                      // TSDoc plugin for linting TSDoc comments
     },
     rules: {
       "no-unused-vars": "off",                             // Disable the rule for unused variables
@@ -45,10 +47,7 @@ export default tseslint.config(
       "@typescript-eslint/no-unsafe-call": "off",          // Disable TypeScript rule for unsafe calls
       "tsdoc/syntax": "warn",                              // Enable TSDoc syntax
     },
-    files: [
-      'src/**/*.ts',
-      'src/**/*.tsx',
-    ],
+    files: ['src/**/*.{ts,tsx}'],
     ignores: [
       ".yalc",
       ".vscode",
