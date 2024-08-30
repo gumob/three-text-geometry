@@ -83,7 +83,7 @@ export class DemoShuffleShader extends DemoBase {
     }
     const self = this
     this.shuffle?.cancel()
-    this.shuffle = new ShuffleText(this.staticText(), option, (text: string, state: ShuffleState) => {
+    this.shuffle = new ShuffleText(this.staticText(), option, (text: string, _: ShuffleState) => {
       const geom = this.textMesh?.geometry as TextGeometry
       geom.update(text)
     })
