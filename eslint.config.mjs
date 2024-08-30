@@ -13,18 +13,18 @@ export default tseslint.config(
   eslintConfigPrettier,
   {
     plugins: {
-      "tsdoc": tsdoc, // TSDoc plugin for linting TSDoc comments
+      "tsdoc": tsdoc,                                      // TSDoc plugin for linting TSDoc comments
     },
     languageOptions: {
-      parser: tsParser,     // TypeScript parser for ESLint
+      parser: tsParser,                                    // TypeScript parser for ESLint
       parserOptions: {
-        project: "tsconfig.json", // Path to the TypeScript configuration file
+        project: "tsconfig.json",                          // Path to the TypeScript configuration file
       },
     },
     settings: {
       "import/resolver": {
         typescript: {
-          project: "tsconfig.json", // Path to the TypeScript configuration for import resolution
+          project: "tsconfig.json",                        // Path to the TypeScript configuration for import resolution
         },
       },
     },
