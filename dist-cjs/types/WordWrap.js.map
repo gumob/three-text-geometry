@@ -1,1 +1,1 @@
-{"version":3,"file":"dist-cjs/types/WordWrap.js.map","sources":["../../src/types/WordWrap.ts"],"names":["WordWrapMode","exports"],"mappings":"aAoCA,IAAYA,a,mFAAZ,SAAYA,GAEVA,EAAA,IAAA,MAEAA,EAAA,OAAA,SAJF,CAAYA,aAAAC,QAAAD,eAAAC,QAAAD,aAAY"}
+{"version":3,"file":"dist-cjs/types/WordWrap.js.map","sources":["../../src/types/WordWrap.ts"],"names":["WordWrapMode","exports"],"mappings":"AAoCA,IAAYA,a,oFAAAA,IAEVA,EAAA,IAAA,MAEAA,EAAA,OAAA,QACD,GALWA,eAAYC,QAAAD,aAAZA,aAAY,GAAA"}

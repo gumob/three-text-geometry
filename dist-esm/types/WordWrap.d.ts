@@ -1,4 +1,4 @@
-export declare type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics;
+export type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics;
 export interface WordMetrics {
     start: number;
     end: number;

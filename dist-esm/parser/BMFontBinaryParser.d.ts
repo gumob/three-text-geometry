@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Buffer } from 'buffer';
 import { BMFont, IBMFontParser } from '~/types';
 declare class BMFontBinaryParser implements IBMFontParser<Buffer> {

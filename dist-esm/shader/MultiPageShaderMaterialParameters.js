@@ -1,4 +1,4 @@
-import*as THREE from"three";class MultiPageShaderMaterialParameters{constructor(e){const t=e||{};var e="number"==typeof t.opacity?t.opacity:1,a=t.precision||"highp",r="number"==typeof t.alphaTest?t.alphaTest:1e-4;const o=t.textures||[],i={};o.forEach((e,t)=>{i["texture"+t]={type:"t",value:e}});var n=o.map(function(e,t){return"uniform sampler2D texture"+t+";"}).join("\n"),l=o.map(function(e,t){return[(0===t?"if":"else if")+" (vPage == "+t+".0) {","sampleColor = texture2D(texture"+t+", vUv);","}"].join("\n")}).join("\n"),v=t.color;delete t.textures,delete t.color,delete t.precision,delete t.opacity;let c={attributes:{page:{type:"f",value:0}}};72<=(0|(parseInt(THREE.REVISION,10)||0))&&(c=void 0);r=0===r?"":`if (gl_FragColor.a < ${r}) discard;`,e=Object.assign({uniforms:Object.assign({},i,{opacity:{type:"f",value:e},color:{type:"c",value:v}}),vertexShader:`
+import*as THREE from"three";class MultiPageShaderMaterialParameters{constructor(e){var e=e||{},t="number"==typeof e.opacity?e.opacity:1,a=e.precision||"highp",r="number"==typeof e.alphaTest?e.alphaTest:1e-4,o=e.textures||[];let i={};o.forEach((e,t)=>{i["texture"+t]={type:"t",value:e}});var n=o.map(function(e,t){return"uniform sampler2D texture"+t+";"}).join("\n"),o=o.map(function(e,t){return[(0===t?"if":"else if")+" (vPage == "+t+".0) {","sampleColor = texture2D(texture"+t+", vUv);","}"].join("\n")}).join("\n"),l=e.color;delete e.textures,delete e.color,delete e.precision,delete e.opacity;let v={attributes:{page:{type:"f",value:0}}};72<=(0|(parseInt(THREE.REVISION,10)||0))&&(v=void 0);r=0===r?"":`if (gl_FragColor.a < ${r}) discard;`,t=Object.assign({uniforms:Object.assign({},i,{opacity:{type:"f",value:t},color:{type:"c",value:l}}),vertexShader:`
                 attribute vec4 position;
                 attribute vec2 uv;
                 attribute float page;
@@ -20,8 +20,8 @@ import*as THREE from"three";class MultiPageShaderMaterialParameters{constructor(
                 varying vec2 vUv;
                 void main() {
                     vec4 sampleColor = vec4(0.0);
-                    ${l}
+                    ${o}
                     gl_FragColor = sampleColor * vec4(color, opacity);
                     ${r}
                 }
-                `},c,t);this.uniforms=e.uniforms,this.vertexShader=e.vertexShader,this.fragmentShader=e.fragmentShader}}export{MultiPageShaderMaterialParameters};
+                `},v,e);this.uniforms=t.uniforms,this.vertexShader=t.vertexShader,this.fragmentShader=t.fragmentShader}}export{MultiPageShaderMaterialParameters};
