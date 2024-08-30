@@ -16,13 +16,13 @@ local setup_yarn() {
 }
 
 local option_list=(
-	"Setup yarn"
+	"yarn cache clean && rm -rf .yarn && rm -rf node_modules && corepack enable && yarn set version stable && yarn -v && yarn install --inline-builds && yarn dlx @yarnpkg/sdks vscode"
 )
 
 local selected_option=$(printf "%s\n" "${option_list[@]}" | fzf --ansi --prompt="Select a job to execute > ")
 
 case "$selected_option" in
-	"Setup yarn")                                setup_yarn;;
+	yarn*)                                eval $selected_option;;
 	*)                                           echo "Invalid option $selected_option" && exit 1;;
 esac
 
