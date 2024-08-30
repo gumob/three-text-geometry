@@ -40,11 +40,6 @@
     "resolveJsonModule": true,                               // Enable importing JSON modules
     "esModuleInterop": true,                                 // Enable interoperability between CommonJS and ES Modules
 
-    /** Other */
-    /** Only enable this for applications. */
-    /** Packages doing this force their consumers to. */
-    // "esModuleInterop": true,
-
     /** Transformer Plugins made possible by https://github.com/nonara/ts-patch */
     "plugins": [
       { "transform": "ts-nameof", "type": "raw" },           // Transform using ts-nameof with raw type <https://github.com/dsherret/ts-nameof>
