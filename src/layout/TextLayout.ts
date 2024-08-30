@@ -1,6 +1,9 @@
 import { WordWrap } from '~/layout'
 import { BMFont, BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordMetrics } from '~/types'
 
+/**
+ * Class representing the layout of text using a bitmap font.
+ */
 class TextLayout {
   static readonly X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
   static readonly M_WIDTHS = ['m', 'w']
@@ -35,37 +38,90 @@ class TextLayout {
   private _capHeight?: number
   private _lineHeight?: number
 
+  /**
+   * Gets the options for the text layout.
+   * @returns {TextLayoutOption} The options for the text layout.
+   */
   public get option(): TextLayoutOption {
     return { ...this._opt } as TextLayoutOption
   }
+
+  /**
+   * Gets the glyphs used in the text layout.
+   * @returns {TextGlyph[]} The array of glyphs.
+   */
   public get glyphs(): TextGlyph[] {
     return this._glyphs ?? []
   }
+
+  /**
+   * Gets the width of the text layout.
+   * @returns {number} The width of the text layout.
+   */
   public get width(): number {
     return this._width ?? 0
   }
+
+  /**
+   * Gets the height of the text layout.
+   * @returns {number} The height of the text layout.
+   */
   public get height(): number {
     return this._height ?? 0
   }
+
+  /**
+   * Gets the descender value of the text layout.
+   * @returns {number} The descender value.
+   */
   public get descender(): number {
     return this._descender ?? 0
   }
+
+  /**
+   * Gets the ascender value of the text layout.
+   * @returns {number} The ascender value.
+   */
   public get ascender(): number {
     return this._ascender ?? 0
   }
+
+  /**
+   * Gets the x-height of the text layout.
+   * @returns {number} The x-height value.
+   */
   public get xHeight(): number {
     return this._xHeight ?? 0
   }
+
+  /**
+   * Gets the baseline of the text layout.
+   * @returns {number} The baseline value.
+   */
   public get baseline(): number {
     return this._baseline ?? 0
   }
+
+  /**
+   * Gets the cap height of the text layout.
+   * @returns {number} The cap height value.
+   */
   public get capHeight(): number {
     return this._capHeight ?? 0
   }
+
+  /**
+   * Gets the line height of the text layout.
+   * @returns {number} The line height value.
+   */
   public get lineHeight(): number {
     return this._lineHeight ?? 0
   }
 
+  /**
+   * Returns a string representation of the text layout.
+   * @returns {string} The string representation.
+   */
   public toString() {
     return `{
   glyphs: ${this.glyphs.length}
@@ -80,14 +136,25 @@ class TextLayout {
 }`
   }
 
+  /**
+   * Creates an instance of TextLayout.
+   * @param {string} text - The text to layout.
+   * @param {any} option - The options for the text layout.
+   * @throws {TypeError} If the font is not specified in options.
+   */
   constructor(text: string, option: any = {}) {
     if (option.font === undefined) throw new TypeError('Must specify a `font` in options')
     this._opt.font = option.font
     this.update(text, option)
   }
 
+  /**
+   * Updates the text layout with new text and options.
+   * @param {string} text - The text to layout.
+   * @param {any} option - The options for the text layout.
+   */
   public update(text: string, option: any = {}) {
-    /** Initalize variables */
+    /** Initialize variables */
     this._glyphs = []
     this._width = 0
     this._height = 0
@@ -97,7 +164,7 @@ class TextLayout {
     this._baseline = 0
     this._capHeight = 0
     this._lineHeight = 0
-    /** Initalize options */
+    /** Initialize options */
     if (option.font !== undefined) this._opt.font = option.font
     if (option.start !== undefined) this._opt.start = Math.max(0, option.start)
     else this._opt.start = 0
@@ -186,16 +253,21 @@ class TextLayout {
     }
   }
 
+  /**
+   * Sets up fallback glyphs for space and tab characters.
+   * @param {BMFont} font - The bitmap font to use.
+   * @param {number} tabSize - The size of the tab character.
+   */
   private _setupSpaceGlyphs(font: BMFont, tabSize: number) {
     /** These are fallbacks, when the font doesn't include */
-    /** ' ' or '\t' _glyphs */
+    /** ' ' or '\t' glyphs */
     this._fallbackSpaceGlyph = null
     this._fallbackTabGlyph = null
 
     if (!font.chars || font.chars.length === 0) return
 
     /** try to get space glyph */
-    /** then fall back to the 'm' or 'w' _glyphs */
+    /** then fall back to the 'm' or 'w' glyphs */
     /** then fall back to the first glyph available */
     const space = this.getGlyphById(font, TextLayout.SPACE_ID) || this.getMGlyph(font) || font.chars[0]
     if (!space) return
@@ -217,6 +289,12 @@ class TextLayout {
     )
   }
 
+  /**
+   * Gets the glyph for a specific character ID.
+   * @param {BMFont} font - The bitmap font to use.
+   * @param {number} id - The character ID.
+   * @returns {BMFontChar | null} The glyph for the character, or null if not found.
+   */
   private getGlyph(font: BMFont, id: number): BMFontChar | null {
     const glyph = this.getGlyphById(font, id)
     if (glyph) return glyph
@@ -225,6 +303,14 @@ class TextLayout {
     return null
   }
 
+  /**
+   * Computes the metrics for a given text segment.
+   * @param {string} text - The text to measure.
+   * @param {number} start - The starting index of the text segment.
+   * @param {number} end - The ending index of the text segment.
+   * @param {number} width - The maximum width for the text segment.
+   * @returns {WordMetrics} The computed metrics for the text segment.
+   */
   private computeMetrics(text: string, start: number, end: number, width: number): WordMetrics {
     const letterSpacing = this._opt.letterSpacing || 0
     const font = this._opt.font
@@ -266,7 +352,7 @@ class TextLayout {
       count++
     }
 
-    /** make sure rightmost edge lines up with rendered _glyphs */
+    /** make sure rightmost edge lines up with rendered glyphs */
     if (lastGlyph) curWidth += lastGlyph.xoffset
     return {
       start: start,
@@ -275,6 +361,12 @@ class TextLayout {
     }
   }
 
+  /**
+   * Gets a glyph by its character ID.
+   * @param {BMFont} font - The bitmap font to use.
+   * @param {number} id - The character ID.
+   * @returns {BMFontChar | undefined} The glyph if found, otherwise undefined.
+   */
   private getGlyphById(font: BMFont, id: number): BMFontChar | undefined {
     if (!font.chars || font.chars.length === 0) return undefined
     const glyphIdx = this.findChar(font.chars, id)
@@ -282,6 +374,11 @@ class TextLayout {
     return undefined
   }
 
+  /**
+   * Gets the x-height of the font.
+   * @param {BMFont} font - The bitmap font to use.
+   * @returns {number} The x-height value.
+   */
   private getXHeight(font: BMFont): number {
     for (let i = 0; i < TextLayout.X_HEIGHTS.length; i++) {
       const id = TextLayout.X_HEIGHTS[i]!.charCodeAt(0)
@@ -291,6 +388,11 @@ class TextLayout {
     return 0
   }
 
+  /**
+   * Gets the 'm' glyph from the font.
+   * @param {BMFont} font - The bitmap font to use.
+   * @returns {BMFontChar | undefined} The 'm' glyph if found, otherwise undefined.
+   */
   private getMGlyph(font: BMFont): BMFontChar | undefined {
     for (let i = 0; i < TextLayout.M_WIDTHS.length; i++) {
       const id = TextLayout.M_WIDTHS[i]!.charCodeAt(0)
@@ -300,6 +402,11 @@ class TextLayout {
     return undefined
   }
 
+  /**
+   * Gets the cap height of the font.
+   * @param {BMFont} font - The bitmap font to use.
+   * @returns {number} The cap height value.
+   */
   private getCapHeight(font: BMFont): number {
     for (let i = 0; i < TextLayout.CAP_HEIGHTS.length; i++) {
       const id = TextLayout.CAP_HEIGHTS[i]!.charCodeAt(0)
@@ -309,6 +416,13 @@ class TextLayout {
     return 0
   }
 
+  /**
+   * Gets the kerning value between two glyphs.
+   * @param {BMFont} font - The bitmap font to use.
+   * @param {number} left - The ID of the left glyph.
+   * @param {number} right - The ID of the right glyph.
+   * @returns {number} The kerning value.
+   */
   private getKerning(font: BMFont, left: number, right: number): number {
     if (!font.kernings || font.kernings.length === 0) return 0
     const table = font.kernings
@@ -319,6 +433,12 @@ class TextLayout {
     return 0
   }
 
+  /**
+   * Finds the index of a character in an array of glyphs.
+   * @param {BMFontChar[]} array - The array of glyphs.
+   * @param {number} value - The character ID to find.
+   * @returns {number} The index of the character, or -1 if not found.
+   */
   private findChar(array: BMFontChar[], value: number): number {
     for (let i = 0; i < array.length; i++) {
       if (array[i]!.id === value) return i
