@@ -2,8 +2,8 @@
 
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import globals from 'globals'
 import tsParser from "@typescript-eslint/parser";
+import globals from 'globals'
 import "eslint-plugin-only-warn";
 import eslintConfigPrettier from "eslint-config-prettier";
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -20,7 +20,7 @@ export default tseslint.config(
       eslintConfigPrettier,                            // Integrate Prettier with ESLint
     ],
     languageOptions: {
-      // parser: tsParser,                            // TypeScript parser for ESLint
+      parser: tsParser,                            // TypeScript parser for ESLint
       ecmaVersion: 2020,
       globals: globals.browser,
       // parserOptions: {
