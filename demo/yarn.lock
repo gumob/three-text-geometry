@@ -1457,7 +1457,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react-swc@npm:^3.5.0":
+"@vitejs/plugin-react-swc@npm:^3.7.0":
   version: 3.7.0
   resolution: "@vitejs/plugin-react-swc@npm:3.7.0"
   dependencies:
@@ -1901,13 +1901,13 @@ __metadata:
     "@types/three": "npm:^0.167.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.3.0"
     "@typescript-eslint/parser": "npm:^8.3.0"
-    "@vitejs/plugin-react-swc": "npm:^3.5.0"
+    "@vitejs/plugin-react-swc": "npm:^3.7.0"
     axios: "npm:^1.7.5"
     eslint: "npm:^9.9.1"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-only-warn: "npm:^1.1.0"
-    eslint-plugin-react-hooks: "npm:^5.1.0-rc.0"
-    eslint-plugin-react-refresh: "npm:^0.4.9"
+    eslint-plugin-react-hooks: "npm:^4.6.2"
+    eslint-plugin-react-refresh: "npm:^0.4.11"
     eslint-plugin-tsdoc: "npm:^0.3.0"
     globals: "npm:^15.9.0"
     react: "npm:^18.3.1"
@@ -1917,7 +1917,7 @@ __metadata:
     three-text-geometry: "npm:beta"
     typescript: "npm:^5.5.4"
     typescript-eslint: "npm:^8.3.0"
-    vite: "npm:^5.4.1"
+    vite: "npm:^5.4.2"
     web-vitals: "npm:^4.2.3"
   languageName: unknown
   linkType: soft
@@ -2125,16 +2125,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^5.1.0-rc.0":
-  version: 5.1.0-rc-fb9a90fa48-20240614
-  resolution: "eslint-plugin-react-hooks@npm:5.1.0-rc-fb9a90fa48-20240614"
+"eslint-plugin-react-hooks@npm:^4.6.2":
+  version: 4.6.2
+  resolution: "eslint-plugin-react-hooks@npm:4.6.2"
   peerDependencies:
-    eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
-  checksum: 10/993da76357003f0f788d9eb621d463012fb5ad42cf92d3eacbf7498e2a2fa707d77c59f5e940642724cd61340b1256d13cebaa7b8fbaa3c432c03911ef6bd40e
+    eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
+  checksum: 10/5a0680941f34e70cf505bcb6082df31a3e445d193ee95a88ff3483041eb944f4cefdaf7e81b0eb1feb4eeceee8c7c6ddb8a2a6e8c4c0388514a42e16ac7b7a69
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-refresh@npm:^0.4.9":
+"eslint-plugin-react-refresh@npm:^0.4.11":
   version: 0.4.11
   resolution: "eslint-plugin-react-refresh@npm:0.4.11"
   peerDependencies:
@@ -4009,7 +4009,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.1":
+"vite@npm:^5.4.2":
   version: 5.4.2
   resolution: "vite@npm:5.4.2"
   dependencies:
