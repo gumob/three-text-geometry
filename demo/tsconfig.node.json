@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",                                      // Specify ECMAScript version for output <https://www.typescriptlang.org/tsconfig#target>
-    "lib": ["ES2023"],                                       // Include standard libraries for ES2023 <https://www.typescriptlang.org/tsconfig#lib>
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],                // Include standard libraries for ES2023 <https://www.typescriptlang.org/tsconfig#lib>
     "module": "ESNext",                                      // Set module system to ESNext <https://www.typescriptlang.org/tsconfig#module>
     "skipLibCheck": true,                                    // Skip type checking of declaration files <https://www.typescriptlang.org/tsconfig#skipLibCheck>
 

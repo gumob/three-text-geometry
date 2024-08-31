@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ES2020",                                      // Specify ECMAScript version for output <https://www.typescriptlang.org/tsconfig#target>
     "useDefineForClassFields": true,                         // Use 'define' for class fields <https://www.typescriptlang.org/tsconfig#useDefineForClassFields>
     "lib": ["ES2020", "DOM", "DOM.Iterable"],                // Include standard libraries <https://www.typescriptlang.org/tsconfig#lib>
     "module": "ESNext",                                      // Set module system <https://www.typescriptlang.org/tsconfig#module>
@@ -24,12 +25,12 @@
       "~/*": ["./src/*"]
     },
 
-    /** Transformer Plugins made possible by https://github.com/nonara/ts-patch */
-    "plugins": [
-      { "transform": "ts-nameof", "type": "raw" },           // Transform using ts-nameof with raw type <https://github.com/dsherret/ts-nameof>
-      { "transform": "typescript-transform-paths" },         // Transform paths in TypeScript files <https://github.com/LeDDGroup/typescript-transform-paths>
-      { "transform": "typescript-transform-paths", "afterDeclarations": true } // Transform paths after declarations
-    ],
+    // /** Transformer Plugins made possible by https://github.com/nonara/ts-patch */
+    // "plugins": [
+    //   { "transform": "ts-nameof", "type": "raw" },           // Transform using ts-nameof with raw type <https://github.com/dsherret/ts-nameof>
+    //   { "transform": "typescript-transform-paths" },         // Transform paths in TypeScript files <https://github.com/LeDDGroup/typescript-transform-paths>
+    //   { "transform": "typescript-transform-paths", "afterDeclarations": true } // Transform paths after declarations
+    // ],
 
     // "typeRoots": ["yarn/cache/@types", ".yarn/unplugged", "src/@types"], // Specify locations for type definitions used in the project
   },
