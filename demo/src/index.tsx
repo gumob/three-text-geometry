@@ -1,15 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // import reportWebVitals from '~/reportWebVitals'
-import Navigation from '~/Navigation'
-import DemoMultipage from '~/DemoMultipage'
-import DemoSimple from '~/DemoSimple'
-import DemoShuffle from '~/DemoShuffle'
-import DemoShader from '~/DemoShader'
-import DemoShuffleShader from '~/DemoShuffleShader'
+import Navigation from '~/Navigation';
+import DemoMultipage from '~/DemoMultipage';
+import DemoSimple from '~/DemoSimple';
+import DemoShuffle from '~/DemoShuffle';
+import DemoShader from '~/DemoShader';
+import DemoShuffleShader from '~/DemoShuffleShader';
 
-import './index.css'
+import './index.css';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
