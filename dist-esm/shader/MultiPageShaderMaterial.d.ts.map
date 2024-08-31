@@ -1,0 +1,1 @@
+{"version":3,"file":"MultiPageShaderMaterial.d.ts","sourceRoot":"","sources":["../../src/shader/MultiPageShaderMaterial.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAA;AAE9B,qBAAa,uBAAwB,SAAQ,KAAK,CAAC,cAAc;gBACnD,UAAU,CAAC,EAAE,KAAK,CAAC,wBAAwB;CAIxD"}

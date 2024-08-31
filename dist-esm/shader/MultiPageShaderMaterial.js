@@ -1,0 +1,1 @@
+import*as THREE from"three";class MultiPageShaderMaterial extends THREE.ShaderMaterial{constructor(e){super(e)}}export{MultiPageShaderMaterial};

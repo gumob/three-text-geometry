@@ -1,0 +1,1 @@
+import Ajv from"ajv";import{BMFontError}from"~/error";import schema from"./BMFontJsonSchema.json";class BMFontJsonParser{parse(r){try{if("string"==typeof r&&(r=JSON.parse(r)),(new Ajv).compile(schema)(r))return r;throw new BMFontError("Invalid json data")}catch(r){throw new BMFontError(r.message)}}}export{BMFontJsonParser};

@@ -1,3 +1,1 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=TextGeometryOption.js.map
+Object.defineProperty(exports,"__esModule",{value:!0});

@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/shaders/index.ts"],"names":[],"mappings":";;;AAAA,kDAAuB;AACvB,iDAAsB;AACtB,sDAA2B;AAC3B,gDAAqB"}
+{"version":3,"file":"dist-cjs/shaders/index.js.map","sources":["../../src/shaders/index.ts"],"names":["tslib_1","__exportStar","require","exports"],"mappings":"oFAAAA,QAAAC,aAAAC,QAAA,SAAA,EAAAC,OAAA,EACAH,QAAAC,aAAAC,QAAA,QAAA,EAAAC,OAAA,EACAH,QAAAC,aAAAC,QAAA,aAAA,EAAAC,OAAA,EACAH,QAAAC,aAAAC,QAAA,OAAA,EAAAC,OAAA"}
