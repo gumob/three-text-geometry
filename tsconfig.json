@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    /** Make the compiler stricter, catch more errors */
+    /** Linting */
     "strict": true,                                          // Enable all strict type-checking options to catch more errors <https://www.typescriptlang.org/tsconfig#strict>
     "noImplicitReturns": true,                               // Ensure that all functions return a value or explicitly return undefined <https://www.typescriptlang.org/tsconfig#noImplicitReturns>
     "noFallthroughCasesInSwitch": true,                      // Report errors for fallthrough cases in switch statements <https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch>
