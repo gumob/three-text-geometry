@@ -52,10 +52,10 @@
     "clean:dist": "rm -rf dist-cjs dist-esm",
     "clean:cache": "yarn cache clean",
     "clean:node_modules": "node_modules/.cache",
-    "postinstall": "husky install",
+    "postinstall": "command -v husky &> /dev/null && husky install || echo 'husky is not installed'",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable",
-    "prepare": "ts-patch install -s && husky install",
+    "prepare": "ts-patch install -s && command -v husky &> /dev/null && husky install || echo 'husky is not installed'",
     "upgrade": "yarn up '*' '@*/*'",
     "typedoc": "yarn format && yarn lint && typedoc --options typedoc.json",
     "all": "yarn format && yarn lint && yarn typedoc && yarn test:coverage && yarn build"
