@@ -3,11 +3,11 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import tsParser from "@typescript-eslint/parser";
-import globals from 'globals'
-import "eslint-plugin-only-warn";
 import eslintConfigPrettier from "eslint-config-prettier";
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import "eslint-plugin-only-warn";
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default tseslint.config(
   {
@@ -20,17 +20,17 @@ export default tseslint.config(
       eslintConfigPrettier,                            // Integrate Prettier with ESLint
     ],
     languageOptions: {
-      parser: tsParser,                            // TypeScript parser for ESLint
+      parser: tsParser,                                // TypeScript parser for ESLint
       ecmaVersion: 2020,
       globals: globals.browser,
       // parserOptions: {
-      //   project: "tsconfig.json",                  // Path to the TypeScript configuration file
+      //   project: "tsconfig.json",                   // Path to the TypeScript configuration file
       // },
     },
     settings: {
       "import/resolver": {
         typescript: {
-          project: "tsconfig.json",                // Path to the TypeScript configuration for import resolution
+          project: "tsconfig.json",                    // Path to the TypeScript configuration for import resolution
         },
       },
     },
