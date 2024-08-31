@@ -1733,7 +1733,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ajv@npm:^8.9.0":
+"ajv@npm:^8.17.1":
   version: 8.17.1
   resolution: "ajv@npm:8.17.1"
   dependencies:
@@ -2156,7 +2156,7 @@ __metadata:
     react-router-dom: "npm:^6.26.1"
     supports-color: "npm:^8.1.1"
     three: "npm:^0.167.1"
-    three-text-geometry: "npm:beta"
+    three-text-geometry: "file:../"
     typescript: "npm:^5.5.4"
     typescript-eslint: "npm:^8.3.0"
     vite: "npm:^5.4.2"
@@ -2595,7 +2595,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-xml-parser@npm:^4.0.2":
+"fast-xml-parser@npm:^4.4.1":
   version: 4.4.1
   resolution: "fast-xml-parser@npm:4.4.1"
   dependencies:
@@ -2675,7 +2675,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"floggy@npm:^0.3.2":
+"floggy@npm:^0.3.5":
   version: 0.3.5
   resolution: "floggy@npm:0.3.5"
   dependencies:
@@ -4297,23 +4297,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"three-text-geometry@npm:beta":
-  version: 0.0.1-beta.5
-  resolution: "three-text-geometry@npm:0.0.1-beta.5"
+"three-text-geometry@file:../::locator=demo%40workspace%3A.":
+  version: 0.0.0
+  resolution: "three-text-geometry@file:../#../::hash=84711b&locator=demo%40workspace%3A."
   dependencies:
-    ajv: "npm:^8.9.0"
-    fast-xml-parser: "npm:^4.0.2"
-    floggy: "npm:^0.3.2"
-    three: "npm:^0.137.5"
-    tslib: "npm:^2.3.1"
-  checksum: 10/74194c57711ea5b3e1943dadd939009ab6fcea4d8a3ab044ad1bf82cd7992e470c47cb4dfd7295cc6e8de769ec0cd5f3b28d0865bf67531e8abd064575675a5f
-  languageName: node
-  linkType: hard
-
-"three@npm:^0.137.5":
-  version: 0.137.5
-  resolution: "three@npm:0.137.5"
-  checksum: 10/7ec792259b32ede7213a0b87ae409d765ee704e6f5c97a9c0746fab1df15c6793a5c8ed80cf4623a9c1506001b04efad4b7b06c0f3d0ed9a3cf7972a084be0cf
+    ajv: "npm:^8.17.1"
+    fast-xml-parser: "npm:^4.4.1"
+    floggy: "npm:^0.3.5"
+    three: "npm:^0.167.1"
+    tslib: "npm:^2.7.0"
+  checksum: 10/b16fecbdddcf10317849200b5e18fa877171952cefbd84ee6c1025de0e241f1713b9daef0152020484b8cc8c659c4a4852387eba392db90917e03dfd7f738ba8
   languageName: node
   linkType: hard
 
@@ -4363,7 +4356,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.3.1":
+"tslib@npm:^2.7.0":
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 10/9a5b47ddac65874fa011c20ff76db69f97cf90c78cff5934799ab8894a5342db2d17b4e7613a087046bc1d133d21547ddff87ac558abeec31ffa929c88b7fce6
