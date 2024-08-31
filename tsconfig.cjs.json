@@ -8,8 +8,9 @@
     "lib": ["ES2018", "DOM", "DOM.Iterable"],                 // Library files for DOM and latest ECMAScript features <https://www.typescriptlang.org/tsconfig#lib>
     "resolveJsonModule": true,                                // Enable importing JSON modules <https://www.typescriptlang.org/tsconfig#resolveJsonModule>
     "esModuleInterop": true,                                  // Interoperability between CommonJS and ES Modules <https://www.typescriptlang.org/tsconfig#esModuleInterop>
-    "incremental": true,                                      // Enable incremental compilation for better performance <https://www.typescriptlang.org/tsconfig#incremental>
-    "tsBuildInfoFile": ".cache/commonjs/.tsbuildinfo",        // Path for TypeScript build information file <https://www.typescriptlang.org/tsconfig#tsBuildInfoFile>
+    /* FIXME: Incremental compilation is broken. Fix `find: dist-cjs: No such file or directory` */
+    // "incremental": true,                                      // Enable incremental compilation for better performance <https://www.typescriptlang.org/tsconfig#incremental>
+    // "tsBuildInfoFile": ".cache/cjs/.tsbuildinfo",             // Path for TypeScript build information file <https://www.typescriptlang.org/tsconfig#tsBuildInfoFile>
     "rootDir": "src",                                         // Root directory of input files <https://www.typescriptlang.org/tsconfig#rootDir>
     "sourceMap": true,                                        // Generate source maps for debugging <https://www.typescriptlang.org/tsconfig#sourceMap>
     "declaration": true,                                      // Generate declaration files <https://www.typescriptlang.org/tsconfig#declaration>
