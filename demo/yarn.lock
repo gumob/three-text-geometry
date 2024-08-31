@@ -4299,7 +4299,7 @@ __metadata:
 
 "three-text-geometry@git+https://github.com/gumob/three-text-geometry.git#beta":
   version: 0.0.0
-  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=429dda22de4bb9ec392d9662f15cae7bc908e74f"
+  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=21d49c3a560be5aefdf6cb34ceb799c3e079e150"
   dependencies:
     ajv: "npm:^8.17.1"
     fast-xml-parser: "npm:^4.4.1"
