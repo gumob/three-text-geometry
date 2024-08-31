@@ -1,1 +1,10 @@
-var TextAlign;(e=>{e[e.Left=0]="Left",e[e.Center=1]="Center",e[e.Right=2]="Right"})(TextAlign=TextAlign||{});export{TextAlign};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TextAlign = void 0;
+var TextAlign;
+(function (TextAlign) {
+    TextAlign[TextAlign["Left"] = 0] = "Left";
+    TextAlign[TextAlign["Center"] = 1] = "Center";
+    TextAlign[TextAlign["Right"] = 2] = "Right";
+})(TextAlign || (exports.TextAlign = TextAlign = {}));
+//# sourceMappingURL=TextLayout.js.map

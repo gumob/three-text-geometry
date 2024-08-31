@@ -1,1 +1,1 @@
-{"version":3,"file":"dist-cjs/types/TextLayout.js.map","sources":["../../src/types/TextLayout.ts"],"names":["TextAlign"],"mappings":"AA2CA,IAAKA,WAAAA,IAEHA,EAAAA,EAAA,KAAA,GAAA,OAEAA,EAAAA,EAAA,OAAA,GAAA,SAEAA,EAAAA,EAAA,MAAA,GAAA,OACD,GAPIA,UAAAA,WAAS,EAAA,SAyDLA,SAAwC"}
+{"version":3,"file":"TextLayout.js","sourceRoot":"","sources":["../../src/types/TextLayout.ts"],"names":[],"mappings":";;;AA2CA,IAAK,SAOJ;AAPD,WAAK,SAAS;IAEZ,yCAAQ,CAAA;IAER,6CAAU,CAAA;IAEV,2CAAS,CAAA;AACX,CAAC,EAPI,SAAS,yBAAT,SAAS,QAOb"}

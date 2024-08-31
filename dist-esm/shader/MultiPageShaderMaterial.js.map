@@ -1,1 +1,0 @@
-{"version":3,"file":"dist-esm/shader/MultiPageShaderMaterial.js.map","sources":["../../src/shader/MultiPageShaderMaterial.ts"],"names":["THREE","MultiPageShaderMaterial","ShaderMaterial","constructor","parameters","super"],"mappings":"MAAYA,cAAW,cAEVC,gCAAgCD,MAAME,eACjDC,YAAYC,GACVC,MAAMD,CAAU,CAElB,C,QAJWH,uB"}

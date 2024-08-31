@@ -1,1 +1,121 @@
-import{WordWrapMode}from"~/types";class WordWrap{static newlineRegexp=/\n/;static whitespaceRegexp=/\s/;static newlineChar="\n";wrap(r,e={}){return this.lines(r,e).map(e=>r.substring(e.start,e.end)).join("\n")}lines(e,r={}){var t={start:void 0,end:void 0,width:void 0,mode:void 0,measure:void 0};return e=e||"",void 0!==r.start?t.start=Math.max(0,r.start):t.start=0,t.end=void 0!==r.end?r.end:e.length,t.width=void 0!==r.width?r.width:Number.MAX_VALUE,void 0!==r.mode&&(t.mode=r.mode),t.measure=r.measure||this.monospace,0===t.width&&t.mode!==WordWrapMode.NoWrap?[]:r.mode===WordWrapMode.Pre?this.pre(t.measure,e,t.start,t.end,t.width):this.greedy(t.measure,e,t.start,t.end,t.width,t.mode)}idxOf(e,r,t,a){e=e.indexOf(r,t);return-1===e||a<e?a:e}isWhitespace(e){return WordWrap.whitespaceRegexp.test(e)}pre(r,t,a,i,d){var s=[];let n=a;for(let e=a;e<i&&e<t.length;e++){var o=t.charAt(e),o=WordWrap.newlineRegexp.test(o);!o&&e!==i-1||(o=o?e:e+1,o=r(t,n,o,d),s.push(o),n=e+1)}return s}greedy(t,a,i,d,e,r){var s=[];let n=e;for(r===WordWrapMode.NoWrap&&(n=Number.MAX_VALUE);i<d&&i<a.length;){for(var o=this.idxOf(a,WordWrap.newlineChar,i,d);i<o&&this.isWhitespace(a.charAt(i));)i++;var h=t(a,i,o,n);let e=i+(h.end-h.start),r=e+WordWrap.newlineChar.length;if(e<o){for(;e>i&&!this.isWhitespace(a.charAt(e));)e--;if(e===i)r>i+WordWrap.newlineChar.length&&r--,e=r;else for(r=e;e>i&&this.isWhitespace(a.charAt(e-WordWrap.newlineChar.length));)e--}e>=i&&s.push(t(a,i,e,n)),i=r}return s}monospace(e,r,t,a){return{start:r,end:r+Math.min(a,t-r),width:0}}}export{WordWrap};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WordWrap = void 0;
+const types_1 = require("~/types");
+class WordWrap {
+    static newlineRegexp = /\n/;
+    static whitespaceRegexp = /\s/;
+    static newlineChar = '\n';
+    wrap(text, option = {}) {
+        return this.lines(text, option)
+            .map((line) => text.substring(line.start, line.end))
+            .join('\n');
+    }
+    lines(text, option = {}) {
+        const opt = {
+            start: undefined,
+            end: undefined,
+            width: undefined,
+            mode: undefined,
+            measure: undefined,
+        };
+        text = text || '';
+        if (option.start !== undefined)
+            opt.start = Math.max(0, option.start);
+        else
+            opt.start = 0;
+        if (option.end !== undefined)
+            opt.end = option.end;
+        else
+            opt.end = text.length;
+        if (option.width !== undefined)
+            opt.width = option.width;
+        else
+            opt.width = Number.MAX_VALUE;
+        if (option.mode !== undefined)
+            opt.mode = option.mode;
+        opt.measure = option.measure || this.monospace;
+        if (opt.width === 0 && opt.mode !== types_1.WordWrapMode.NoWrap)
+            return [];
+        if (option.mode === types_1.WordWrapMode.Pre)
+            return this.pre(opt.measure, text, opt.start, opt.end, opt.width);
+        else
+            return this.greedy(opt.measure, text, opt.start, opt.end, opt.width, opt.mode);
+    }
+    idxOf(text, chr, start, end) {
+        const idx = text.indexOf(chr, start);
+        if (idx === -1 || idx > end)
+            return end;
+        return idx;
+    }
+    isWhitespace(chr) {
+        return WordWrap.whitespaceRegexp.test(chr);
+    }
+    pre(measure, text, start, end, width) {
+        const lines = [];
+        let lineStart = start;
+        for (let i = start; i < end && i < text.length; i++) {
+            const chr = text.charAt(i);
+            const isNewline = WordWrap.newlineRegexp.test(chr);
+            if (isNewline || i === end - 1) {
+                const lineEnd = isNewline ? i : i + 1;
+                const measured = measure(text, lineStart, lineEnd, width);
+                lines.push(measured);
+                lineStart = i + 1;
+            }
+        }
+        return lines;
+    }
+    greedy(measure, text, start, end, width, mode) {
+        const lines = [];
+        let testWidth = width;
+        if (mode === types_1.WordWrapMode.NoWrap)
+            testWidth = Number.MAX_VALUE;
+        while (start < end && start < text.length) {
+            const newLine = this.idxOf(text, WordWrap.newlineChar, start, end);
+            while (start < newLine) {
+                if (!this.isWhitespace(text.charAt(start)))
+                    break;
+                start++;
+            }
+            const measured = measure(text, start, newLine, testWidth);
+            let lineEnd = start + (measured.end - measured.start);
+            let nextStart = lineEnd + WordWrap.newlineChar.length;
+            if (lineEnd < newLine) {
+                while (lineEnd > start) {
+                    if (this.isWhitespace(text.charAt(lineEnd)))
+                        break;
+                    lineEnd--;
+                }
+                if (lineEnd === start) {
+                    if (nextStart > start + WordWrap.newlineChar.length)
+                        nextStart--;
+                    lineEnd = nextStart;
+                }
+                else {
+                    nextStart = lineEnd;
+                    while (lineEnd > start) {
+                        if (!this.isWhitespace(text.charAt(lineEnd - WordWrap.newlineChar.length)))
+                            break;
+                        lineEnd--;
+                    }
+                }
+            }
+            if (lineEnd >= start) {
+                lines.push(measure(text, start, lineEnd, testWidth));
+            }
+            start = nextStart;
+        }
+        return lines;
+    }
+    monospace(_, start, end, width) {
+        const glyphs = Math.min(width, end - start);
+        return {
+            start: start,
+            end: start + glyphs,
+            width: 0,
+        };
+    }
+}
+exports.WordWrap = WordWrap;
+//# sourceMappingURL=WordWrap.js.map

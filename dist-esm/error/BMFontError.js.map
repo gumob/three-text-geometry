@@ -1,1 +1,0 @@
-{"version":3,"file":"dist-esm/error/BMFontError.js.map","sources":["../../src/error/BMFontError.ts"],"names":["BMFontError","Error","LoadError","ParseError","constructor","message","super","Object","setPrototypeOf","this","prototype"],"mappings":"MAAMA,oBAAoBC,MACxBC,iBAAoC,YACpCC,kBAAqC,aAErCC,YAAYC,GACVC,MAAMD,CAAO,EACbE,OAAOC,eAAeC,KAAMT,YAAYU,SAAS,CACnD,C,QAGOV,WAAa"}
