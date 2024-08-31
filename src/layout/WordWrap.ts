@@ -3,7 +3,7 @@
  * https://github.com/mattdesl/word-wrapper
  *
  */
-import { ComputeMetrics, WordMetrics, WordWrapMode, WordWrapOption } from '~/types'
+import { ComputeMetrics, WordMetrics, WordWrapMode, WordWrapOption } from '@three-text-geometry/types'
 
 class WordWrap {
   static readonly newlineRegexp: RegExp = /\n/

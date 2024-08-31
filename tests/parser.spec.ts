@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
-import { BMFontError } from '~/error'
-import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '~/parser'
-import { isBMFont } from '~/types'
+import { BMFontError } from '@three-text-geometry/error'
+import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '@three-text-geometry/parser'
+import { isBMFont } from '@three-text-geometry/types'
 
 const config = {
   headers: {

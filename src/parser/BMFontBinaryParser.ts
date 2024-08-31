@@ -5,7 +5,7 @@
  */
 
 import { Buffer } from 'buffer'
-import { BMFontError } from '~/error'
+import { BMFontError } from '@three-text-geometry/error'
 import {
   BMFont,
   BMFontChar,
@@ -17,7 +17,7 @@ import {
   DefaultBMFontInfo,
   DefaultBMFontKern,
   IBMFontParser,
-} from '~/types'
+} from '@three-text-geometry/types'
 
 /**
  * The class for parsing font data in Binary format.

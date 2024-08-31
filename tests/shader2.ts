@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { IMultipageShaderOption } from '~/shader'
+import { IMultipageShaderOption } from '@three-text-geometry/shader'
 
 export function createMultipageShader(opt: IMultipageShaderOption): THREE.ShaderMaterialParameters {
   opt = opt || {}

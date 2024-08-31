@@ -1,4 +1,4 @@
-import { createIndices, dtype } from '~/utils'
+import { createIndices, dtype } from '@three-text-geometry/utils'
 
 describe('Utils', () => {
   describe('dtype', () => {

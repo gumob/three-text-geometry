@@ -4,9 +4,9 @@
 import * as fs from 'fs'
 import gl from 'gl'
 import * as THREE from 'three'
-import TextGeometry, { TextAlign, WordWrapMode } from '~/index'
-import { BMFontAsciiParser } from '~/parser'
-import { MultiPageShaderMaterialParameters } from '~/shader'
+import TextGeometry, { TextAlign, WordWrapMode } from '@three-text-geometry/index'
+import { BMFontAsciiParser } from '@three-text-geometry/parser'
+import { MultiPageShaderMaterialParameters } from '@three-text-geometry/shader'
 
 describe('TextGeometry', () => {
   /** Prepare Font */

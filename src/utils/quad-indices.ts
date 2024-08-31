@@ -1,4 +1,4 @@
-import { dtype } from '~/utils'
+import { dtype } from '@three-text-geometry/utils'
 
 interface QuadOptions {
   count?: number /** the number of quads to index, default 1 */

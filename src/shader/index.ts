@@ -1,2 +1,2 @@
-export * from '~/shader/MultiPageShaderMaterial'
-export * from '~/shader/MultiPageShaderMaterialParameters'
+export * from '@three-text-geometry/shader/MultiPageShaderMaterial'
+export * from '@three-text-geometry/shader/MultiPageShaderMaterialParameters'

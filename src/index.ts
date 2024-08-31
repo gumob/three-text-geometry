@@ -1,7 +1,7 @@
-import { BMFontError } from '~/error'
-import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '~/parser'
-import { MultiPageShaderMaterial, MultiPageShaderMaterialParameters } from '~/shader'
-import TextGeometry from '~/TextGeometry'
+import { BMFontError } from '@three-text-geometry/error'
+import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '@three-text-geometry/parser'
+import { MultiPageShaderMaterial, MultiPageShaderMaterialParameters } from '@three-text-geometry/shader'
+import TextGeometry from '@three-text-geometry/TextGeometry'
 import {
   BMFont,
   BMFontChar,
@@ -13,7 +13,7 @@ import {
   TextGeometryOption,
   TextGlyph,
   WordWrapMode,
-} from '~/types'
+} from '@three-text-geometry/types'
 
 export {
   BMFont,

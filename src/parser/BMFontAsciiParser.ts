@@ -1,4 +1,4 @@
-import { BMFontError } from '~/error'
+import { BMFontError } from '@three-text-geometry/error'
 import {
   BMFont,
   BMFontChar,
@@ -10,7 +10,7 @@ import {
   DefaultBMFontCommon,
   DefaultBMFontInfo,
   IBMFontParser,
-} from '~/types'
+} from '@three-text-geometry/types'
 
 /**
  * The class for parsing font data in ASCII format.

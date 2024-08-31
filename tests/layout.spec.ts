@@ -1,7 +1,7 @@
 import * as fs from 'fs'
-import { TextLayout } from '~/layout'
-import { BMFontAsciiParser, BMFontJsonParser } from '~/parser'
-import { BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordWrapMode } from '~/types'
+import { TextLayout } from '@three-text-geometry/layout'
+import { BMFontAsciiParser, BMFontJsonParser } from '@three-text-geometry/parser'
+import { BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordWrapMode } from '@three-text-geometry/types'
 
 function DefaultBMFontChar(): BMFontChar {
   return {

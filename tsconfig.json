@@ -18,8 +18,8 @@
     /** Module Resolution */
     "baseUrl": "./",                                           // Set the base URL for module resolution <https://www.typescriptlang.org/tsconfig#baseUrl>
     "paths": {
-      "~/*": ["./src/*"],
-      "@/*": ["./tests/*"]
+      "@three-text-geometry/*": ["./src/*"],
+      "@three-text-geometry-tests/*": ["./tests/*"]
     },
 
     /** Transformer Plugins made possible by https://github.com/nonara/ts-patch */
