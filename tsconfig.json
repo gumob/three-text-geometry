@@ -1,20 +1,22 @@
 {
   "compilerOptions": {
     /** Linting */
-    "strict": true,                                          // Enable all strict type-checking options to catch more errors <https://www.typescriptlang.org/tsconfig#strict>
-    "noImplicitReturns": true,                               // Ensure that all functions return a value or explicitly return undefined <https://www.typescriptlang.org/tsconfig#noImplicitReturns>
-    "noFallthroughCasesInSwitch": true,                      // Report errors for fallthrough cases in switch statements <https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch>
-    "noUncheckedIndexedAccess": true,                        // Enable error reporting for accessing properties of arrays and objects without type checks <https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess>
-    "noImplicitOverride": true,                              // Ensure that methods in derived classes explicitly override base class methods <https://www.typescriptlang.org/tsconfig#noImplicitOverride>
-    "forceConsistentCasingInFileNames": true,                // Disallow inconsistently-cased references to the same file <https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames>
-    "noErrorTruncation": true,                               // Disable error truncation to show full error messages <https://www.typescriptlang.org/tsconfig#noErrorTruncation>
+    "strict": true,                                            // Enable all strict type-checking options to catch more errors <https://www.typescriptlang.org/tsconfig#strict>
+    "noImplicitReturns": true,                                 // Ensure that all functions return a value or explicitly return undefined <https://www.typescriptlang.org/tsconfig#noImplicitReturns>
+    "noFallthroughCasesInSwitch": true,                        // Report errors for fallthrough cases in switch statements <https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch>
+    "noUncheckedIndexedAccess": true,                          // Enable error reporting for accessing properties of arrays and objects without type checks <https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess>
+    "noImplicitOverride": true,                                // Ensure that methods in derived classes explicitly override base class methods <https://www.typescriptlang.org/tsconfig#noImplicitOverride>
+    "forceConsistentCasingInFileNames": true,                  // Disallow inconsistently-cased references to the same file <https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames>
+    "noErrorTruncation": true,                                 // Disable error truncation to show full error messages <https://www.typescriptlang.org/tsconfig#noErrorTruncation>
     /** We handle these with ESLint: */
-    "noUnusedLocals": false,                                 // Disable the rule for unused local variables <https://www.typescriptlang.org/tsconfig#noUnusedLocals>
-    "noUnusedParameters": false,                             // Disable the rule for unused function parameters <https://www.typescriptlang.org/tsconfig#noUnusedParameters>
+    "noUnusedLocals": false,                                   // Disable the rule for unused local variables <https://www.typescriptlang.org/tsconfig#noUnusedLocals>
+    "noUnusedParameters": false,                               // Disable the rule for unused function parameters <https://www.typescriptlang.org/tsconfig#noUnusedParameters>
+
+    "resolveJsonModule": true,                                 // Enable importing JSON modules <https://www.typescriptlang.org/tsconfig#resolveJsonModule>
+    "esModuleInterop": true,                                   // Disable interoperability between CommonJS and ES Modules <https://www.typescriptlang.org/tsconfig#esModuleInterop>
 
     /** Module Resolution */
-    "rootDirs": ["./src", "./tests"],                        // Root directory of input files <https://www.typescriptlang.org/tsconfig#rootDir>
-    "baseUrl": "./",                                         // Set the base URL for module resolution <https://www.typescriptlang.org/tsconfig#baseUrl>
+    "baseUrl": "./",                                           // Set the base URL for module resolution <https://www.typescriptlang.org/tsconfig#baseUrl>
     "paths": {
       "~/*": ["./src/*"],
       "@/*": ["./tests/*"]
@@ -22,16 +24,16 @@
 
     /** Transformer Plugins made possible by https://github.com/nonara/ts-patch */
     "plugins": [
-      { "transform": "ts-nameof", "type": "raw" },           // Transform using ts-nameof with raw type <https://github.com/dsherret/ts-nameof>
-      { "transform": "typescript-transform-paths" },         // Transform paths in TypeScript files <https://github.com/LeDDGroup/typescript-transform-paths>
+      { "transform": "ts-nameof", "type": "raw" },             // Transform using ts-nameof with raw type <https://github.com/dsherret/ts-nameof>
+      { "transform": "typescript-transform-paths" },           // Transform paths in TypeScript files <https://github.com/LeDDGroup/typescript-transform-paths>
       { "transform": "typescript-transform-paths", "afterDeclarations": true } // Transform paths after declarations <https://github.com/LeDDGroup/typescript-transform-paths>
     ]
   },
-  "include": ["src", "tests", "scripts"],                    // Specify directories to include for TypeScript compilation <https://www.typescriptlang.org/tsconfig#include>
-  "exclude": ["dist-*", "demo"],                             // Prevent unwanted things like auto-import from built modules <https://www.typescriptlang.org/tsconfig#exclude>
+  "include": ["src", "tests", "scripts"],                      // Specify directories to include for TypeScript compilation <https://www.typescriptlang.org/tsconfig#include>
+  "exclude": ["dist-*", "demo"],                               // Prevent unwanted things like auto-import from built modules <https://www.typescriptlang.org/tsconfig#exclude>
   "plugins": [
     {
-      "name": "typescript-snapshots-plugin"                  // Name of the TypeScript snapshots plugin <https://github.com/your-plugin-repo>
+      "name": "typescript-snapshots-plugin"                    // Name of the TypeScript snapshots plugin <https://github.com/your-plugin-repo>
     }
   ]
 }
