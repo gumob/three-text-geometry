@@ -1,1 +1,1 @@
-{"version":3,"file":"IBMFontParser.d.ts","sourceRoot":"","sources":["../../src/types/IBMFontParser.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,SAAS,CAAA;AAEhC,MAAM,WAAW,aAAa,CAAC,CAAC;IAC9B,KAAK,CAAC,IAAI,EAAE,CAAC,GAAG,MAAM,CAAA;CACvB"}
+{"version":3,"file":"IBMFontParser.d.ts","sourceRoot":"","sources":["../../src/types/IBMFontParser.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,4BAA4B,CAAA;AAEnD,MAAM,WAAW,aAAa,CAAC,CAAC;IAC9B,KAAK,CAAC,IAAI,EAAE,CAAC,GAAG,MAAM,CAAA;CACvB"}

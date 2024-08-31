@@ -1,5 +1,5 @@
-export * from '~/utils/compute';
-export * from '~/utils/vertices';
-export * from '~/utils/binary';
-export * from '~/utils/quad-indices';
+export * from '@three-text-geometry/utils/compute';
+export * from '@three-text-geometry/utils/vertices';
+export * from '@three-text-geometry/utils/binary';
+export * from '@three-text-geometry/utils/quad-indices';
 //# sourceMappingURL=index.d.ts.map

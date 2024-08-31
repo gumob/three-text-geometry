@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer';
-import { BMFont, IBMFontParser } from '~/types';
+import { BMFont, IBMFontParser } from '@three-text-geometry/types';
 declare class BMFontBinaryParser implements IBMFontParser<Buffer> {
     private static HEADER;
     parse(buf: Buffer): BMFont;

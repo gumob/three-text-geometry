@@ -1,5 +1,5 @@
-export * from '~/shaders/basic';
-export * from '~/shaders/msdf';
-export * from '~/shaders/multipage';
-export * from '~/shaders/sdf';
+export * from '@three-text-geometry/shaders/basic';
+export * from '@three-text-geometry/shaders/msdf';
+export * from '@three-text-geometry/shaders/multipage';
+export * from '@three-text-geometry/shaders/sdf';
 //# sourceMappingURL=index.d.ts.map

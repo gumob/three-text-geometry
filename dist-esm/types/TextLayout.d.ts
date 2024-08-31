@@ -1,4 +1,4 @@
-import { BMFont, BMFontChar, WordWrapOption } from '~/types';
+import { BMFont, BMFontChar, WordWrapOption } from '@three-text-geometry/types';
 interface TextGlyph {
     position: [number, number];
     data: BMFontChar;
