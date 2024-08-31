@@ -1461,7 +1461,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.3.4":
+"@types/react@npm:*, @types/react@npm:^18.3.5":
   version: 18.3.5
   resolution: "@types/react@npm:18.3.5"
   dependencies:
@@ -2133,7 +2133,7 @@ __metadata:
     "@types/eslint__js": "npm:^8.42.3"
     "@types/jest": "npm:^29.5.12"
     "@types/node": "npm:^22.5.1"
-    "@types/react": "npm:^18.3.4"
+    "@types/react": "npm:^18.3.5"
     "@types/react-dom": "npm:^18.3.0"
     "@types/react-router-dom": "npm:^5.3.3"
     "@types/supports-color": "npm:^8.1.1"
@@ -4299,14 +4299,14 @@ __metadata:
 
 "three-text-geometry@git+https://github.com/gumob/three-text-geometry.git#beta":
   version: 0.0.0
-  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=db093f3bab7df66ecaff91fa0f7e4cbe2ca86b65"
+  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=007812dadca7dab54e0a89f37d2752fdba7e81f2"
   dependencies:
     ajv: "npm:^8.17.1"
     fast-xml-parser: "npm:^4.4.1"
     floggy: "npm:^0.3.5"
     three: "npm:^0.167.1"
     tslib: "npm:^2.7.0"
-  checksum: 10/515c96faef6dcc5d9c9e3be7880cc7699534eada01ac46d9ef7f4947629756da8d9c1892650017dc56e54ca9c379a045d65f62eb9bec6b9d758049db4c93e762
+  checksum: 10/d45a410f8776eb1636d7799fdb120462f9d2243ddcb3f8bc4f800855579c3231c607fbdda31a58ca7f814e0c7711748875c9fe83f4aa5504067c31082aa4dcbe
   languageName: node
   linkType: hard
 
