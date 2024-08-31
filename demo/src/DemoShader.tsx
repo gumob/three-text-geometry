@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import TextGeometry, { TextAlign } from 'three-text-geometry'
-import DemoBase from './DemoBase'
-import { fragmentShader, vertexShader } from './shaders/effect'
+import DemoBase from '~/DemoBase'
+import { fragmentShader, vertexShader } from '~/shaders/effect'
 
 export class DemoShader extends DemoBase {
   swapTimeoutID?: any

@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import TextGeometry, { TextAlign, MultiPageShaderMaterialParameters } from 'three-text-geometry'
-import DemoBase from './DemoBase'
+import DemoBase from '~/DemoBase'
 
 export class DemoMultipage extends DemoBase {
   fontUri: string =

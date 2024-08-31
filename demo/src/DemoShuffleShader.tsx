@@ -1,8 +1,8 @@
 import * as THREE from 'three'
 import TextGeometry, { TextAlign } from 'three-text-geometry'
-import ShuffleText, { ShuffleOption, ShuffleState } from './effects/shuffle'
-import DemoBase from './DemoBase'
-import { fragmentShader, vertexShader } from './shaders/effect'
+import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle'
+import DemoBase from '~/DemoBase'
+import { fragmentShader, vertexShader } from '~/shaders/effect'
 
 export class DemoShuffleShader extends DemoBase {
   shuffle?: ShuffleText

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import TextGeometry, { TextAlign } from 'three-text-geometry'
-import ShuffleText, { ShuffleOption, ShuffleState } from './effects/shuffle'
-import DemoBase from './DemoBase'
+import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle'
+import DemoBase from '~/DemoBase'
 
 export class DemoShuffle extends DemoBase {
   shuffleTimeoutID?: any

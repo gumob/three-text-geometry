@@ -1,6 +1,6 @@
 // import { nextPowerOfTwo } from 'three/src/math/MathUtils'
 
-import Easing from './easing'
+import Easing from '~/effects/easing'
 
 function randFloat(min: number, max: number) {
   return min + Math.random() * (max - min)

@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import TextGeometry, { TextAlign } from 'three-text-geometry'
-import DemoBase from './DemoBase'
+import DemoBase from '~/DemoBase'
 
 export class DemoSimple extends DemoBase {
   fontUri: string =
