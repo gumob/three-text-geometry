@@ -1,5 +1,5 @@
-export * from './BMFontBinaryParser';
-export * from './BMFontJsonParser';
-export * from './BMFontXMLParser';
-export * from './BMFontAsciiParser';
+export * from '~/parser/BMFontBinaryParser';
+export * from '~/parser/BMFontJsonParser';
+export * from '~/parser/BMFontXMLParser';
+export * from '~/parser/BMFontAsciiParser';
 //# sourceMappingURL=index.d.ts.map

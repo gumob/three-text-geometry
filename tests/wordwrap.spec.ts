@@ -1,4 +1,4 @@
-import fs from 'fs'
+import * as fs from 'fs'
 import { WordWrap } from '~/layout'
 import { WordMetrics, WordWrapMode } from '~/types'
 

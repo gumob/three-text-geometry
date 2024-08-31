@@ -1,4 +1,4 @@
-import fs from 'fs'
+import * as fs from 'fs'
 import { TextLayout } from '~/layout'
 import { BMFontAsciiParser, BMFontJsonParser } from '~/parser'
 import { BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordWrapMode } from '~/types'

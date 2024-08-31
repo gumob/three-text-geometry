@@ -1,3 +1,3 @@
-export * from './TextLayout';
-export * from './WordWrap';
+export * from '~/layout/TextLayout';
+export * from '~/layout/WordWrap';
 //# sourceMappingURL=index.d.ts.map

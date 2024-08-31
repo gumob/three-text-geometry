@@ -1,2 +1,2 @@
-export * from './TextLayout'
-export * from './WordWrap'
+export * from '~/layout/TextLayout'
+export * from '~/layout/WordWrap'

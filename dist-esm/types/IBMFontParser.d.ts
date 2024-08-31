@@ -1,4 +1,4 @@
-import { BMFont } from './';
+import { BMFont } from '~/types';
 export interface IBMFontParser<T> {
     parse(data: T): BMFont;
 }

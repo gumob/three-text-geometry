@@ -1,1 +1,1 @@
-export * from './BMFontError'
+export * from '~/error/BMFontError'

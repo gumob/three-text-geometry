@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import fs from 'fs'
-import gl from 'gl'
+import * as fs from 'fs'
+import * as gl from 'gl'
 import * as THREE from 'three'
 import TextGeometry, { TextAlign, WordWrapMode } from '~/index'
 import { BMFontAsciiParser } from '~/parser'
