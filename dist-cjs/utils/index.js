@@ -1,1 +1,1 @@
-Object.defineProperty(exports,"__esModule",{value:!0});let tslib_1=require("tslib");tslib_1.__exportStar(require("./compute"),exports),tslib_1.__exportStar(require("./vertices"),exports),tslib_1.__exportStar(require("./binary"),exports),tslib_1.__exportStar(require("./quad-indices"),exports);
+export*from"./compute";export*from"./vertices";export*from"./binary";export*from"./quad-indices";

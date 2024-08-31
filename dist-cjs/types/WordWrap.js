@@ -1,1 +1,1 @@
-var WordWrapMode;Object.defineProperty(exports,"__esModule",{value:!0}),exports.WordWrapMode=void 0,(r=>{r.Pre="pre",r.NoWrap="nowrap"})(WordWrapMode||(exports.WordWrapMode=WordWrapMode={}));
+var WordWrapMode;(r=>{r.Pre="pre",r.NoWrap="nowrap"})(WordWrapMode=WordWrapMode||{});export{WordWrapMode};
