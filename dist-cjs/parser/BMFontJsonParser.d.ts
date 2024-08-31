@@ -1,4 +1,4 @@
-import { BMFont, IBMFontParser } from '@three-text-geometry/types';
+import { BMFont, IBMFontParser } from '../types';
 declare class BMFontJsonParser implements IBMFontParser<object | string> {
     parse(json: object | string): BMFont;
 }

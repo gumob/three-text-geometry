@@ -1,4 +1,4 @@
-import { TextGlyph } from '@three-text-geometry/types'
+import { TextGlyph } from '../types'
 
 function extractPages(glyphs: TextGlyph[]): Float32Array {
   const pages = new Float32Array(glyphs.length * 4 * 1)

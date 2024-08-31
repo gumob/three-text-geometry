@@ -1,7 +1,7 @@
 import * as THREE from 'three'
-import { TextLayout } from '@three-text-geometry/layout'
-import { TextAlign, TextGeometryOption, TextGlyph } from '@three-text-geometry/types'
-import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from '@three-text-geometry/utils'
+import { TextLayout } from './layout'
+import { TextAlign, TextGeometryOption, TextGlyph } from './types'
+import { computeBox, computeSphere, createIndices, extractPages, extractPositions, extractUVs } from './utils'
 
 /**
  * The class that generates THREE.BufferGeometry from BMFont data.

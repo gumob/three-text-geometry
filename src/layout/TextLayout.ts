@@ -1,5 +1,5 @@
-import { WordWrap } from '@three-text-geometry/layout'
-import { BMFont, BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordMetrics } from '@three-text-geometry/types'
+import { WordWrap } from '../layout'
+import { BMFont, BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordMetrics } from '../types'
 
 /**
  * Class representing the layout of text using a bitmap font.

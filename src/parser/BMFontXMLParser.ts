@@ -1,6 +1,6 @@
 import { XMLParser } from 'fast-xml-parser'
-import { BMFontError } from '@three-text-geometry/error'
-import { BMFont, BMFontChar, BMFontCommon, BMFontInfo, BMFontKern, IBMFontParser } from '@three-text-geometry/types'
+import { BMFontError } from '../error'
+import { BMFont, BMFontChar, BMFontCommon, BMFontInfo, BMFontKern, IBMFontParser } from '../types'
 
 /**
  * The class for parsing font data in XML format.

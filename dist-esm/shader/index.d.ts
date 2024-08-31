@@ -1,3 +1,3 @@
-export * from '@three-text-geometry/shader/MultiPageShaderMaterial';
-export * from '@three-text-geometry/shader/MultiPageShaderMaterialParameters';
+export * from './MultiPageShaderMaterial';
+export * from './MultiPageShaderMaterialParameters';
 //# sourceMappingURL=index.d.ts.map

@@ -1,7 +1,7 @@
 import Ajv from 'ajv'
-import { BMFontError } from '@three-text-geometry/error'
-import { BMFont, IBMFontParser } from '@three-text-geometry/types'
-import schema from '@three-text-geometry/parser/BMFontJsonSchema.json'
+import { BMFontError } from '../error'
+import { BMFont, IBMFontParser } from '../types'
+import schema from './BMFontJsonSchema.json'
 
 /**
  * # How to create a json schema

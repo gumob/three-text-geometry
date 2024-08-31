@@ -1,2 +1,2 @@
-export * from '@three-text-geometry/error/BMFontError';
+export * from './BMFontError';
 //# sourceMappingURL=index.d.ts.map

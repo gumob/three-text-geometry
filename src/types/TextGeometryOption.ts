@@ -1,4 +1,4 @@
-import { BMFont, TextAlign, WordWrapMode } from '@three-text-geometry/types'
+import { BMFont, TextAlign, WordWrapMode } from '../types'
 
 /**
  * The interface to define options for `TextGeometry`.

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { TextGeometryOption, TextGlyph } from '@three-text-geometry/types';
+import { TextGeometryOption, TextGlyph } from './types';
 declare class TextGeometry extends THREE.BufferGeometry {
     private _opt;
     private _visibleGlyphs;

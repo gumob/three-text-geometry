@@ -1,7 +1,7 @@
-export * from '@three-text-geometry/types/BMFont';
-export * from '@three-text-geometry/types/BMFontUtil';
-export * from '@three-text-geometry/types/IBMFontParser';
-export * from '@three-text-geometry/types/TextGeometryOption';
-export * from '@three-text-geometry/types/TextLayout';
-export * from '@three-text-geometry/types/WordWrap';
+export * from './BMFont';
+export * from './BMFontUtil';
+export * from './IBMFontParser';
+export * from './TextGeometryOption';
+export * from './TextLayout';
+export * from './WordWrap';
 //# sourceMappingURL=index.d.ts.map

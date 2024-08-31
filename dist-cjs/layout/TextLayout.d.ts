@@ -1,4 +1,4 @@
-import { TextGlyph, TextLayoutOption } from '@three-text-geometry/types';
+import { TextGlyph, TextLayoutOption } from '../types';
 declare class TextLayout {
     static readonly X_HEIGHTS: string[];
     static readonly M_WIDTHS: string[];
