@@ -1,22 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ES2022",                                  // Specify ECMAScript version for output <https://www.typescriptlang.org/tsconfig#target>
-    "lib": ["ES2023"],                                   // Include standard libraries for ES2023 <https://www.typescriptlang.org/tsconfig#lib>
-    "module": "ESNext",                                  // Set module system to ESNext <https://www.typescriptlang.org/tsconfig#module>
-    "skipLibCheck": true,                                // Skip type checking of declaration files <https://www.typescriptlang.org/tsconfig#skipLibCheck>
+    "target": "ES2022",                                      // Specify ECMAScript version for output <https://www.typescriptlang.org/tsconfig#target>
+    "lib": ["ES2023"],                                       // Include standard libraries for ES2023 <https://www.typescriptlang.org/tsconfig#lib>
+    "module": "ESNext",                                      // Set module system to ESNext <https://www.typescriptlang.org/tsconfig#module>
+    "skipLibCheck": true,                                    // Skip type checking of declaration files <https://www.typescriptlang.org/tsconfig#skipLibCheck>
 
     /* Bundler mode */
-    "moduleResolution": "bundler",                       // Resolve modules using bundler strategy <https://www.typescriptlang.org/tsconfig#moduleResolution>
-    "allowImportingTsExtensions": true,                  // Allow importing TypeScript files directly <https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions>
-    "isolatedModules": true,                             // Ensure each file can be transpiled independently <https://www.typescriptlang.org/tsconfig#isolatedModules>
-    "moduleDetection": "force",                          // Force module detection for all files <https://www.typescriptlang.org/tsconfig#moduleDetection>
-    "noEmit": true,                                      // Do not emit output files during compilation <https://www.typescriptlang.org/tsconfig#noEmit>
+    "moduleResolution": "bundler",                           // Resolve modules using bundler strategy <https://www.typescriptlang.org/tsconfig#moduleResolution>
+    "allowImportingTsExtensions": true,                      // Allow importing TypeScript files directly <https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions>
+    "isolatedModules": true,                                 // Ensure each file can be transpiled independently <https://www.typescriptlang.org/tsconfig#isolatedModules>
+    "moduleDetection": "force",                              // Force module detection for all files <https://www.typescriptlang.org/tsconfig#moduleDetection>
+    "noEmit": true,                                          // Do not emit output files during compilation <https://www.typescriptlang.org/tsconfig#noEmit>
 
     /* Linting */
-    "strict": true,                                      // Enable all strict type-checking options <https://www.typescriptlang.org/tsconfig#strict>
-    "noUnusedLocals": true,                              // Report errors on unused local variables <https://www.typescriptlang.org/tsconfig#noUnusedLocals>
-    "noUnusedParameters": true,                          // Report errors on unused function parameters <https://www.typescriptlang.org/tsconfig#noUnusedParameters>
-    "noFallthroughCasesInSwitch": true,                  // Prevent fallthrough cases in switch statements <https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch>
+    "strict": true,                                          // Enable all strict type-checking options <https://www.typescriptlang.org/tsconfig#strict>
+    "noUnusedLocals": true,                                  // Report errors on unused local variables <https://www.typescriptlang.org/tsconfig#noUnusedLocals>
+    "noUnusedParameters": true,                              // Report errors on unused function parameters <https://www.typescriptlang.org/tsconfig#noUnusedParameters>
+    "noFallthroughCasesInSwitch": true,                      // Prevent fallthrough cases in switch statements <https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch>
+  
+    "baseUrl": "./",                                         // Set the base URL for module resolution <https://www.typescriptlang.org/tsconfig#baseUrl>
+    "paths": {
+      "~/*": ["./src/*"]
+    },
 
     /* TypeRoots */
     // "typeRoots": ["src/@types", "node_modules/@types"],
