@@ -11,7 +11,6 @@
     /* FIXME: Incremental compilation is broken. Fix `find: dist-cjs: No such file or directory` */
     // "incremental": true,                                      // Enable incremental compilation for better performance <https://www.typescriptlang.org/tsconfig#incremental>
     // "tsBuildInfoFile": ".cache/cjs/.tsbuildinfo",             // Path for TypeScript build information file <https://www.typescriptlang.org/tsconfig#tsBuildInfoFile>
-    "rootDir": "src",                                         // Root directory of input files <https://www.typescriptlang.org/tsconfig#rootDir>
     "sourceMap": true,                                        // Generate source maps for debugging <https://www.typescriptlang.org/tsconfig#sourceMap>
     "declaration": true,                                      // Generate declaration files <https://www.typescriptlang.org/tsconfig#declaration>
     "declarationMap": true,                                   // Generate declaration maps <https://www.typescriptlang.org/tsconfig#declarationMap>
