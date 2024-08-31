@@ -1,13 +1,21 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist-esm",
-    "module": "ES2015",
-    "rootDir": "src",
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-    "removeComments": true
+    "outDir": "dist-esm",                                      // Output directory for compiled files <https://www.typescriptlang.org/tsconfig#outDir>
+    "target": "ES2020",                                        // Specify the target ECMAScript version for the output code <https://www.typescriptlang.org/tsconfig#target>
+    "module": "ESNext",                                        // Set the module system to the latest ECMAScript module <https://www.typescriptlang.org/tsconfig#module>
+    "moduleResolution": "bundler",                             // Specify the module resolution strategy to bundler <https://www.typescriptlang.org/tsconfig#moduleResolution>
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],                  // Include library files for the latest ECMAScript features and DOM <https://www.typescriptlang.org/tsconfig#lib>
+    "resolveJsonModule": true,                                 // Enable importing JSON modules <https://www.typescriptlang.org/tsconfig#resolveJsonModule>
+    "esModuleInterop": false,                                  // Disable interoperability between CommonJS and ES Modules <https://www.typescriptlang.org/tsconfig#esModuleInterop>
+    "incremental": true,                                       // Enable incremental compilation for better performance <https://www.typescriptlang.org/tsconfig#incremental>
+    "tsBuildInfoFile": ".cache/esmodules/.tsbuildinfo",        // Path for TypeScript build information file <https://www.typescriptlang.org/tsconfig#tsBuildInfoFile>
+    "rootDir": "src",                                          // Root directory of input files <https://www.typescriptlang.org/tsconfig#rootDir>
+    "sourceMap": true,                                         // Generate source maps for debugging <https://www.typescriptlang.org/tsconfig#sourceMap>
+    "declaration": true,                                       // Generate declaration files <https://www.typescriptlang.org/tsconfig#declaration>
+    "declarationMap": true,                                    // Generate declaration maps <https://www.typescriptlang.org/tsconfig#declarationMap>
+    "removeComments": true,                                    // Remove comments from output files <https://www.typescriptlang.org/tsconfig#removeComments>
+    "importHelpers": true,                                     // Use helper functions from TypeScript library to reduce output size <https://www.typescriptlang.org/tsconfig#importHelpers>
   },
-  "include": ["src"]
+  "include": ["src"]                                           // Specify directories to include for TypeScript compilation <https://www.typescriptlang.org/tsconfig#include>
 }
