@@ -11,6 +11,7 @@
     "isolatedModules": true,                                 // Ensure each file can be transpiled independently <https://www.typescriptlang.org/tsconfig#isolatedModules>
     "moduleDetection": "force",                              // Force module detection for all files <https://www.typescriptlang.org/tsconfig#moduleDetection>
     "noEmit": true,                                          // Do not emit output files during compilation <https://www.typescriptlang.org/tsconfig#noEmit>
+    "jsx": "react-jsx",                                      // Use React JSX transform <https://www.typescriptlang.org/tsconfig#jsx>
 
     /* Linting */
     "strict": true,                                          // Enable all strict type-checking options <https://www.typescriptlang.org/tsconfig#strict>
