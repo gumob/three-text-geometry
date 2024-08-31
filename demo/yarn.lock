@@ -4299,14 +4299,14 @@ __metadata:
 
 "three-text-geometry@git+https://github.com/gumob/three-text-geometry.git#beta":
   version: 0.0.0
-  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=21d49c3a560be5aefdf6cb34ceb799c3e079e150"
+  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=db093f3bab7df66ecaff91fa0f7e4cbe2ca86b65"
   dependencies:
     ajv: "npm:^8.17.1"
     fast-xml-parser: "npm:^4.4.1"
     floggy: "npm:^0.3.5"
     three: "npm:^0.167.1"
     tslib: "npm:^2.7.0"
-  checksum: 10/e74880e30a513de45bf1d51d3b4dc447e77be1bd99a9ba662e04cf1ddc71fcc014de10d921956774dcaef894f4864a95c5061a97796c21cf23f1e3d441765f13
+  checksum: 10/515c96faef6dcc5d9c9e3be7880cc7699534eada01ac46d9ef7f4947629756da8d9c1892650017dc56e54ca9c379a045d65f62eb9bec6b9d758049db4c93e762
   languageName: node
   linkType: hard
 
