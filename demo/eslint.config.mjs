@@ -49,6 +49,8 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      "react-hooks/rules-of-hooks": "error",           // Ensure hooks are used correctly
+      "react-hooks/exhaustive-deps": "warn",           // Ensure effect dependencies are specified correctly
     },
     files: ['src/**/*.{ts,tsx}']
   },
