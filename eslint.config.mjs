@@ -3,16 +3,17 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import tsParser from "@typescript-eslint/parser";
-import tsdoc from 'eslint-plugin-tsdoc';
+import jsdoc from 'eslint-plugin-jsdoc';
 import "eslint-plugin-only-warn";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
   {
     extends: [
-      eslint.configs.recommended,                      // Use recommended ESLint settings
-      ...tseslint.configs.recommended,                 // Spread recommended settings
-      eslintConfigPrettier,                            // Integrate Prettier with ESLint
+      eslint.configs.recommended,                          // Use recommended ESLint settings
+      ...tseslint.configs.recommended,                     // Spread recommended settings
+      eslintConfigPrettier,                                // Integrate Prettier with ESLint
+      jsdoc.configs['flat/recommended'],                   // Integrate JSDoc with ESLint
     ],
     languageOptions: {
       parser: tsParser,                                    // TypeScript parser for ESLint
@@ -28,7 +29,7 @@ export default tseslint.config(
       },
     },
     plugins: {
-      "tsdoc": tsdoc,                                      // TSDoc plugin for linting TSDoc comments
+      "jsdoc": jsdoc,                                      // JSDoc plugin for linting JSDoc comments
     },
     rules: {
       "no-unused-vars": "off",                             // Disable the rule for unused variables
@@ -45,9 +46,54 @@ export default tseslint.config(
       "@typescript-eslint/no-this-alias": "off",           // Disable TypeScript rule for aliasing 'this'
       "@typescript-eslint/no-explicit-any": "off",         // Disable TypeScript rule for using 'any' type
       "@typescript-eslint/no-unsafe-call": "off",          // Disable TypeScript rule for unsafe calls
-      "tsdoc/syntax": "warn",                              // Enable TSDoc syntax
+      // 'jsdoc/require-description': 'warn',
+      // 'jsdoc/require-returns': 'warn',
+      // 'jsdoc/require-returns-type': 'warn',
+      // 'jsdoc/require-param': 'warn',
+      // 'jsdoc/require-param-type': 'warn',
+      // 'jsdoc/require-returns-description': 'warn',
+      // 'jsdoc/require-param-description': 'warn',
+      // 'jsdoc/require-returns-check': 'warn',
+      "jsdoc/no-defaults": "off",
+      "jsdoc/require-param": [
+        "error",
+          {
+            "checkDestructuredRoots": false,
+          },
+      ],
+      "jsdoc/tag-lines": [
+        "error",
+        "never",
+        {
+          "startLines": 1
+        }
+      ],
+      "jsdoc/require-jsdoc": [
+        "error",
+          {
+            "publicOnly": true,
+            "require": {
+              "ArrowFunctionExpression": true,
+              "ClassDeclaration": true,
+              "ClassExpression": true,
+              "FunctionDeclaration": true,
+              "FunctionExpression": true,
+              "MethodDefinition": true,
+            },
+            "contexts": [
+              "VariableDeclaration",
+              "TSInterfaceDeclaration",
+              "TSTypeAliasDeclaration",
+              "TSPropertySignature",
+              "TSMethodSignature",
+            ],
+          },
+      ],
     },
-    files: ['src/**/*.{ts,tsx}'],
+    files: [
+      'src/**/*.{ts,tsx}',
+      'tests/**/*.{ts,tsx}',
+    ],
     ignores: [
       ".yalc",
       ".vscode",
