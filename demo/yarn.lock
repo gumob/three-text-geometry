@@ -1952,7 +1952,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.2":
+"chalk@npm:^4.0.0, chalk@npm:^4.1.0":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -2675,18 +2675,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"floggy@npm:^0.3.5":
-  version: 0.3.5
-  resolution: "floggy@npm:0.3.5"
-  dependencies:
-    chalk: "npm:^4.1.2"
-    kleur: "npm:^4.1.5"
-    lodash: "npm:^4.17.21"
-    strip-ansi: "npm:6"
-  checksum: 10/49b25ea917c31dc76a261ba7c25922a391cdb206b551e0932dae1685adfe77122ac433e91773decaa138bedd858122e625eddc753586ea972c5db869f4515e54
-  languageName: node
-  linkType: hard
-
 "follow-redirects@npm:^1.15.6":
   version: 1.15.6
   resolution: "follow-redirects@npm:1.15.6"
@@ -3234,13 +3222,6 @@ __metadata:
   dependencies:
     json-buffer: "npm:3.0.1"
   checksum: 10/167eb6ef64cc84b6fa0780ee50c9de456b422a1e18802209234f7c2cf7eae648c7741f32e50d7e24ccb22b24c13154070b01563d642755b156c357431a191e75
-  languageName: node
-  linkType: hard
-
-"kleur@npm:^4.1.5":
-  version: 4.1.5
-  resolution: "kleur@npm:4.1.5"
-  checksum: 10/44d84cc4eedd4311099402ef6d4acd9b2d16e08e499d6ef3bb92389bd4692d7ef09e35248c26e27f98acac532122acb12a1bfee645994ae3af4f0a37996da7df
   languageName: node
   linkType: hard
 
@@ -4194,7 +4175,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1, strip-ansi@npm:6, strip-ansi@npm:^6.0.0, strip-ansi@npm:^6.0.1":
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1, strip-ansi@npm:^6.0.0, strip-ansi@npm:^6.0.1":
   version: 6.0.1
   resolution: "strip-ansi@npm:6.0.1"
   dependencies:
@@ -4298,15 +4279,13 @@ __metadata:
   linkType: hard
 
 "three-text-geometry@git+https://github.com/gumob/three-text-geometry.git#beta":
-  version: 0.0.0
-  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=6330f9b79551c1eb05fcfe444ed36e00036db1f1"
+  version: 0.1.0
+  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=3b80bb82e46a5f5e902e70beebd560b4d8dc8be0"
   dependencies:
     ajv: "npm:^8.17.1"
     fast-xml-parser: "npm:^4.4.1"
-    floggy: "npm:^0.3.5"
     three: "npm:^0.167.1"
-    tslib: "npm:^2.7.0"
-  checksum: 10/d45a410f8776eb1636d7799fdb120462f9d2243ddcb3f8bc4f800855579c3231c607fbdda31a58ca7f814e0c7711748875c9fe83f4aa5504067c31082aa4dcbe
+  checksum: 10/a10c361bacda9dbecd7f018e2cb3b7e3a806fbc3cf48ef789ea5cd87969ff9b6b3ff9769ddf73dac79d1fd0e5849f5bb252b2d84b591978de627775b24889e52
   languageName: node
   linkType: hard
 
@@ -4353,13 +4332,6 @@ __metadata:
   bin:
     tsconfck: bin/tsconfck.js
   checksum: 10/bf9b9b72de5b83f833f5dea8b276e77bab08e85751589f36dd23854fa3d5f7955194086fb8424df388bf232f2fc9a067d7913bfa674cb1217be0bba648ec71f2
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "tslib@npm:2.7.0"
-  checksum: 10/9a5b47ddac65874fa011c20ff76db69f97cf90c78cff5934799ab8894a5342db2d17b4e7613a087046bc1d133d21547ddff87ac558abeec31ffa929c88b7fce6
   languageName: node
   linkType: hard
 
