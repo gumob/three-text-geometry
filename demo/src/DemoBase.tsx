@@ -52,10 +52,11 @@ export class DemoBase extends React.Component {
   textOption?: TextGeometryOption
   textMesh?: THREE.Mesh
 
+  lastFrameTime: number = 0
   animationFrameID?: any
 
   componentDidMount() {
-    // this.loadFont()
+    this.lastFrameTime = 0
     const self = this
     this.loadAssets(this.fontUri, this.textureUri)
       .then((values: (BMFont | THREE.Texture)[]) => {
@@ -156,10 +157,22 @@ export class DemoBase extends React.Component {
   initScene() {}
 
   updateScene() {
+    const fps = 120
+    const interval = 1000 / fps
+
+    const now = Date.now()
+    const elapsed = now - (this.lastFrameTime || 0)
+
+    this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this))
+
+    if (elapsed < interval) return;
+
+    this.lastFrameTime = now - (elapsed % interval)
+
     this.controls?.update()
     this.renderer?.render(this.scene!, this.camera!)
     this.stats?.update()
-    this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this))
+
   }
 
   onWindowResize(_: any) {
