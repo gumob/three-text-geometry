@@ -52,8 +52,9 @@ export class DemoBase extends React.Component {
   textOption?: TextGeometryOption
   textMesh?: THREE.Mesh
 
+  fpsLimit: number = 120
   lastFrameTime: number = 0
-  animationFrameID?: any
+  animationFrameID?: number
 
   componentDidMount() {
     this.lastFrameTime = 0
@@ -157,13 +158,12 @@ export class DemoBase extends React.Component {
   initScene() {}
 
   updateScene() {
-    const fps = 120
-    const interval = 1000 / fps
+    this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this));
 
-    const now = Date.now()
-    const elapsed = now - (this.lastFrameTime || 0)
+    const interval = 1000 / this.fpsLimit;
 
-    this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this))
+    const now = Date.now();
+    const elapsed = now - (this.lastFrameTime || 0);
 
     if (elapsed < interval) return;
 
@@ -172,7 +172,6 @@ export class DemoBase extends React.Component {
     this.controls?.update()
     this.renderer?.render(this.scene!, this.camera!)
     this.stats?.update()
-
   }
 
   onWindowResize(_: any) {
