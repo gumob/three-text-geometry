@@ -22,13 +22,13 @@
     "baseUrl": "./",                                         // Set the base URL for module resolution <https://www.typescriptlang.org/tsconfig#baseUrl>
     "paths": {
       "~/*": ["./src/*"]
-    },
+    },                                                       // Paths for module resolution <https://www.typescriptlang.org/tsconfig#paths>
 
     /* TypeRoots */
     // "typeRoots": ["src/@types", "node_modules/@types"],
   },
   "include": [
-    "src",
+    // "src",
     "vite.config.ts"
   ]
 }
