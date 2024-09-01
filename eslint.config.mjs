@@ -54,7 +54,9 @@ export default tseslint.config(
       // 'jsdoc/require-returns-description': 'warn',
       // 'jsdoc/require-param-description': 'warn',
       // 'jsdoc/require-returns-check': 'warn',
+      "jsdoc/no-undefined-types": "off",
       "jsdoc/no-defaults": "off",
+      "jsdoc/check-tag-names": "off",
       "jsdoc/require-param": [
         "error",
           {
