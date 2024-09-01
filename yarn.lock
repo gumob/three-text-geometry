@@ -1696,12 +1696,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shikijs/core@npm:1.15.1":
-  version: 1.15.1
-  resolution: "@shikijs/core@npm:1.15.1"
+"@shikijs/core@npm:1.15.2":
+  version: 1.15.2
+  resolution: "@shikijs/core@npm:1.15.2"
   dependencies:
     "@types/hast": "npm:^3.0.4"
-  checksum: 10c0/9bfdb56072be2dedd03bdafb770fa6ee13e6f05bb233c0524bc8616821a03e32eb38ec45409b31a00f6c4c2512ec6fc1d0087083af82948a374bfa70d3c5594c
+  checksum: 10c0/86f143e80dd7dd5f2823554e9b2c52bb6789cf48497dd82a19be6ecbd5da7774f463d47090453af0e57ae3d23fa16fe371245995a2c5d768f21efbe283969edc
   languageName: node
   linkType: hard
 
@@ -2667,14 +2667,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.1, axios@npm:^1.7.5":
-  version: 1.7.6
-  resolution: "axios@npm:1.7.6"
+"axios@npm:^1.6.1, axios@npm:^1.7.7":
+  version: 1.7.7
+  resolution: "axios@npm:1.7.7"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/8b4be67056f8f3895ebadbfce0708e5aa9c537a5a68e2da03bec49d35695e29b57f14ce38f20f55bb19946bd89787a839a7c3afa9e58e1152696c208046f8417
+  checksum: 10c0/4499efc89e86b0b49ffddc018798de05fab26e3bf57913818266be73279a6418c3ce8f9e934c7d2d707ab8c095e837fc6c90608fb7715b94d357720b5f568af7
   languageName: node
   linkType: hard
 
@@ -8342,13 +8342,13 @@ __metadata:
   linkType: hard
 
 "postcss@npm:^8.4.32":
-  version: 8.4.41
-  resolution: "postcss@npm:8.4.41"
+  version: 8.4.42
+  resolution: "postcss@npm:8.4.42"
   dependencies:
     nanoid: "npm:^3.3.7"
     picocolors: "npm:^1.0.1"
     source-map-js: "npm:^1.2.0"
-  checksum: 10c0/c1828fc59e7ec1a3bf52b3a42f615dba53c67960ed82a81df6441b485fe43c20aba7f4e7c55425762fd99c594ecabbaaba8cf5b30fd79dfec5b52a9f63a2d690
+  checksum: 10c0/ac4dd01b07b2b9db12c24284aed497d35436ed05e4944be6cf00eb8daa4914fd9fbc5ec729e47981b4f1a9c51847d043d1808c796b9440ae0c5e8ff7a29bc821
   languageName: node
   linkType: hard
 
@@ -8993,12 +8993,12 @@ __metadata:
   linkType: hard
 
 "shiki@npm:^1.9.1":
-  version: 1.15.1
-  resolution: "shiki@npm:1.15.1"
+  version: 1.15.2
+  resolution: "shiki@npm:1.15.2"
   dependencies:
-    "@shikijs/core": "npm:1.15.1"
+    "@shikijs/core": "npm:1.15.2"
     "@types/hast": "npm:^3.0.4"
-  checksum: 10c0/c5668fb3c6601f98e4a20c3ed53f76fa3ed614e5b261ceb33fd4e76ddab71b2c173975ad5d228ba097c1b51d8250991f2f325d101efc4a97c00acb0c0f807516
+  checksum: 10c0/2bef488dec4c1ae97bcfac7bf0fb7a02e77f5bd532f20fd87a0b6feb5ea19a6427c4f8bab4e3f2c90d82426f6d126b57a9e543fc7f7d7d3e522d7b9faa275353
   languageName: node
   linkType: hard
 
@@ -9637,7 +9637,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.3.0"
     "@typescript-eslint/parser": "npm:^8.3.0"
     ajv: "npm:^8.17.1"
-    axios: "npm:^1.7.5"
+    axios: "npm:^1.7.7"
     canvas: "npm:^2.11.2"
     eslint: "npm:^9.9.1"
     eslint-config-prettier: "npm:^9.1.0"
