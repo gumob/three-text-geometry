@@ -78,7 +78,7 @@ Runs the linter to check for code quality and style issues. It helps ensure that
 Serves the production build locally for previewing. This command allows you to test the production build before deploying it to ensure everything works as expected.
 
 
-### `yarn.sh`
+### Fuzzy Commands
 
 This script is used to automate the setup and configuration of the project environment. It includes commands for `yarn build`, `yarn dev`, `yarn lint`, and `yarn preview`.
 
