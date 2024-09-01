@@ -40,7 +40,7 @@ class DemoShader extends DemoBase {
         animate: { value: 1 },
         iGlobalTime: { value: 0 },
         map: { value: this.textures[0] },
-        color: { value: new THREE.Color(0x666666) },
+        color: { value: new THREE.Color(0x999999) },
       },
       transparent: true,
       side: THREE.DoubleSide,

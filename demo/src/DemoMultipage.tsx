@@ -38,7 +38,7 @@ class DemoMultipage extends DemoBase {
       transparent: true,
       opacity: 0.95,
       alphaTest: 0.5,
-      color: new THREE.Color(0x666666),
+      color: new THREE.Color(0x999999),
     });
     const textMaterial = new THREE.RawShaderMaterial(params);
     textMaterial.side = THREE.DoubleSide;

@@ -29,7 +29,7 @@ class DemoSimple extends DemoBase {
       map: this.textures[0],
       side: THREE.DoubleSide,
       transparent: true,
-      color: 0x666666,
+      color: 0x999999,
     });
 
     this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
