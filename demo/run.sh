@@ -14,7 +14,7 @@ local option_list=(
 	"yarn lint"
 	"yarn preview"
 	" "
-	"yarn cache clean && rm -rf .yarn && echo \"\" > yarn.lock && rm -rf node_modules && corepack enable && yarn set version stable && yarn -v && yarn install --inline-builds && yarn dlx @yarnpkg/sdks vscode"
+	"yarn cache clean && rm -rf .yarn && echo \"\" > yarn.lock && rm -rf node_modules && corepack enable && yarn set version stable && yarn -v && yarn install && yarn dlx @yarnpkg/sdks vscode"
 	" "
 	"yarn add three-text-geometry@link:../../three-text-geometry"
 	"yarn add three-text-geometry@gumob/three-text-geometry#develop"
