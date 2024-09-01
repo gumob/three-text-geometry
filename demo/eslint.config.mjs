@@ -27,13 +27,13 @@ export default tseslint.config(
       //   project: "tsconfig.json",                   // Path to the TypeScript configuration file
       // },
     },
-    settings: {
-      "import/resolver": {
-        typescript: {
-          project: "tsconfig.json",                    // Path to the TypeScript configuration for import resolution
-        },
-      },
-    },
+    // settings: {
+    //   "import/resolver": {
+    //     typescript: {
+    //       project: "tsconfig.json",                    // Path to the TypeScript configuration for import resolution
+    //     },
+    //   },
+    // },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
