@@ -1827,13 +1827,13 @@ __metadata:
   linkType: hard
 
 "axios@npm:^1.7.5":
-  version: 1.7.6
-  resolution: "axios@npm:1.7.6"
+  version: 1.7.7
+  resolution: "axios@npm:1.7.7"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/c9a488da1e5bae690b4832d270bf0bc99c4246407f65783446c94216a6d63d228bccbacff4bde1891d6612c4a89369356101a1cbbd66efeac1776950750a561b
+  checksum: 10/7f875ea13b9298cd7b40fd09985209f7a38d38321f1118c701520939de2f113c4ba137832fe8e3f811f99a38e12c8225481011023209a77b0c0641270e20cde1
   languageName: node
   linkType: hard
 
@@ -3711,13 +3711,13 @@ __metadata:
   linkType: hard
 
 "postcss@npm:^8.4.41":
-  version: 8.4.41
-  resolution: "postcss@npm:8.4.41"
+  version: 8.4.42
+  resolution: "postcss@npm:8.4.42"
   dependencies:
     nanoid: "npm:^3.3.7"
     picocolors: "npm:^1.0.1"
     source-map-js: "npm:^1.2.0"
-  checksum: 10/6e6176c2407eff60493ca60a706c6b7def20a722c3adda94ea1ece38345eb99964191336fd62b62652279cec6938e79e0b1e1d477142c8d3516e7a725a74ee37
+  checksum: 10/5c3a057b13c36ed89d79a16c0b1921a5ca41c7923f1cb1f70b7dbdae27587c4f03e2d910aa0e9e6397415326459926ae6816aa690337b2ec3103a74a74bafdba
   languageName: node
   linkType: hard
 
@@ -4299,7 +4299,7 @@ __metadata:
 
 "three-text-geometry@git+https://github.com/gumob/three-text-geometry.git#beta":
   version: 0.0.0
-  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=9bb1c274d941a891563aa3af20791d0c082c43d1"
+  resolution: "three-text-geometry@https://github.com/gumob/three-text-geometry.git#commit=6330f9b79551c1eb05fcfe444ed36e00036db1f1"
   dependencies:
     ajv: "npm:^8.17.1"
     fast-xml-parser: "npm:^4.4.1"
@@ -4343,8 +4343,8 @@ __metadata:
   linkType: hard
 
 "tsconfck@npm:^3.0.3":
-  version: 3.1.1
-  resolution: "tsconfck@npm:3.1.1"
+  version: 3.1.3
+  resolution: "tsconfck@npm:3.1.3"
   peerDependencies:
     typescript: ^5.0.0
   peerDependenciesMeta:
@@ -4352,7 +4352,7 @@ __metadata:
       optional: true
   bin:
     tsconfck: bin/tsconfck.js
-  checksum: 10/a4456577f540212516d7eb530005893739aadd6da00787914a8ed9aa19c3f2f306b8912920aa440b9b8978f10c9dadbd062b8c2a2f0ff1f6c2d4272b5be2ef34
+  checksum: 10/bf9b9b72de5b83f833f5dea8b276e77bab08e85751589f36dd23854fa3d5f7955194086fb8424df388bf232f2fc9a067d7913bfa674cb1217be0bba648ec71f2
   languageName: node
   linkType: hard
 
