@@ -13,7 +13,7 @@ The difference in rendering speed is noticeable when animations are enabled, and
 
 ## Requirements
 
-- Three.js r134 or later
+- Three.js 0.167.1 or later
 
 ## Installation
 
@@ -39,11 +39,17 @@ The demo is written in TypeScript using React, so you need to check out the repo
 The source code for the demo is available [here](https://github.com/gumob/three-text-geometry/tree/develop/demo).
 
 ```
-$ git clone https://github.com/gumob/three-text-geometry.git
-$ cd three-text-geometry/demo
-$ yarn install
-$ yarn start
+git clone https://github.com/gumob/three-text-geometry.git
+cd three-text-geometry/demo
+yarn cache clean
+corepack enable
+yarn set version stable
+yarn -v
+yarn install
+yarn dev
 ```
+
+Please refer to the [README.md in the demo directory](https://github.com/gumob/three-text-geometry/blob/beta/demo/README.md) for more details.
 
 ### Sample code
 
