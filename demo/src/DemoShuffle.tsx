@@ -8,9 +8,9 @@ export class DemoShuffle extends DemoBase {
   shuffle?: ShuffleText
 
   componentWillUnmount() {
-    this.shuffle?.cancel()
-    clearTimeout(this.shuffleTimeoutID)
-    cancelAnimationFrame(this.animationFrameID)
+    if (this.shuffle) this.shuffle.cancel()
+    if (this.shuffleTimeoutID) clearTimeout(this.shuffleTimeoutID) 
+    if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID)
   }
 
   initScene() {

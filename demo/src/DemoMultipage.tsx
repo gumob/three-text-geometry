@@ -12,7 +12,7 @@ export class DemoMultipage extends DemoBase {
   ]
 
   componentWillUnmount() {
-    cancelAnimationFrame(this.animationFrameID)
+    if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID)
   }
 
   initScene() {

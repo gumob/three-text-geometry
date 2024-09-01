@@ -13,7 +13,7 @@ export class DemoShuffleShader extends DemoBase {
 
   componentWillUnmount() {
     this.shuffle?.cancel()
-    cancelAnimationFrame(this.animationFrameID)
+    if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID)
   }
 
   initScene() {

@@ -11,7 +11,7 @@ export class DemoShader extends DemoBase {
 
   componentWillUnmount() {
     clearTimeout(this.swapTimeoutID)
-    cancelAnimationFrame(this.animationFrameID)
+    if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID)
     this.clock?.stop()
   }
 
