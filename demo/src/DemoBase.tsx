@@ -59,6 +59,7 @@ export class DemoBase extends PureComponent {
   animationFrameID?: number;
 
   constructor(props: any) {
+    console.log('constructor called');
     super(props);
     this.onWindowResize = this.onWindowResize.bind(this);
     this.onClicked = this.onClicked.bind(this);
