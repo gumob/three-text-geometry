@@ -64,7 +64,11 @@ export class DemoBase extends PureComponent {
     this.onClicked = this.onClicked.bind(this);
   }
 
+  didInitScene: boolean = false;
+
   async componentDidMount() {
+    if (this.didInitScene) return;
+    this.didInitScene = true;
     console.log('componentDidMount called');
     this.lastFrameTime = 0;
     try {
