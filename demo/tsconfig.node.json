@@ -30,7 +30,7 @@
     // "typeRoots": ["src/@types", "node_modules/@types"],
   },
   "include": [
-    // "src",
+    "src",
     "vite.config.ts"
   ]
 }

@@ -37,7 +37,7 @@
     // "typeRoots": ["yarn/cache/@types", ".yarn/unplugged", "src/@types"], // Specify locations for type definitions used in the project
   },
   "include": [
-    // "src",
+    "src",
     "vite.config.ts"
   ]
 }
