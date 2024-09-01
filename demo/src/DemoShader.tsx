@@ -1,22 +1,22 @@
-import * as THREE from 'three'
-import TextGeometry, { TextAlign } from 'three-text-geometry'
-import DemoBase from '~/DemoBase'
-import { fragmentShader, vertexShader } from '~/shaders/effect'
+import * as THREE from 'three';
+import TextGeometry, { TextAlign } from 'three-text-geometry';
+import DemoBase from '~/DemoBase';
+import { fragmentShader, vertexShader } from '~/shaders/effect';
 
 export class DemoShader extends DemoBase {
-  swapTimeoutID?: any
-  time: number = 0
-  textMaterial?: THREE.Material
-  clock: THREE.Clock = new THREE.Clock()
+  swapTimeoutID?: number;
+  time: number = 0;
+  textMaterial?: THREE.Material;
+  clock: THREE.Clock = new THREE.Clock();
 
   componentWillUnmount() {
-    clearTimeout(this.swapTimeoutID)
-    if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID)
-    this.clock?.stop()
+    clearTimeout(this.swapTimeoutID);
+    if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID);
+    this.clock.stop();
   }
 
   initScene() {
-    super.initScene()
+    super.initScene();
 
     /** TextGeometryOption */
     this.textOption = {
@@ -24,13 +24,14 @@ export class DemoShader extends DemoBase {
       align: TextAlign.Left,
       width: 1600,
       flipY: this.textures[0].flipY,
-    }
+    };
 
     /** Geometry */
-    const textGeometry = new TextGeometry(this.staticText(), this.textOption)
-    const box = new THREE.Vector3()
-    textGeometry.computeBoundingBox()
-    textGeometry.boundingBox?.getSize(box)
+    const textGeometry = new TextGeometry(this.staticText(), this.textOption);
+    const box = new THREE.Vector3();
+    textGeometry.computeBoundingBox();
+    textGeometry.boundingBox?.getSize(box);
+
     /** Material */
     this.textMaterial = new THREE.RawShaderMaterial({
       vertexShader: vertexShader,
@@ -44,41 +45,41 @@ export class DemoShader extends DemoBase {
       transparent: true,
       side: THREE.DoubleSide,
       depthTest: false,
-    })
-    this.textMaterial.side = THREE.DoubleSide
+    });
+
     this.textMesh = new THREE.Mesh(textGeometry, this.textMaterial)
       .rotateY(Math.PI)
       .rotateZ(Math.PI)
       .translateX(-box.x / 2)
-      .translateY(-box.y / 2)
-    this.scene?.add(this.textMesh)
+      .translateY(-box.y / 2);
+    this.scene?.add(this.textMesh);
 
-    this.clock.start()
+    this.clock.start();
   }
 
   updateScene(): void {
-    const dt = this.clock.getDelta()
-    const duration = 3
-    this.time += dt
-    const mat = this.textMaterial as THREE.RawShaderMaterial
-    mat.uniforms.iGlobalTime.value = this.time
-    mat.uniforms.animate.value = this.time / duration
-    mat.needsUpdate = true
+    const dt = this.clock.getDelta();
+    const duration = 3;
+    this.time += dt;
+    const mat = this.textMaterial as THREE.RawShaderMaterial;
+    mat.uniforms.iGlobalTime.value = this.time;
+    mat.uniforms.animate.value = this.time / duration;
+    mat.needsUpdate = true;
     if (this.time > duration) {
-      this.time = 0
-      this.swapText()
+      this.time = 0;
+      this.swapText();
     }
-    super.updateScene()
+    super.updateScene();
   }
 
   swapText() {
-    const geom = this.textMesh?.geometry as TextGeometry
-    geom.update(this.randomText())
-    const box = new THREE.Vector3()
-    this.textMesh!.geometry.computeBoundingBox()
-    this.textMesh!.geometry.boundingBox?.getSize(box)
-    this.textMesh!.position.set(-box.x / 2, -box.y / 2, 0)
+    const geom = this.textMesh?.geometry as TextGeometry;
+    geom.update(this.randomText());
+    const box = new THREE.Vector3();
+    this.textMesh!.geometry.computeBoundingBox();
+    this.textMesh!.geometry.boundingBox?.getSize(box);
+    this.textMesh!.position.set(-box.x / 2, -box.y / 2, 0);
   }
 }
 
-export default DemoShader
+export default DemoShader;

@@ -1,4 +1,4 @@
-import React from 'react'
+import { PureComponent } from 'react'
 import * as THREE from 'three'
 import Stats from 'three/addons/libs/stats.module.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
@@ -13,7 +13,7 @@ import {
 import './Demo.css'
 import axios from 'axios'
 
-export class DemoBase extends React.Component {
+export class DemoBase extends PureComponent {
   stats?: Stats | undefined
   controls?: OrbitControls | undefined
 
@@ -56,43 +56,48 @@ export class DemoBase extends React.Component {
   lastFrameTime: number = 0
   animationFrameID?: number
 
-  componentDidMount() {
+  constructor(props: any) {
+    super(props)
+    this.onWindowResize = this.onWindowResize.bind(this)
+    this.onClicked = this.onClicked.bind(this)
+  }
+
+  async componentDidMount() {
+    console.log('componentDidMount called');
     this.lastFrameTime = 0
-    const self = this
-    this.loadAssets(this.fontUri, this.textureUri)
-      .then((values: (BMFont | THREE.Texture)[]) => {
-        values.forEach((value: BMFont | THREE.Texture) => {
-          if (value instanceof THREE.Texture) {
-            self.textures.push(value as THREE.Texture)
-          } else {
-            self.font = value as BMFont
-          }
-        })
-        self.assetsDidLoad()
+    try {
+      const values = await this.loadAssets(this.fontUri, this.textureUri)
+      values.forEach((value: BMFont | THREE.Texture) => {
+        if (value instanceof THREE.Texture) {
+          this.textures.push(value as THREE.Texture)
+        } else {
+          this.font = value as BMFont
+        }
       })
-      .catch((e) => {
-        console.error(e)
-      })
+      this.assetsDidLoad()
+    } catch (e) {
+      console.error(e)
+    }
 
     // Prevent duplicate registration of event listeners
-    window.addEventListener('resize', this.onWindowResize.bind(this));
-    window.addEventListener('click', this.onClicked.bind(this));
+    window.addEventListener('resize', this.onWindowResize)
+    window.addEventListener('click', this.onClicked)
   }
 
   componentWillUnmount() {
     if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID)
-    window.removeEventListener('resize', this.onWindowResize.bind(this))
-    window.removeEventListener('click', this.onClicked.bind(this))
+    window.removeEventListener('resize', this.onWindowResize)
+    window.removeEventListener('click', this.onClicked)
     if (this.renderer) {
-      const container = document.querySelector(`#${this.divID}`);
-      container?.removeChild(this.renderer.domElement);
+      const container = document.querySelector(`#${this.divID}`)
+      container?.removeChild(this.renderer.domElement)
     }
     if (this.stats) {
-      document.body.removeChild(this.stats.dom);
+      document.body.removeChild(this.stats.dom)
     }
   }
 
-  loadAssets(fontUri: string, textureUri: string[]): Promise<(BMFont | THREE.Texture)[]> {
+  async loadAssets(fontUri: string, textureUri: string[]): Promise<(BMFont | THREE.Texture)[]> {
     let fontLoader: Promise<BMFont>
     if (fontUri.endsWith('.fnt')) {
       fontLoader = axios.get(fontUri).then((res) => new BMFontAsciiParser().parse(res.data))
@@ -164,21 +169,21 @@ export class DemoBase extends React.Component {
     //   )
     // this.scene?.add(axes)
 
-    window.addEventListener('resize', this.onWindowResize.bind(this))
-    window.addEventListener('click', this.onClicked.bind(this))
+    window.addEventListener('resize', this.onWindowResize)
+    window.addEventListener('click', this.onClicked)
   }
 
   initScene() {}
 
   updateScene() {
-    this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this));
+    this.animationFrameID = requestAnimationFrame(this.updateScene.bind(this))
 
-    const interval = 1000 / this.fpsLimit;
+    const interval = 1000 / this.fpsLimit
 
-    const now = Date.now();
-    const elapsed = now - (this.lastFrameTime || 0);
+    const now = Date.now()
+    const elapsed = now - (this.lastFrameTime || 0)
 
-    if (elapsed < interval) return;
+    if (elapsed < interval) return
 
     this.lastFrameTime = now - (elapsed % interval)
 

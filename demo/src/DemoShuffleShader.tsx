@@ -8,12 +8,13 @@ export class DemoShuffleShader extends DemoBase {
   shuffle?: ShuffleText
   swapTimeoutID?: any
   time: number = 0
-  textMaterial?: THREE.Material
+  textMaterial?: THREE.RawShaderMaterial
   clock: THREE.Clock = new THREE.Clock()
 
   componentWillUnmount() {
     this.shuffle?.cancel()
     if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID)
+    this.clock.stop()
   }
 
   initScene() {
