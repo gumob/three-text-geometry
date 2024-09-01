@@ -73,10 +73,23 @@ export class DemoBase extends React.Component {
       .catch((e) => {
         console.error(e)
       })
+
+    // Prevent duplicate registration of event listeners
+    window.addEventListener('resize', this.onWindowResize.bind(this));
+    window.addEventListener('click', this.onClicked.bind(this));
   }
 
   componentWillUnmount() {
-    cancelAnimationFrame(this.animationFrameID)
+    if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID)
+    window.removeEventListener('resize', this.onWindowResize.bind(this))
+    window.removeEventListener('click', this.onClicked.bind(this))
+    if (this.renderer) {
+      const container = document.querySelector(`#${this.divID}`);
+      container?.removeChild(this.renderer.domElement);
+    }
+    if (this.stats) {
+      document.body.removeChild(this.stats.dom);
+    }
   }
 
   loadAssets(fontUri: string, textureUri: string[]): Promise<(BMFont | THREE.Texture)[]> {
