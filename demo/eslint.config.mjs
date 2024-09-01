@@ -23,17 +23,7 @@ export default tseslint.config(
       parser: tsParser,                                // TypeScript parser for ESLint
       ecmaVersion: 2020,
       globals: globals.browser,
-      // parserOptions: {
-      //   project: "tsconfig.json",                   // Path to the TypeScript configuration file
-      // },
     },
-    // settings: {
-    //   "import/resolver": {
-    //     typescript: {
-    //       project: "tsconfig.json",                    // Path to the TypeScript configuration for import resolution
-    //     },
-    //   },
-    // },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
