@@ -58,7 +58,7 @@ Please refer to the detailed instructions at [Yarn Official Docs](https://yarnpk
     3) Pick "Use Workspace Version"
 
 
-## Available Scripts
+## Available Commands
 
 In the project directory, you can run:
 
@@ -73,6 +73,16 @@ Runs the linter to check for code quality and style issues. It helps ensure that
 
 ### `yarn preview`
 Serves the production build locally for previewing. This command allows you to test the production build before deploying it to ensure everything works as expected.
+
+
+## Fuzzy Commands
+
+\* You need to have [Fuzzy Finder](https://github.com/junegunn/fzf) installed to run this script.
+
+```
+chmod +x yarn.sh
+./yarn.sh
+```
 
 
 ## Learn More
