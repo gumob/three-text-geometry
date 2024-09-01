@@ -1,46 +1,82 @@
-# Getting Started with Create React App
+# Getting Started with Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This demo project works with [Vite](https://github.com/vitejs/vite).
+
+## Clone the repository
+
+```
+git clone https://github.com/gumob/three-text-geometry.git
+cd three-text-geometry/demo
+```
+
+## Install dependencies
+
+Setup yarn and install dependencies
+
+```
+yarn cache clean
+corepack enable
+yarn set version stable
+yarn -v
+yarn install
+```
+
+## Configure SDKs for Cursor (VSCode)
+
+```log
+Cannot find module `***` or its corresponding type declarations
+```
+
+Please refer to the detailed instructions at [Yarn Official Docs](https://yarnpkg.com/getting-started/editor-sdks#vscode).
+
+1) Install the ZipFS extension
+
+    Cursor:
+
+    ```
+    cursor --install-extension arcanis.vscode-zipfs
+    ```
+
+    VSCode:
+
+    ```
+    code --install-extension arcanis.vscode-zipfs
+    ```
+
+2) Run the following command, which will generate a .vscode/settings.json file:
+
+    ```
+    yarn dlx @yarnpkg/sdks vscode
+    ```
+
+3) For safety reason VSCode requires you to explicitly activate the custom TS settings:
+
+    1) Press ctrl+shift+p in a TypeScript file
+    
+    2) Choose "Select TypeScript Version"
+
+    3) Pick "Use Workspace Version"
+
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `yarn build`
+Builds the application for production. It optimizes the build for the best performance and outputs the files to the `build` directory. The build is minified, and the filenames include hashes for better caching.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `yarn dev`
+Runs the application in development mode. It enables hot reloading, allowing you to see changes in real-time. Open [http://localhost:5173/](http://localhost:5173/) to view the application in your browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `yarn lint`
+Runs the linter to check for code quality and style issues. It helps ensure that the code adheres to the defined coding standards and best practices.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `yarn preview`
+Serves the production build locally for previewing. This command allows you to test the production build before deploying it to ensure everything works as expected.
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can learn more in the [Vite Official Documentation](https://vitejs.dev/guide/).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To learn React, check out the [React Official Documentation](https://react.dev/reference/react).
