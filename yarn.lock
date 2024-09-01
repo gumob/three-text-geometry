@@ -4534,18 +4534,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"floggy@npm:^0.3.5":
-  version: 0.3.5
-  resolution: "floggy@npm:0.3.5"
-  dependencies:
-    chalk: "npm:^4.1.2"
-    kleur: "npm:^4.1.5"
-    lodash: "npm:^4.17.21"
-    strip-ansi: "npm:6"
-  checksum: 10c0/1b2d565f731f3a0dfd1253a8c5ba1882baeed45d9e8a09e3d1e64a3847af3d2090e2603915596593bfbbdf8223d8ce101df655c2a90f37fdd0eb7491173840df
-  languageName: node
-  linkType: hard
-
 "follow-redirects@npm:^1.15.6":
   version: 1.15.6
   resolution: "follow-redirects@npm:1.15.6"
@@ -6542,13 +6530,6 @@ __metadata:
   version: 3.0.3
   resolution: "kleur@npm:3.0.3"
   checksum: 10c0/cd3a0b8878e7d6d3799e54340efe3591ca787d9f95f109f28129bdd2915e37807bf8918bb295ab86afb8c82196beec5a1adcaf29042ce3f2bd932b038fe3aa4b
-  languageName: node
-  linkType: hard
-
-"kleur@npm:^4.1.5":
-  version: 4.1.5
-  resolution: "kleur@npm:4.1.5"
-  checksum: 10c0/e9de6cb49657b6fa70ba2d1448fd3d691a5c4370d8f7bbf1c2f64c24d461270f2117e1b0afe8cb3114f13bbd8e51de158c2a224953960331904e636a5e4c0f2a
   languageName: node
   linkType: hard
 
@@ -9365,7 +9346,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1, strip-ansi@npm:6, strip-ansi@npm:^6.0.0, strip-ansi@npm:^6.0.1":
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1, strip-ansi@npm:^6.0.0, strip-ansi@npm:^6.0.1":
   version: 6.0.1
   resolution: "strip-ansi@npm:6.0.1"
   dependencies:
@@ -9644,7 +9625,6 @@ __metadata:
     eslint-plugin-only-warn: "npm:^1.1.0"
     eslint-plugin-tsdoc: "npm:^0.3.0"
     fast-xml-parser: "npm:^4.4.1"
-    floggy: "npm:^0.3.5"
     format-imports: "npm:^4.0.4"
     gl: "npm:^8.0.2"
     husky: "npm:^9.1.5"
