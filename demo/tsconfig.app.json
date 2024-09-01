@@ -9,6 +9,7 @@
     /* Bundler mode */
     "moduleResolution": "bundler",                           // Resolve modules using bundler <https://www.typescriptlang.org/tsconfig#moduleResolution>
     "allowImportingTsExtensions": true,                      // Allow importing .ts files directly <https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions>
+    "resolveJsonModule": true,                               // Enable importing JSON modules <https://www.typescriptlang.org/tsconfig#resolveJsonModule>
     "isolatedModules": true,                                 // Ensure each file can be transpiled independently <https://www.typescriptlang.org/tsconfig#isolatedModules>
     "moduleDetection": "force",                              // Force module detection for all files <https://www.typescriptlang.org/tsconfig#moduleDetection>
     "noEmit": true,                                          // Do not emit output files <https://www.typescriptlang.org/tsconfig#noEmit>
@@ -20,6 +21,7 @@
     "noUnusedParameters": false,                             // Report errors on unused function parameters <https://www.typescriptlang.org/tsconfig#noUnusedParameters>
     "noFallthroughCasesInSwitch": false,                     // Prevent fallthrough cases in switch statements <https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch>
   
+    /* Module Resolution */
     "baseUrl": "./",                                         // Set the base URL for module resolution <https://www.typescriptlang.org/tsconfig#baseUrl>
     "paths": {
       "~/*": ["./src/*"]
