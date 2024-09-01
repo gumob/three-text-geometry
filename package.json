@@ -1,12 +1,12 @@
 {
   "name": "three-text-geometry",
   "description": "Renders BMFont files in ThreeJS with word-wrapping",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "author": {
     "name": "Kojiro Futamura",
     "email": "gumob.dev@gmail.com",
-    "url": "https://github.com/gumob"
+    "url": "https://github.com/gumob/three-text-geometry"
   },
   "repository": {
     "type": "https",
