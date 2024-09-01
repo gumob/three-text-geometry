@@ -23,11 +23,13 @@ yarn install
 
 ## Configure SDKs for Cursor (VSCode)
 
+If you are using Cursor or VSCode, you may encounter the following error related to Module Resolution.
+
 ```log
 Cannot find module `***` or its corresponding type declarations
 ```
 
-Please refer to the detailed instructions at [Yarn Official Docs](https://yarnpkg.com/getting-started/editor-sdks#vscode).
+To resolve this issue, please follow the steps below.
 
 1) Install the ZipFS extension
 
@@ -57,6 +59,7 @@ Please refer to the detailed instructions at [Yarn Official Docs](https://yarnpk
 
     3) Pick "Use Workspace Version"
 
+Please refer to the detailed instructions at [Yarn Official Docs](https://yarnpkg.com/getting-started/editor-sdks#vscode).
 
 ## Available Commands
 
@@ -75,7 +78,9 @@ Runs the linter to check for code quality and style issues. It helps ensure that
 Serves the production build locally for previewing. This command allows you to test the production build before deploying it to ensure everything works as expected.
 
 
-## Fuzzy Commands
+### `yarn.sh`
+
+This script is used to automate the setup and configuration of the project environment. It includes commands for `yarn build`, `yarn dev`, `yarn lint`, and `yarn preview`.
 
 \* You need to have [Fuzzy Finder](https://github.com/junegunn/fzf) installed to run this script.
 
