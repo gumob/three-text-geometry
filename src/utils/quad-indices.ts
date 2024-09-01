@@ -1,10 +1,15 @@
 import { dtype } from '../utils'
 
+/**
+ * The interface to define options for `createIndices`.
+ *
+ * @interface QuadOptions
+ */
 interface QuadOptions {
-  count?: number /** the number of quads to index, default 1 */
-  type?: string /** (string) the dtype of the returned array, default '"uint16"' */
-  clockwise?: boolean /** (boolean) the orientation of the indices, default true */
-  start?: number /** the starting index to place the data into the array, default 0 */
+  count?: number; /** the number of quads to index, default 1 */
+  type?: string; /** (string) the dtype of the returned array, default '"uint16"' */
+  clockwise?: boolean; /** (boolean) the orientation of the indices, default true */
+  start?: number; /** the starting index to place the data into the array, default 0 */
 }
 
 type QuadIndices =
@@ -17,8 +22,15 @@ type QuadIndices =
   | Uint32Array
   | Float32Array
   | Float64Array
-  | Uint8ClampedArray
+  | Uint8ClampedArray;
 
+/**
+ * The function for creating the indices of the quads.
+ *
+ * @param {QuadIndices | QuadOptions | null} array - The array to store the indices.
+ * @param {QuadOptions | null} opt - The options for the indices.
+ * @returns {QuadIndices} The indices of the quads.
+ */
 function createIndices(
   array: QuadIndices | QuadOptions | null = null,
   opt: QuadOptions | null = null

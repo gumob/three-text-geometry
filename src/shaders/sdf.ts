@@ -1,5 +1,10 @@
 import * as THREE from 'three'
 
+/**
+ * The interface for the options of the SDF shader.
+ *
+ * @interface SDFShaderOption
+ */
 interface SDFShaderOption {
   opacity?: number
   alphaTest?: number
@@ -8,6 +13,12 @@ interface SDFShaderOption {
   map?: THREE.Texture
 }
 
+/**
+ * The function for creating a SDF shader.
+ *
+ * @param {SDFShaderOption} opt - The options for the shader.
+ * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
+ */
 function createSDFShader(opt: SDFShaderOption) {
   opt = opt || {}
   const opacity = opt.opacity !== undefined ? opt.opacity : 1

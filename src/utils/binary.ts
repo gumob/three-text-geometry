@@ -1,5 +1,11 @@
 /* eslint @typescript-eslint/unbound-method: 0 */
 
+/**
+ * The function for getting the array constructor for the given data type.
+ *
+ * @param {string} dtype - The data type.
+ * @returns {ArrayConstructor | Int8ArrayConstructor | Int16ArrayConstructor | Int32ArrayConstructor | Uint8ArrayConstructor | Uint16ArrayConstructor | Uint32ArrayConstructor | Float32ArrayConstructor | Float64ArrayConstructor | Uint8ClampedArrayConstructor | undefined} The array constructor.
+ */
 function dtype(
   dtype: string
 ):

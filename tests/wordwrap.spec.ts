@@ -89,7 +89,7 @@ describe('WordWrap', () => {
     const str = 'the quick brown fox jumps over the lazy dog'
 
     /** word-wrap the entire sentence */
-    const text = new WordWrap().wrap(str, { width: 10 })
+    const _text = new WordWrap().wrap(str, { width: 10 })
 
     /** bits at a time */
     const start = 20

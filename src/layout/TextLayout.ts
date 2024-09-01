@@ -3,6 +3,18 @@ import { BMFont, BMFontChar, TextAlign, TextGlyph, TextLayoutOption, WordMetrics
 
 /**
  * Class representing the layout of text using a bitmap font.
+ *
+ * @class
+ * @property {TextLayoutOption} option - The options for the text layout.
+ * @property {TextGlyph[]} glyphs - The glyphs used in the text layout.
+ * @property {number} width - The width of the text layout.
+ * @property {number} height - The height of the text layout.
+ * @property {number} descender - The descender value of the text layout.
+ * @property {number} ascender - The ascender value of the text layout.
+ * @property {number} xHeight - The x-height of the text layout.
+ * @property {number} baseline - The baseline of the text layout.
+ * @property {number} capHeight - The cap height of the text layout.
+ * @property {number} lineHeight - The line height of the text layout.
  */
 class TextLayout {
   static readonly X_HEIGHTS = ['x', 'e', 'a', 'o', 'n', 's', 'r', 'c', 'u', 'm', 'v', 'w', 'z']
@@ -40,7 +52,9 @@ class TextLayout {
 
   /**
    * Gets the options for the text layout.
+   *
    * @returns {TextLayoutOption} The options for the text layout.
+   * @readonly
    */
   public get option(): TextLayoutOption {
     return { ...this._opt } as TextLayoutOption
@@ -48,7 +62,9 @@ class TextLayout {
 
   /**
    * Gets the glyphs used in the text layout.
+   *
    * @returns {TextGlyph[]} The array of glyphs.
+   * @readonly
    */
   public get glyphs(): TextGlyph[] {
     return this._glyphs ?? []
@@ -56,7 +72,9 @@ class TextLayout {
 
   /**
    * Gets the width of the text layout.
+   *
    * @returns {number} The width of the text layout.
+   * @readonly
    */
   public get width(): number {
     return this._width ?? 0
@@ -64,7 +82,9 @@ class TextLayout {
 
   /**
    * Gets the height of the text layout.
+   *
    * @returns {number} The height of the text layout.
+   * @readonly
    */
   public get height(): number {
     return this._height ?? 0
@@ -72,7 +92,9 @@ class TextLayout {
 
   /**
    * Gets the descender value of the text layout.
+   *
    * @returns {number} The descender value.
+   * @readonly
    */
   public get descender(): number {
     return this._descender ?? 0
@@ -80,7 +102,9 @@ class TextLayout {
 
   /**
    * Gets the ascender value of the text layout.
+   *
    * @returns {number} The ascender value.
+   * @readonly
    */
   public get ascender(): number {
     return this._ascender ?? 0
@@ -88,7 +112,9 @@ class TextLayout {
 
   /**
    * Gets the x-height of the text layout.
+   *
    * @returns {number} The x-height value.
+   * @readonly
    */
   public get xHeight(): number {
     return this._xHeight ?? 0
@@ -96,7 +122,9 @@ class TextLayout {
 
   /**
    * Gets the baseline of the text layout.
+   *
    * @returns {number} The baseline value.
+   * @readonly
    */
   public get baseline(): number {
     return this._baseline ?? 0
@@ -104,7 +132,9 @@ class TextLayout {
 
   /**
    * Gets the cap height of the text layout.
+   *
    * @returns {number} The cap height value.
+   * @readonly
    */
   public get capHeight(): number {
     return this._capHeight ?? 0
@@ -112,7 +142,9 @@ class TextLayout {
 
   /**
    * Gets the line height of the text layout.
+   *
    * @returns {number} The line height value.
+   * @readonly
    */
   public get lineHeight(): number {
     return this._lineHeight ?? 0
@@ -120,6 +152,7 @@ class TextLayout {
 
   /**
    * Returns a string representation of the text layout.
+   *
    * @returns {string} The string representation.
    */
   public toString() {
@@ -138,6 +171,7 @@ class TextLayout {
 
   /**
    * Creates an instance of TextLayout.
+   *
    * @param {string} text - The text to layout.
    * @param {any} option - The options for the text layout.
    * @throws {TypeError} If the font is not specified in options.
@@ -150,6 +184,7 @@ class TextLayout {
 
   /**
    * Updates the text layout with new text and options.
+   *
    * @param {string} text - The text to layout.
    * @param {any} option - The options for the text layout.
    */
@@ -255,6 +290,7 @@ class TextLayout {
 
   /**
    * Sets up fallback glyphs for space and tab characters.
+   *
    * @param {BMFont} font - The bitmap font to use.
    * @param {number} tabSize - The size of the tab character.
    */
@@ -291,6 +327,7 @@ class TextLayout {
 
   /**
    * Gets the glyph for a specific character ID.
+   *
    * @param {BMFont} font - The bitmap font to use.
    * @param {number} id - The character ID.
    * @returns {BMFontChar | null} The glyph for the character, or null if not found.
@@ -305,6 +342,7 @@ class TextLayout {
 
   /**
    * Computes the metrics for a given text segment.
+   *
    * @param {string} text - The text to measure.
    * @param {number} start - The starting index of the text segment.
    * @param {number} end - The ending index of the text segment.
@@ -363,6 +401,7 @@ class TextLayout {
 
   /**
    * Gets a glyph by its character ID.
+   *
    * @param {BMFont} font - The bitmap font to use.
    * @param {number} id - The character ID.
    * @returns {BMFontChar | undefined} The glyph if found, otherwise undefined.
@@ -376,6 +415,7 @@ class TextLayout {
 
   /**
    * Gets the x-height of the font.
+   *
    * @param {BMFont} font - The bitmap font to use.
    * @returns {number} The x-height value.
    */
@@ -390,6 +430,7 @@ class TextLayout {
 
   /**
    * Gets the 'm' glyph from the font.
+   *
    * @param {BMFont} font - The bitmap font to use.
    * @returns {BMFontChar | undefined} The 'm' glyph if found, otherwise undefined.
    */
@@ -404,6 +445,7 @@ class TextLayout {
 
   /**
    * Gets the cap height of the font.
+   *
    * @param {BMFont} font - The bitmap font to use.
    * @returns {number} The cap height value.
    */
@@ -418,6 +460,7 @@ class TextLayout {
 
   /**
    * Gets the kerning value between two glyphs.
+   *
    * @param {BMFont} font - The bitmap font to use.
    * @param {number} left - The ID of the left glyph.
    * @param {number} right - The ID of the right glyph.
@@ -435,6 +478,7 @@ class TextLayout {
 
   /**
    * Finds the index of a character in an array of glyphs.
+   *
    * @param {BMFontChar[]} array - The array of glyphs.
    * @param {number} value - The character ID to find.
    * @returns {number} The index of the character, or -1 if not found.

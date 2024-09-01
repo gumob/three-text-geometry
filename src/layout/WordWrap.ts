@@ -5,17 +5,39 @@
  */
 import { ComputeMetrics, WordMetrics, WordWrapMode, WordWrapOption } from '../types'
 
+/**
+ * Class representing a word wrap.
+ *
+ * @class
+ * @property {RegExp} newlineRegexp - The regular expression for newline characters.
+ * @property {RegExp} whitespaceRegexp - The regular expression for whitespace characters.
+ * @property {string} newlineChar - The character for newline.
+ */
 class WordWrap {
   static readonly newlineRegexp: RegExp = /\n/
   static readonly whitespaceRegexp: RegExp = /\s/
   static readonly newlineChar: string = '\n'
 
+  /**
+   * Wraps the text according to the specified options.
+   *
+   * @param {string} text - The text to wrap.
+   * @param {any} [option={}] - The options for the word wrap.
+   * @returns {string} The wrapped text.
+   */
   wrap(text: string, option: any = {}): string {
     return this.lines(text, option)
       .map((line: WordMetrics) => text.substring(line.start, line.end))
       .join('\n')
   }
 
+  /**
+   * Wraps the text according to the specified options.
+   *
+   * @param {string} text - The text to wrap.
+   * @param {any} [option={}] - The options for the word wrap.
+   * @returns {WordMetrics[]} The wrapped text.
+   */
   lines(text: string, option: any = {}): WordMetrics[] {
     /** zero width results in nothing visible */
     const opt: WordWrapOption = {
@@ -40,16 +62,41 @@ class WordWrap {
     else return this.greedy(opt.measure!, text, opt.start, opt.end!, opt.width!, opt.mode!)
   }
 
+  /**
+   * Finds the index of the specified character in the text.
+   *
+   * @param {string} text - The text to search within.
+   * @param {string} chr - The character to find.
+   * @param {number} start - The starting index for the search.
+   * @param {number} end - The ending index for the search.
+   * @returns {number} The index of the character, or the end index if not found.
+   */
   idxOf(text: string, chr: string, start: number, end: number) {
     const idx: number = text.indexOf(chr, start)
     if (idx === -1 || idx > end) return end
     return idx
   }
 
+  /**
+   * Checks if the specified character is a whitespace character.
+   *
+   * @param {string} chr - The character to check.
+   * @returns {boolean} True if the character is a whitespace, false otherwise.
+   */
   isWhitespace(chr: string): boolean {
     return WordWrap.whitespaceRegexp.test(chr)
   }
 
+  /**
+   * Wraps the text according to the specified options.
+   *
+   * @param {ComputeMetrics} measure - The function to measure the text.
+   * @param {string} text - The text to wrap.
+   * @param {number} start - The starting index for the text.
+   * @param {number} end - The ending index for the text.
+   * @param {number} width - The width to wrap the text to.
+   * @returns {WordMetrics[]} The wrapped text.
+   */
   pre(measure: ComputeMetrics, text: string, start: number, end: number, width: number): WordMetrics[] {
     const lines: WordMetrics[] = []
     let lineStart: number = start
@@ -68,6 +115,17 @@ class WordWrap {
     return lines
   }
 
+  /**
+   * Wraps the text according to the specified options.
+   *
+   * @param {ComputeMetrics} measure - The function to measure the text.
+   * @param {string} text - The text to wrap.
+   * @param {number} start - The starting index for the text.
+   * @param {number} end - The ending index for the text.
+   * @param {number} width - The width to wrap the text to.
+   * @param {string} mode - The mode to wrap the text.
+   * @returns {WordMetrics[]} The wrapped text.
+   */
   greedy(
     measure: ComputeMetrics,
     text: string,
@@ -127,7 +185,15 @@ class WordWrap {
     return lines
   }
 
-  /** determines the visible number of glyphs within a given width */
+  /**
+   * Determines the visible number of glyphs within a given width.
+   *
+   * @param {string} _ - The text to measure.
+   * @param {number} start - The starting index for the text.
+   * @param {number} end - The ending index for the text.
+   * @param {number} width - The width to measure.
+   * @returns {WordMetrics} The measured word metrics.
+   */
   monospace(_: string, start: number, end: number, width: number): WordMetrics {
     const glyphs: number = Math.min(width, end - start)
     return {

@@ -1,5 +1,10 @@
 import * as THREE from 'three'
 
+/**
+ * The interface for the options of the multi-page shader.
+ *
+ * @interface BSDFShaderOption
+ */
 interface BSDFShaderOption {
   opacity?: number
   alphaTest?: number
@@ -9,6 +14,12 @@ interface BSDFShaderOption {
   negate?: boolean
 }
 
+/**
+ * The function for creating a multi-page shader.
+ *
+ * @param {BSDFShaderOption} opt - The options for the shader.
+ * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
+ */
 function createMSDFShader(opt: BSDFShaderOption) {
   opt = opt || {}
   const opacity = opt.opacity !== undefined ? opt.opacity : 1

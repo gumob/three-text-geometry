@@ -63,11 +63,11 @@ describe('TextLayout', () => {
     // const font = new BMFontAsciiParser().parse(ascii);
     const json = fs.readFileSync('tests/fonts/Lato-Regular-32.json').toString()
     const font = new BMFontJsonParser().parse(json)
-    let xIdx: number | undefined
+    let _xIndex: number | undefined
     let xGlyph: BMFontChar = DefaultBMFontChar()
     font.chars.forEach((val: BMFontChar) => {
       if (val.id === 'x'.charCodeAt(0)) {
-        xIdx = val.id
+        _xIndex = val.id
         xGlyph = val
         return
       }

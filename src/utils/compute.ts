@@ -1,5 +1,11 @@
 import * as THREE from 'three'
 
+/**
+ * The function for computing the bounding box of the given positions.
+ *
+ * @param {ArrayLike<number>} positions - The positions to compute the bounding box.
+ * @returns {object} The bounding box.
+ */
 function bounds(positions: ArrayLike<number>) {
   const itemSize = 2
   const box = { min: [0, 0], max: [0, 0] }
@@ -21,6 +27,12 @@ function bounds(positions: ArrayLike<number>) {
   return box
 }
 
+/**
+ * The function for computing the bounding box of the given positions.
+ *
+ * @param {ArrayLike<number>} positions - The positions to compute the bounding box.
+ * @param {THREE.Box3} output - The output box.
+ */
 function computeBox(positions: ArrayLike<number>, output: THREE.Box3) {
   const box = bounds(positions)
   if (!box.min[0] || !box.min[1] || !box.max[0] || !box.max[1]) return
@@ -28,6 +40,12 @@ function computeBox(positions: ArrayLike<number>, output: THREE.Box3) {
   output.max.set(box.max[0], box.max[1], 0)
 }
 
+/**
+ * The function for computing the bounding sphere of the given positions.
+ *
+ * @param {ArrayLike<number>} positions - The positions to compute the bounding sphere.
+ * @param {THREE.Sphere} output - The output sphere.
+ */
 function computeSphere(positions: ArrayLike<number>, output: THREE.Sphere) {
   const box = bounds(positions)
   if (!box.min[0] || !box.min[1] || !box.max[0] || !box.max[1]) return

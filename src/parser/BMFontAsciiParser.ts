@@ -41,7 +41,7 @@ class BMFontAsciiParser implements IBMFontParser<string> {
 
     const result: BMFont = DefaultBMFont()
 
-    lines.forEach((line: string, idx: number) => {
+    lines.forEach((line: string, _index: number) => {
       line = line.replace(/[\s\t]+/g, ' ').trim()
       if (!line) return
 

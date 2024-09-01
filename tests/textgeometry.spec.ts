@@ -14,7 +14,7 @@ describe('TextGeometry', () => {
   // const font = new BMFontXMLParser().parse(xml)
   const ascii = fs.readFileSync('tests/fonts/Lato-Regular-64.fnt').toString()
   const font = new BMFontAsciiParser().parse(ascii)
-  const texture = new THREE.TextureLoader().load('tests/font/lato.png')
+  const _texture = new THREE.TextureLoader().load('tests/font/lato.png')
 
   /** Prepare WebGL */
   /** https://github.com/cognitedata/reveal/blob/9c248458a0c582a9a5f9f381323bfd2683648e82/viewer/test-utilities/src/createGlContext.ts */

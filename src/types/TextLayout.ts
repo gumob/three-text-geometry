@@ -69,7 +69,7 @@ interface TextLayoutOption extends WordWrapOption {
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue 0
+   * @default 0
    */
   letterSpacing?: number | undefined
   /**
@@ -77,7 +77,7 @@ interface TextLayoutOption extends WordWrapOption {
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue 4
+   * @default 4
    */
   tabSize?: number | undefined
   /**
@@ -85,7 +85,7 @@ interface TextLayoutOption extends WordWrapOption {
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue font.common.lineHeight.
+   * @default font.common.lineHeight.
    */
   lineHeight?: number | undefined
   /**
@@ -93,7 +93,7 @@ interface TextLayoutOption extends WordWrapOption {
    *
    * @type {TextAlign | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue TextAlign.left
+   * @default TextAlign.left
    */
   align?: TextAlign | undefined
 }

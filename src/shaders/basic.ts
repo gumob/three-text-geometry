@@ -1,5 +1,10 @@
 import * as THREE from 'three'
 
+/**
+ * The interface for the options of the basic shader.
+ *
+ * @interface BasicShaderOption
+ */
 interface BasicShaderOption {
   opacity?: number
   alphaTest?: number
@@ -8,6 +13,12 @@ interface BasicShaderOption {
   map?: THREE.Texture
 }
 
+/**
+ * The function for creating a basic shader.
+ *
+ * @param {BasicShaderOption} opt - The options for the shader.
+ * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
+ */
 function createBasicShader(opt: BasicShaderOption) {
   opt = opt || {}
   const opacity: number = opt.opacity !== undefined ? opt.opacity : 1

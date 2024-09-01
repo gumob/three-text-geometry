@@ -18,7 +18,7 @@ export interface TextGeometryOption {
    *
    * @type {number | undefined}
    * @memberof WordWrapOption
-   * @defaultValue 0
+   * @default 0
    */
   start?: number | undefined
   /**
@@ -26,7 +26,7 @@ export interface TextGeometryOption {
    *
    * @type {number | undefined}
    * @memberof WordWrapOption
-   * @defaultValue text.length
+   * @default text.length
    */
   end?: number | undefined
   /**
@@ -35,7 +35,7 @@ export interface TextGeometryOption {
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue undefined
+   * @default undefined
    */
   width?: number | undefined
   /**
@@ -45,7 +45,7 @@ export interface TextGeometryOption {
    *
    * @type {WordWrapMode | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue undefined
+   * @default undefined
    */
   mode?: WordWrapMode | undefined
   /**
@@ -53,7 +53,7 @@ export interface TextGeometryOption {
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue 0
+   * @default 0
    */
   letterSpacing?: number | undefined
   /**
@@ -61,7 +61,7 @@ export interface TextGeometryOption {
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue 4
+   * @default 4
    */
   tabSize?: number | undefined
   /**
@@ -69,7 +69,7 @@ export interface TextGeometryOption {
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue font.common.lineHeight.
+   * @default font.common.lineHeight.
    */
   lineHeight?: number | undefined
   /**
@@ -77,7 +77,7 @@ export interface TextGeometryOption {
    *
    * @type {TextAlign | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue TextAlign.left
+   * @default TextAlign.left
    */
   align?: TextAlign | undefined
   /**
@@ -85,7 +85,7 @@ export interface TextGeometryOption {
    *
    * @type {boolean}
    * @memberof TextGeometryOption
-   * @defaultValue true
+   * @default true
    */
   flipY?: boolean
   /**
@@ -94,7 +94,7 @@ export interface TextGeometryOption {
    *
    * @type {boolean}
    * @memberof TextGeometryOption
-   * @defaultValue false
+   * @default false
    */
   multipage?: boolean
 }

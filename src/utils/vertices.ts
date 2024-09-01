@@ -1,5 +1,11 @@
 import { TextGlyph } from '../types'
 
+/**
+ * The function for extracting the pages of the glyphs.
+ *
+ * @param {TextGlyph[]} glyphs - The glyphs to extract the pages.
+ * @returns {Float32Array} The pages of the glyphs.
+ */
 function extractPages(glyphs: TextGlyph[]): Float32Array {
   const pages = new Float32Array(glyphs.length * 4 * 1)
   let idx = 0
@@ -14,6 +20,15 @@ function extractPages(glyphs: TextGlyph[]): Float32Array {
   return pages
 }
 
+/**
+ * The function for extracting the UVs of the glyphs.
+ *
+ * @param {TextGlyph[]} glyphs - The glyphs to extract the UVs.
+ * @param {number} texWidth - The width of the texture.
+ * @param {number} texHeight - The height of the texture.
+ * @param {boolean} flipY - Whether to flip the Y axis.
+ * @returns {Float32Array} The UVs of the glyphs.
+ */
 function extractUVs(glyphs: TextGlyph[], texWidth: number, texHeight: number, flipY: boolean): Float32Array {
   const uvs = new Float32Array(glyphs.length * 4 * 2)
   let idx = 0
@@ -50,6 +65,12 @@ function extractUVs(glyphs: TextGlyph[], texWidth: number, texHeight: number, fl
   return uvs
 }
 
+/**
+ * The function for extracting the positions of the glyphs.
+ *
+ * @param {TextGlyph[]} glyphs - The glyphs to extract the positions.
+ * @returns {Float32Array} The positions of the glyphs.
+ */
 function extractPositions(glyphs: TextGlyph[]): Float32Array {
   const positions = new Float32Array(glyphs.length * 4 * 2)
   let idx = 0

@@ -1,6 +1,12 @@
 import * as THREE from 'three'
 import { IMultipageShaderOption } from '@three-text-geometry/shader'
 
+/**
+ * The function for creating a multi-page shader.
+ *
+ * @param {IMultipageShaderOption} opt - The options for the shader.
+ * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
+ */
 export function createMultipageShader(opt: IMultipageShaderOption): THREE.ShaderMaterialParameters {
   opt = opt || {}
   const opacity = typeof opt.opacity === 'number' ? opt.opacity : 1
@@ -8,7 +14,12 @@ export function createMultipageShader(opt: IMultipageShaderOption): THREE.Shader
   const alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001
   const textures = opt.textures || []
 
-  let baseUniforms: { [key: string]: { type: string; value: THREE.Texture } } = {}
+  /**
+   * The base uniforms for the shader.
+   *
+   * @type {object}
+   */
+  const baseUniforms: { [key: string]: { type: string; value: THREE.Texture } } = {}
   textures.forEach((tex: THREE.Texture, i: number) => {
     baseUniforms['texture' + i] = {
       type: 't',
@@ -16,15 +27,25 @@ export function createMultipageShader(opt: IMultipageShaderOption): THREE.Shader
     }
   })
 
-  var samplers = textures
+  /**
+   * The samplers for the shader.
+   *
+   * @type {string}
+   */
+  const samplers = textures
     .map(function (tex, i) {
       return 'uniform sampler2D texture' + i + ';'
     })
     .join('\n')
 
-  var body = textures
+  /**
+   * The body of the shader.
+   *
+   * @type {string}
+   */
+  const body = textures
     .map(function (tex, i) {
-      var cond = i === 0 ? 'if' : 'else if'
+      const cond = i === 0 ? 'if' : 'else if'
       return [
         cond + ' (vPage == ' + i + '.0) {',
         'sampleColor = texture2D(texture' + i + ', vUv);',
@@ -33,6 +54,11 @@ export function createMultipageShader(opt: IMultipageShaderOption): THREE.Shader
     })
     .join('\n')
 
+  /**
+   * The color for the shader.
+   *
+   * @type {THREE.Color}
+   */
   const color = opt.color
 
   // remove to satisfy r73

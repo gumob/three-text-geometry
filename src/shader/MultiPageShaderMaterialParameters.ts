@@ -1,14 +1,54 @@
 import * as THREE from 'three'
 
+/**
+ * The interface for the parameters of the MultiPageShaderMaterial.
+ *
+ * @interface IMultipageShaderOption
+ */
 export interface IMultipageShaderOption {
+  /**
+   * The opacity of the material.
+   *
+   * @default 1
+   */
   opacity?: number
+  /**
+   * The transparency of the material.
+   *
+   * @default false
+   */
   transparent?: boolean
+  /**
+   * The precision of the material.
+   *
+   * @default 'highp'
+   */
   precision?: number
+  /**
+   * The alpha test of the material.
+   *
+   * @default 0.0001
+   */
   alphaTest?: number
+  /**
+   * The textures of the material.
+   *
+   * @default []
+   */
   textures?: THREE.Texture[]
+  /**
+   * The color of the material.
+   *
+   * @default new THREE.Color(0xffffff)
+   */
   color?: THREE.Color
 }
 
+/**
+ * The class for the parameters of the MultiPageShaderMaterial.
+ *
+ * @class MultiPageShaderMaterialParameters
+ */
 export class MultiPageShaderMaterialParameters implements THREE.ShaderMaterialParameters {
   uniforms?: { [uniform: string]: THREE.IUniform } | undefined
   vertexShader?: string | undefined
@@ -28,6 +68,12 @@ export class MultiPageShaderMaterialParameters implements THREE.ShaderMaterialPa
   } | undefined
   glslVersion?: THREE.GLSLVersion | undefined
 
+  /**
+   * Creates an instance of MultiPageShaderMaterialParameters.
+   *
+   * @param {IMultipageShaderOption} param - The parameters for the shader material.
+   * @memberof MultiPageShaderMaterialParameters
+   */
   constructor(param: IMultipageShaderOption) {
     const opt = param || {}
     const opacity = typeof opt.opacity === 'number' ? opt.opacity : 1

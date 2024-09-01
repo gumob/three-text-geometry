@@ -1,9 +1,15 @@
+// import { TextGeometryOption } from './TextLayout';
+
+/**
+ * The function for computing word metrics.
+ *
+ * @type {ComputeMetrics}
+ */
 export type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics
 
 /**
  * The word metrics computed by `ComputeMetrics` function.
  *
- * @export
  * @interface WordMetrics
  */
 export interface WordMetrics {
@@ -44,7 +50,6 @@ export enum WordWrapMode {
 /**
  * The interface to define options for `WordWrap`.
  *
- * @export
  * @interface WordWrapOption
  */
 export interface WordWrapOption {
@@ -53,7 +58,7 @@ export interface WordWrapOption {
    *
    * @type {number | undefined}
    * @memberof WordWrapOption
-   * @defaultValue 0
+   * @default 0
    */
   start?: number | undefined
   /**
@@ -61,7 +66,7 @@ export interface WordWrapOption {
    *
    * @type {number | undefined}
    * @memberof WordWrapOption
-   * @defaultValue text.length
+   * @default text.length
    */
   end?: number | undefined
   /**
@@ -70,7 +75,7 @@ export interface WordWrapOption {
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue undefined
+   * @default undefined
    */
   width?: number | undefined
   /**
@@ -80,7 +85,7 @@ export interface WordWrapOption {
    *
    * @type {WordWrapMode | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue undefined
+   * @default undefined
    */
   mode?: WordWrapMode | undefined
   /**
