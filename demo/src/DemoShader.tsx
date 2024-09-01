@@ -3,7 +3,7 @@ import TextGeometry, { TextAlign } from 'three-text-geometry';
 import DemoBase from '~/DemoBase';
 import { fragmentShader, vertexShader } from '~/shaders/effect';
 
-export class DemoShader extends DemoBase {
+class DemoShader extends DemoBase {
   swapTimeoutID?: number;
   time: number = 0;
   textMaterial?: THREE.Material;

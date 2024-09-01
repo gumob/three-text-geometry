@@ -4,7 +4,7 @@ import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle';
 import DemoBase from '~/DemoBase';
 import { fragmentShader, vertexShader } from '~/shaders/effect';
 
-export class DemoShuffleShader extends DemoBase {
+class DemoShuffleShader extends DemoBase {
   shuffle?: ShuffleText;
   swapTimeoutID?: any;
   time: number = 0;

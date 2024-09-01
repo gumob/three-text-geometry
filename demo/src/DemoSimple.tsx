@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import TextGeometry, { TextAlign } from 'three-text-geometry';
 import DemoBase from '~/DemoBase';
 
-export class DemoSimple extends DemoBase {
+class DemoSimple extends DemoBase {
   fontUri: string =
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt';
   textureUri: string[] = [

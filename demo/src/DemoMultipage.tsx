@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import TextGeometry, { TextAlign, MultiPageShaderMaterialParameters } from 'three-text-geometry';
 import DemoBase from '~/DemoBase';
 
-export class DemoMultipage extends DemoBase {
+class DemoMultipage extends DemoBase {
   fontUri: string =
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64-Multipage.json';
   textureUri: string[] = [

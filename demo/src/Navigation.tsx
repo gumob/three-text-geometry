@@ -1,7 +1,7 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { Paper, MenuList, MenuItem } from '@mui/material'
-import './Navigation.css'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { Paper, MenuList, MenuItem } from '@mui/material';
+import './Navigation.css';
 
 export class Navigation extends React.Component {
   render(): React.ReactNode {
@@ -39,4 +39,4 @@ export class Navigation extends React.Component {
   }
 }
 
-export default Navigation
+export default Navigation;
