@@ -85,24 +85,16 @@ class TextGeometry extends THREE.BufferGeometry {
     super()
     if (option.font === undefined) throw new TypeError('Must specify a `font` in options')
     this._opt.font = option.font
-    if (option.start !== undefined) this._opt.start = Math.max(0, option.start)
-    else this._opt.start = 0
-    if (option.end !== undefined) this._opt.end = option.end
-    else this._opt.end = text.length
-    if (option.width !== undefined) this._opt.width = option.width
-    if (option.align !== undefined) this._opt.align = option.align
-    else this._opt.align = TextAlign.Left
-    if (option.mode !== undefined) this._opt.mode = option.mode
-    if (option.letterSpacing !== undefined) this._opt.letterSpacing = option.letterSpacing
-    else this._opt.letterSpacing = 0
-    if (option.lineHeight !== undefined) this._opt.lineHeight = option.lineHeight
-    else this._opt.lineHeight = this._opt.font!.common.lineHeight
-    if (option.tabSize !== undefined) this._opt.tabSize = option.tabSize
-    else this._opt.tabSize = 4
-    if (option.flipY !== undefined) this._opt.flipY = option.flipY
-    else this._opt.flipY = true
-    if (option.multipage !== undefined) this._opt.multipage = option.multipage
-    else this._opt.multipage = false
+    this._opt.start = option.start !== undefined ? Math.max(0, option.start) : 0
+    this._opt.end = option.end !== undefined ? option.end : text.length
+    this._opt.width = option.width !== undefined ? option.width : undefined
+    this._opt.align = option.align !== undefined ? option.align : TextAlign.Left
+    this._opt.mode = option.mode !== undefined ? option.mode : undefined
+    this._opt.letterSpacing = option.letterSpacing !== undefined ? option.letterSpacing : 0
+    this._opt.lineHeight = option.lineHeight !== undefined ? option.lineHeight : this._opt.font!.common.lineHeight
+    this._opt.tabSize = option.tabSize !== undefined ? option.tabSize : 4
+    this._opt.flipY = option.flipY !== undefined ? option.flipY : true
+    this._opt.multipage = option.multipage !== undefined ? option.multipage : false
     this.update(text, option)
   }
 
@@ -115,18 +107,16 @@ class TextGeometry extends THREE.BufferGeometry {
    */
   public update(text: string, option: any = {}) {
     if (option.font !== undefined) this._opt.font = option.font
-    if (option.start !== undefined) this._opt.start = Math.max(0, option.start)
-    else this._opt.start = 0
-    if (option.end !== undefined) this._opt.end = option.end
-    else this._opt.end = text.length
-    if (option.width !== undefined) this._opt.width = option.width
-    if (option.align !== undefined) this._opt.align = option.align
-    if (option.mode !== undefined) this._opt.mode = option.mode
-    if (option.letterSpacing !== undefined) this._opt.letterSpacing = option.letterSpacing
-    if (option.lineHeight !== undefined) this._opt.lineHeight = option.lineHeight
-    if (option.tabSize !== undefined) this._opt.tabSize = option.tabSize
-    if (option.flipY !== undefined) this._opt.flipY = option.flipY
-    if (option.multipage !== undefined) this._opt.multipage = option.multipage
+    this._opt.start = option.start !== undefined ? Math.max(0, option.start) : 0
+    this._opt.end = option.end !== undefined ? option.end : text.length
+    this._opt.width = option.width !== undefined ? option.width : undefined
+    this._opt.align = option.align !== undefined ? option.align : this._opt.align
+    this._opt.mode = option.mode !== undefined ? option.mode : this._opt.mode
+    this._opt.letterSpacing = option.letterSpacing !== undefined ? option.letterSpacing : this._opt.letterSpacing
+    this._opt.lineHeight = option.lineHeight !== undefined ? option.lineHeight : this._opt.lineHeight
+    this._opt.tabSize = option.tabSize !== undefined ? option.tabSize : this._opt.tabSize
+    this._opt.flipY = option.flipY !== undefined ? option.flipY : this._opt.flipY
+    this._opt.multipage = option.multipage !== undefined ? option.multipage : this._opt.multipage
 
     /** Determine texture size from font file */
     const texWidth = this._opt.font!.common.scaleW
@@ -134,7 +124,7 @@ class TextGeometry extends THREE.BufferGeometry {
 
     /** Get visible glyphs */
     const layout = new TextLayout(text, this._opt)
-    const glyphs = layout.glyphs.filter(function (glyph) {
+    const glyphs = layout.glyphs.filter(glyph => {
       const bitmap = glyph.data
       return bitmap.width * bitmap.height > 0
     })
