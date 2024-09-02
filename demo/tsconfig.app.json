@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",                                      // Specify ECMAScript version for output <https://www.typescriptlang.org/tsconfig#target>
+    "useDefineForClassFields": true,                         // Use 'define' for class fields <https://www.typescriptlang.org/tsconfig#useDefineForClassFields>
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],                // Include standard libraries <https://www.typescriptlang.org/tsconfig#lib>
+    "module": "ESNext",                                      // Set module system <https://www.typescriptlang.org/tsconfig#module>
+    "skipLibCheck": true,                                    // Skip type checking of declaration files <https://www.typescriptlang.org/tsconfig#skipLibCheck>
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",                           // Resolve modules using bundler <https://www.typescriptlang.org/tsconfig#moduleResolution>
+    "allowImportingTsExtensions": true,                      // Allow importing .ts files directly <https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions>
+    "resolveJsonModule": true,                               // Enable importing JSON modules <https://www.typescriptlang.org/tsconfig#resolveJsonModule>
+    "isolatedModules": true,                                 // Ensure each file can be transpiled independently <https://www.typescriptlang.org/tsconfig#isolatedModules>
+    "moduleDetection": "force",                              // Force module detection for all files <https://www.typescriptlang.org/tsconfig#moduleDetection>
+    "noEmit": true,                                          // Do not emit output files <https://www.typescriptlang.org/tsconfig#noEmit>
+    "jsx": "react-jsx",                                      // Use React JSX transform <https://www.typescriptlang.org/tsconfig#jsx>
+
+    /* Linting */
+    "strict": true,                                          // Enable all strict type-checking options <https://www.typescriptlang.org/tsconfig#strict>
+    "noUnusedLocals": false,                                 // Report errors on unused local variables <https://www.typescriptlang.org/tsconfig#noUnusedLocals>
+    "noUnusedParameters": false,                             // Report errors on unused function parameters <https://www.typescriptlang.org/tsconfig#noUnusedParameters>
+    "noFallthroughCasesInSwitch": false,                     // Prevent fallthrough cases in switch statements <https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch>
+  
+    /* Module Resolution */
+    "baseUrl": "./",                                         // Set the base URL for module resolution <https://www.typescriptlang.org/tsconfig#baseUrl>
+    "paths": {
+      "~/*": ["./src/*"]
+    },                                                       // Paths for module resolution <https://www.typescriptlang.org/tsconfig#paths>
+
+    // /** Transformer Plugins made possible by https://github.com/nonara/ts-patch */
+    // "plugins": [
+    //   { "transform": "ts-nameof", "type": "raw" },           // Transform using ts-nameof with raw type <https://github.com/dsherret/ts-nameof>
+    //   { "transform": "typescript-transform-paths" },         // Transform paths in TypeScript files <https://github.com/LeDDGroup/typescript-transform-paths>
+    //   { "transform": "typescript-transform-paths", "afterDeclarations": true } // Transform paths after declarations
+    // ],
+
+    // "typeRoots": ["yarn/cache/@types", ".yarn/unplugged", "src/@types"], // Specify locations for type definitions used in the project
+  },
+  "include": [
+    "src",
+    "vite.config.ts"
+  ]
+}

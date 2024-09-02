@@ -23,6 +23,8 @@ export declare class MultiPageShaderMaterialParameters implements THREE.ShaderMa
         fragDepth?: boolean | undefined;
         drawBuffers?: boolean | undefined;
         shaderTextureLOD?: boolean | undefined;
+        clipCullDistance?: boolean | undefined;
+        multiDraw?: boolean | undefined;
     } | undefined;
     glslVersion?: THREE.GLSLVersion | undefined;
     constructor(param: IMultipageShaderOption);

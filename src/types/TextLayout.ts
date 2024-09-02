@@ -1,4 +1,4 @@
-import { BMFont, BMFontChar, WordWrapOption } from '~/types'
+import { BMFont, BMFontChar, WordWrapOption } from '../types';
 
 /**
  * The interface to define text glyph.
@@ -12,28 +12,28 @@ interface TextGlyph {
    * @type {[number, number]}
    * @memberof TextGlyph
    */
-  position: [number, number]
+  position: [number, number];
   /**
    * BMFontChar data held by glyphs.
    *
    * @type {BMFontChar}
    * @memberof TextGlyph
    */
-  data: BMFontChar
+  data: BMFontChar;
   /**
    * The index of glyphs.
    *
    * @type {number}
    * @memberof TextGlyph
    */
-  index: number
+  index: number;
   /**
    * The line to which Griff belongs.
    *
    * @type {number}
    * @memberof TextGlyph
    */
-  line: number
+  line: number;
 }
 
 /**
@@ -63,39 +63,39 @@ interface TextLayoutOption extends WordWrapOption {
    * @type {BMFont | undefined}
    * @memberof TextGeometryOption
    */
-  font?: BMFont | undefined
+  font?: BMFont | undefined;
   /**
    * The letter spacing in pixels.
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue 0
+   * @default 0
    */
-  letterSpacing?: number | undefined
+  letterSpacing?: number | undefined;
   /**
    * The number of spaces to use in a single tab	.
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue 4
+   * @default 4
    */
-  tabSize?: number | undefined
+  tabSize?: number | undefined;
   /**
    * The line height in pixels.
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue font.common.lineHeight.
+   * @default font.common.lineHeight.
    */
-  lineHeight?: number | undefined
+  lineHeight?: number | undefined;
   /**
    * This can be TextAlign.left, TextAlign.center or TextAlign.right.
    *
    * @type {TextAlign | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue TextAlign.left
+   * @default TextAlign.left
    */
-  align?: TextAlign | undefined
+  align?: TextAlign | undefined;
 }
 
-export { TextAlign, TextGlyph, TextLayoutOption }
+export { TextAlign, TextGlyph, TextLayoutOption };

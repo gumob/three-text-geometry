@@ -1,1 +1,1 @@
-var TextAlign;!function(t){t[t.Left=0]="Left",t[t.Center=1]="Center",t[t.Right=2]="Right"}(TextAlign=TextAlign||{});export{TextAlign};
+var TextAlign;(e=>{e[e.Left=0]="Left",e[e.Center=1]="Center",e[e.Right=2]="Right"})(TextAlign=TextAlign||{});export{TextAlign};

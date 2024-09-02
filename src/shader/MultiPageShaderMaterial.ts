@@ -1,8 +1,21 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
 
-export class MultiPageShaderMaterial extends THREE.ShaderMaterial {
+/**
+ * The class for creating a shader material for rendering text with multiple pages.
+ *
+ * @class MultiPageShaderMaterial
+ */
+class MultiPageShaderMaterial extends THREE.ShaderMaterial {
+  /**
+   * Creates an instance of MultiPageShaderMaterial.
+   *
+   * @param {THREE.ShaderMaterialParameters} parameters - The parameters for the shader material.
+   * @memberof MultiPageShaderMaterial
+   */
   constructor(parameters?: THREE.ShaderMaterialParameters) {
-    super(parameters)
+    super(parameters);
     /** TODO: Implement this class */
   }
 }
+
+export { MultiPageShaderMaterial };

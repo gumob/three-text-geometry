@@ -1,26 +1,37 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
 
+/**
+ * The interface for the options of the SDF shader.
+ *
+ * @interface SDFShaderOption
+ */
 interface SDFShaderOption {
-  opacity?: number
-  alphaTest?: number
-  precision?: string
-  color?: THREE.Color
-  map?: THREE.Texture
+  opacity?: number;
+  alphaTest?: number;
+  precision?: string;
+  color?: THREE.Color;
+  map?: THREE.Texture;
 }
 
+/**
+ * The function for creating a SDF shader.
+ *
+ * @param {SDFShaderOption} opt - The options for the shader.
+ * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
+ */
 function createSDFShader(opt: SDFShaderOption) {
-  opt = opt || {}
-  const opacity = opt.opacity !== undefined ? opt.opacity : 1
-  const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001
-  const precision = opt.precision || 'highp'
-  const color = opt.color || new THREE.Color()
-  const map = opt.map || new THREE.Texture()
+  opt = opt || {};
+  const opacity = opt.opacity !== undefined ? opt.opacity : 1;
+  const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
+  const precision = opt.precision || 'highp';
+  const color = opt.color || new THREE.Color();
+  const map = opt.map || new THREE.Texture();
 
   // remove to satisfy r73
-  delete opt.map
-  delete opt.color
-  delete opt.precision
-  delete opt.opacity
+  delete opt.map;
+  delete opt.color;
+  delete opt.precision;
+  delete opt.opacity;
 
   return Object.assign(
     {
@@ -67,8 +78,8 @@ function createSDFShader(opt: SDFShaderOption) {
         '}',
       ].join('\n'),
     },
-    opt
-  )
+    opt,
+  );
 }
 
-export { createSDFShader }
+export { createSDFShader };
