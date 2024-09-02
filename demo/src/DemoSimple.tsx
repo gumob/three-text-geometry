@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import TextGeometry, { TextAlign } from 'three-text-geometry';
+
 import DemoBase from '~/DemoBase';
 
 class DemoSimple extends DemoBase {
-  fontUri: string =
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt';
+  fontUri: string = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt';
   textureUri: string[] = [
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/lato.png',
   ];

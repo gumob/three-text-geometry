@@ -102,7 +102,7 @@ float snoise(vec3 v)
                                 dot(p2,x2), dot(p3,x3) ) );
   }
 
-`
+`;
 
 const asstep = `
 float aastep(float threshold, float value) {
@@ -113,7 +113,7 @@ float aastep(float threshold, float value) {
     return step(threshold, value);
     #endif
 }
-`
+`;
 
 export const fragmentShader = `
 #extension GL_OES_standard_derivatives : enable
@@ -144,7 +144,7 @@ void main() {
 
   gl_FragColor = vec4(color, alpha);
 }
-`
+`;
 export const vertexShader = `
 attribute vec4 position;
 attribute vec2 uv;
@@ -159,4 +159,4 @@ void main() {
   vUv = uv;
   gl_Position = projectionMatrix * modelViewMatrix * position;
 }
-`
+`;

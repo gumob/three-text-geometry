@@ -1,6 +1,7 @@
 import React from 'react';
+import { MenuItem, MenuList, Paper } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { Paper, MenuList, MenuItem } from '@mui/material';
+
 import './Navigation.css';
 
 export class Navigation extends React.Component {
@@ -35,7 +36,7 @@ export class Navigation extends React.Component {
           </MenuItem> */}
         </MenuList>
       </Paper>
-    )
+    );
   }
 }
 

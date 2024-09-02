@@ -1,7 +1,8 @@
-import Ajv from 'ajv'
-import { BMFontError } from '../error'
-import { BMFont, IBMFontParser } from '../types'
-import schema from './BMFontJsonSchema.json'
+import Ajv from 'ajv';
+
+import { BMFontError } from '../error';
+import { BMFont, IBMFontParser } from '../types';
+import schema from './BMFontJsonSchema.json';
 
 /**
  * # How to create a json schema
@@ -32,19 +33,19 @@ class BMFontJsonParser implements IBMFontParser<object | string> {
    */
   public parse(json: object | string): BMFont {
     try {
-      if (typeof json === 'string') json = JSON.parse(json)
-      const ajv = new Ajv()
-      const validate = ajv.compile(schema)
-      const valid: boolean = validate(json)
+      if (typeof json === 'string') json = JSON.parse(json);
+      const ajv = new Ajv();
+      const validate = ajv.compile(schema);
+      const valid: boolean = validate(json);
       if (valid) {
-        return json as BMFont
+        return json as BMFont;
       } else {
-        throw new BMFontError('Invalid json data')
+        throw new BMFontError('Invalid json data');
       }
     } catch (error: any) {
-      throw new BMFontError(error.message)
+      throw new BMFontError(error.message);
     }
   }
 }
 
-export { BMFontJsonParser }
+export { BMFontJsonParser };

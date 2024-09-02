@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
 
 /**
  * The interface for the parameters of the MultiPageShaderMaterial.
@@ -11,37 +11,37 @@ export interface IMultipageShaderOption {
    *
    * @default 1
    */
-  opacity?: number
+  opacity?: number;
   /**
    * The transparency of the material.
    *
    * @default false
    */
-  transparent?: boolean
+  transparent?: boolean;
   /**
    * The precision of the material.
    *
    * @default 'highp'
    */
-  precision?: number
+  precision?: number;
   /**
    * The alpha test of the material.
    *
    * @default 0.0001
    */
-  alphaTest?: number
+  alphaTest?: number;
   /**
    * The textures of the material.
    *
    * @default []
    */
-  textures?: THREE.Texture[]
+  textures?: THREE.Texture[];
   /**
    * The color of the material.
    *
    * @default new THREE.Color(0xffffff)
    */
-  color?: THREE.Color
+  color?: THREE.Color;
 }
 
 /**
@@ -50,23 +50,25 @@ export interface IMultipageShaderOption {
  * @class MultiPageShaderMaterialParameters
  */
 export class MultiPageShaderMaterialParameters implements THREE.ShaderMaterialParameters {
-  uniforms?: { [uniform: string]: THREE.IUniform } | undefined
-  vertexShader?: string | undefined
-  fragmentShader?: string | undefined
-  linewidth?: number | undefined
-  wireframe?: boolean | undefined
-  wireframeLinewidth?: number | undefined
-  lights?: boolean | undefined
-  clipping?: boolean | undefined
-  extensions?: {
-    derivatives?: boolean | undefined
-    fragDepth?: boolean | undefined
-    drawBuffers?: boolean | undefined
-    shaderTextureLOD?: boolean | undefined
-    clipCullDistance?: boolean | undefined // Added
-    multiDraw?: boolean | undefined // Added
-  } | undefined
-  glslVersion?: THREE.GLSLVersion | undefined
+  uniforms?: { [uniform: string]: THREE.IUniform } | undefined;
+  vertexShader?: string | undefined;
+  fragmentShader?: string | undefined;
+  linewidth?: number | undefined;
+  wireframe?: boolean | undefined;
+  wireframeLinewidth?: number | undefined;
+  lights?: boolean | undefined;
+  clipping?: boolean | undefined;
+  extensions?:
+    | {
+        derivatives?: boolean | undefined;
+        fragDepth?: boolean | undefined;
+        drawBuffers?: boolean | undefined;
+        shaderTextureLOD?: boolean | undefined;
+        clipCullDistance?: boolean | undefined; // Added
+        multiDraw?: boolean | undefined; // Added
+      }
+    | undefined;
+  glslVersion?: THREE.GLSLVersion | undefined;
 
   /**
    * Creates an instance of MultiPageShaderMaterialParameters.
@@ -75,54 +77,54 @@ export class MultiPageShaderMaterialParameters implements THREE.ShaderMaterialPa
    * @memberof MultiPageShaderMaterialParameters
    */
   constructor(param: IMultipageShaderOption) {
-    const opt = param || {}
-    const opacity = typeof opt.opacity === 'number' ? opt.opacity : 1
-    const precision = opt.precision || 'highp'
-    const alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001
-    const textures = opt.textures || []
+    const opt = param || {};
+    const opacity = typeof opt.opacity === 'number' ? opt.opacity : 1;
+    const precision = opt.precision || 'highp';
+    const alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001;
+    const textures = opt.textures || [];
 
-    const baseUniforms: { [key: string]: { type: string; value: THREE.Texture } } = {}
+    const baseUniforms: { [key: string]: { type: string; value: THREE.Texture } } = {};
     textures.forEach((tex: THREE.Texture, i: number) => {
       baseUniforms['texture' + i] = {
         type: 't',
         value: tex,
-      }
-    })
+      };
+    });
 
     const samplers = textures
       .map(function (tex, i) {
-        return 'uniform sampler2D texture' + i + ';'
+        return 'uniform sampler2D texture' + i + ';';
       })
-      .join('\n')
+      .join('\n');
 
     const body = textures
       .map(function (tex, i) {
-        const cond = i === 0 ? 'if' : 'else if'
+        const cond = i === 0 ? 'if' : 'else if';
         return [
           cond + ' (vPage == ' + i + '.0) {',
           'sampleColor = texture2D(texture' + i + ', vUv);',
           '}',
-        ].join('\n')
+        ].join('\n');
       })
-      .join('\n')
+      .join('\n');
 
-    const color = opt.color
+    const color = opt.color;
 
     // remove to satisfy r73
-    delete opt.textures
-    delete opt.color
-    delete opt.precision
-    delete opt.opacity
+    delete opt.textures;
+    delete opt.color;
+    delete opt.precision;
+    delete opt.opacity;
 
     let attributes: { [key: string]: { [page: string]: { type: string; value: number } } } | undefined = {
       attributes: { page: { type: 'f', value: 0 } },
-    }
+    };
 
-    const threeVers = (parseInt(THREE.REVISION, 10) || 0) | 0
+    const threeVers = (parseInt(THREE.REVISION, 10) || 0) | 0;
     if (threeVers >= 72) {
-      attributes = undefined
+      attributes = undefined;
     }
-    const discard = alphaTest === 0 ? '' : `if (gl_FragColor.a < ${alphaTest}) discard;`
+    const discard = alphaTest === 0 ? '' : `if (gl_FragColor.a < ${alphaTest}) discard;`;
     const variables = Object.assign(
       {
         uniforms: Object.assign({}, baseUniforms, {
@@ -159,10 +161,10 @@ export class MultiPageShaderMaterialParameters implements THREE.ShaderMaterialPa
                 `,
       },
       attributes,
-      opt
-    ) as THREE.ShaderMaterialParameters
-    this.uniforms = variables.uniforms
-    this.vertexShader = variables.vertexShader
-    this.fragmentShader = variables.fragmentShader
+      opt,
+    ) as THREE.ShaderMaterialParameters;
+    this.uniforms = variables.uniforms;
+    this.vertexShader = variables.vertexShader;
+    this.fragmentShader = variables.fragmentShader;
   }
 }

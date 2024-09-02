@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
 
 /**
  * The interface for the options of the multi-page shader.
@@ -6,11 +6,11 @@ import * as THREE from 'three'
  * @interface BSDFShaderOption
  */
 interface BSDFShaderOption {
-  opacity?: number
-  alphaTest?: number
-  precision?: string
-  color?: THREE.Color
-  textures?: THREE.Texture[]
+  opacity?: number;
+  alphaTest?: number;
+  precision?: string;
+  color?: THREE.Color;
+  textures?: THREE.Texture[];
 }
 
 /**
@@ -20,39 +20,39 @@ interface BSDFShaderOption {
  * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
  */
 function createMultipageShader(opt: BSDFShaderOption) {
-  opt = opt || {}
-  const opacity = opt.opacity !== undefined ? opt.opacity : 1
-  const precision = opt.precision || 'highp'
-  const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001
+  opt = opt || {};
+  const opacity = opt.opacity !== undefined ? opt.opacity : 1;
+  const precision = opt.precision || 'highp';
+  const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
 
-  let textures: THREE.Texture[] = opt.textures || []
-  textures = Array.isArray(textures) ? textures : [textures]
+  let textures: THREE.Texture[] = opt.textures || [];
+  textures = Array.isArray(textures) ? textures : [textures];
 
-  const baseUniforms: { [s: string]: { type: string; value: THREE.Texture } } = {}
+  const baseUniforms: { [s: string]: { type: string; value: THREE.Texture } } = {};
   textures.forEach((tex: THREE.Texture, i: number) => {
-    baseUniforms[`texture${i}`] = { type: 't', value: tex }
-  })
+    baseUniforms[`texture${i}`] = { type: 't', value: tex };
+  });
 
   const samplers: string = textures
     .map(function (_tex: THREE.Texture, i: number) {
-      return `uniform sampler2D texture${i};`
+      return `uniform sampler2D texture${i};`;
     })
-    .join('\n')
+    .join('\n');
 
   const body: string = textures
     .map(function (_tex: THREE.Texture, i: number) {
-      const cond = i === 0 ? 'if' : 'else if'
-      return [`${cond} (vPage == ${i}.0) {`, `sampleColor = texture2D(texture${i}, vUv);`, '}'].join('\n')
+      const cond = i === 0 ? 'if' : 'else if';
+      return [`${cond} (vPage == ${i}.0) {`, `sampleColor = texture2D(texture${i}, vUv);`, '}'].join('\n');
     })
-    .join('\n')
+    .join('\n');
 
-  const color: THREE.Color = opt.color || new THREE.Color()
+  const color: THREE.Color = opt.color || new THREE.Color();
 
   /** remove to satisfy r73 */
-  delete opt.textures
-  delete opt.color
-  delete opt.precision
-  delete opt.opacity
+  delete opt.textures;
+  delete opt.color;
+  delete opt.precision;
+  delete opt.opacity;
 
   let attributes: { attributes: { page: { type: string; value: number } } } | undefined = {
     attributes: {
@@ -61,11 +61,11 @@ function createMultipageShader(opt: BSDFShaderOption) {
         value: 0,
       },
     },
-  }
+  };
 
-  const threeVers = (parseInt(THREE.REVISION, 10) || 0) | 0
+  const threeVers = (parseInt(THREE.REVISION, 10) || 0) | 0;
   if (threeVers >= 72) {
-    attributes = undefined
+    attributes = undefined;
   }
 
   return Object.assign(
@@ -104,8 +104,8 @@ function createMultipageShader(opt: BSDFShaderOption) {
       ].join('\n'),
     },
     attributes,
-    opt
-  )
+    opt,
+  );
 }
 
-export { createMultipageShader }
+export { createMultipageShader };

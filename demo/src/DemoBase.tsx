@@ -1,16 +1,11 @@
 import { PureComponent } from 'react';
 import * as THREE from 'three';
-import Stats from 'three/addons/libs/stats.module.js';
+import { BMFont, BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser, TextGeometryOption } from 'three-text-geometry';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import {
-  BMFont,
-  BMFontAsciiParser,
-  BMFontBinaryParser,
-  BMFontJsonParser,
-  BMFontXMLParser,
-  TextGeometryOption,
-} from 'three-text-geometry';
+import Stats from 'three/addons/libs/stats.module.js';
+
 import './Demo.css';
+
 import axios from 'axios';
 
 export class DemoBase extends PureComponent {
@@ -41,8 +36,7 @@ export class DemoBase extends PureComponent {
     return this.textList[index];
   }
 
-  fontUri: string =
-    'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json';
+  fontUri: string = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json';
   textureUri: string[] = [
     'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png',
   ];
@@ -114,13 +108,7 @@ export class DemoBase extends PureComponent {
     } else if (fontUri.endsWith('.xml')) {
       fontLoader = axios.get(fontUri).then((res) => new BMFontXMLParser().parse(res.data));
     } else {
-      fontLoader = axios
-        .get(fontUri)
-        .then((res) =>
-          new BMFontBinaryParser().parse(
-            typeof res.data === 'string' ? Buffer.from(res.data, 'binary') : (res.data as Buffer)
-          )
-        );
+      fontLoader = axios.get(fontUri).then((res) => new BMFontBinaryParser().parse(typeof res.data === 'string' ? Buffer.from(res.data, 'binary') : (res.data as Buffer)));
     }
     const textureLoaders: Promise<THREE.Texture>[] = textureUri.map((uri: string) => {
       return new THREE.TextureLoader().loadAsync(uri);
@@ -170,12 +158,7 @@ export class DemoBase extends PureComponent {
 
     /** AxesHelper */
     if (this.showAxes) {
-      const axes = new THREE.AxesHelper(1000)
-        .setColors(
-          new THREE.Color(0.3, 0.2, 0.2),
-          new THREE.Color(0.2, 0.3, 0.2),
-          new THREE.Color(0.2, 0.2, 0.3)
-        );
+      const axes = new THREE.AxesHelper(1000).setColors(new THREE.Color(0.3, 0.2, 0.2), new THREE.Color(0.2, 0.3, 0.2), new THREE.Color(0.2, 0.2, 0.3));
       this.scene?.add(axes);
     }
 

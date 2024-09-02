@@ -10,36 +10,36 @@ interface BMFont {
    * @type {string[]}
    * @memberof BMFont
    */
-  pages: string[]
-  chars: BMFontChar[]
+  pages: string[];
+  chars: BMFontChar[];
   /**
    * The value to store `BMFontInfo`.
    *
    * @type {BMFontInfo}
    * @memberof BMFont
    */
-  info: BMFontInfo
+  info: BMFontInfo;
   /**
    * The value to store `BMFontCommon`.
    *
    * @type {BMFontCommon}
    * @memberof BMFont
    */
-  common: BMFontCommon
+  common: BMFontCommon;
   /**
    * The value to store `BMFontDistanceField`.
    *
    * @type {BMFontDistanceField}
    * @memberof BMFont
    */
-  distanceField: BMFontDistanceField
+  distanceField: BMFontDistanceField;
   /**
    * The array to store `BMFontKern`.
    *
    * @type {BMFontKern[]}
    * @memberof BMFont
    */
-  kernings: BMFontKern[]
+  kernings: BMFontKern[];
 }
 
 /**
@@ -54,56 +54,56 @@ interface BMFontChar {
    * @type {number}
    * @memberof BMFontChar
    */
-  id: number
+  id: number;
   /**
    * The character index.
    *
    * @type {number}
    * @memberof BMFontChar
    */
-  index: number
+  index: number;
   /**
    * The character string.
    *
    * @type {string}
    * @memberof BMFontChar
    */
-  char: string
+  char: string;
   /**
    * The width of the character image in the texture.
    *
    * @type {number}
    * @memberof BMFontChar
    */
-  width: number
+  width: number;
   /**
    * The height of the character image in the texture.
    *
    * @type {number}
    * @memberof BMFontChar
    */
-  height: number
+  height: number;
   /**
    * How much the current position should be offset when copying the image from the texture to the screen.
    *
    * @type {number}
    * @memberof BMFontChar
    */
-  xoffset: number
+  xoffset: number;
   /**
    * How much the current position should be offset when copying the image from the texture to the screen.
    *
    * @type {number}
    * @memberof BMFontChar
    */
-  yoffset: number
+  yoffset: number;
   /**
    * How much the current position should be advanced after drawing the character.
    *
    * @type {number}
    * @memberof BMFontChar
    */
-  xadvance: number
+  xadvance: number;
   /**
    * The texture channel where the character image is found (1 = blue, 2 = green, 4 = red, 8 = alpha, 15 = all
    * channels).
@@ -111,28 +111,28 @@ interface BMFontChar {
    * @type {number}
    * @memberof BMFontChar
    */
-  chnl: number
+  chnl: number;
   /**
    * The left position of the character image in the texture.
    *
    * @type {number}
    * @memberof BMFontChar
    */
-  x: number
+  x: number;
   /**
    * The top position of the character image in the texture.
    *
    * @type {number}
    * @memberof BMFontChar
    */
-  y: number
+  y: number;
   /**
    * The number of texture pages included in the font.
    *
    * @type {number}
    * @memberof BMFontChar
    */
-  page: number
+  page: number;
 }
 
 /**
@@ -147,91 +147,91 @@ interface BMFontInfo {
    * @type {string}
    * @memberof BMFontInfo
    */
-  face: string
+  face: string;
   /**
    * The size of the true type font.
    *
    * @type {number}
    * @memberof BMFontInfo
    */
-  size: number
+  size: number;
   /**
    * The font is bold.
    *
    * @type {number}
    * @memberof BMFontInfo
    */
-  bold: number
+  bold: number;
   /**
    * The font is italic.
    *
    * @type {string[]}
    * @memberof BMFontInfo
    */
-  italic: number
+  italic: number;
   /**
    * The name of the OEM charset used (when not unicode).
    *
    * @type {string[]}
    * @memberof BMFontInfo
    */
-  charset: string[]
+  charset: string[];
   /**
    * Set to 1 if it is the unicode charset.
    *
    * @type {number}
    * @memberof BMFontInfo
    */
-  unicode: number
+  unicode: number;
   /**
    * The font height stretch in percentage. 100% means no stretch.
    *
    * @type {number}
    * @memberof BMFontInfo
    */
-  stretchH: number
+  stretchH: number;
   /**
    * Set to 1 if smoothing was turned on.
    *
    * @type {number}
    * @memberof BMFontInfo
    */
-  smooth: number
+  smooth: number;
   /**
    * The supersampling level used. 1 means no supersampling was used.
    *
    * @type {number}
    * @memberof BMFontInfo
    */
-  aa: number
+  aa: number;
   /**
    * The padding for each character (up, right, down, left).
    *
    * @type {number[]}
    * @memberof BMFontInfo
    */
-  padding: number[]
+  padding: number[];
   /**
    * The spacing for each character (horizontal, vertical).
    *
    * @type {number[]}
    * @memberof BMFontInfo
    */
-  spacing: number[]
+  spacing: number[];
   /**
    * The fixed font height.
    *
    * @type {number}
    * @memberof BMFontInfo
    */
-  fixedHeight: number
+  fixedHeight: number;
   /**
    * The outline thickness for the characters.
    *
    * @type {number}
    * @memberof BMFontInfo
    */
-  outline: number
+  outline: number;
 }
 
 /**
@@ -246,35 +246,35 @@ interface BMFontCommon {
    * @type {number}
    * @memberof BMFontCommon
    */
-  lineHeight: number
+  lineHeight: number;
   /**
    * The number of pixels from the absolute top of the line to the base of the characters.
    *
    * @type {number}
    * @memberof BMFontCommon
    */
-  base: number
+  base: number;
   /**
    * The width of the texture, normally used to scale the x pos of the character image.
    *
    * @type {number}
    * @memberof BMFontCommon
    */
-  scaleW: number
+  scaleW: number;
   /**
    * The height of the texture, normally used to scale the y pos of the character image.
    *
    * @type {number}
    * @memberof BMFontCommon
    */
-  scaleH: number
+  scaleH: number;
   /**
    * The number of texture pages included in the font.
    *
    * @type {number}
    * @memberof BMFontCommon
    */
-  pages: number
+  pages: number;
   /**
    * Set to 1 if the monochrome characters have been packed into each of the texture channels. In this case
    * alphaChnl describes what is stored in each channel.
@@ -282,7 +282,7 @@ interface BMFontCommon {
    * @type {number}
    * @memberof BMFontCommon
    */
-  packed: number
+  packed: number;
   /**
    * Set to 0 if the channel holds the glyph data, 1 if it holds the outline, 2 if it holds the glyph and the
    * outline, 3 if its set to zero, and 4 if its set to one.
@@ -290,7 +290,7 @@ interface BMFontCommon {
    * @type {number}
    * @memberof BMFontCommon
    */
-  alphaChnl: number
+  alphaChnl: number;
   /**
    * Set to 0 if the channel holds the glyph data, 1 if it holds the outline, 2 if it holds the glyph and the
    * outline, 3 if its set to zero, and 4 if its set to one.
@@ -298,7 +298,7 @@ interface BMFontCommon {
    * @type {number}
    * @memberof BMFontCommon
    */
-  redChnl: number
+  redChnl: number;
   /**
    * Set to 0 if the channel holds the glyph data, 1 if it holds the outline, 2 if it holds the glyph and the
    * outline, 3 if its set to zero, and 4 if its set to one.
@@ -306,7 +306,7 @@ interface BMFontCommon {
    * @type {number}
    * @memberof BMFontCommon
    */
-  greenChnl: number
+  greenChnl: number;
   /**
    * Set to 0 if the channel holds the glyph data, 1 if it holds the outline, 2 if it holds the glyph and the
    * outline, 3 if its set to zero, and 4 if its set to one.
@@ -314,7 +314,7 @@ interface BMFontCommon {
    * @type {number}
    * @memberof BMFontCommon
    */
-  blueChnl: number
+  blueChnl: number;
 }
 
 /**
@@ -329,14 +329,14 @@ interface BMFontDistanceField {
    * @type {string}
    * @memberof BMFontDistanceField
    */
-  fieldType: string
+  fieldType: string;
   /**
    * Unused value.
    *
    * @type {number}
    * @memberof BMFontDistanceField
    */
-  distanceRange: number
+  distanceRange: number;
 }
 
 /**
@@ -351,14 +351,14 @@ interface BMFontKern {
    * @type {number}
    * @memberof BMFontKern
    */
-  first: number
+  first: number;
   /**
    * The second character id.
    *
    * @type {number}
    * @memberof BMFontKern
    */
-  second: number
+  second: number;
   /**
    * How much the x position should be adjusted when drawing the second character immediately following the
    * first.
@@ -366,7 +366,7 @@ interface BMFontKern {
    * @type {number}
    * @memberof BMFontKern
    */
-  amount: number
+  amount: number;
 }
 
-export { BMFont, BMFontChar, BMFontCommon, BMFontDistanceField, BMFontInfo, BMFontKern }
+export { BMFont, BMFontChar, BMFontCommon, BMFontDistanceField, BMFontInfo, BMFontKern };

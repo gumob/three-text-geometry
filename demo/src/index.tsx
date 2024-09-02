@@ -1,13 +1,14 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+import DemoMultipage from '~/DemoMultipage';
+import DemoShader from '~/DemoShader';
+import DemoShuffle from '~/DemoShuffle';
+import DemoShuffleShader from '~/DemoShuffleShader';
+import DemoSimple from '~/DemoSimple';
 // import reportWebVitals from '~/reportWebVitals'
 import Navigation from '~/Navigation';
-import DemoMultipage from '~/DemoMultipage';
-import DemoSimple from '~/DemoSimple';
-import DemoShuffle from '~/DemoShuffle';
-import DemoShader from '~/DemoShader';
-import DemoShuffleShader from '~/DemoShuffleShader';
 
 import './index.css';
 
@@ -25,7 +26,7 @@ root.render(
         <Route path="/shuffleshader" element={<DemoShuffleShader />} />
       </Routes>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

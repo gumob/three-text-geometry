@@ -1,6 +1,7 @@
-import { XMLParser } from 'fast-xml-parser'
-import { BMFontError } from '../error'
-import { BMFont, BMFontChar, BMFontCommon, BMFontInfo, BMFontKern, IBMFontParser } from '../types'
+import { XMLParser } from 'fast-xml-parser';
+
+import { BMFontError } from '../error';
+import { BMFont, BMFontChar, BMFontCommon, BMFontInfo, BMFontKern, IBMFontParser } from '../types';
 
 /**
  * The class for parsing font data in XML format.
@@ -28,24 +29,24 @@ class BMFontXMLParser implements IBMFontParser<string> {
       const options = {
         ignoreAttributes: false,
         attributeNamePrefix: '',
-      }
-      const parser = new XMLParser(options)
-      const json: any = parser.parse(xml)
-      const font = json.font
-      if (!font) throw new BMFontError('No font data in BMFont file')
-      if (!font.pages) throw new BMFontError('No font data in BMFont file')
-      if (!font.chars) throw new BMFontError('No chars data in BMFont file')
-      if (!font.info) throw new BMFontError('No info data in BMFont file')
-      if (!font.common) throw new BMFontError('No common data in BMFont file')
+      };
+      const parser = new XMLParser(options);
+      const json: any = parser.parse(xml);
+      const font = json.font;
+      if (!font) throw new BMFontError('No font data in BMFont file');
+      if (!font.pages) throw new BMFontError('No font data in BMFont file');
+      if (!font.chars) throw new BMFontError('No chars data in BMFont file');
+      if (!font.info) throw new BMFontError('No info data in BMFont file');
+      if (!font.common) throw new BMFontError('No common data in BMFont file');
 
-      let pages: string[]
+      let pages: string[];
       if (Array.isArray(font.pages.page)) {
-        pages = font.pages.page.map((element: any) => element.file)
+        pages = font.pages.page.map((element: any) => element.file);
       } else {
-        pages = [font.pages.page.file]
+        pages = [font.pages.page.file];
       }
 
-      const chars: BMFontChar[] = font.chars.char.map((element: object) => element)
+      const chars: BMFontChar[] = font.chars.char.map((element: object) => element);
 
       const info: BMFontInfo = {
         face: font.info.face,
@@ -61,7 +62,7 @@ class BMFontXMLParser implements IBMFontParser<string> {
         spacing: font.info.spacing.split(',').map((element: any) => +element),
         fixedHeight: +font.info.fixedHeight || 0,
         outline: +font.info.outline || 0,
-      }
+      };
 
       const common: BMFontCommon = {
         lineHeight: +font.common.lineHeight || 0,
@@ -74,7 +75,7 @@ class BMFontXMLParser implements IBMFontParser<string> {
         redChnl: +font.common.redChnl || 0,
         greenChnl: +font.common.greenChnl || 0,
         blueChnl: +font.common.blueChn || 0,
-      }
+      };
 
       const kernings: BMFontKern[] = font.kernings.kerning.map(
         (element: any) =>
@@ -82,13 +83,13 @@ class BMFontXMLParser implements IBMFontParser<string> {
             first: +element.first || 0,
             second: +element.second || 0,
             amount: +element.amount || 0,
-          } as BMFontKern)
-      )
+          }) as BMFontKern,
+      );
 
       const distanceField = {
         fieldType: font.distanceField.fieldType,
         distanceRange: +font.distanceField.distanceRange || 0,
-      }
+      };
 
       const bmFont: BMFont = {
         pages: pages,
@@ -97,12 +98,12 @@ class BMFontXMLParser implements IBMFontParser<string> {
         common: common,
         kernings: kernings,
         distanceField: distanceField,
-      }
-      return bmFont
+      };
+      return bmFont;
     } catch (error: any) {
-      throw new BMFontError(error.message)
+      throw new BMFontError(error.message);
     }
   }
 }
 
-export { BMFontXMLParser }
+export { BMFontXMLParser };

@@ -1,4 +1,4 @@
-import { BMFont } from '../types'
+import { BMFont } from '../types';
 
 /**
  * The interface for the BMFont parser.
@@ -12,5 +12,5 @@ export interface IBMFontParser<T> {
    * @param {T} data - The data to parse.
    * @returns {BMFont} The parsed BMFont.
    */
-  parse(data: T): BMFont
+  parse(data: T): BMFont;
 }

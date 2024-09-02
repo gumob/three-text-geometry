@@ -5,7 +5,7 @@
  *
  * @type {ComputeMetrics}
  */
-export type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics
+export type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics;
 
 /**
  * The word metrics computed by `ComputeMetrics` function.
@@ -19,21 +19,21 @@ export interface WordMetrics {
    * @type {number}
    * @memberof WordMetrics
    */
-  start: number
+  start: number;
   /**
    * The end position.
    *
    * @type {number}
    * @memberof WordMetrics
    */
-  end: number
+  end: number;
   /**
    * The width.
    *
    * @type {number}
    * @memberof WordMetrics
    */
-  width: number
+  width: number;
 }
 /**
  * The enums to specify word wrapping.
@@ -60,7 +60,7 @@ export interface WordWrapOption {
    * @memberof WordWrapOption
    * @default 0
    */
-  start?: number | undefined
+  start?: number | undefined;
   /**
    * The ending index (exclusive) into the text to layout.
    *
@@ -68,7 +68,7 @@ export interface WordWrapOption {
    * @memberof WordWrapOption
    * @default text.length
    */
-  end?: number | undefined
+  end?: number | undefined;
   /**
    * The desired width of the text box, causes word-wrapping and clipping in WordWrapMode mode. Leave as
    * undefined to remove word-wrapping (default behaviour).
@@ -77,7 +77,7 @@ export interface WordWrapOption {
    * @memberof TextGeometryOption
    * @default undefined
    */
-  width?: number | undefined
+  width?: number | undefined;
   /**
    * A mode for word-wrapper; can be WordWrapMode.Pre (maintain spacing), or WordWrapMode.NoWrap (collapse
    * whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse
@@ -87,12 +87,12 @@ export interface WordWrapOption {
    * @memberof TextGeometryOption
    * @default undefined
    */
-  mode?: WordWrapMode | undefined
+  mode?: WordWrapMode | undefined;
   /**
    * The function that computes word metrics.
    *
    * @type {ComputeMetrics | undefined}
    * @memberof WordWrapOption
    */
-  measure?: ComputeMetrics | undefined
+  measure?: ComputeMetrics | undefined;
 }

@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
 
 /**
  * The interface for the options of the basic shader.
@@ -6,11 +6,11 @@ import * as THREE from 'three'
  * @interface BasicShaderOption
  */
 interface BasicShaderOption {
-  opacity?: number
-  alphaTest?: number
-  precision?: string
-  color?: THREE.Color
-  map?: THREE.Texture
+  opacity?: number;
+  alphaTest?: number;
+  precision?: string;
+  color?: THREE.Color;
+  map?: THREE.Texture;
 }
 
 /**
@@ -20,18 +20,18 @@ interface BasicShaderOption {
  * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
  */
 function createBasicShader(opt: BasicShaderOption) {
-  opt = opt || {}
-  const opacity: number = opt.opacity !== undefined ? opt.opacity : 1
-  const alphaTest: number = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001
-  const precision: string = opt.precision || 'highp'
-  const color: THREE.Color = opt.color || new THREE.Color()
-  const map: THREE.Texture = opt.map || new THREE.Texture()
+  opt = opt || {};
+  const opacity: number = opt.opacity !== undefined ? opt.opacity : 1;
+  const alphaTest: number = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
+  const precision: string = opt.precision || 'highp';
+  const color: THREE.Color = opt.color || new THREE.Color();
+  const map: THREE.Texture = opt.map || new THREE.Texture();
 
   /** remove to satisfy r73 */
-  delete opt.map
-  delete opt.color
-  delete opt.precision
-  delete opt.opacity
+  delete opt.map;
+  delete opt.color;
+  delete opt.precision;
+  delete opt.opacity;
 
   return Object.assign(
     {
@@ -63,8 +63,8 @@ function createBasicShader(opt: BasicShaderOption) {
         '}',
       ].join('\n'),
     },
-    opt
-  )
+    opt,
+  );
 }
 
-export { createBasicShader }
+export { createBasicShader };
