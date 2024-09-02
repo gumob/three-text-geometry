@@ -71,5 +71,5 @@ declare function DefaultBMFontDistanceField(): {
     fieldType: string;
     distanceRange: number;
 };
-export { DefaultBMFont, DefaultBMFontCommon, DefaultBMFontDistanceField, DefaultBMFontInfo, DefaultBMFontKern, isBMFont, };
+export { DefaultBMFont, DefaultBMFontCommon, DefaultBMFontDistanceField, DefaultBMFontInfo, DefaultBMFontKern, isBMFont };
 //# sourceMappingURL=BMFontUtil.d.ts.map
