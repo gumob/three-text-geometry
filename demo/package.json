@@ -52,10 +52,10 @@
     "vite-tsconfig-paths": "^5.0.1"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint src",
-    "preview": "vite preview"
+    "dev": "pnpm vite",
+    "build": "pnpm tsc -b && pnpm vite build",
+    "lint": "pnpm eslint src",
+    "preview": "pnpm vite preview"
   },
   "browserslist": {
     "production": [
@@ -69,5 +69,5 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@4.4.1"
+  "packageManager": "pnpm@9.9.0"
 }
