@@ -45,7 +45,7 @@ local option_list=(
 local selected_option=$(printf "%s\n" "${option_list[@]}" | fzf --ansi --prompt="Select a job to execute > ")
 
 if [[ -n "$selected_option" && "$selected_option" =~ [^[:space:]] ]]; then
-    command="pnpm $selected_option"
+    command="pnpm $(echo "$selected_option" | cut -d':' -f1)"
     eval $command;
 fi;
 
