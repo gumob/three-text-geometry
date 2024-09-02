@@ -8,13 +8,6 @@ if ! command -v fzf &> /dev/null; then
     exit 1;
 fi
 
-local setup_yarn() {
-    corepack enable
-    yarn set version stable
-    yarn -v
-    yarn dlx @yarnpkg/sdks vscode
-}
-
 local option_list=(
     "format-fix:           Fixes the code format"
     "format-check:         Checks the code format"
@@ -40,14 +33,24 @@ local option_list=(
     "post-publish:         Post-publishes the project"
     "reflect-toc:          Reflects the TOC"
     "typedoc:              Generates the typedoc"
-    "all:                  Runs all the jobs"   
+    "all:                  Runs all the jobs"
+    "setup:                Setup modules"
 )
 
 local selected_option=$(printf "%s\n" "${option_list[@]}" | fzf --ansi --prompt="Select a job to execute > ")
 
-if [[ -n "$selected_option" && "$selected_option" =~ [^[:space:]] ]]; then
-    command="pnpm $(echo "$selected_option" | cut -d':' -f1)"
-    eval $command;
-fi;
+case $selected_option in
+    "setup")
+        corepack enable pnpm;
+        pnpm -v;
+        pnpm install;
+        ;;
+    *)
+        if [[ -n "$selected_option" && "$selected_option" =~ [^[:space:]] ]]; then
+            command="pnpm $(echo "$selected_option" | cut -d':' -f1)"
+            eval $command;
+        fi;
+        ;;
+esac
 
 exit 0;
