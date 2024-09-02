@@ -7,7 +7,8 @@
 
 const config = {
   plugins: [
-    "@ianvs/prettier-plugin-sort-imports"                                  // A plugin to sort import statements in a specified order. <https://github.com/IanVS/prettier-plugin-sort-imports#importorder>
+    "@ianvs/prettier-plugin-sort-imports",                                  // A plugin to sort import statements in a specified order. <https://github.com/IanVS/prettier-plugin-sort-imports#importorder>
+    "prettier-plugin-multiline-arrays",                                     // A plugin to sort import statements in a specified order. <https://github.com/IanVS/prettier-plugin-sort-imports#importorder>
   ],
   importOrder: [
     "^(react/(.*)$)|^(react$)|^(react-native(.*)$)",
