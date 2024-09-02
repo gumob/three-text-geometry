@@ -49,10 +49,11 @@
     "clean-coverage": "rm -rf coverage",
     "clean-dist": "rm -rf dist-cjs dist-esm",
     "clean-cache": "rm -rf .cache",
-    "clean-modules": "rm -rf node_modules .yarn .pnpm-store",
+    "modules-clean": "rm -rf node_modules .yarn .pnpm-store",
+    "modules-reinstall": "pnpm modules-clean && pnpm install",
     "pre-publish-only": "pinst --disable",
     "post-publish": "pinst --enable",
-    "typedoc": "pnpm format-fix && pnpm lint-fix && typedoc --options typedoc.json",
+    "typedoc": "pnpm format-fix && pnpm lint-fix && typedoc --options typedoc.mjs",
     "reflect-toc": "markdown-toc README.md -i --maxdepth 4 && prettier --write README.md",
     "all": "pnpm format-fix && pnpm lint-fix && pnpm typedoc && pnpm test-coverage && pnpm build"
   },
