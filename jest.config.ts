@@ -20,19 +20,10 @@ const config: Config.InitialOptions = {
     'jest-watch-suspend',
   ],
   modulePathIgnorePatterns: ['<rootDir>/demo/'],
-  globals: {
-    'ts-jest': {
-      diagnostics: Boolean(process.env.CI),
-      // TODO bring back once working... prevents importing nexus etc.?
-      // astTransformers: {
-      //   before: ['ts-jest/dist/transformers/path-mapping'],
-      // },
-    },
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-  // transform: {
-  //   '^.+\\.(ts|tsx)$': 'ts-jest',
-  // },
-  // testEnvironment: 'node',
+  testEnvironment: 'node',
 }
 
 export default config
