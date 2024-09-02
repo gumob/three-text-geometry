@@ -55,7 +55,7 @@
     "post-publish": "pinst --enable",
     "typedoc": "pnpm format-fix && pnpm lint-fix && typedoc --options typedoc.mjs",
     "reflect-toc": "markdown-toc README.md -i --maxdepth 4 && prettier --write README.md",
-    "all": "pnpm format-fix && pnpm lint-fix && pnpm typedoc && pnpm test-coverage && pnpm build"
+    "all": "pnpm format-fix && pnpm lint-fix && pnpm typedoc && pnpm build && pnpm test-coverage"
   },
   "dependencies": {
     "ajv": "^8.17.1",
