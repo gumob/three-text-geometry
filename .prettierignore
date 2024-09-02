@@ -1,6 +1,7 @@
+.yarn
+*.d.ts
 dist-cjs
 dist-esm
-.yarn
 coverage
 docs
 tests/fonts/
