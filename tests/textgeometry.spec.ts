@@ -5,31 +5,26 @@ import * as fs from 'fs';
 import TextGeometry, { TextAlign, WordWrapMode } from '@three-text-geometry/index';
 import { BMFontAsciiParser } from '@three-text-geometry/parser';
 import { MultiPageShaderMaterialParameters } from '@three-text-geometry/shader';
-import gl from 'gl';
-import * as THREE from 'three';
+
+import THREE from './helpers/webgl-mock';
 
 describe('TextGeometry', () => {
-  /** Prepare Font */
+  /** Setup Font */
   // const xml = fs.readFileSync('tests/fonts/Roboto-Regular.xml').toString()
   // const font = new BMFontXMLParser().parse(xml)
   const ascii = fs.readFileSync('tests/fonts/Lato-Regular-64.fnt').toString();
   const font = new BMFontAsciiParser().parse(ascii);
   const _texture = new THREE.TextureLoader().load('tests/font/lato.png');
 
-  /** Prepare WebGL */
-  /** https://github.com/cognitedata/reveal/blob/9c248458a0c582a9a5f9f381323bfd2683648e82/viewer/test-utilities/src/createGlContext.ts */
+  /** Setup Renderer */
   const width = 1024;
   const height = 768;
-  const canvas: HTMLCanvasElement = window.document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const glContext: WebGLRenderingContext = gl(width, height, {});
   let renderer: THREE.WebGLRenderer;
   let scene: THREE.Scene;
   let camera: THREE.Camera;
 
   beforeEach(() => {
-    renderer = new THREE.WebGLRenderer({ context: glContext });
+    renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
     renderer.setClearColor(0xffffff, 0);
     window.document.body.append(renderer.domElement);
@@ -80,8 +75,7 @@ describe('TextGeometry', () => {
   });
 
   describe('Three.js', () => {
-    test('2d context should be exist', async () => {
-      expect(glContext).not.toBeNull();
+    test('Renderer should be exist', async () => {
       expect(renderer).not.toBeNull();
     });
 
