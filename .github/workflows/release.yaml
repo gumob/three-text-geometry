@@ -81,6 +81,8 @@ jobs:
           set -eo pipefail
           ### Retrieve build settings and execute a command to filter MARKETING_VERSION
           current_version=$(jq -r '.version' package.json)
+          ### Create an empty commit for semantic-release
+          git commit --allow-empty -m "feat: release ${current_version}" && git push
           echo "Current version: $current_version"
           ### If the current version is found
           if [[ $current_version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
