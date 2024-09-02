@@ -1,6 +1,6 @@
 [![npm version](https://badge.fury.io/js/three-text-geometry.svg)](https://badge.fury.io/js/three-text-geometry)
-![Main Workflow](https://github.com/gumob/three-text-geometry/actions/workflows/main.yaml/badge.svg)
-![Develop Workflow](https://github.com/gumob/three-text-geometry/actions/workflows/develop.yaml/badge.svg)
+[![Main](https://github.com/gumob/three-text-geometry/actions/workflows/release.yaml/badge.svg)](https://github.com/gumob/three-text-geometry/actions/workflows/release.yaml)
+[![Develop](https://github.com/gumob/three-text-geometry/actions/workflows/develop.yaml/badge.svg)](https://github.com/gumob/three-text-geometry/actions/workflows/develop.yaml)
 [![codecov](https://codecov.io/gh/gumob/three-text-geometry/branch/main/graph/badge.svg?token=CL35QZ32NY)](https://codecov.io/gh/gumob/three-text-geometry)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -14,19 +14,26 @@ The difference in rendering speed is noticeable when animations are enabled, and
 ## Requirements
 
 - Three.js 0.167.1 or later
+- Node.js 20.8.1 or later
 
 ## Installation
+
+### NPM
+
+```
+$ npm install three-text-geometry
+```
+
+### PNPM
+
+```
+$ pnpm add three-text-geometry
+```
 
 ### Yarn
 
 ```
 $ yarn add three-text-geometry
-```
-
-### Node
-
-```
-$ node install three-text-geometry
 ```
 
 ## Usage
@@ -41,12 +48,9 @@ The source code for the demo is available [here](https://github.com/gumob/three-
 ```
 git clone https://github.com/gumob/three-text-geometry.git
 cd three-text-geometry/demo
-yarn cache clean
 corepack enable
-yarn set version stable
-yarn -v
-yarn install
-yarn dev
+pnpm install
+pnpm dev
 ```
 
 Please refer to the [README.md in the demo directory](https://github.com/gumob/three-text-geometry/blob/beta/demo/README.md) for more details.
