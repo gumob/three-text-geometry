@@ -5,7 +5,7 @@
 - Bumped `three.js` version from `0.137.5` to `0.167.1`
 - Bumped `TypeScript` version from `4.5.5` to `5.5.4`
 - Migrated from `react-scripts` to `vite`
-- Changed to `yarn` v4 environment
+- Changed package manager from `yarn` to `pnpm`
 
 ## [0.0.1-beta.5](https://github.com/gumob/three-text-geometry/compare/0.0.1-beta.4...0.0.1-beta.5) (2022-02-04)
 
