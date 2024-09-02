@@ -81,7 +81,6 @@
     "@types/offscreencanvas": "^2019.7.3",
     "@types/three": "^0.167.1",
     "@types/ts-nameof": "^4.2.5",
-    "@types/uglify-es": "^3.0.3",
     "@types/uglify-js": "^3.17.5",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
@@ -120,7 +119,6 @@
     "typescript-eslint": "^8.3.0",
     "typescript-snapshots-plugin": "^1.7.0",
     "typescript-transform-paths": "^3.5.0",
-    "uglify-es": "3.3.9",
     "uglify-js": "^3.19.2"
   },
   "importSorter": {
