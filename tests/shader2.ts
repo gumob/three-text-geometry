@@ -1,53 +1,79 @@
-import * as THREE from 'three'
-import { IMultipageShaderOption } from '~/shader'
+import { IMultipageShaderOption } from '@three-text-geometry/shader';
+import * as THREE from 'three';
 
+/**
+ * The function for creating a multi-page shader.
+ *
+ * @param {IMultipageShaderOption} opt - The options for the shader.
+ * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
+ */
 export function createMultipageShader(opt: IMultipageShaderOption): THREE.ShaderMaterialParameters {
-  opt = opt || {}
-  const opacity = typeof opt.opacity === 'number' ? opt.opacity : 1
-  const precision = opt.precision || 'highp'
-  const alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001
-  const textures = opt.textures || []
+  opt = opt || {};
+  const opacity = typeof opt.opacity === 'number' ? opt.opacity : 1;
+  const precision = opt.precision || 'highp';
+  const alphaTest = typeof opt.alphaTest === 'number' ? opt.alphaTest : 0.0001;
+  const textures = opt.textures || [];
 
-  let baseUniforms: { [key: string]: { type: string; value: THREE.Texture } } = {}
+  /**
+   * The base uniforms for the shader.
+   *
+   * @type {object}
+   */
+  const baseUniforms: { [key: string]: { type: string; value: THREE.Texture } } = {};
   textures.forEach((tex: THREE.Texture, i: number) => {
     baseUniforms['texture' + i] = {
       type: 't',
       value: tex,
-    }
-  })
+    };
+  });
 
-  var samplers = textures
+  /**
+   * The samplers for the shader.
+   *
+   * @type {string}
+   */
+  const samplers = textures
     .map(function (tex, i) {
-      return 'uniform sampler2D texture' + i + ';'
+      return 'uniform sampler2D texture' + i + ';';
     })
-    .join('\n')
+    .join('\n');
 
-  var body = textures
+  /**
+   * The body of the shader.
+   *
+   * @type {string}
+   */
+  const body = textures
     .map(function (tex, i) {
-      var cond = i === 0 ? 'if' : 'else if'
+      const cond = i === 0 ? 'if' : 'else if';
       return [
         cond + ' (vPage == ' + i + '.0) {',
         'sampleColor = texture2D(texture' + i + ', vUv);',
         '}',
-      ].join('\n')
+      ].join('\n');
     })
-    .join('\n')
+    .join('\n');
 
-  const color = opt.color
+  /**
+   * The color for the shader.
+   *
+   * @type {THREE.Color}
+   */
+  const color = opt.color;
 
   // remove to satisfy r73
-  delete opt.textures
-  delete opt.color
-  delete opt.precision
-  delete opt.opacity
+  delete opt.textures;
+  delete opt.color;
+  delete opt.precision;
+  delete opt.opacity;
 
   let attributes: { [key: string]: { [page: string]: { type: string; value: number } } } | undefined = {
     attributes: { page: { type: 'f', value: 0 } },
-  }
+  };
 
-  const threeVers = (parseInt(THREE.REVISION, 10) || 0) | 0
+  const threeVers = (parseInt(THREE.REVISION, 10) || 0) | 0;
   if (threeVers >= 72) {
-    attributes = undefined
+    attributes = undefined;
   }
 
   return Object.assign(
@@ -86,6 +112,6 @@ export function createMultipageShader(opt: IMultipageShaderOption): THREE.Shader
       ].join('\n'),
     },
     attributes,
-    opt
-  ) as THREE.ShaderMaterialParameters
+    opt,
+  ) as THREE.ShaderMaterialParameters;
 }

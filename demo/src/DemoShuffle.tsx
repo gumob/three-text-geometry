@@ -1,20 +1,21 @@
-import * as THREE from 'three'
-import TextGeometry, { TextAlign } from 'three-text-geometry'
-import ShuffleText, { ShuffleOption, ShuffleState } from './effects/shuffle'
-import DemoBase from './DemoBase'
+import * as THREE from 'three';
+import TextGeometry, { TextAlign } from 'three-text-geometry';
 
-export class DemoShuffle extends DemoBase {
-  shuffleTimeoutID?: any
-  shuffle?: ShuffleText
+import DemoBase from '~/DemoBase';
+import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle';
+
+class DemoShuffle extends DemoBase {
+  shuffleTimeoutID?: any;
+  shuffle?: ShuffleText;
 
   componentWillUnmount() {
-    this.shuffle?.cancel()
-    clearTimeout(this.shuffleTimeoutID)
-    cancelAnimationFrame(this.animationFrameID)
+    if (this.shuffle) this.shuffle.cancel();
+    if (this.shuffleTimeoutID) clearTimeout(this.shuffleTimeoutID);
+    if (this.animationFrameID !== undefined) cancelAnimationFrame(this.animationFrameID);
   }
 
   initScene() {
-    super.initScene()
+    super.initScene();
 
     /** TextGeometryOption */
     this.textOption = {
@@ -22,28 +23,28 @@ export class DemoShuffle extends DemoBase {
       align: TextAlign.Left,
       width: 1600,
       flipY: this.textures[0].flipY,
-    }
+    };
 
     /** Text Mesh */
-    const textGeometry = new TextGeometry(this.staticText(), this.textOption)
-    const box = new THREE.Vector3()
-    textGeometry.computeBoundingBox()
-    textGeometry.boundingBox?.getSize(box)
+    const textGeometry = new TextGeometry(this.staticText(), this.textOption);
+    const box = new THREE.Vector3();
+    textGeometry.computeBoundingBox();
+    textGeometry.boundingBox?.getSize(box);
     const textMaterial = new THREE.MeshBasicMaterial({
       map: this.textures[0],
       side: THREE.DoubleSide,
       transparent: true,
-      color: 0x666666,
-    })
+      color: 0x999999,
+    });
     this.textMesh = new THREE.Mesh(textGeometry, textMaterial)
       .rotateY(Math.PI)
       .rotateZ(Math.PI)
       .translateX(-box.x / 2)
-      .translateY(-box.y / 2)
-    this.scene?.add(this.textMesh)
+      .translateY(-box.y / 2);
+    this.scene?.add(this.textMesh);
 
     /** Shuffle text */
-    this.shuffleText(1000)
+    this.shuffleText(1000);
   }
 
   shuffleText(timeout: number) {
@@ -54,19 +55,19 @@ export class DemoShuffle extends DemoBase {
       fadeDuration: { min: 500, max: 700 },
       shuffleDuration: { min: 1000, max: 2000 },
       interval: { min: 20, max: 40 },
-    }
-    const self = this
-    this.shuffle?.cancel()
+    };
+    const self = this;
+    this.shuffle?.cancel();
     this.shuffle = new ShuffleText(this.staticText(), option, (text: string, state: ShuffleState) => {
-      const geom = this.textMesh?.geometry as TextGeometry
-      geom.update(text)
-      if (state === ShuffleState.Completed) self.shuffleText(3000)
-    })
-    clearTimeout(this.shuffleTimeoutID)
+      const geom = this.textMesh?.geometry as TextGeometry;
+      geom.update(text);
+      if (state === ShuffleState.Completed) self.shuffleText(3000);
+    });
+    clearTimeout(this.shuffleTimeoutID);
     this.shuffleTimeoutID = setTimeout(() => {
-      self.shuffle?.start()
-    }, timeout)
+      self.shuffle?.start();
+    }, timeout);
   }
 }
 
-export default DemoShuffle
+export default DemoShuffle;

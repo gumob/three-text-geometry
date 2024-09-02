@@ -1,4 +1,4 @@
-import { BMFont, TextAlign, WordWrapMode } from "./";
+import { BMFont, TextAlign, WordWrapMode } from '../types';
 export interface TextGeometryOption {
     font?: BMFont | undefined;
     start?: number | undefined;

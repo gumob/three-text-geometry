@@ -1,0 +1,104 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version:
+          - 20.8.x
+          - 20.x
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install apt packages for headless-gl
+        run: sudo apt update && sudo apt install libxi-dev xvfb libgl1-mesa-dev
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm lint-check
+
+      - name: Test
+        run: xvfb-run --auto-servernum pnpm test-coverage
+
+      - name: Coverage
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  release:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version:
+          - 20.x
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Extract version and add tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ### Enable error handling and exit the script on pipe failures
+          set -eo pipefail
+          ### Retrieve build settings and execute a command to filter MARKETING_VERSION
+          current_version=$(jq -r '.version' package.json)
+          echo "Current version: $current_version"
+          ### If the current version is found
+          if [[ $current_version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            ### If the tag exists, delete it from both local and remote
+            git fetch --tags
+            if git tag -l | grep -q "$current_version"; then
+              git tag -d "$current_version"
+              git push origin ":refs/tags/$current_version"
+            fi
+            ### Create a new tag for the current version and push it to the remote repository
+            git tag "$current_version"
+            git push origin "$current_version"
+          else
+            ### If the version could not be retrieved, display an error message
+            echo "Error: Could not retrieve the version."
+          fi
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          pnpm semantic-release
+    needs: tests

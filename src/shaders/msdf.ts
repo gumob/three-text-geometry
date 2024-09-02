@@ -1,29 +1,40 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
 
+/**
+ * The interface for the options of the multi-page shader.
+ *
+ * @interface BSDFShaderOption
+ */
 interface BSDFShaderOption {
-  opacity?: number
-  alphaTest?: number
-  precision?: string
-  color?: THREE.Color
-  map?: THREE.Texture
-  negate?: boolean
+  opacity?: number;
+  alphaTest?: number;
+  precision?: string;
+  color?: THREE.Color;
+  map?: THREE.Texture;
+  negate?: boolean;
 }
 
+/**
+ * The function for creating a multi-page shader.
+ *
+ * @param {BSDFShaderOption} opt - The options for the shader.
+ * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
+ */
 function createMSDFShader(opt: BSDFShaderOption) {
-  opt = opt || {}
-  const opacity = opt.opacity !== undefined ? opt.opacity : 1
-  const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001
-  const precision = opt.precision || 'highp'
-  const color = opt.color || new THREE.Color()
-  const map = opt.map || new THREE.Texture()
-  const negate = typeof opt.negate === 'boolean' ? opt.negate : true
+  opt = opt || {};
+  const opacity = opt.opacity !== undefined ? opt.opacity : 1;
+  const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
+  const precision = opt.precision || 'highp';
+  const color = opt.color || new THREE.Color();
+  const map = opt.map || new THREE.Texture();
+  const negate = typeof opt.negate === 'boolean' ? opt.negate : true;
 
   /** remove to satisfy r73 */
-  delete opt.map
-  delete opt.color
-  delete opt.precision
-  delete opt.opacity
-  delete opt.negate
+  delete opt.map;
+  delete opt.color;
+  delete opt.precision;
+  delete opt.opacity;
+  delete opt.negate;
 
   return Object.assign(
     {
@@ -66,8 +77,8 @@ function createMSDFShader(opt: BSDFShaderOption) {
         '}',
       ].join('\n'),
     },
-    opt
-  )
+    opt,
+  );
 }
 
-export { createMSDFShader }
+export { createMSDFShader };

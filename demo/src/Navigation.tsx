@@ -1,16 +1,8 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import Paper from '@mui/material/Paper'
-import MenuList from '@mui/material/MenuList'
-import MenuItem from '@mui/material/MenuItem'
-// import ListItemIcon from '@mui/material/ListItemIcon'
-// import Check from '@mui/icons-material/Check';
-// import FormGroup from '@mui/material/FormGroup';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
-// import Typography from '@mui/material/Typography';
+import React from 'react';
+import { MenuItem, MenuList, Paper } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
-import './Navigation.css'
+import './Navigation.css';
 
 export class Navigation extends React.Component {
   render(): React.ReactNode {
@@ -44,8 +36,8 @@ export class Navigation extends React.Component {
           </MenuItem> */}
         </MenuList>
       </Paper>
-    )
+    );
   }
 }
 
-export default Navigation
+export default Navigation;

@@ -1,9 +1,15 @@
-export type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics
+// import { TextGeometryOption } from './TextLayout';
+
+/**
+ * The function for computing word metrics.
+ *
+ * @type {ComputeMetrics}
+ */
+export type ComputeMetrics = (text: string, start: number, end: number, width: number) => WordMetrics;
 
 /**
  * The word metrics computed by `ComputeMetrics` function.
  *
- * @export
  * @interface WordMetrics
  */
 export interface WordMetrics {
@@ -13,21 +19,21 @@ export interface WordMetrics {
    * @type {number}
    * @memberof WordMetrics
    */
-  start: number
+  start: number;
   /**
    * The end position.
    *
    * @type {number}
    * @memberof WordMetrics
    */
-  end: number
+  end: number;
   /**
    * The width.
    *
    * @type {number}
    * @memberof WordMetrics
    */
-  width: number
+  width: number;
 }
 /**
  * The enums to specify word wrapping.
@@ -44,7 +50,6 @@ export enum WordWrapMode {
 /**
  * The interface to define options for `WordWrap`.
  *
- * @export
  * @interface WordWrapOption
  */
 export interface WordWrapOption {
@@ -53,26 +58,26 @@ export interface WordWrapOption {
    *
    * @type {number | undefined}
    * @memberof WordWrapOption
-   * @defaultValue 0
+   * @default 0
    */
-  start?: number | undefined
+  start?: number | undefined;
   /**
    * The ending index (exclusive) into the text to layout.
    *
    * @type {number | undefined}
    * @memberof WordWrapOption
-   * @defaultValue text.length
+   * @default text.length
    */
-  end?: number | undefined
+  end?: number | undefined;
   /**
    * The desired width of the text box, causes word-wrapping and clipping in WordWrapMode mode. Leave as
    * undefined to remove word-wrapping (default behaviour).
    *
    * @type {number | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue undefined
+   * @default undefined
    */
-  width?: number | undefined
+  width?: number | undefined;
   /**
    * A mode for word-wrapper; can be WordWrapMode.Pre (maintain spacing), or WordWrapMode.NoWrap (collapse
    * whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse
@@ -80,14 +85,14 @@ export interface WordWrapOption {
    *
    * @type {WordWrapMode | undefined}
    * @memberof TextGeometryOption
-   * @defaultValue undefined
+   * @default undefined
    */
-  mode?: WordWrapMode | undefined
+  mode?: WordWrapMode | undefined;
   /**
    * The function that computes word metrics.
    *
    * @type {ComputeMetrics | undefined}
    * @memberof WordWrapOption
    */
-  measure?: ComputeMetrics | undefined
+  measure?: ComputeMetrics | undefined;
 }

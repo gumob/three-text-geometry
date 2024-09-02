@@ -1,2 +1,2 @@
-export * from './MultiPageShaderMaterial'
-export * from './MultiPageShaderMaterialParameters'
+export * from './MultiPageShaderMaterial';
+export * from './MultiPageShaderMaterialParameters';
