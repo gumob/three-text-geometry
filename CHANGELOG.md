@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/gumob/three-text-geometry/compare/0.1.0...0.2.0) (2024-09-03)
+
+
+### Features
+
+* release 0.1.1 ([f4241bd](https://github.com/gumob/three-text-geometry/commit/f4241bd3c04ddc7c212f37802541e7c5918e47d8))
+
 # [0.1.0](https://github.com/gumob/three-text-geometry/compare/0.0.0...0.1.0) (2024-09-03)
 
 
