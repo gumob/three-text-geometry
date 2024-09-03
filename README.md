@@ -1,5 +1,5 @@
-[![npm version](https://badge.fury.io/js/three-text-geometry.svg)](https://badge.fury.io/js/three-text-geometry)
-[![Main](https://github.com/gumob/three-text-geometry/actions/workflows/release.yaml/badge.svg)](https://github.com/gumob/three-text-geometry/actions/workflows/release.yaml)
+[![NPM Version](https://img.shields.io/npm/v/three-text-geometry)](https://badge.fury.io/js/three-text-geometry)
+[![Main](https://github.com/gumob/three-text-geometry/actions/workflows/main.yaml/badge.svg)](https://github.com/gumob/three-text-geometry/actions/workflows/main.yaml)
 [![Develop](https://github.com/gumob/three-text-geometry/actions/workflows/develop.yaml/badge.svg)](https://github.com/gumob/three-text-geometry/actions/workflows/develop.yaml)
 [![codecov](https://codecov.io/gh/gumob/three-text-geometry/branch/main/graph/badge.svg?token=CL35QZ32NY)](https://codecov.io/gh/gumob/three-text-geometry)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
