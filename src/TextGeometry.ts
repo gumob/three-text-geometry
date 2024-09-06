@@ -169,7 +169,7 @@ class TextGeometry extends THREE.BufferGeometry {
     /** Get visible glyphs */
     const layout = new TextLayout(this._text, this._opt);
     const glyphs = layout.glyphs.filter((glyph) => {
-    const bitmap = glyph.data;
+      const bitmap = glyph.data;
       return bitmap.width * bitmap.height > 0;
     });
 
