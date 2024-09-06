@@ -54,10 +54,18 @@ class TextLayout {
    * Gets the options for the text layout.
    *
    * @returns {TextLayoutOption} The options for the text layout.
-   * @readonly
    */
   public get option(): TextLayoutOption {
     return { ...this._opt } as TextLayoutOption;
+  }
+
+  /**
+   * Sets the options for the text layout.
+   *
+   * @param {TextLayoutOption} value - The options for the text layout.
+   */
+  public set option(value: TextLayoutOption) {
+    this._opt = { ...value };
   }
 
   /**

@@ -51,17 +51,48 @@ class TextGeometry extends THREE.BufferGeometry {
     multipage: false,
   };
 
+  private _text: string = '';
+
   private _visibleGlyphs: TextGlyph[] = [];
 
   /**
    * The options conforming to the TextGeometryOption interface.
    *
    * @type {TextGeometryOption}
-   * @memberof TextGeometry
-   * @readonly
+   * @memberof textGeometry
    */
   public get option(): TextGeometryOption {
     return { ...this._opt } as TextGeometryOption;
+  }
+
+  /**
+   * Sets the options for the text geometry.
+   *
+   * @param {TextGeometryOption} value - The options for the text geometry.
+   */
+  public set option(value: TextGeometryOption) {
+    this._opt = { ...value };
+    this.update(this._text, value);
+  }
+
+  /**
+   * The text to layout.
+   *
+   * @type {string}
+   * @memberof TextGeometry
+   */
+  public get text(): string {
+    return this._text;
+  }
+
+  /**
+   * Sets the text to layout.
+   *
+   * @param {string} value - The text to layout.
+   */
+  public set text(value: string) {
+    this._text = value;
+    this.update(value, this._opt);
   }
 
   /**
@@ -89,9 +120,10 @@ class TextGeometry extends THREE.BufferGeometry {
       console.warn('Must specify a `font` in options');
       return;
     }
+    this._text = text;
     this._opt.font = option.font;
     this._opt.start = option.start !== undefined ? Math.max(0, option.start) : 0;
-    this._opt.end = option.end !== undefined ? option.end : text.length;
+    this._opt.end = option.end !== undefined ? option.end : this._text.length;
     this._opt.width = option.width !== undefined ? option.width : undefined;
     this._opt.align = option.align !== undefined ? option.align : TextAlign.Left;
     this._opt.mode = option.mode !== undefined ? option.mode : undefined;
@@ -100,7 +132,7 @@ class TextGeometry extends THREE.BufferGeometry {
     this._opt.tabSize = option.tabSize !== undefined ? option.tabSize : 4;
     this._opt.flipY = option.flipY !== undefined ? option.flipY : true;
     this._opt.multipage = option.multipage !== undefined ? option.multipage : false;
-    this.update(text, option);
+    this.update(this._text, this._opt);
   }
 
   /**
@@ -110,31 +142,34 @@ class TextGeometry extends THREE.BufferGeometry {
    * @param {*}      [option={}]  An object conforming to `TextGeometryOption`.
    * @memberof TextGeometry
    */
-  public update(text: string, option: any = {}) {
-    if (option.font !== undefined) this._opt.font = option.font;
+  public update(text?: string, option?: any) {
+    if (text !== undefined) this._text = text;
+    if (option !== undefined) {
+      if (option.font !== undefined) this._opt.font = option.font;
+      this._opt.start = option.start !== undefined ? Math.max(0, option.start) : 0;
+      this._opt.end = option.end !== undefined ? option.end : this._text.length;
+      this._opt.width = option.width !== undefined ? option.width : undefined;
+      this._opt.align = option.align !== undefined ? option.align : this._opt.align;
+      this._opt.mode = option.mode !== undefined ? option.mode : this._opt.mode;
+      this._opt.letterSpacing = option.letterSpacing !== undefined ? option.letterSpacing : this._opt.letterSpacing;
+      this._opt.lineHeight = option.lineHeight !== undefined ? option.lineHeight : this._opt.lineHeight;
+      this._opt.tabSize = option.tabSize !== undefined ? option.tabSize : this._opt.tabSize;
+      this._opt.flipY = option.flipY !== undefined ? option.flipY : this._opt.flipY;
+      this._opt.multipage = option.multipage !== undefined ? option.multipage : this._opt.multipage;
+    }
     if (this._opt.font === undefined) {
       console.warn('Must specify a `font` in options');
       return;
     }
-    this._opt.start = option.start !== undefined ? Math.max(0, option.start) : 0;
-    this._opt.end = option.end !== undefined ? option.end : text.length;
-    this._opt.width = option.width !== undefined ? option.width : undefined;
-    this._opt.align = option.align !== undefined ? option.align : this._opt.align;
-    this._opt.mode = option.mode !== undefined ? option.mode : this._opt.mode;
-    this._opt.letterSpacing = option.letterSpacing !== undefined ? option.letterSpacing : this._opt.letterSpacing;
-    this._opt.lineHeight = option.lineHeight !== undefined ? option.lineHeight : this._opt.lineHeight;
-    this._opt.tabSize = option.tabSize !== undefined ? option.tabSize : this._opt.tabSize;
-    this._opt.flipY = option.flipY !== undefined ? option.flipY : this._opt.flipY;
-    this._opt.multipage = option.multipage !== undefined ? option.multipage : this._opt.multipage;
 
     /** Determine texture size from font file */
     const texWidth = this._opt.font!.common.scaleW;
     const texHeight = this._opt.font!.common.scaleH;
 
     /** Get visible glyphs */
-    const layout = new TextLayout(text, this._opt);
+    const layout = new TextLayout(this._text, this._opt);
     const glyphs = layout.glyphs.filter((glyph) => {
-      const bitmap = glyph.data;
+    const bitmap = glyph.data;
       return bitmap.width * bitmap.height > 0;
     });
 
