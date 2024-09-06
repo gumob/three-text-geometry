@@ -2,7 +2,7 @@ import { BufferGeometryNode, extend, Node, Overwrite } from '@react-three/fiber'
 import { EventHandlers } from '@react-three/fiber/dist/declarations/src/core/events';
 
 import TextGeometry from '../TextGeometry';
-import { TextGeometryOption } from '../types';
+// import { TextGeometryOption } from '../types';
 
 extend({ TextGeometry });
 
@@ -17,7 +17,7 @@ export type TextGeometryNode<T, P> = Overwrite<
   Node<T, P>,
   {
     text: string;
-    option: TextGeometryOption;
+    // option: TextGeometryOption;
   }
 > &
   BufferGeometryNode<TextGeometry, typeof TextGeometry> &
