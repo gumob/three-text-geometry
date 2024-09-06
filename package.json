@@ -44,7 +44,7 @@
     "test-coverage": "pnpm clean-jest && pnpm clean-coverage && jest --coverage",
     "test-e2e": "jest --config jest.config.e2e.ts",
     "_test-e2e": "playwright test ./tests/demo.e2e.ts",
-    "clean-all": "pnpm clean-dist && pnpm clean-cache && pnpm clean-modules && pnpm clean-jest",
+    "clean-all": "pnpm clean-cache && pnpm clean-jest&& pnpm clean-dist && pnpm modules-clean",
     "clean-jest": "jest --clearCache",
     "clean-coverage": "rm -rf coverage",
     "clean-dist": "rm -rf dist-cjs dist-esm",
