@@ -46,7 +46,7 @@ export class DemoBase extends PureComponent {
   textOption?: TextGeometryOption;
   textMesh?: THREE.Mesh;
 
-  showAxes: boolean = false;
+  showAxes: boolean = true;
 
   fpsLimit: number = 144;
   lastFrameTime: number = 0;
@@ -158,7 +158,7 @@ export class DemoBase extends PureComponent {
 
     /** AxesHelper */
     if (this.showAxes) {
-      const axes = new THREE.AxesHelper(1000).setColors(new THREE.Color(0.3, 0.2, 0.2), new THREE.Color(0.2, 0.3, 0.2), new THREE.Color(0.2, 0.2, 0.3));
+      const axes = new THREE.AxesHelper(1000).setColors(new THREE.Color(1.0, 0.2, 0.2), new THREE.Color(0.2, 1.0, 0.2), new THREE.Color(0.2, 0.2, 1.0));
       this.scene?.add(axes);
     }
 
