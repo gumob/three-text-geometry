@@ -39,8 +39,8 @@ function computeBox(positions: ArrayLike<number>, output: THREE.Box3): void {
 /**
  * The function for computing the bounding sphere of the given positions.
  *
- * @param positions - The positions to compute the bounding sphere.
- * @param output - The output sphere.
+ * @param {ArrayLike<number>} positions - The positions to compute the bounding sphere.
+ * @param {THREE.Sphere} output - The output sphere.
  */
 function computeSphere(positions: ArrayLike<number>, output: THREE.Sphere): void {
   const box = bounds(positions);
