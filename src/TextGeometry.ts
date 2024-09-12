@@ -117,6 +117,7 @@ class TextGeometry extends THREE.BufferGeometry {
     super();
     // if (option.font === undefined) throw new TypeError('Must specify a `font` in options');
     if (option.font === undefined) {
+      console.debug('[TextGeometry:constructor]', text?.substring(0, 30), option);
       console.debug('Must specify a `font` in options');
       return;
     }
