@@ -7,23 +7,6 @@ interface BSDFShaderOption {
     map?: THREE.Texture;
     negate?: boolean;
 }
-declare function createMSDFShader(opt: BSDFShaderOption): {
-    uniforms: {
-        opacity: {
-            type: string;
-            value: number;
-        };
-        map: {
-            type: string;
-            value: THREE.Texture;
-        };
-        color: {
-            type: string;
-            value: THREE.Color;
-        };
-    };
-    vertexShader: string;
-    fragmentShader: string;
-} & BSDFShaderOption;
+declare function createMSDFShader(opt: BSDFShaderOption): THREE.ShaderMaterialParameters;
 export { createMSDFShader };
 //# sourceMappingURL=msdf.d.ts.map

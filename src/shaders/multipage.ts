@@ -19,7 +19,7 @@ interface BSDFShaderOption {
  * @param {BSDFShaderOption} opt - The options for the shader.
  * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
  */
-function createMultipageShader(opt: BSDFShaderOption) {
+function createMultipageShader(opt: BSDFShaderOption): THREE.ShaderMaterialParameters {
   opt = opt || {};
   const opacity = opt.opacity !== undefined ? opt.opacity : 1;
   const precision = opt.precision || 'highp';
@@ -105,7 +105,7 @@ function createMultipageShader(opt: BSDFShaderOption) {
     },
     attributes,
     opt,
-  );
+  ) as THREE.ShaderMaterialParameters;
 }
 
 export { createMultipageShader };

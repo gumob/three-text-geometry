@@ -20,7 +20,7 @@ interface BSDFShaderOption {
  * @param {BSDFShaderOption} opt - The options for the shader.
  * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
  */
-function createMSDFShader(opt: BSDFShaderOption) {
+function createMSDFShader(opt: BSDFShaderOption): THREE.ShaderMaterialParameters {
   opt = opt || {};
   const opacity = opt.opacity !== undefined ? opt.opacity : 1;
   const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
@@ -78,7 +78,7 @@ function createMSDFShader(opt: BSDFShaderOption) {
       ].join('\n'),
     },
     opt,
-  );
+  ) as THREE.ShaderMaterialParameters;
 }
 
 export { createMSDFShader };
