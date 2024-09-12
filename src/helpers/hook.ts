@@ -8,25 +8,32 @@ import { BMFont } from '../types';
 /**
  * Custom hook to load a font and its texture.
  *
- * @param {string} name - The name of the font.
- * @param {number} size - The size of the font.
+ * @param {string} fontUrl - The URL of the font file.
+ * @param {string} textureUrl - The URL of the texture file.
  * @returns {{ font: FontData; isFontLoading: boolean }} - The font data and loading state.
  */
-const useFont = (name: string, size: number): { data: { font: BMFont; texture: Texture }; isLoading: boolean } => {
+const useFont = (fontUrl: string, textureUrl: string): { data: { font: BMFont; texture: Texture }; isLoading: boolean } => {
   const { data: font, isLoading } = useSWR(
-    `/assets/bmfont/${name}-${size}.fnt`,
+    fontUrl,
     (url) =>
       fetch(url)
         .then((res) => res.text())
         .then((text) => {
-          if (name.endsWith('.fnt')) return new BMFontAsciiParser().parse(text);
-          else if (name.endsWith('.json')) return new BMFontJsonParser().parse(text);
-          else if (name.endsWith('.xml')) return new BMFontXMLParser().parse(text);
-          else if (name.endsWith('.bin')) return new BMFontBinaryParser().parse(Buffer.from(text, 'binary'));
-          else throw new Error('Unsupported font format');
+          const extension = fontUrl.split('.').pop()?.toLowerCase();
+          switch (extension) {
+            case 'xml':
+              return new BMFontXMLParser().parse(text);
+            case 'bin':
+              return new BMFontBinaryParser().parse(Buffer.from(text, 'utf-8'));
+            case 'json':
+              return new BMFontJsonParser().parse(text);
+            case 'fnt':
+            default:
+              return new BMFontAsciiParser().parse(text);
+          }
         }) as Promise<BMFont>,
   );
-  const texture = useLoader(TextureLoader, `/assets/bmfont/${name}-${size}.png`);
+  const texture = useLoader(TextureLoader, textureUrl);
   return {
     data: {
       font: font as BMFont,
