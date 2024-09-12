@@ -9,8 +9,9 @@ declare class TextGeometry extends THREE.BufferGeometry {
     get text(): string;
     set text(value: string);
     get visibleGlyphs(): TextGlyph[];
-    constructor(text: string, option?: any);
-    update(text?: string, option?: any): void;
+    constructor(text: string, option?: TextGeometryOption);
+    copy(source: TextGeometry): this;
+    update(text?: string, option?: TextGeometryOption): void;
     computeBoundingSphere(): void;
     computeBoundingBox(): void;
 }

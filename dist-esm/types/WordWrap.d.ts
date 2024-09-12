@@ -9,10 +9,10 @@ export declare enum WordWrapMode {
     NoWrap = "nowrap"
 }
 export interface WordWrapOption {
-    start?: number | undefined;
-    end?: number | undefined;
-    width?: number | undefined;
-    mode?: WordWrapMode | undefined;
-    measure?: ComputeMetrics | undefined;
+    start?: number;
+    end?: number;
+    width?: number;
+    mode?: WordWrapMode;
+    measure?: ComputeMetrics;
 }
 //# sourceMappingURL=WordWrap.d.ts.map

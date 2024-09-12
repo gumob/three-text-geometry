@@ -10,23 +10,23 @@ export interface IMultipageShaderOption {
 export declare class MultiPageShaderMaterialParameters implements THREE.ShaderMaterialParameters {
     uniforms?: {
         [uniform: string]: THREE.IUniform;
-    } | undefined;
-    vertexShader?: string | undefined;
-    fragmentShader?: string | undefined;
-    linewidth?: number | undefined;
-    wireframe?: boolean | undefined;
-    wireframeLinewidth?: number | undefined;
-    lights?: boolean | undefined;
-    clipping?: boolean | undefined;
+    };
+    vertexShader?: string;
+    fragmentShader?: string;
+    linewidth?: number;
+    wireframe?: boolean;
+    wireframeLinewidth?: number;
+    lights?: boolean;
+    clipping?: boolean;
     extensions?: {
-        derivatives?: boolean | undefined;
-        fragDepth?: boolean | undefined;
-        drawBuffers?: boolean | undefined;
-        shaderTextureLOD?: boolean | undefined;
-        clipCullDistance?: boolean | undefined;
-        multiDraw?: boolean | undefined;
+        derivatives?: boolean;
+        fragDepth?: boolean;
+        drawBuffers?: boolean;
+        shaderTextureLOD?: boolean;
+        clipCullDistance?: boolean;
+        multiDraw?: boolean;
     } | undefined;
-    glslVersion?: THREE.GLSLVersion | undefined;
+    glslVersion?: THREE.GLSLVersion;
     constructor(param: IMultipageShaderOption);
 }
 //# sourceMappingURL=MultiPageShaderMaterialParameters.d.ts.map

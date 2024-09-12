@@ -11,11 +11,11 @@ declare enum TextAlign {
     Right = 2
 }
 interface TextLayoutOption extends WordWrapOption {
-    font?: BMFont | undefined;
-    letterSpacing?: number | undefined;
-    tabSize?: number | undefined;
-    lineHeight?: number | undefined;
-    align?: TextAlign | undefined;
+    font?: BMFont;
+    letterSpacing?: number;
+    tabSize?: number;
+    lineHeight?: number;
+    align?: TextAlign;
 }
 export { TextAlign, TextGlyph, TextLayoutOption };
 //# sourceMappingURL=TextLayout.d.ts.map
