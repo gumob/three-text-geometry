@@ -117,7 +117,7 @@ class TextGeometry extends THREE.BufferGeometry {
     super();
     // if (option.font === undefined) throw new TypeError('Must specify a `font` in options');
     if (option.font === undefined) {
-      console.warn('Must specify a `font` in options');
+      console.debug('Must specify a `font` in options');
       return;
     }
     this._text = text;
@@ -133,6 +133,12 @@ class TextGeometry extends THREE.BufferGeometry {
     this._opt.flipY = option.flipY !== undefined ? option.flipY : true;
     this._opt.multipage = option.multipage !== undefined ? option.multipage : false;
     this.update(this._text, this._opt);
+    // const box = new THREE.Vector3();
+    // this.computeBoundingBox();
+    // this.boundingBox?.getSize(box);
+    // this.rotateY(Math.PI);
+    // this.rotateZ(Math.PI);
+    // this.translate(-box.x / 2, -box.y / 2, 0);
   }
 
   /**
@@ -158,7 +164,7 @@ class TextGeometry extends THREE.BufferGeometry {
       this._opt.multipage = option.multipage !== undefined ? option.multipage : this._opt.multipage;
     }
     if (this._opt.font === undefined) {
-      console.warn('Must specify a `font` in options');
+      console.debug('Must specify a `font` in options');
       return;
     }
 
