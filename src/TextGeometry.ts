@@ -133,8 +133,22 @@ class TextGeometry extends THREE.BufferGeometry {
     this._opt.flipY = option.flipY !== undefined ? option.flipY : true;
     this._opt.multipage = option.multipage !== undefined ? option.multipage : false;
     this.update(this._text, this._opt);
-    this.computeBoundingBox();
-    this.computeBoundingSphere();
+  }
+
+  /**
+   * The function to copy the source geometry.
+   *
+   * @param {TextGeometry} source - The source geometry.
+   * @returns {TextGeometry} The copied geometry.
+   * @memberof TextGeometry
+   */
+  public override copy(source: TextGeometry): this {
+    super.copy(source);
+
+    this.text = Object.assign({}, source.text);
+    this.option = Object.assign({}, source.option);
+
+    return this;
   }
 
   /**
