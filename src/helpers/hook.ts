@@ -2,7 +2,7 @@ import { useLoader } from '@react-three/fiber';
 import useSWR from 'swr';
 import { Texture, TextureLoader } from 'three';
 
-import { BMFontAsciiParser } from '../parser';
+import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '../parser';
 import { BMFont } from '../types';
 
 /**
@@ -18,7 +18,13 @@ const useFont = (name: string, size: number): { data: { font: BMFont; texture: T
     (url) =>
       fetch(url)
         .then((res) => res.text())
-        .then((text) => new BMFontAsciiParser().parse(text)) as Promise<BMFont>,
+        .then((text) => {
+          if (name.endsWith('.fnt')) return new BMFontAsciiParser().parse(text);
+          else if (name.endsWith('.json')) return new BMFontJsonParser().parse(text);
+          else if (name.endsWith('.xml')) return new BMFontXMLParser().parse(text);
+          else if (name.endsWith('.bin')) return new BMFontBinaryParser().parse(Buffer.from(text, 'binary'));
+          else throw new Error('Unsupported font format');
+        }) as Promise<BMFont>,
   );
   const texture = useLoader(TextureLoader, `/assets/bmfont/${name}-${size}.png`);
   return {
