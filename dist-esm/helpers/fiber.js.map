@@ -1,1 +1,1 @@
-{"version":3,"file":"dist-esm/helpers/fiber.js.map","sources":["../../src/helpers/fiber.ts"],"names":["extend","TextGeometry"],"mappings":"OAA6BA,MAAkE,KAApB,4BAGpEC,iBAAkB,kBAGzBD,OAAO,CAAEC,aAAAA,YAAY,CAAE"}
+{"version":3,"file":"fiber.js","sourceRoot":"","sources":["../../src/helpers/fiber.ts"],"names":[],"mappings":"AAAA,OAAO,EAAsB,MAAM,EAAiB,MAAM,oBAAoB,CAAC;AAE/E,OAAO,YAAY,MAAM,iBAAiB,CAAC;AAE3C,MAAM,CAAC,EAAE,YAAY,EAAE,CAAC,CAAC"}

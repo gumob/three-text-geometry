@@ -1,1 +1,3 @@
-export*from"./MultiPageShaderMaterial";export*from"./MultiPageShaderMaterialParameters";
+export * from './MultiPageShaderMaterial';
+export * from './MultiPageShaderMaterialParameters';
+//# sourceMappingURL=index.js.map
