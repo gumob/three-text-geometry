@@ -1,6 +1,6 @@
 import { Texture } from 'three';
 import { BMFont } from '../types';
-declare const useFont: (name: string, size: number) => {
+declare const useFont: (fontUrl: string, textureUrl: string) => {
     data: {
         font: BMFont;
         texture: Texture;
