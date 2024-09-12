@@ -110,10 +110,10 @@ class TextGeometry extends THREE.BufferGeometry {
    * The constructor to create an instance of TextGeometry.
    *
    * @param {string} text         Text to layout.
-   * @param {*}      [option={}]  An object conforming to `TextGeometryOption`.
+   * @param {TextGeometryOption} option - The options for the text geometry.
    * @memberof TextGeometry
    */
-  constructor(text: string, option: any = {}) {
+  constructor(text: string, option: TextGeometryOption = {}) {
     super();
     // if (option.font === undefined) throw new TypeError('Must specify a `font` in options');
     if (option.font === undefined) {
@@ -154,11 +154,11 @@ class TextGeometry extends THREE.BufferGeometry {
   /**
    * The function to update the text.
    *
-   * @param {string} text         Text to layout.
-   * @param {*}      [option={}]  An object conforming to `TextGeometryOption`.
+   * @param {string} text - The text to layout.
+   * @param {TextGeometryOption} option - The options for the text geometry.
    * @memberof TextGeometry
    */
-  public update(text?: string, option?: any) {
+  public update(text?: string, option?: TextGeometryOption) {
     if (text !== undefined) this._text = text;
     if (option !== undefined) {
       if (option.font !== undefined) this._opt.font = option.font;
