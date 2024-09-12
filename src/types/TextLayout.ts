@@ -60,42 +60,42 @@ interface TextLayoutOption extends WordWrapOption {
   /**
    * The BMFont definition which holds chars, kernings, etc.
    *
-   * @type {BMFont | undefined}
+   * @type {BMFont}
    * @memberof TextGeometryOption
    */
-  font?: BMFont | undefined;
+  font?: BMFont;
   /**
    * The letter spacing in pixels.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof TextGeometryOption
    * @default 0
    */
-  letterSpacing?: number | undefined;
+  letterSpacing?: number;
   /**
    * The number of spaces to use in a single tab	.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof TextGeometryOption
    * @default 4
    */
-  tabSize?: number | undefined;
+  tabSize?: number;
   /**
    * The line height in pixels.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof TextGeometryOption
    * @default font.common.lineHeight.
    */
-  lineHeight?: number | undefined;
+  lineHeight?: number;
   /**
    * This can be TextAlign.left, TextAlign.center or TextAlign.right.
    *
-   * @type {TextAlign | undefined}
+   * @type {TextAlign}
    * @memberof TextGeometryOption
    * @default TextAlign.left
    */
-  align?: TextAlign | undefined;
+  align?: TextAlign;
 }
 
 export { TextAlign, TextGlyph, TextLayoutOption };
