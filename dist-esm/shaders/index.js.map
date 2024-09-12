@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/shaders/index.ts"],"names":[],"mappings":"AAAA,cAAc,SAAS,CAAC;AACxB,cAAc,QAAQ,CAAC;AACvB,cAAc,aAAa,CAAC;AAC5B,cAAc,OAAO,CAAC"}
+{"version":3,"file":"dist-esm/shaders/index.js.map","sources":["../../src/shaders/index.ts"],"names":[],"mappings":"WAAc,qBACA,oBACA,yBACA"}

@@ -1,2 +1,1 @@
-export * from './BMFontError';
-//# sourceMappingURL=index.js.map
+export*from"./BMFontError";

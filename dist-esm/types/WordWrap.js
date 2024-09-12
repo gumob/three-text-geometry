@@ -1,6 +1,1 @@
-export var WordWrapMode;
-(function (WordWrapMode) {
-    WordWrapMode["Pre"] = "pre";
-    WordWrapMode["NoWrap"] = "nowrap";
-})(WordWrapMode || (WordWrapMode = {}));
-//# sourceMappingURL=WordWrap.js.map
+var WordWrapMode;(r=>{r.Pre="pre",r.NoWrap="nowrap"})(WordWrapMode=WordWrapMode||{});export{WordWrapMode};

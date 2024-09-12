@@ -1,10 +1,1 @@
-class BMFontError extends Error {
-    constructor(message) {
-        super(message);
-        Object.setPrototypeOf(this, BMFontError.prototype);
-    }
-}
-BMFontError.LoadError = 'LoadError';
-BMFontError.ParseError = 'ParseError';
-export { BMFontError };
-//# sourceMappingURL=BMFontError.js.map
+class BMFontError extends Error{constructor(r){super(r),Object.setPrototypeOf(this,BMFontError.prototype)}}BMFontError.LoadError="LoadError",BMFontError.ParseError="ParseError";export{BMFontError};
