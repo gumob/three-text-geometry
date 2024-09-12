@@ -133,12 +133,8 @@ class TextGeometry extends THREE.BufferGeometry {
     this._opt.flipY = option.flipY !== undefined ? option.flipY : true;
     this._opt.multipage = option.multipage !== undefined ? option.multipage : false;
     this.update(this._text, this._opt);
-    // const box = new THREE.Vector3();
-    // this.computeBoundingBox();
-    // this.boundingBox?.getSize(box);
-    // this.rotateY(Math.PI);
-    // this.rotateZ(Math.PI);
-    // this.translate(-box.x / 2, -box.y / 2, 0);
+    this.computeBoundingBox();
+    this.computeBoundingSphere();
   }
 
   /**
