@@ -62,7 +62,7 @@
     "ajv": "^8.17.1",
     "fast-xml-parser": "^4.4.1",
     "swr": "^2.2.5",
-    "three": "^0.167.1"
+    "three": "^0.168.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.4.1",
@@ -82,7 +82,7 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^22.5.1",
     "@types/offscreencanvas": "^2019.7.3",
-    "@types/three": "^0.167.1",
+    "@types/three": "^0.168.0",
     "@types/ts-nameof": "^4.2.5",
     "@types/uglify-js": "^3.17.5",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
