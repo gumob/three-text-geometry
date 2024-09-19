@@ -86,16 +86,16 @@ function extractPositions(glyphs: TextGlyph[]): Float32Array {
     const w = bitmap.width;
     const h = bitmap.height;
 
-    /** BL */
+    /** Bottom left position */
     positions[idx++] = x;
     positions[idx++] = y;
-    /** TL */
+    /** Top left position */
     positions[idx++] = x;
     positions[idx++] = y + h;
-    /** TR */
+    /** Top right position */
     positions[idx++] = x + w;
     positions[idx++] = y + h;
-    /** BR */
+    /** Bottom right position */
     positions[idx++] = x + w;
     positions[idx++] = y;
   }
