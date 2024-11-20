@@ -17,6 +17,9 @@ importers:
       fast-xml-parser:
         specifier: ^4
         version: 4.5.0
+      react:
+        specifier: ^18
+        version: 18.3.1
       swr:
         specifier: ^2
         version: 2.2.5(react@18.3.1)
@@ -75,6 +78,9 @@ importers:
       '@types/offscreencanvas':
         specifier: ^2019.7
         version: 2019.7.3
+      '@types/react':
+        specifier: ^18.3.12
+        version: 18.3.12
       '@types/three':
         specifier: ^0.170
         version: 0.170.0
