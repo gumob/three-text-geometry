@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import axios from 'axios';
 import useSWR from 'swr';
 import { Texture, TextureLoader } from 'three';
@@ -5,31 +6,50 @@ import { Texture, TextureLoader } from 'three';
 import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '../parser';
 import { BMFont } from '../types';
 
+interface FontProgressCallback {
+  (loaded: number, total: number, percent: number): void;
+}
+
 /**
  * Custom hook to load a font and its texture.
  *
  * @param {string} fontUrl - The URL of the font file.
  * @param {string} textureUrl - The URL of the texture file.
- * @param {Function} onProgress - The function to call with the progress of the font file download.
- * @returns { font: BMFont, texture: Texture, isLoading: boolean } - The font data, texture, and loading state.
+ * @param {FontProgressCallback} onProgress - The function to call with the progress of the font file download.
+ * @returns { { font: BMFont; texture: Texture; isLoading: boolean } } - The font data, texture, and loading state.
  */
-const useFont = (fontUrl: string, textureUrl: string, onProgress?: (loaded: number, total: number, percent: number) => void): { font: BMFont; texture: Texture; isLoading: boolean } => {
+const useFont = (fontUrl?: string, textureUrl?: string, onProgress?: FontProgressCallback): { font: BMFont; texture: Texture; isLoading: boolean } => {
+  /*********************************
+   * Refs
+   *********************************/
+
+  const onProgressRef = useRef(onProgress);
+
+  /*********************************
+   * State
+   *********************************/
+
   /** Total number of items to load. */
   const totalItems = 2;
   /** Bytes loaded for each item. */
-  const itemBytesLoaded = new Array<number>(totalItems).fill(0);
+  const itemBytesLoaded = useRef(new Array<number>(totalItems).fill(0));
   /** Bytes total for each item. */
-  const itemBytesTotal = new Array<number>(totalItems).fill(0);
+  const itemBytesTotal = useRef(new Array<number>(totalItems).fill(0));
   /** Sum of bytes loaded. */
-  let sumBytesLoaded = 0;
+  const sumBytesLoaded = useRef(0);
   /** Sum of bytes total. */
-  let sumBytesTotal = 0;
+  const sumBytesTotal = useRef(0);
   /** Sum percent completed. */
-  let sumPercentCompleted = 0;
+  const sumPercentCompleted = useRef(0);
   /** Number of completed items. */
-  let numCompleted = 0;
+  const numCompleted = useRef(0);
 
-  const fontFetcher = async (url: string, loadIndex: number): Promise<BMFont> => {
+  /*********************************
+   * Fetchers
+   *********************************/
+
+  const fontFetcher = async (url: string | null, loadIndex: number): Promise<BMFont | null> => {
+    if (!url) return null;
     return axios
       .get(url, {
         onDownloadProgress: async (progressEvent) => {
@@ -37,10 +57,10 @@ const useFont = (fontUrl: string, textureUrl: string, onProgress?: (loaded: numb
         },
       })
       .then(async (res) => {
-        numCompleted++;
-        calculateProgress(loadIndex, itemBytesTotal[loadIndex]!, itemBytesTotal[loadIndex]!);
+        numCompleted.current++;
+        calculateProgress(loadIndex, itemBytesTotal.current[loadIndex]!, itemBytesTotal.current[loadIndex]!);
         const text = res.data;
-        const extension = fontUrl.split('.').pop()?.toLowerCase();
+        const extension = url.split('.').pop()?.toLowerCase();
         switch (extension) {
           case 'xml':
             return new BMFontXMLParser().parse(text);
@@ -56,19 +76,29 @@ const useFont = (fontUrl: string, textureUrl: string, onProgress?: (loaded: numb
       });
   };
 
-  const textureFetcher = async (url: string, loadIndex: number): Promise<Texture> => {
-    return axios
-      .get(url, {
-        onDownloadProgress: async (progressEvent) => {
-          calculateProgress(loadIndex, progressEvent.loaded, progressEvent.total ?? 0);
+  const textureFetcher = async (url: string | null, loadIndex: number): Promise<Texture | null> => {
+    if (!url) return null;
+    return new Promise((resolve, reject) => {
+      new TextureLoader().load(
+        url,
+        (texture: Texture) => {
+          numCompleted.current++;
+          calculateProgress(loadIndex, itemBytesTotal.current[loadIndex]!, itemBytesTotal.current[loadIndex]!);
+          resolve(texture);
         },
-      })
-      .then(async (res) => {
-        numCompleted++;
-        calculateProgress(loadIndex, itemBytesTotal[loadIndex]!, itemBytesTotal[loadIndex]!);
-        return new TextureLoader().load(res.data);
-      });
+        (event: ProgressEvent) => {
+          calculateProgress(loadIndex, event.loaded, event.total ?? 0);
+        },
+        (error: unknown) => {
+          reject(error);
+        },
+      );
+    });
   };
+
+  /*********************************
+   * Progress
+   *********************************/
 
   /**
    * Update the progress of the loading.
@@ -79,20 +109,35 @@ const useFont = (fontUrl: string, textureUrl: string, onProgress?: (loaded: numb
    */
   const calculateProgress = (index: number, loaded: number, total: number) => {
     /** Update the loaded and total bytes for the item. */
-    itemBytesLoaded[index] = loaded;
-    itemBytesTotal[index] = total;
+    itemBytesLoaded.current[index] = loaded;
+    itemBytesTotal.current[index] = total;
 
     /** Update the loaded and total bytes for the sum. */
-    sumBytesLoaded = itemBytesLoaded.reduce((acc, curr) => acc + curr, 0);
-    sumBytesTotal = itemBytesTotal.reduce((acc, curr) => acc + curr, 0);
-    if (sumBytesLoaded === 0 || sumBytesTotal === 0) return;
-    sumPercentCompleted = Math.round((sumBytesLoaded * 100) / sumBytesTotal);
+    sumBytesLoaded.current = itemBytesLoaded.current.reduce((acc: number, curr: number) => acc + curr, 0);
+    sumBytesTotal.current = itemBytesTotal.current.reduce((acc: number, curr: number) => acc + curr, 0);
+    if (sumBytesLoaded.current === 0 || sumBytesTotal.current === 0) return;
+    sumPercentCompleted.current = Math.round((sumBytesLoaded.current * 100) / sumBytesTotal.current);
 
-    onProgress?.(sumBytesLoaded, sumBytesTotal, sumPercentCompleted);
+    console.log('onProgress', onProgressRef.current);
+    console.log('calculateProgress', 'sumBytesLoaded', sumBytesLoaded.current, 'sumBytesTotal', sumBytesTotal.current, 'sumPercentCompleted', sumPercentCompleted.current);
+    onProgressRef.current?.(sumBytesLoaded.current, sumBytesTotal.current, sumPercentCompleted.current);
   };
+
+  useEffect(() => {
+    console.log('useEffect', 'onProgress', onProgress);
+    onProgressRef.current = onProgress;
+  }, [onProgress]);
+
+  /*********************************
+   * Loaders
+   *********************************/
 
   const { data: font, isLoading: isFontLoading } = useSWR(fontUrl, (url) => fontFetcher(url, 0));
   const { data: texture, isLoading: isTextureLoading } = useSWR(textureUrl, (url) => textureFetcher(url, 1));
+
+  /*********************************
+   * Result Hook
+   *********************************/
 
   return {
     font: font as BMFont,
