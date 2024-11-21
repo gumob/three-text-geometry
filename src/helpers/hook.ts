@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import axios from 'axios';
 import useSWR from 'swr';
 import { Texture, TextureLoader } from 'three';
@@ -19,6 +19,12 @@ interface FontProgressCallback {
  * @returns { { font: BMFont; texture: Texture; isLoading: boolean } } - The font data, texture, and loading state.
  */
 const useFont = (fontUrl: string | null = null, textureUrl: string | null = null, onProgress: FontProgressCallback | null = null): { font: BMFont; texture: Texture; isLoading: boolean } => {
+  /*********************************
+   * Refs
+   *********************************/
+
+  const callbackRef = useRef(onProgress);
+
   /*********************************
    * State
    *********************************/
@@ -42,8 +48,18 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
    * Loaders
    *********************************/
 
-  const { data: font, isLoading: isFontLoading } = useSWR(fontUrl, (url) => fontFetcher(url, 0));
-  const { data: texture, isLoading: isTextureLoading } = useSWR(textureUrl, (url) => textureFetcher(url, 1));
+  const { data: font, isLoading: isFontLoading } = useSWR(fontUrl, (url) => fontFetcher(url, 0), {
+    // suspense: true,
+    // revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+  const { data: texture, isLoading: isTextureLoading } = useSWR(textureUrl, (url) => textureFetcher(url, 1), {
+    // suspense: true,
+    // revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   /*********************************
    * Fetchers
@@ -54,12 +70,12 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
     return axios
       .get(url, {
         onDownloadProgress: async (progressEvent) => {
-          calculateProgress(loadIndex, progressEvent.loaded, progressEvent.total ?? 0);
+          calculateProgress(loadIndex, progressEvent.loaded, progressEvent.total ?? 0, url);
         },
       })
       .then(async (res) => {
         numCompleted.current++;
-        calculateProgress(loadIndex, itemBytesTotal.current[loadIndex]!, itemBytesTotal.current[loadIndex]!);
+        calculateProgress(loadIndex, itemBytesTotal.current[loadIndex]!, itemBytesTotal.current[loadIndex]!, url);
         const text = res.data;
         const extension = url.split('.').pop()?.toLowerCase();
         switch (extension) {
@@ -79,22 +95,23 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
 
   const textureFetcher = async (url: string | null, loadIndex: number): Promise<Texture | null> => {
     if (!url) return null;
-    return new Promise((resolve, reject) => {
-      new TextureLoader().load(
-        url,
-        (texture: Texture) => {
-          numCompleted.current++;
-          calculateProgress(loadIndex, itemBytesTotal.current[loadIndex]!, itemBytesTotal.current[loadIndex]!);
-          resolve(texture);
+    return axios
+      .get(url, {
+        responseType: 'arraybuffer',
+        headers: {
+          'Content-Type': 'image/*',
         },
-        (event: ProgressEvent) => {
-          calculateProgress(loadIndex, event.loaded, event.total ?? 0);
+        onDownloadProgress: async (progressEvent) => {
+          calculateProgress(loadIndex, progressEvent.loaded, progressEvent.total ?? 0, url);
         },
-        (error: unknown) => {
-          reject(error);
-        },
-      );
-    });
+      })
+      .then(async (res) => {
+        numCompleted.current++;
+        calculateProgress(loadIndex, itemBytesTotal.current[loadIndex]!, itemBytesTotal.current[loadIndex]!, url);
+        const blob = new Blob([res.data], { type: res.headers['content-type'] });
+        const imageUrl = URL.createObjectURL(blob);
+        return new TextureLoader().load(imageUrl);
+      });
   };
 
   /*********************************
@@ -107,20 +124,25 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
    * @param {number} index - The index of the data.
    * @param {number} loaded - The loaded bytes.
    * @param {number} total - The total bytes.
+   * @param {string} url - The URL of the item.
    */
-  const calculateProgress = (index: number, loaded: number, total: number) => {
+  const calculateProgress = (index: number, loaded: number, total: number, url: string) => {
     /** Update the loaded and total bytes for the item. */
     itemBytesLoaded.current[index] = loaded;
     itemBytesTotal.current[index] = total;
 
+    /** Check how many items have started loading. */
+    const numLoadStarted = itemBytesTotal.current.filter((value) => value !== 0).length;
+    const ratioLoadStarted = numLoadStarted / totalItems;
+
     /** Update the loaded and total bytes for the sum. */
     sumBytesLoaded.current = itemBytesLoaded.current.reduce((acc: number, curr: number) => acc + curr, 0);
     sumBytesTotal.current = itemBytesTotal.current.reduce((acc: number, curr: number) => acc + curr, 0);
-    if (sumBytesLoaded.current === 0 || sumBytesTotal.current === 0) return;
-    sumPercentCompleted.current = Math.round((sumBytesLoaded.current * 100) / sumBytesTotal.current);
 
-    console.log('calculateProgress', 'fontUrl', fontUrl, 'onProgress', onProgress);
-    onProgress?.(sumBytesLoaded.current, sumBytesTotal.current, sumPercentCompleted.current);
+    if (sumBytesTotal.current === 0) return;
+    sumPercentCompleted.current = Math.round((sumBytesLoaded.current * 100) / sumBytesTotal.current) * ratioLoadStarted;
+
+    callbackRef.current?.(sumBytesLoaded.current, sumBytesTotal.current, sumPercentCompleted.current);
   };
 
   /*********************************
