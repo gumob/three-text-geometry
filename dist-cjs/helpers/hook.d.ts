@@ -6,6 +6,8 @@ interface FontProgressCallback {
 declare const useFont: (fontUrl?: string | null, textureUrl?: string | null, onProgress?: FontProgressCallback | null) => {
     font: BMFont;
     texture: Texture;
+    fontError: Error | null;
+    textureError: Error | null;
     isLoading: boolean;
 };
 export { useFont, FontProgressCallback };

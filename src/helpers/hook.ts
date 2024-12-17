@@ -18,7 +18,7 @@ interface FontProgressCallback {
  * @param {FontProgressCallback} onProgress - The function to call with the progress of the font file download.
  * @returns { { font: BMFont; texture: Texture; isLoading: boolean } } - The font data, texture, and loading state.
  */
-const useFont = (fontUrl: string | null = null, textureUrl: string | null = null, onProgress: FontProgressCallback | null = null): { font: BMFont; texture: Texture; isLoading: boolean } => {
+const useFont = (fontUrl: string | null = null, textureUrl: string | null = null, onProgress: FontProgressCallback | null = null): { font: BMFont; texture: Texture; fontError: Error | null; textureError: Error | null; isLoading: boolean } => {
   /*********************************
    * Refs
    *********************************/
@@ -48,13 +48,13 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
    * Loaders
    *********************************/
 
-  const { data: font, isLoading: isFontLoading } = useSWR(fontUrl, (url) => fontFetcher(url, 0), {
+  const { data: font, error: fontError, isLoading: isFontLoading } = useSWR(fontUrl, (url) => fontFetcher(url, 0), {
     // suspense: true,
     // revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
-  const { data: texture, isLoading: isTextureLoading } = useSWR(textureUrl, (url) => textureFetcher(url, 1), {
+  const { data: texture, error: textureError, isLoading: isTextureLoading } = useSWR(textureUrl, (url) => textureFetcher(url, 1), {
     // suspense: true,
     // revalidateIfStale: false,
     revalidateOnFocus: false,
@@ -152,6 +152,8 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
   return {
     font: font as BMFont,
     texture: texture as Texture,
+    fontError,
+    textureError,
     isLoading: isFontLoading || isTextureLoading,
   };
 };
