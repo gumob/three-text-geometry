@@ -1,14 +1,14 @@
 import { BMFont, TextAlign, WordWrapMode } from '../types';
 export interface TextGeometryOption {
-    font?: BMFont | undefined;
-    start?: number | undefined;
-    end?: number | undefined;
-    width?: number | undefined;
-    mode?: WordWrapMode | undefined;
-    letterSpacing?: number | undefined;
-    tabSize?: number | undefined;
-    lineHeight?: number | undefined;
-    align?: TextAlign | undefined;
+    font?: BMFont;
+    start?: number;
+    end?: number;
+    width?: number;
+    mode?: WordWrapMode;
+    letterSpacing?: number;
+    tabSize?: number;
+    lineHeight?: number;
+    align?: TextAlign;
     flipY?: boolean;
     multipage?: boolean;
 }

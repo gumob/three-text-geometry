@@ -39,10 +39,20 @@ describe('TextGeometry', () => {
     camera.position.set(eye.x, eye.y, eye.z);
     camera.lookAt(target);
     scene.add(camera);
+
+    jest.spyOn(console, 'debug').mockImplementation(() => {});
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   describe('Option', () => {
     test('No Font', async () => {
+      // new TextGeometry('Hello World');
+      // expect(console.error).toHaveBeenCalledWith('Must specify a `font` in options');
       try {
         new TextGeometry('Hello World');
       } catch (e) {

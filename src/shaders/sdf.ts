@@ -19,7 +19,7 @@ interface SDFShaderOption {
  * @param {SDFShaderOption} opt - The options for the shader.
  * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
  */
-function createSDFShader(opt: SDFShaderOption) {
+function createSDFShader(opt: SDFShaderOption): THREE.ShaderMaterialParameters {
   opt = opt || {};
   const opacity = opt.opacity !== undefined ? opt.opacity : 1;
   const alphaTest = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
@@ -79,7 +79,7 @@ function createSDFShader(opt: SDFShaderOption) {
       ].join('\n'),
     },
     opt,
-  );
+  ) as THREE.ShaderMaterialParameters;
 }
 
 export { createSDFShader };

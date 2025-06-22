@@ -56,43 +56,43 @@ export interface WordWrapOption {
   /**
    * The starting index into the text to layout.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof WordWrapOption
    * @default 0
    */
-  start?: number | undefined;
+  start?: number;
   /**
    * The ending index (exclusive) into the text to layout.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof WordWrapOption
    * @default text.length
    */
-  end?: number | undefined;
+  end?: number;
   /**
    * The desired width of the text box, causes word-wrapping and clipping in WordWrapMode mode. Leave as
    * undefined to remove word-wrapping (default behaviour).
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof TextGeometryOption
    * @default undefined
    */
-  width?: number | undefined;
+  width?: number;
   /**
    * A mode for word-wrapper; can be WordWrapMode.Pre (maintain spacing), or WordWrapMode.NoWrap (collapse
    * whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse
    * whitespace, break at width or newlines).
    *
-   * @type {WordWrapMode | undefined}
+   * @type {WordWrapMode}
    * @memberof TextGeometryOption
    * @default undefined
    */
-  mode?: WordWrapMode | undefined;
+  mode?: WordWrapMode;
   /**
    * The function that computes word metrics.
    *
-   * @type {ComputeMetrics | undefined}
+   * @type {ComputeMetrics}
    * @memberof WordWrapOption
    */
-  measure?: ComputeMetrics | undefined;
+  measure?: ComputeMetrics;
 }
