@@ -5,6 +5,7 @@ declare class TextLayout {
     static readonly CAP_HEIGHTS: string[];
     static readonly TAB_ID: number;
     static readonly SPACE_ID: number;
+    private _text;
     private _opt;
     private _fallbackSpaceGlyph;
     private _fallbackTabGlyph;
@@ -17,7 +18,10 @@ declare class TextLayout {
     private _baseline?;
     private _capHeight?;
     private _lineHeight?;
+    get text(): string;
+    set text(value: string);
     get option(): TextLayoutOption;
+    set option(value: TextLayoutOption);
     get glyphs(): TextGlyph[];
     get width(): number;
     get height(): number;
@@ -29,7 +33,7 @@ declare class TextLayout {
     get lineHeight(): number;
     toString(): string;
     constructor(text: string, option?: any);
-    update(text: string, option?: any): void;
+    update(text?: string, option?: any): void;
     private _setupSpaceGlyphs;
     private getGlyph;
     private computeMetrics;

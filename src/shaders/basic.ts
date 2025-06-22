@@ -19,7 +19,7 @@ interface BasicShaderOption {
  * @param {BasicShaderOption} opt - The options for the shader.
  * @returns {THREE.ShaderMaterialParameters} The shader material parameters.
  */
-function createBasicShader(opt: BasicShaderOption) {
+function createBasicShader(opt: BasicShaderOption): THREE.ShaderMaterialParameters {
   opt = opt || {};
   const opacity: number = opt.opacity !== undefined ? opt.opacity : 1;
   const alphaTest: number = opt.alphaTest !== undefined ? opt.alphaTest : 0.0001;
@@ -64,7 +64,7 @@ function createBasicShader(opt: BasicShaderOption) {
       ].join('\n'),
     },
     opt,
-  );
+  ) as THREE.ShaderMaterialParameters;
 }
 
 export { createBasicShader };

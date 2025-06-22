@@ -9,77 +9,77 @@ export interface TextGeometryOption {
   /**
    * The BMFont definition which holds chars, kernings, etc.
    *
-   * @type {BMFont | undefined}
+   * @type {BMFont}
    * @memberof TextGeometryOption
    */
-  font?: BMFont | undefined;
+  font?: BMFont;
   /**
    * The starting index into the text to layout.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof WordWrapOption
    * @default 0
    */
-  start?: number | undefined;
+  start?: number;
   /**
    * The ending index (exclusive) into the text to layout.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof WordWrapOption
    * @default text.length
    */
-  end?: number | undefined;
+  end?: number;
   /**
    * The desired width of the text box, causes word-wrapping and clipping in WordWrapMode mode. Leave as
    * undefined to remove word-wrapping (default behaviour).
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof TextGeometryOption
    * @default undefined
    */
-  width?: number | undefined;
+  width?: number;
   /**
    * A mode for word-wrapper; can be WordWrapMode.Pre (maintain spacing), or WordWrapMode.NoWrap (collapse
    * whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse
    * whitespace, break at width or newlines).
    *
-   * @type {WordWrapMode | undefined}
+   * @type {WordWrapMode}
    * @memberof TextGeometryOption
    * @default undefined
    */
-  mode?: WordWrapMode | undefined;
+  mode?: WordWrapMode;
   /**
    * The letter spacing in pixels.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof TextGeometryOption
    * @default 0
    */
-  letterSpacing?: number | undefined;
+  letterSpacing?: number;
   /**
    * The number of spaces to use in a single tab	.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof TextGeometryOption
    * @default 4
    */
-  tabSize?: number | undefined;
+  tabSize?: number;
   /**
    * The line height in pixels.
    *
-   * @type {number | undefined}
+   * @type {number}
    * @memberof TextGeometryOption
    * @default font.common.lineHeight.
    */
-  lineHeight?: number | undefined;
+  lineHeight?: number;
   /**
    * This can be TextAlign.left, TextAlign.center or TextAlign.right.
    *
-   * @type {TextAlign | undefined}
+   * @type {TextAlign}
    * @memberof TextGeometryOption
    * @default TextAlign.left
    */
-  align?: TextAlign | undefined;
+  align?: TextAlign;
   /**
    * Whether the texture will be Y-flipped.
    *

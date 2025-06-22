@@ -23,6 +23,8 @@ class TextLayout {
   static readonly TAB_ID = '\t'.charCodeAt(0);
   static readonly SPACE_ID = ' '.charCodeAt(0);
 
+  private _text: string = '';
+
   private _opt: TextLayoutOption = {
     font: undefined,
     letterSpacing: undefined,
@@ -51,13 +53,41 @@ class TextLayout {
   private _lineHeight?: number;
 
   /**
+   * Gets the text used in the text layout.
+   *
+   * @returns {string} The text used in the text layout.
+   */
+  public get text(): string {
+    return this._text;
+  }
+
+  /**
+   * Sets the text used in the text layout.
+   *
+   * @param {string} value - The text used in the text layout.
+   */
+  public set text(value: string) {
+    this._text = value;
+    this.update(value, this._opt);
+  }
+
+  /**
    * Gets the options for the text layout.
    *
    * @returns {TextLayoutOption} The options for the text layout.
-   * @readonly
    */
   public get option(): TextLayoutOption {
     return { ...this._opt } as TextLayoutOption;
+  }
+
+  /**
+   * Sets the options for the text layout.
+   *
+   * @param {TextLayoutOption} value - The options for the text layout.
+   */
+  public set option(value: TextLayoutOption) {
+    this._opt = { ...value };
+    this.update(this._text, this._opt);
   }
 
   /**
@@ -188,7 +218,8 @@ class TextLayout {
    * @param {string} text - The text to layout.
    * @param {any} option - The options for the text layout.
    */
-  public update(text: string, option: any = {}) {
+  public update(text?: string, option?: any) {
+    this._text = text ?? this._text;
     /** Initialize variables */
     this._glyphs = [];
     this._width = 0;
@@ -200,27 +231,29 @@ class TextLayout {
     this._capHeight = 0;
     this._lineHeight = 0;
     /** Initialize options */
-    if (option.font !== undefined) this._opt.font = option.font;
-    if (option.start !== undefined) this._opt.start = Math.max(0, option.start);
-    else this._opt.start = 0;
-    if (option.end !== undefined) this._opt.end = option.end;
-    else this._opt.end = text.length;
-    if (option.width !== undefined) this._opt.width = option.width;
-    if (option.align !== undefined) this._opt.align = option.align;
-    else this._opt.align = TextAlign.Left;
-    if (option.mode !== undefined) this._opt.mode = option.mode;
-    if (option.letterSpacing !== undefined) this._opt.letterSpacing = option.letterSpacing;
-    else this._opt.letterSpacing = 0;
-    if (option.lineHeight !== undefined) this._opt.lineHeight = option.lineHeight;
-    else this._opt.lineHeight = this._opt.font!.common.lineHeight;
-    if (option.tabSize !== undefined) this._opt.tabSize = option.tabSize;
-    else this._opt.tabSize = 4;
-    this._opt.measure = this.computeMetrics.bind(this);
-    this._setupSpaceGlyphs(this._opt.font!, this._opt.tabSize!);
+    if (option) {
+      if (option.font !== undefined) this._opt.font = option.font;
+      if (option.start !== undefined) this._opt.start = Math.max(0, option.start);
+      else this._opt.start = 0;
+      if (option.end !== undefined) this._opt.end = option.end;
+      else this._opt.end = this._text.length;
+      if (option.width !== undefined) this._opt.width = option.width;
+      if (option.align !== undefined) this._opt.align = option.align;
+      else this._opt.align = TextAlign.Left;
+      if (option.mode !== undefined) this._opt.mode = option.mode;
+      if (option.letterSpacing !== undefined) this._opt.letterSpacing = option.letterSpacing;
+      else this._opt.letterSpacing = 0;
+      if (option.lineHeight !== undefined) this._opt.lineHeight = option.lineHeight;
+      else this._opt.lineHeight = this._opt.font!.common.lineHeight;
+      if (option.tabSize !== undefined) this._opt.tabSize = option.tabSize;
+      else this._opt.tabSize = 4;
+      this._opt.measure = this.computeMetrics.bind(this);
+      this._setupSpaceGlyphs(this._opt.font!, this._opt.tabSize!);
+    }
 
     const font: BMFont = this._opt.font!;
 
-    const lines = new WordWrap().lines(text, this._opt);
+    const lines = new WordWrap().lines(this._text, this._opt);
     const minWidth = this._opt.width || 0;
 
     /** get max line width */
@@ -260,7 +293,7 @@ class TextLayout {
       let lastGlyph = undefined;
       /** for each glyph in that line... */
       for (let i = start; i < end; i++) {
-        const id = text.charCodeAt(i);
+        const id = this._text.charCodeAt(i);
         const glyph = this.getGlyph(font, id);
         if (glyph) {
           if (lastGlyph) x += this.getKerning(font, lastGlyph.id, glyph.id);
