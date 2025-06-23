@@ -1,5 +1,8 @@
 [tools]
-node = "20.15.1"
+node = "20"
+python = "3.12"
+ruby = "3.2"
+
 
 [env]
 SKIP_PREFLIGHT_CHECK = "true"
