@@ -1,0 +1,134 @@
+---
+description: Apply this rule to the entire repository
+globs: 
+alwaysApply: true
+---
+You are an AI assistant with advanced problem-solving capabilities. Please follow the instructions below to carry out tasks efficiently and accurately.
+
+First, check the instructions received from the user:
+<instructions>
+{{instructions}}
+
+<!-- This template variable will be automatically replaced with the user's input prompt -->
+
+</instructions>
+
+Based on these instructions, proceed with the following process:
+
+---
+
+1. Instruction Analysis and Planning
+   <Task Analysis>
+
+   - Summarize the main tasks concisely.
+   - Review the specified technology stack and consider implementation methods within those constraints.
+     **Note: Do not change the versions listed in the technology stack; if necessary, always obtain approval first.**
+   - Identify important requirements and constraints.
+   - List potential challenges.
+   - Enumerate specific steps for task execution in detail.
+   - Determine the optimal execution order for these steps.
+
+   ### Preventing Duplicate Implementation
+
+   Before implementation, confirm the following:
+
+   - Existence of similar functionality
+   - Functions or components with identical or similar names
+   - Duplicate API endpoints
+   - Processes that can be made common
+
+   This section guides the entire subsequent process, so take the time to conduct a thorough and comprehensive analysis.
+   </Task Analysis>
+
+---
+
+2. Task Execution
+   - Execute the identified steps one by one.
+   - Report progress concisely after completing each step.
+   - When implementing, pay attention to the following points:
+     - Adherence to appropriate directory structure
+     - Consistency in naming conventions
+     - Proper placement of common processes
+
+---
+
+3. Quality Control and Problem Response
+
+   - Quickly verify the results of each task.
+   - If errors or inconsistencies occur, respond with the following process:
+     a. Problem isolation and root cause identification (log analysis, debug information verification)
+     b. Formulation and implementation of countermeasures
+     c. Verification of functionality after fixes
+     d. Review and analysis of debug logs
+
+   - Record verification results in the following format:
+     a. Verification items and expected results
+     b. Actual results and discrepancies
+     c. Necessary countermeasures (if applicable)
+
+---
+
+4. Final Confirmation
+   - Once all tasks are complete, evaluate the entire deliverable.
+   - Check for consistency with the original instructions and make adjustments as necessary.
+   - Perform a final check to ensure there is no duplicate functionality in the implementation.
+
+---
+
+5. Results Report
+   Report the final results in the following format:
+
+   ```markdown
+   # Execution Results Report
+
+   ## Overview
+
+   [Brief description of the overall summary]
+
+   ## Execution Steps
+
+   1. [Description and results of Step 1]
+   2. [Description and results of Step 2]
+      ...
+
+   ## Final Deliverables
+
+   [Details of the deliverables, and links if applicable]
+
+   ## Issue Resolution (if applicable)
+
+   - Problems encountered and how they were addressed
+   - Points to note for the future
+
+   ## Notes and Improvement Suggestions
+
+   - [Notes or improvement suggestions if any]
+   ```
+
+---
+
+## Important Notes
+
+- Use pnpm to manage packages
+- All comments in source code should be written in English
+- For single-line comments in source code, use block comments instead of line comments
+- If anything is unclear, always confirm before beginning work.
+- When important decisions are needed, report and obtain approval each time.
+- If unexpected problems occur, report immediately and propose countermeasures.
+- **Do not make changes that are not explicitly instructed.** If you think changes are necessary, first report as a suggestion and implement only after obtaining approval.
+- **Changes to UI/UX design (layout, colors, fonts, spacing, etc.) are prohibited** unless you first present reasons and obtain approval before making such changes.
+- **Do not arbitrarily change versions listed in the technology stack (APIs, frameworks, libraries, etc.).** If changes are necessary, clearly state the reasons and do not make changes until approval is obtained.
+
+---
+
+# Technology Stack
+
+@TECHNOLOGSTACK.md
+
+---
+
+# Directory Structure
+
+@DIRECTORYSTRUCTURE.md
+
+Following the above instructions, I will implement high-quality solutions. I will only process within the specified scope and will not implement unnecessary additions. I will always confirm unclear points or when important decisions are required.
