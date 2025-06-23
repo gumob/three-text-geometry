@@ -1,5 +1,75 @@
-import{BMFontError}from"../error";import{DefaultBMFont,DefaultBMFontCommon,DefaultBMFontInfo}from"../types";class BMFontAsciiParser{parse(r){r=(r=r.trim()).split(/\r\n?|\n/g);if(0===r.length)throw new BMFontError("No data in BMFont file");let a=DefaultBMFont();if(r.forEach((r,t)=>{if(r=r.replace(/[\s\t]+/g," ").trim()){var o=r.indexOf(" ");if(-1===o)throw new BMFontError("No page data");var n=r.substring(0,o);let e={};switch(r.substring(o+1).replace(/[\s\t]+/g," ").split(" ").forEach(r=>{var r=r.split("="),t=r[0],r=r[1];/^-?\d+\.?\d*$/.test(r)?e[t]=+r:/^[\d,]+/.test(r)?e[t]=r.split(",").map(r=>+r):/^("|').*("|')$/.test(r)?e[t]=r.replace(/^("|')(.*)("|')$/g,"$2"):e[t]=r}),n){case"info":a.info=e;break;case"common":a.common=e;break;case"distanceField":a.distanceField=e;break;case"page":a.pages.push(e.file);break;case"chars":break;case"char":a.chars.push(e);break;case"kernings":break;case"kerning":a.kernings.push(e)}}}),JSON.stringify(a.info)===JSON.stringify(DefaultBMFontInfo()))throw new BMFontError(`No info data. 
-`+JSON.stringify(a));if(JSON.stringify(a.common)===JSON.stringify(DefaultBMFontCommon()))throw new BMFontError(`No common data. 
-`+JSON.stringify(a));if(0==a.pages.length)throw new BMFontError(`No page data. 
-`+JSON.stringify(a));if(0==a.chars.length)throw new BMFontError(`No char data. 
-`+JSON.stringify(a));return a}}export{BMFontAsciiParser};
+import { BMFontError } from '../error';
+import { DefaultBMFont, DefaultBMFontCommon, DefaultBMFontInfo } from '../types';
+class BMFontAsciiParser {
+    parse(data) {
+        data = data.trim();
+        const lines = data.split(/\r\n?|\n/g);
+        if (lines.length === 0)
+            throw new BMFontError('No data in BMFont file');
+        const result = DefaultBMFont();
+        lines.forEach((line, _index) => {
+            line = line.replace(/[\s\t]+/g, ' ').trim();
+            if (!line)
+                return;
+            const space = line.indexOf(' ');
+            if (space === -1)
+                throw new BMFontError('No page data');
+            const rootKey = line.substring(0, space);
+            const keyValues = {};
+            line
+                .substring(space + 1)
+                .replace(/[\s\t]+/g, ' ')
+                .split(' ')
+                .forEach((str) => {
+                const arr = str.split('=');
+                const key = arr[0];
+                const value = arr[1];
+                if (/^-?\d+\.?\d*$/.test(value))
+                    keyValues[key] = +value;
+                else if (/^[\d,]+/.test(value))
+                    keyValues[key] = value.split(',').map((value) => +value);
+                else if (/^("|').*("|')$/.test(value))
+                    keyValues[key] = value.replace(/^("|')(.*)("|')$/g, '$2');
+                else
+                    keyValues[key] = value;
+            });
+            switch (rootKey) {
+                case 'info':
+                    result.info = keyValues;
+                    break;
+                case 'common':
+                    result.common = keyValues;
+                    break;
+                case 'distanceField':
+                    result.distanceField = keyValues;
+                    break;
+                case 'page':
+                    result.pages.push(keyValues.file);
+                    break;
+                case 'chars':
+                    break;
+                case 'char':
+                    result.chars.push(keyValues);
+                    break;
+                case 'kernings':
+                    break;
+                case 'kerning':
+                    result.kernings.push(keyValues);
+                    break;
+                default:
+                    break;
+            }
+        });
+        if (JSON.stringify(result.info) === JSON.stringify(DefaultBMFontInfo()))
+            throw new BMFontError(`No info data. \n${JSON.stringify(result)}`);
+        if (JSON.stringify(result.common) === JSON.stringify(DefaultBMFontCommon()))
+            throw new BMFontError(`No common data. \n${JSON.stringify(result)}`);
+        if (result.pages.length == 0)
+            throw new BMFontError(`No page data. \n${JSON.stringify(result)}`);
+        if (result.chars.length == 0)
+            throw new BMFontError(`No char data. \n${JSON.stringify(result)}`);
+        return result;
+    }
+}
+export { BMFontAsciiParser };
+//# sourceMappingURL=BMFontAsciiParser.js.map

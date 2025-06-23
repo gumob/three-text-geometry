@@ -1,1 +1,34 @@
-import{dtype}from"../utils";function createIndices(t=null,e=null){let r=null;r=t&&(Array.isArray(t)||Buffer.isBuffer(t))?t:(e=t||{},null);var t="string"==typeof(e=e||{}).type?e.type:"uint16",n=void 0!==e.count?e.count:1,o=void 0!==e.start?e.start:0,e="boolean"!=typeof e.clockwise||e.clockwise?[0,2,3]:[2,1,3],i=e[0]||0,l=e[1]||0,u=e[2]||0,c=6*n,a=r||new(dtype(t)||Uint16Array)(c);for(let t=0,e=0;t<c;t+=6,e+=4){var s=t+o;a[s+0]=e+0,a[s+1]=e+1,a[s+2]=e+2,a[s+3]=e+i,a[s+4]=e+l,a[s+5]=e+u}return a}export{createIndices};
+import { dtype } from '../utils';
+function createIndices(array = null, opt = null) {
+    let arr = null;
+    if (!array || !(Array.isArray(array) || Buffer.isBuffer(array))) {
+        opt = array || {};
+        arr = null;
+    }
+    else {
+        arr = array;
+    }
+    opt = opt || {};
+    const type = typeof opt.type === 'string' ? opt.type : 'uint16';
+    const count = opt.count !== undefined ? opt.count : 1;
+    const start = opt.start !== undefined ? opt.start : 0;
+    const clockwise = typeof opt.clockwise === 'boolean' ? opt.clockwise : true;
+    const dir = clockwise ? [0, 2, 3] : [2, 1, 3];
+    const a = dir[0] || 0;
+    const b = dir[1] || 0;
+    const c = dir[2] || 0;
+    const numIndices = count * 6;
+    const indices = arr || new (dtype(type) || Uint16Array)(numIndices);
+    for (let i = 0, j = 0; i < numIndices; i += 6, j += 4) {
+        const x = i + start;
+        indices[x + 0] = j + 0;
+        indices[x + 1] = j + 1;
+        indices[x + 2] = j + 2;
+        indices[x + 3] = j + a;
+        indices[x + 4] = j + b;
+        indices[x + 5] = j + c;
+    }
+    return indices;
+}
+export { createIndices };
+//# sourceMappingURL=quad-indices.js.map

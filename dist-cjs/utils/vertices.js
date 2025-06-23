@@ -1,1 +1,67 @@
-function extractPages(r){var a=new Float32Array(4*r.length*1);let o=0;for(let t=0,e=r.length;t<e;t++){var n=r[t].data.page||0;a[o++]=n,a[o++]=n,a[o++]=n,a[o++]=n}return a}function extractUVs(a,o,n,s){var l=new Float32Array(4*a.length*2);let i=0;for(let r=0,t=a.length;r<t;r++){var x=a[r].data,c=x.x+x.width,g=x.y+x.height,h=x.x/o;let t=x.y/n;c=c/o;let e=g/n;s&&(t=(n-x.y)/n,e=(n-g)/n),l[i++]=h,l[i++]=t,l[i++]=h,l[i++]=e,l[i++]=c,l[i++]=e,l[i++]=c,l[i++]=t}return l}function extractPositions(r){var a=new Float32Array(4*r.length*2);let o=0;for(let t=0,e=r.length;t<e;t++){var n=r[t],s=n.data,l=n.position[0]+s.xoffset,n=n.position[1]+s.yoffset,i=s.width,s=s.height;a[o++]=l,a[o++]=n,a[o++]=l,a[o++]=n+s,a[o++]=l+i,a[o++]=n+s,a[o++]=l+i,a[o++]=n}return a}Object.defineProperty(exports,"__esModule",{value:!0}),exports.extractPages=extractPages,exports.extractPositions=extractPositions,exports.extractUVs=extractUVs;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.extractPages = extractPages;
+exports.extractPositions = extractPositions;
+exports.extractUVs = extractUVs;
+function extractPages(glyphs) {
+    const pages = new Float32Array(glyphs.length * 4 * 1);
+    let idx = 0;
+    for (let i = 0, len = glyphs.length; i < len; i++) {
+        const glyph = glyphs[i];
+        const id = glyph.data.page || 0;
+        pages[idx++] = id;
+        pages[idx++] = id;
+        pages[idx++] = id;
+        pages[idx++] = id;
+    }
+    return pages;
+}
+function extractUVs(glyphs, texWidth, texHeight, flipY) {
+    const uvs = new Float32Array(glyphs.length * 4 * 2);
+    let idx = 0;
+    for (let i = 0, len = glyphs.length; i < len; i++) {
+        const glyph = glyphs[i];
+        const bitmap = glyph.data;
+        const bw = bitmap.x + bitmap.width;
+        const bh = bitmap.y + bitmap.height;
+        const u0 = bitmap.x / texWidth;
+        let v1 = bitmap.y / texHeight;
+        const u1 = bw / texWidth;
+        let v0 = bh / texHeight;
+        if (flipY) {
+            v1 = (texHeight - bitmap.y) / texHeight;
+            v0 = (texHeight - bh) / texHeight;
+        }
+        uvs[idx++] = u0;
+        uvs[idx++] = v1;
+        uvs[idx++] = u0;
+        uvs[idx++] = v0;
+        uvs[idx++] = u1;
+        uvs[idx++] = v0;
+        uvs[idx++] = u1;
+        uvs[idx++] = v1;
+    }
+    return uvs;
+}
+function extractPositions(glyphs) {
+    const positions = new Float32Array(glyphs.length * 4 * 2);
+    let idx = 0;
+    for (let i = 0, len = glyphs.length; i < len; i++) {
+        const glyph = glyphs[i];
+        const bitmap = glyph.data;
+        const x = glyph.position[0] + bitmap.xoffset;
+        const y = glyph.position[1] + bitmap.yoffset;
+        const w = bitmap.width;
+        const h = bitmap.height;
+        positions[idx++] = x;
+        positions[idx++] = y;
+        positions[idx++] = x;
+        positions[idx++] = y + h;
+        positions[idx++] = x + w;
+        positions[idx++] = y + h;
+        positions[idx++] = x + w;
+        positions[idx++] = y;
+    }
+    return positions;
+}
+//# sourceMappingURL=vertices.js.map
