@@ -1,1 +1,1 @@
-{"version":3,"file":"fiber.js","sourceRoot":"","sources":["../../src/helpers/fiber.ts"],"names":[],"mappings":";;;AAAA,8CAAyE;AAEzE,2EAA2C;AAE3C,IAAA,cAAM,EAAC,EAAE,YAAY,EAAZ,sBAAY,EAAE,CAAC,CAAC"}
+{"version":3,"file":"dist-cjs/helpers/fiber.js.map","sources":["../../src/helpers/fiber.ts"],"names":["fiber_1","require","TextGeometry_1","tslib_1","__importDefault","extend","TextGeometry","default"],"mappings":"oFAAAA,QAAAC,QAAA,oBAAA,EAEAC,eAAAC,QAAAC,gBAAAH,QAAA,iBAAA,CAAA,GAEA,EAAAD,QAAAK,QAAO,CAAEC,aAAAJ,eAAAK,OAAY,CAAE"}
