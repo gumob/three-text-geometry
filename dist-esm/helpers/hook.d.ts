@@ -10,5 +10,5 @@ declare const useFont: (fontUrl?: string | null, textureUrl?: string | null, onP
     textureError: Error | null;
     isLoading: boolean;
 };
-export { useFont, FontProgressCallback };
+export { FontProgressCallback, useFont };
 //# sourceMappingURL=hook.d.ts.map
