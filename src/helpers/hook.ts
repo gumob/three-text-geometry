@@ -48,13 +48,21 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
    * Loaders
    *********************************/
 
-  const { data: font, error: fontError, isLoading: isFontLoading } = useSWR(fontUrl, (url) => fontFetcher(url, 0), {
+  const {
+    data: font,
+    error: fontError,
+    isLoading: isFontLoading,
+  } = useSWR(fontUrl, (url) => fontFetcher(url, 0), {
     // suspense: true,
     // revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
-  const { data: texture, error: textureError, isLoading: isTextureLoading } = useSWR(textureUrl, (url) => textureFetcher(url, 1), {
+  const {
+    data: texture,
+    error: textureError,
+    isLoading: isTextureLoading,
+  } = useSWR(textureUrl, (url) => textureFetcher(url, 1), {
     // suspense: true,
     // revalidateIfStale: false,
     revalidateOnFocus: false,
@@ -126,6 +134,7 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
    * @param {number} total - The total bytes.
    * @param {string} url - The URL of the item.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const calculateProgress = (index: number, loaded: number, total: number, url: string) => {
     /** Update the loaded and total bytes for the item. */
     itemBytesLoaded.current[index] = loaded;
@@ -158,4 +167,4 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
   };
 };
 
-export { useFont, FontProgressCallback };
+export { FontProgressCallback, useFont };
