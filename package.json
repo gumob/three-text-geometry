@@ -63,7 +63,7 @@
     "fast-xml-parser": "^5.2.5",
     "react": "^19.1.0",
     "swr": "^2.3.3",
-    "three": "^0.177.0"
+    "three": "^0.172.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -84,7 +84,7 @@
     "@types/node": "^20.19.1",
     "@types/offscreencanvas": "^2019.7",
     "@types/react": "^19.1.8",
-    "@types/three": "^0.177.0",
+    "@types/three": "^0.172.0",
     "@types/ts-nameof": "^4.2",
     "@types/uglify-js": "^3.17",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
