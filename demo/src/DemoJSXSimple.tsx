@@ -25,7 +25,7 @@ const fetchFont = async (url: string) => {
   return new BMFontJsonParser().parse(response.data);
 };
 
-const DemoJSX = (): React.ReactNode => {
+const DemoJSXSimple = (): React.ReactNode => {
   return (
     <Canvas>
       <DemoJSXRenderer />
@@ -109,4 +109,4 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
   );
 };
 
-export default DemoJSX;
+export default DemoJSXSimple;

@@ -1,7 +1,7 @@
 import './index.css';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import DemoJSX from '~/DemoJSX';
+import DemoJSXSimple from '~/DemoJSXSimple';
 import DemoMultipage from '~/DemoMultipage';
 import DemoShader from '~/DemoShader';
 import DemoShuffle from '~/DemoShuffle';
@@ -16,7 +16,7 @@ root.render(
     <Navigation />
     <Routes>
       <Route path="*" element={<Navigate to="/simple" />} />
-      <Route path="/jsx" element={<DemoJSX />} />
+      <Route path="/jsx" element={<DemoJSXSimple />} />
       <Route path="/simple" element={<DemoSimple />} />
       <Route path="/multipage" element={<DemoMultipage />} />
       <Route path="/shuffle" element={<DemoShuffle />} />
