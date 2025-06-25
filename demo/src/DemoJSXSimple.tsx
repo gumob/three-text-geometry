@@ -6,13 +6,7 @@ import useSWR from 'swr';
 import * as THREE from 'three';
 import TextGeometry, { BMFontJsonParser, TextAlign, TextGeometryOption } from 'three-text-geometry';
 import { BoxHelper } from 'three';
-import { randomText } from './utils/Text';
-
-/**
- * Example 1: Using TextGeometry with JSX
- */
-const fontUrl = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json';
-const textureUrl = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png';
+import { FONT_URL, randomText, TEXTURE_URL } from './utils/Text';
 
 /**
  * Fetcher for font JSON and parse with BMFontJsonParser
@@ -33,11 +27,15 @@ const DemoJSXSimple = (): React.ReactNode => {
   );
 };
 
+
+/**
+ * Example 1: Using TextGeometry with JSX
+ */
 const DemoJSXRenderer = (): React.ReactNode => {
   const cameraRef = useRef<THREE.PerspectiveCamera>(null!);
 
-  const { data: font, error: fontError, isLoading: fontLoading } = useSWR(fontUrl, fetchFont);
-  const texture = useTexture(textureUrl);
+  const { data: font, error: fontError, isLoading: fontLoading } = useSWR(FONT_URL, fetchFont);
+  const texture = useTexture(TEXTURE_URL);
 
   const option: TextGeometryOption | null = useMemo(() => {
     if (!font || !texture) return null;

@@ -1,3 +1,5 @@
+const FONT_URL = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json';
+const TEXTURE_URL = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png';
 
 const textIndex: number = 0;
 const textList: string[] = [
@@ -13,4 +15,4 @@ const randomText = (): string => {
   return textList[index];
 }
 
-export { randomText };
+export { randomText, FONT_URL, TEXTURE_URL };
