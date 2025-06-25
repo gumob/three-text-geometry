@@ -14,10 +14,10 @@ The difference in rendering speed is noticeable when animations are enabled, and
 
 ## Requirements
 
-- React 19 or later
-- @react-three/fiber 9 or later
-- Three.js 0.172.0 or later
-- Node.js 20 or later
+- React 19
+- @react-three/fiber 9
+- Three.js 0.172.0
+- Node.js 20
 
 ## Installation
 
@@ -60,6 +60,89 @@ Please refer to the [README.md in the demo directory](https://github.com/gumob/t
 
 ### Sample code (JSX Component)
 
+1. Use [`useSWR`](https://swr.vercel.app/) and [`useTexture`](https://docs.pmnd.rs/drei/utilities/use-texture) to load assets asynchronously.
+2. Instantiate [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) using the loaded [`BMFont`](https://gumob.github.io/three-text-geometry/interfaces/BMFont.html) and [`THREE.Texture`](https://threejs.org/docs/#api/en/textures/Texture) data.
+
+[`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) supports word wrapping, text aligning, letter spacing, and kerning. See [the list](#option-list) to see how each option works.
+
+```TypeScript
+import React, { useEffect, useMemo, useRef } from 'react';
+import { PerspectiveCamera, useTexture } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import useSWR from 'swr';
+import * as THREE from 'three';
+import TextGeometry, { TextAlign, TextGeometryOption } from 'three-text-geometry';
+
+const DemoJSXSimple = (): React.ReactNode => {
+  return (
+    <Canvas>
+      <DemoJSXRenderer />
+    </Canvas>
+  );
+};
+
+const DemoJSXRenderer = (): React.ReactNode => {
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null!);
+  const { data: font, error: fontError } = useSWR(FONT_URL, fetchFont);
+  const texture = useTexture(TEXTURE_URL);
+
+  const option: TextGeometryOption | null = useMemo(() => {
+    if (!font || !texture) return null;
+    return {
+      font: font,
+      align: TextAlign.Left,
+      width: 1600,
+      flipY: texture.flipY,
+    };
+  }, [font, texture]);
+
+  useEffect(() => {
+    if (fontError) console.error('Failed to load font:', fontError);
+  }, [fontError]);
+
+  useEffect(() => {
+    if (cameraRef.current) cameraRef.current.lookAt(0, 0, 0);
+  }, [cameraRef]);
+
+  return (
+    <>
+      <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 1600]} fov={45} aspect={window.innerWidth / window.innerHeight} near={1} far={100000} />
+      <ambientLight intensity={0.1} />
+      <pointLight position={[1000, 1000, 1000]} />
+      {option && <TextMesh texture={texture} option={option} />}
+    </>
+  );
+};
+
+const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeometryOption }) => {
+  const meshRef = useRef<THREE.Mesh>(null!);
+  const geomRef = useRef<TextGeometry>(null!);
+
+  useEffect(() => {
+    /** Get the bounding box of the text geometry */
+    const box = new THREE.Vector3();
+    geomRef.current.computeBoundingBox();
+    geomRef.current.boundingBox?.getSize(box);
+    /** Reset the mesh position */
+    meshRef.current.scale.set(0.5, 0.5, 0.5);
+    meshRef.current.position.set(0, 0, 0);
+    meshRef.current.rotation.set(0, 0, 0);
+    /** Rotate and translate the mesh to center the text */
+    meshRef.current
+      .rotateY(Math.PI)
+      .rotateZ(Math.PI)
+      .translateX(-box.x / 4)
+      .translateY(-box.y / 4);
+  }, [meshRef, geomRef]);
+
+  return (
+    <mesh ref={meshRef}>
+      <textGeometry ref={geomRef} args={[randomText(), option]} />
+      <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent={true} color={0x666666} />
+    </mesh>
+  );
+};
+```
 
 ### Sample code (Class Component)
 
