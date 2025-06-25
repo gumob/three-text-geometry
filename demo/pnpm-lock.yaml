@@ -35,6 +35,9 @@ importers:
       axios:
         specifier: ^1.10.0
         version: 1.10.0
+      postprocessing:
+        specifier: ^6.37.4
+        version: 6.37.4(three@0.172.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0
