@@ -43,7 +43,7 @@ function TextGeometryJSXExample(): React.ReactNode {
   return (
     <mesh>
       <textGeometry args={["Hello World", textOption]} />
-      <meshBasicMaterial 
+      <meshBasicMaterial
         map={texture}
         side={THREE.DoubleSide}
         transparent={true}
