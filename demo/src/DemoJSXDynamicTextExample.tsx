@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import axios from 'axios';
 import * as THREE from 'three';
 import TextGeometry, { BMFontJsonParser, TextAlign, TextGeometryOption } from 'three-text-geometry';
-import { OrbitControls } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
 
 /**
  * Example 3: Dynamic text update
@@ -12,7 +12,7 @@ const DemoJSXDynamicTextExample = (): React.ReactNode => {
   const meshRef = useRef<THREE.Mesh>(null);
   const [font, setFont] = useState<any>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
-  const [text, setText] = useState("Hello World");
+  const [text, setText] = useState('Hello World');
   const [geometry, setGeometry] = useState<TextGeometry | null>(null);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const DemoJSXDynamicTextExample = (): React.ReactNode => {
   // Update text every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setText(prev => prev === "Hello World" ? "Updated Text!" : "Hello World");
+      setText((prev) => (prev === 'Hello World' ? 'Updated Text!' : 'Hello World'));
     }, 3000);
 
     return () => clearInterval(interval);
@@ -76,6 +76,6 @@ const DemoJSXDynamicTextExample = (): React.ReactNode => {
       <OrbitControls />
     </Canvas>
   );
-}
+};
 
 export default DemoJSXDynamicTextExample;

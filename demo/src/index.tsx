@@ -1,11 +1,13 @@
 import './index.css';
+
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import DemoJSXSimple from '~/DemoJSXSimple';
-import DemoJSXShuffle from '~/DemoJSXShuffle';
+
 import DemoJSXShader from '~/DemoJSXShader';
-import DemoMultipage from '~/DemoMultipage';
+import DemoJSXShuffle from '~/DemoJSXShuffle';
 import DemoJSXShuffleShader from '~/DemoJSXShuffleShader';
+import DemoJSXSimple from '~/DemoJSXSimple';
+import DemoMultipage from '~/DemoMultipage';
 import Navigation from '~/Navigation';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);

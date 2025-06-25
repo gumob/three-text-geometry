@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import axios from 'axios';
 import * as THREE from 'three';
 import TextGeometry, { BMFontJsonParser, TextAlign, TextGeometryOption } from 'three-text-geometry';
-import { OrbitControls } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
 
 /**
  * Example 2: Using TextGeometry with traditional approach (Recommended)
@@ -62,7 +62,7 @@ const DemoJSXTextGeometryTraditionalExample = (): React.ReactNode => {
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} />
       <OrbitControls />
-        <mesh ref={meshRef} geometry={geometry} material={material} />
+      <mesh ref={meshRef} geometry={geometry} material={material} />
       <OrbitControls />
     </Canvas>
   );

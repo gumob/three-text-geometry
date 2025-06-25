@@ -1,11 +1,12 @@
-import React, { useEffect, useMemo, useRef, useCallback } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { GizmoHelper, GizmoViewport, OrbitControls, PerspectiveCamera, useTexture } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import useSWR from 'swr';
 import * as THREE from 'three';
 import TextGeometry, { TextAlign, TextGeometryOption } from 'three-text-geometry';
-import { FONT_URL, fetchFont, randomText, TEXTURE_URL } from '~/utils';
+
 import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle';
+import { fetchFont, FONT_URL, randomText, TEXTURE_URL } from '~/utils';
 
 /**
  * DemoJSXShuffle
@@ -41,7 +42,7 @@ const DemoJSXRenderer = (): React.ReactNode => {
       font: font,
       align: TextAlign.Left,
       width: 1600,
-      flipY: texture.flipY, /** Apply flipY to textOption  */
+      flipY: texture.flipY /** Apply flipY to textOption  */,
     };
   }, [font, texture]);
 
@@ -95,26 +96,29 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
   const shuffleTimeoutID = useRef<any>(null);
   const shuffle = useRef<ShuffleText | null>(null);
 
-  const shuffleText = useCallback((timeout: number) => {
-    const option: ShuffleOption = {
-      shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
-      ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|,)/,
-      delay: { min: 0, max: 0 },
-      fadeDuration: { min: 500, max: 700 },
-      shuffleDuration: { min: 1000, max: 2000 },
-      interval: { min: 20, max: 40 },
-    };
-    shuffle.current?.cancel();
-    shuffle.current = new ShuffleText(text, option, (text: string, state: ShuffleState) => {
-      const geom = meshRef.current.geometry as TextGeometry;
-      geom.update(text);
-      if (state === ShuffleState.Completed) shuffleText(3000);
-    });
-    clearTimeout(shuffleTimeoutID.current);
-    shuffleTimeoutID.current = setTimeout(() => {
-      shuffle.current?.start();
-    }, timeout);
-  }, [text]);
+  const shuffleText = useCallback(
+    (timeout: number) => {
+      const option: ShuffleOption = {
+        shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+        ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|,)/,
+        delay: { min: 0, max: 0 },
+        fadeDuration: { min: 500, max: 700 },
+        shuffleDuration: { min: 1000, max: 2000 },
+        interval: { min: 20, max: 40 },
+      };
+      shuffle.current?.cancel();
+      shuffle.current = new ShuffleText(text, option, (text: string, state: ShuffleState) => {
+        const geom = meshRef.current.geometry as TextGeometry;
+        geom.update(text);
+        if (state === ShuffleState.Completed) shuffleText(3000);
+      });
+      clearTimeout(shuffleTimeoutID.current);
+      shuffleTimeoutID.current = setTimeout(() => {
+        shuffle.current?.start();
+      }, timeout);
+    },
+    [text],
+  );
 
   /************************************
    * Effects

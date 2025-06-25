@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import axios from 'axios';
 import * as THREE from 'three';
 import TextGeometry, { BMFontJsonParser, TextAlign, TextGeometryOption } from 'three-text-geometry';
-import { OrbitControls } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
 
 /**
  * Example 1: Using TextGeometry with JSX (if working)
@@ -42,13 +42,8 @@ function TextGeometryJSXExample() {
 
   return (
     <mesh>
-      <textGeometry args={["Hello World", textOption]} />
-      <meshBasicMaterial 
-        map={texture}
-        side={THREE.DoubleSide}
-        transparent={true}
-        color={0x666666}
-      />
+      <textGeometry args={['Hello World', textOption]} />
+      <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent={true} color={0x666666} />
     </mesh>
   );
 }
@@ -90,7 +85,7 @@ function TextGeometryTraditionalExample() {
         flipY: texture?.flipY ?? true,
       };
 
-      const textGeometry = new TextGeometry("Hello World", textOption);
+      const textGeometry = new TextGeometry('Hello World', textOption);
       textGeometry.computeBoundingBox();
       setGeometry(textGeometry);
     }
@@ -115,7 +110,7 @@ function DynamicTextExample() {
   const meshRef = useRef<THREE.Mesh>(null);
   const [font, setFont] = useState<any>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
-  const [text, setText] = useState("Hello World");
+  const [text, setText] = useState('Hello World');
   const [geometry, setGeometry] = useState<TextGeometry | null>(null);
 
   useEffect(() => {
@@ -155,7 +150,7 @@ function DynamicTextExample() {
   // Update text every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setText(prev => prev === "Hello World" ? "Updated Text!" : "Hello World");
+      setText((prev) => (prev === 'Hello World' ? 'Updated Text!' : 'Hello World'));
     }, 3000);
 
     return () => clearInterval(interval);
@@ -182,16 +177,16 @@ function App() {
       <Canvas camera={{ position: [0, 0, 5] }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
-        
+
         {/* Choose one of the examples */}
         {/* <TextGeometryJSXExample /> */}
         <TextGeometryTraditionalExample />
         {/* <DynamicTextExample /> */}
-        
+
         <OrbitControls />
       </Canvas>
     </div>
   );
 }
 
-export default App; 
+export default App;

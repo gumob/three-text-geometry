@@ -3,9 +3,10 @@ import { GizmoHelper, GizmoViewcube, GizmoViewport, OrbitControls, PerspectiveCa
 import { Canvas } from '@react-three/fiber';
 import useSWR from 'swr';
 import * as THREE from 'three';
-import TextGeometry, { TextAlign, TextGeometryOption } from 'three-text-geometry';
 import { BoxHelper } from 'three';
-import { FONT_URL, fetchFont, randomText, TEXTURE_URL } from './utils';
+import TextGeometry, { TextAlign, TextGeometryOption } from 'three-text-geometry';
+
+import { fetchFont, FONT_URL, randomText, TEXTURE_URL } from './utils';
 
 /**
  * DemoJSXSimple
@@ -39,7 +40,7 @@ const DemoJSXRenderer = (): React.ReactNode => {
       font: font,
       align: TextAlign.Left,
       width: 1600,
-      flipY: texture.flipY, /** Apply flipY to textOption  */
+      flipY: texture.flipY /** Apply flipY to textOption  */,
     };
   }, [font, texture]);
 

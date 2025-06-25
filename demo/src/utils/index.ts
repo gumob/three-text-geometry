@@ -4,7 +4,6 @@ import TextGeometry, { BMFontJsonParser } from 'three-text-geometry';
 const FONT_URL = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json';
 const TEXTURE_URL = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png';
 
-
 /**
  * Fetcher for font JSON and parse with BMFontJsonParser
  *
@@ -32,6 +31,6 @@ const textList: string[] = [
 const randomText = (): string => {
   const index = Math.floor(Math.random() * textList.length);
   return textList[index];
-}
+};
 
 export { fetchFont, randomText, FONT_URL, TEXTURE_URL };

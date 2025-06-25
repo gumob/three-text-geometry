@@ -1,4 +1,5 @@
 import { extend, ThreeElement, ThreeElements } from '@react-three/fiber';
+
 import TextGeometry from '../TextGeometry';
 
 /* Extend with constructor function for @react-three/fiber 9 */
