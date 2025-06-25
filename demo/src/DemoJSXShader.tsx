@@ -119,7 +119,7 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
   const time = useRef(0);
 
   useFrame((state, delta) => {
-    const duration = 3;
+    const duration = 60;
     time.current += delta;
     matRef.current.uniforms.iGlobalTime.value = time.current;
     matRef.current.uniforms.animate.value = time.current / duration;
