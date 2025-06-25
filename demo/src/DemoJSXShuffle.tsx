@@ -21,7 +21,9 @@ const DemoJSXShuffle = (): React.ReactNode => {
 };
 
 /**
- * Example 1: Using TextGeometry with JSX
+ * The component that displays the text geometry
+ *
+ * @returns {React.ReactNode}
  */
 const DemoJSXRenderer = (): React.ReactNode => {
   /************************************
@@ -74,6 +76,9 @@ const DemoJSXRenderer = (): React.ReactNode => {
   );
 };
 
+/**
+ * The component that displays the text geometry
+ */
 const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeometryOption }) => {
   /************************************
    * References
@@ -148,7 +153,7 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
   return (
     <mesh ref={meshRef}>
       <textGeometry ref={geomRef} args={[text, option]} />
-      <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent={true} color={0x999999} />
+      <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent={true} color={0x666666} />
     </mesh>
   );
 };
