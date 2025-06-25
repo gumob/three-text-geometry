@@ -1,11 +1,11 @@
 // @ts-check
 
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import tsParser from "@typescript-eslint/parser";
+import 'eslint-plugin-only-warn';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import jsdoc from 'eslint-plugin-jsdoc';
-import "eslint-plugin-only-warn";
-import eslintConfigPrettier from "eslint-config-prettier";
+import tseslint from 'typescript-eslint';
+import eslint from '@eslint/js';
+import tsParser from '@typescript-eslint/parser';
 
 export default tseslint.config(
   {
@@ -57,6 +57,8 @@ export default tseslint.config(
       "jsdoc/no-undefined-types": "off",
       "jsdoc/no-defaults": "off",
       "jsdoc/check-tag-names": "off",
+      "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
       "jsdoc/require-param": [
         "error",
           {

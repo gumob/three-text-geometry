@@ -10,4 +10,16 @@ declare global {
         }
     }
 }
+declare module 'react' {
+    namespace JSX {
+        interface IntrinsicElements extends TextGeometryElements {
+        }
+    }
+}
+declare module 'react/jsx-runtime' {
+    namespace JSX {
+        interface IntrinsicElements extends TextGeometryElements {
+        }
+    }
+}
 //# sourceMappingURL=fiber.d.ts.map
