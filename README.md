@@ -19,6 +19,9 @@ The difference in rendering speed is noticeable when animations are enabled, and
 - Three.js 0.172.0
 - Node.js 20
 
+> **Note:**
+> This library supports React 19 and @react-three/fiber 9 only. It does **not** support React 18 or @react-three/fiber 8.
+
 ## Installation
 
 ### NPM
