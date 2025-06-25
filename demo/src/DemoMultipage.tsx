@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import TextGeometry, { MultiPageShaderMaterialParameters, TextAlign } from 'three-text-geometry';
-
 import DemoBase from '~/DemoBase';
 
 class DemoMultipage extends DemoBase {

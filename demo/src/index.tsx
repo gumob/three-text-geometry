@@ -1,7 +1,8 @@
+import './index.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-
+import DemoJSX from '~/DemoJSX';
 import DemoMultipage from '~/DemoMultipage';
 import DemoShader from '~/DemoShader';
 import DemoShuffle from '~/DemoShuffle';
@@ -10,8 +11,6 @@ import DemoSimple from '~/DemoSimple';
 // import reportWebVitals from '~/reportWebVitals'
 import Navigation from '~/Navigation';
 
-import './index.css';
-
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
@@ -19,6 +18,7 @@ root.render(
       <Navigation />
       <Routes>
         <Route path="*" element={<Navigate to="/simple" />} />
+        <Route path="/jsx" element={<DemoJSX />} />
         <Route path="/simple" element={<DemoSimple />} />
         <Route path="/multipage" element={<DemoMultipage />} />
         <Route path="/shuffle" element={<DemoShuffle />} />

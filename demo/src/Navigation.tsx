@@ -1,15 +1,15 @@
-import React from 'react';
-import { MenuItem, MenuList, Paper } from '@mui/material';
-import { NavLink } from 'react-router-dom';
-
 import './Navigation.css';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { MenuItem, MenuList, Paper } from '@mui/material';
 
-export class Navigation extends React.Component {
-  render(): React.ReactNode {
-    // const path = this.props.location.pathname;
-    return (
+export const Navigation = (): React.ReactNode => {
+  return (
       <Paper sx={{ width: 160 }} className="Navigation">
         <MenuList dense>
+          <MenuItem component={NavLink} to="/jsx">
+            JSX
+          </MenuItem>
           {/* <MenuItem component={NavLink} to="/simple" selected={location === '/simple' ? true : false}> */}
           <MenuItem component={NavLink} to="/simple">
             {/* <ListItemIcon>
@@ -36,8 +36,7 @@ export class Navigation extends React.Component {
           </MenuItem> */}
         </MenuList>
       </Paper>
-    );
-  }
-}
+  );
+};
 
 export default Navigation;

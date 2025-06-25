@@ -8,7 +8,7 @@ import { Canvas } from '@react-three/fiber';
 /**
  * Example 1: Using TextGeometry with JSX (if working)
  */
-function TextGeometryJSXExample(): React.ReactNode {
+const DemoJSX = (): React.ReactNode => {
   const [font, setFont] = useState<any>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
 
@@ -16,12 +16,13 @@ function TextGeometryJSXExample(): React.ReactNode {
     // Load font and texture
     const loadAssets = async () => {
       try {
-        const fontResponse = await axios.get('path/to/font.json');
+        const fontResponse = await axios.get('https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json');
+        console.log("fontResponse.data", fontResponse.data);
         const fontData = new BMFontJsonParser().parse(fontResponse.data);
         setFont(fontData);
 
         const textureLoader = new THREE.TextureLoader();
-        const loadedTexture = await textureLoader.loadAsync('path/to/texture.png');
+        const loadedTexture = await textureLoader.loadAsync('https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png');
         setTexture(loadedTexture);
       } catch (error) {
         console.error('Failed to load assets:', error);
@@ -56,7 +57,7 @@ function TextGeometryJSXExample(): React.ReactNode {
 /**
  * Example 2: Using TextGeometry with traditional approach (Recommended)
  */
-function TextGeometryTraditionalExample() {
+function TextGeometryTraditionalExample(): React.ReactNode {
   const meshRef = useRef<THREE.Mesh>(null);
   const [font, setFont] = useState<any>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
@@ -66,12 +67,12 @@ function TextGeometryTraditionalExample() {
     // Load font and texture
     const loadAssets = async () => {
       try {
-        const fontResponse = await axios.get('path/to/font.json');
+        const fontResponse = await axios.get('https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json');
         const fontData = new BMFontJsonParser().parse(fontResponse.data);
         setFont(fontData);
 
         const textureLoader = new THREE.TextureLoader();
-        const loadedTexture = await textureLoader.loadAsync('path/to/texture.png');
+        const loadedTexture = await textureLoader.loadAsync('https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png');
         setTexture(loadedTexture);
       } catch (error) {
         console.error('Failed to load assets:', error);
@@ -111,7 +112,7 @@ function TextGeometryTraditionalExample() {
 /**
  * Example 3: Dynamic text update
  */
-function DynamicTextExample() {
+function DynamicTextExample(): React.ReactNode {
   const meshRef = useRef<THREE.Mesh>(null);
   const [font, setFont] = useState<any>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
@@ -122,7 +123,7 @@ function DynamicTextExample() {
     // Load font and texture
     const loadAssets = async () => {
       try {
-        const fontResponse = await axios.get('path/to/font.json');
+        const fontResponse = await axios.get('https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json');
         const fontData = new BMFontJsonParser().parse(fontResponse.data);
         setFont(fontData);
 
@@ -176,7 +177,7 @@ function DynamicTextExample() {
 /**
  * Main App Component
  */
-function App() {
+function App(): React.ReactNode {
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <Canvas camera={{ position: [0, 0, 5] }}>
@@ -194,4 +195,5 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+export default DemoJSX;
