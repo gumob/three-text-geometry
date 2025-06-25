@@ -5,7 +5,7 @@ import DemoJSXSimple from '~/DemoJSXSimple';
 import DemoJSXShuffle from '~/DemoJSXShuffle';
 import DemoJSXShader from '~/DemoJSXShader';
 import DemoMultipage from '~/DemoMultipage';
-import DemoShuffleShader from '~/DemoShuffleShader';
+import DemoJSXShuffleShader from '~/DemoJSXShuffleShader';
 import Navigation from '~/Navigation';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
@@ -18,7 +18,7 @@ root.render(
       <Route path="/multipage" element={<DemoMultipage />} />
       <Route path="/shuffle" element={<DemoJSXShuffle />} />
       <Route path="/shader" element={<DemoJSXShader />} />
-      <Route path="/shuffleshader" element={<DemoShuffleShader />} />
+      <Route path="/shuffleshader" element={<DemoJSXShuffleShader />} />
     </Routes>
   </BrowserRouter>,
 );
