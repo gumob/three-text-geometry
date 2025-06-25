@@ -1,4 +1,4 @@
-import { extend, ThreeElement, ThreeElements } from '@react-three/fiber';
+import { extend, ThreeElement } from '@react-three/fiber';
 
 import TextGeometry from '../TextGeometry';
 
@@ -11,44 +11,9 @@ extend({ TextGeometry: TextGeometry });
  */
 export type TextGeometryProps = ThreeElement<typeof TextGeometry>;
 
-/**
- * TextGeometryElements is an interface that extends the ThreeElements interface and includes the TextGeometry component.
- *
- * @global
- * @interface TextGeometryElements
- * @extends {ThreeElements}
- */
-export interface TextGeometryElements extends ThreeElements {
-  /**
-   * The props for the TextGeometry component.
-   *
-   * @type {TextGeometryProps}
-   */
-  textGeometry: TextGeometryProps;
-}
-
-/**
- * Declares a global namespace for JSX.
- * It extends the IntrinsicElements interface to include the TextGeometry component.
- *
- * @global
- * @interface IntrinsicElements
- * @extends {TextGeometryElements}
- */
-declare global {
-  namespace JSX {
-    interface IntrinsicElements extends TextGeometryElements {}
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements extends TextGeometryElements {}
-  }
-}
-
-declare module 'react/jsx-runtime' {
-  namespace JSX {
-    interface IntrinsicElements extends TextGeometryElements {}
+// --- 型拡張: ThreeElements['textGeometry'] でアクセス可能にする ---
+declare module '@react-three/fiber' {
+  interface ThreeElements {
+    textGeometry: TextGeometryProps;
   }
 }
