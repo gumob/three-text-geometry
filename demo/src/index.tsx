@@ -3,9 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import DemoJSXSimple from '~/DemoJSXSimple';
 import DemoJSXShuffle from '~/DemoJSXShuffle';
-// import DemoShuffle from '~/DemoShuffle';
+import DemoJSXShader from '~/DemoJSXShader';
 import DemoMultipage from '~/DemoMultipage';
-import DemoShader from '~/DemoShader';
 import DemoShuffleShader from '~/DemoShuffleShader';
 import Navigation from '~/Navigation';
 
@@ -18,7 +17,7 @@ root.render(
       <Route path="/simple" element={<DemoJSXSimple />} />
       <Route path="/multipage" element={<DemoMultipage />} />
       <Route path="/shuffle" element={<DemoJSXShuffle />} />
-      <Route path="/shader" element={<DemoShader />} />
+      <Route path="/shader" element={<DemoJSXShader />} />
       <Route path="/shuffleshader" element={<DemoShuffleShader />} />
     </Routes>
   </BrowserRouter>,
