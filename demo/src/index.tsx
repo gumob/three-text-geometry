@@ -1,5 +1,4 @@
 import './index.css';
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import DemoJSX from '~/DemoJSX';
@@ -13,20 +12,18 @@ import Navigation from '~/Navigation';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <StrictMode>
-    <BrowserRouter>
-      <Navigation />
-      <Routes>
-        <Route path="*" element={<Navigate to="/simple" />} />
-        <Route path="/jsx" element={<DemoJSX />} />
-        <Route path="/simple" element={<DemoSimple />} />
-        <Route path="/multipage" element={<DemoMultipage />} />
-        <Route path="/shuffle" element={<DemoShuffle />} />
-        <Route path="/shader" element={<DemoShader />} />
-        <Route path="/shuffleshader" element={<DemoShuffleShader />} />
-      </Routes>
-    </BrowserRouter>
-  </StrictMode>,
+  <BrowserRouter>
+    <Navigation />
+    <Routes>
+      <Route path="*" element={<Navigate to="/simple" />} />
+      <Route path="/jsx" element={<DemoJSX />} />
+      <Route path="/simple" element={<DemoSimple />} />
+      <Route path="/multipage" element={<DemoMultipage />} />
+      <Route path="/shuffle" element={<DemoShuffle />} />
+      <Route path="/shader" element={<DemoShader />} />
+      <Route path="/shuffleshader" element={<DemoShuffleShader />} />
+    </Routes>
+  </BrowserRouter>,
 );
 
 // If you want to start measuring performance in your app, pass a function
