@@ -21,6 +21,7 @@
     "swr": "^2.3.3",
     "tailwindcss": "^4.1.10",
     "three": "^0.172.0",
+    "three-stdlib": "^2.36.0",
     "three-text-geometry": "file:../",
     "web-vitals": "^4.2.4"
   },

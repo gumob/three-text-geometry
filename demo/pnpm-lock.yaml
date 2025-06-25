@@ -59,6 +59,9 @@ importers:
       three:
         specifier: ^0.172.0
         version: 0.172.0
+      three-stdlib:
+        specifier: ^2.36.0
+        version: 2.36.0(three@0.172.0)
       three-text-geometry:
         specifier: file:../
         version: file:..(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))
