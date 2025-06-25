@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useRef, useCallback } from 'react';
 import { GizmoHelper, GizmoViewport, OrbitControls, PerspectiveCamera, useTexture } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import useSWR from 'swr';
 import * as THREE from 'three';
 import TextGeometry, { TextAlign, TextGeometryOption } from 'three-text-geometry';
 import { FONT_URL, fetchFont, randomText, TEXTURE_URL } from './utils';
 import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle';
+import { fragmentShader, vertexShader } from '~/shaders/effect';
 
 /**
  * DemoJSXShader
@@ -86,41 +87,14 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
 
   const meshRef = useRef<THREE.Mesh>(null!);
   const geomRef = useRef<TextGeometry>(null!);
-  const text = useMemo(() => randomText(), []);
-
-  /************************************
-   * Shuffle Effect
-   ************************************/
-
-  const shuffleTimeoutID = useRef<any>(null);
-  const shuffle = useRef<ShuffleText | null>(null);
-
-  const shuffleText = useCallback((timeout: number) => {
-    const option: ShuffleOption = {
-      shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
-      ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|,)/,
-      delay: { min: 0, max: 0 },
-      fadeDuration: { min: 500, max: 700 },
-      shuffleDuration: { min: 1000, max: 2000 },
-      interval: { min: 20, max: 40 },
-    };
-    shuffle.current?.cancel();
-    shuffle.current = new ShuffleText(text, option, (text: string, state: ShuffleState) => {
-      const geom = meshRef.current.geometry as TextGeometry;
-      geom.update(text);
-      if (state === ShuffleState.Completed) shuffleText(3000);
-    });
-    clearTimeout(shuffleTimeoutID.current);
-    shuffleTimeoutID.current = setTimeout(() => {
-      shuffle.current?.start();
-    }, timeout);
-  }, [text]);
+  const matRef = useRef<THREE.RawShaderMaterial>(null!);
+  const text = useRef(randomText());
 
   /************************************
    * Effects
    ************************************/
 
-  useEffect(() => {
+  const resetMesh = useCallback(() => {
     /** Get the bounding box of the text geometry */
     const box = new THREE.Vector3();
     geomRef.current.computeBoundingBox();
@@ -136,15 +110,26 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
       .rotateZ(Math.PI)
       .translateX(-(box.x / 2) * scale)
       .translateY(-(box.y / 2) * scale);
-  }, [meshRef, geomRef]);
+  }, []);
 
   useEffect(() => {
-    shuffleText(1000);
-    return () => {
-      clearTimeout(shuffleTimeoutID.current);
-      shuffle.current?.cancel();
-    };
-  }, [shuffleText]);
+    resetMesh();
+  }, [meshRef, geomRef, resetMesh]);
+
+  const time = useRef(0);
+
+  useFrame((state, delta) => {
+    const duration = 3;
+    time.current += delta;
+    matRef.current.uniforms.iGlobalTime.value = time.current;
+    matRef.current.uniforms.animate.value = time.current / duration;
+    matRef.current.needsUpdate = true;
+    if (time.current > duration) {
+      time.current = 0;
+      text.current = randomText();
+      resetMesh();
+    }
+  });
 
   /************************************
    * Render
@@ -152,8 +137,22 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
 
   return (
     <mesh ref={meshRef}>
-      <textGeometry ref={geomRef} args={[text, option]} />
-      <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent={true} color={0x666666} />
+      <textGeometry ref={geomRef} args={[text.current, option]} />
+      {/* <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent={true} color={0x666666} /> */}
+      <rawShaderMaterial
+        ref={matRef}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={{
+          animate: { value: 1 },
+          iGlobalTime: { value: 0 },
+          map: { value: texture },
+          color: { value: new THREE.Color(0x999999) }
+        }}
+        transparent={true}
+        side={THREE.DoubleSide}
+        depthTest={false}
+      />
     </mesh>
   );
 };

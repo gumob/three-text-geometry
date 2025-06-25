@@ -133,7 +133,7 @@ ${asstep}
 void main() {
   vec4 texColor = texture2D(map, vUv);
   float sdf = texColor.a;
-  
+
   float alpha = 0.0;
   float animValue = pow(abs(animate * 2.0 - 1.0), 12.0 - vLine * 5.0);
   float threshold = animValue * 0.5 + 0.5;
