@@ -23,7 +23,7 @@
     "three": "^0.172.0",
     "three-stdlib": "^2.36.0",
     "three-text-geometry": "file:../",
-    "web-vitals": "^4.2.4"
+    "web-vitals": "^5.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
@@ -54,7 +54,7 @@
     "prettier-plugin-tailwindcss": "^0.6.13",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.1",
-    "vite": "^5.4.19",
+    "vite": "^6.3.5",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "scripts": {
