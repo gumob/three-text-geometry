@@ -64,7 +64,7 @@ const DemoJSXRenderer = (): React.ReactNode => {
 
   return (
     <>
-      <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 2000]} fov={45} aspect={window.innerWidth / window.innerHeight} near={1} far={100000} />
+      <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 1600]} fov={45} aspect={window.innerWidth / window.innerHeight} near={1} far={100000} />
       <ambientLight intensity={0.1} />
       <pointLight position={[1000, 1000, 1000]} />
       <OrbitControls autoRotate={true} />
@@ -91,7 +91,7 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
   const text = useRef(randomText());
 
   /************************************
-   * Effects
+   * Utilities
    ************************************/
 
   const resetMesh = useCallback(() => {
@@ -112,9 +112,17 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
       .translateY(-(box.y / 2) * scale);
   }, []);
 
+  /************************************
+   * Effects
+   ************************************/
+
   useEffect(() => {
     resetMesh();
   }, [meshRef, geomRef, resetMesh]);
+
+  /************************************
+   * Shader Effects
+   ************************************/
 
   const time = useRef(0);
 
@@ -130,6 +138,42 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
       resetMesh();
     }
   });
+
+  /************************************
+   * Shuffle Effect
+   ************************************/
+
+  const shuffleTimeoutID = useRef<any>(null);
+  const shuffle = useRef<ShuffleText | null>(null);
+
+  const shuffleText = useCallback((timeout: number) => {
+    const option: ShuffleOption = {
+      shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+      ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|,)/,
+      delay: { min: 0, max: 0 },
+      fadeDuration: { min: 500, max: 700 },
+      shuffleDuration: { min: 1000, max: 2000 },
+      interval: { min: 20, max: 40 },
+    };
+    shuffle.current?.cancel();
+    shuffle.current = new ShuffleText(text.current, option, (text: string, state: ShuffleState) => {
+      const geom = meshRef.current.geometry as TextGeometry;
+      geom.update(text);
+      if (state === ShuffleState.Completed) shuffleText(3000);
+    });
+    clearTimeout(shuffleTimeoutID.current);
+    shuffleTimeoutID.current = setTimeout(() => {
+      shuffle.current?.start();
+    }, timeout);
+  }, [text]);
+
+  useEffect(() => {
+    shuffleText(1000);
+    return () => {
+      clearTimeout(shuffleTimeoutID.current);
+      shuffle.current?.cancel();
+    };
+  }, [shuffleText]);
 
   /************************************
    * Render

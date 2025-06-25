@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import useSWR from 'swr';
 import * as THREE from 'three';
 import TextGeometry, { TextAlign, TextGeometryOption } from 'three-text-geometry';
-import { FONT_URL, fetchFont, randomText, TEXTURE_URL } from './utils';
+import { FONT_URL, fetchFont, randomText, TEXTURE_URL } from '~/utils';
 import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle';
 
 /**
@@ -63,7 +63,7 @@ const DemoJSXRenderer = (): React.ReactNode => {
 
   return (
     <>
-      <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 2000]} fov={45} aspect={window.innerWidth / window.innerHeight} near={1} far={100000} />
+      <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 1600]} fov={45} aspect={window.innerWidth / window.innerHeight} near={1} far={100000} />
       <ambientLight intensity={0.1} />
       <pointLight position={[1000, 1000, 1000]} />
       <OrbitControls autoRotate={true} />
