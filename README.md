@@ -9,8 +9,8 @@
 
 <img src="https://raw.githubusercontent.com/gumob/three-text-geometry/main/README-assets/demo.gif" alt="demo.gif" style="width:1200px;"/>
 
-The port of the JavaScript versions of [three-bmfont-text](https://github.com/Jam3/three-bmfont-text), [layout-bmfont-text](https://github.com/Jam3/layout-bmfont-text), [load-bmfont](https://github.com/Jam3/load-bmfont), and [word-wrapper](https://github.com/mattdesl/word-wrapper) to Pure Typescript, this library enables fast text rendering with Three.js and bitmap font.<br/>
-The difference in rendering speed is noticeable when animations are enabled, and it runs 10x faster than canvas texture based text rendering.
+The port of the JavaScript versions of [three-bmfont-text](https://github.com/Jam3/three-bmfont-text), [layout-bmfont-text](https://github.com/Jam3/layout-bmfont-text), [load-bmfont](https://github.com/Jam3/load-bmfont), and [word-wrapper](https://github.com/mattdesl/word-wrapper) to Pure TypeScript, this library enables fast text rendering with Three.js and bitmap font.<br/>
+The difference in rendering speed is noticeable when animations are enabled, and it runs 10x faster than canvas texture-based text rendering.
 
 ## Requirements
 
@@ -56,12 +56,15 @@ pnpm dev
 
 Please refer to the [README.md in the demo directory](https://github.com/gumob/three-text-geometry/blob/beta/demo/README.md) for more details.
 
-### Sample code
+### Sample code (JSX Component)
+
+
+### Sample code (Class Component)
 
 1. Combine [`Axios`](https://github.com/axios/axios) and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader) to load assets asynchronously.
 2. Instantiate [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) using the loaded [`BMFont`](https://gumob.github.io/three-text-geometry/interfaces/BMFont.html) and [`THREE.Texture`](https://threejs.org/docs/#api/en/textures/Texture) data.
 
-[`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) supports word wrapping, text aligning, letter spacing, kerning. see [the list](#option-list) to see how each option works.
+[`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) supports word wrapping, text aligning, letter spacing, and kerning. See [the list](#option-list) to see how each option works.
 
 ```TypeScript
 import * as THREE from 'three'
@@ -114,12 +117,12 @@ class TextGeometryRenderer extends React.Component {
         this.camera.lookAt(0, 0, 0)
 
         /** Geometry */
-        const text: string = 'Hollo World.\nHello Universe.' /** The text to layout. Newline characters `\n` will cause line breaks */
+        const text: string = 'Hello World.\nHello Universe.' /** The text to layout. Newline characters `\n` will cause line breaks */
         const textOption: TextGeometryOption = {
             font: font,
             align: TextAlign.Left,
             width: 1600,
-            flipY: textures.flipY,
+            flipY: texture.flipY,
             multipage: false
         }
         const textGeometry = new TextGeometry(text, textOption)
@@ -133,19 +136,18 @@ class TextGeometryRenderer extends React.Component {
         })
 
         /** Mesh */
-        const mesth = new THREE.Mesh(textGeometry, textMaterial)
+        const mesh = new THREE.Mesh(textGeometry, textMaterial)
             .rotateY(Math.PI)
             .rotateZ(Math.PI)
-            .translateX(-box.x / 2)
-            .translateY(-box.y / 2)
-        this.scene!.add(mesth)
+            .translateX(-textGeometry.boundingBox?.max.x! / 2)
+            .translateY(-textGeometry.boundingBox?.max.y! / 2)
+        this.scene!.add(mesh)
 
         this.updateScene()
     }
 
     updateScene() {
         this.renderer?.render(this.scene!, this.camera!)
-        this.stats?.update()
         requestAnimationFrame(this.updateScene.bind(this))
     }
 
@@ -160,17 +162,17 @@ class TextGeometryRenderer extends React.Component {
 
 TextGeometry places text based on the screen coordinate system.
 Therefore, when [`THREE.Mesh`](https://threejs.org/docs/#api/en/objects/Mesh) is added to the scene, the text will be placed inverted when viewed from the positive direction of the Z axis.
-To make the text visible from the positive z-axis, you need apply transformation.
+To make the text visible from the positive z-axis, you need to apply transformation.
 
 ![coord-conversion.webp](https://raw.githubusercontent.com/gumob/three-text-geometry/main/README-assets/coord-conversion.webp)
 
-#### BMFontParser interface supports JSON, XML, ACII, and Binary fromat
+#### BMFontParser interface supports JSON, XML, ASCII, and Binary format
 
 Parse font data in JSON format
 
 ```TypeScript
 import { BMFontJsonParser } from 'three-text-geometry'
-const font: BMFont = new BMFontJsonParser().parse(/** `string` or `object` data JSON format */)
+const font: BMFont = new BMFontJsonParser().parse(/** `string` or `object` data in JSON format */)
 ```
 
 Parse font data in XML format
@@ -191,18 +193,18 @@ Parse font data in Binary format
 
 ```TypeScript
 import { BMFontBinaryParser } from 'three-text-geometry'
-const font: BMFont = new BMFontBinaryParser().parse(/** `string` data in ASCII Binary */)
+const font: BMFont = new BMFontBinaryParser().parse(/** `string` data in Binary format */)
 ```
 
-### <a name="option-list"></a>The value list of `TextGeometryOption`
+### <a name="option-list"></a>The list of values for `TextGeometryOption`
 
 <!-- prettier-ignore-start -->
 | key | type | description | default | required |
 | ----------------- | :-----------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------: | :------: |
 | **font** | [`BMFont`](https://gumob.github.io/three-text-geometry/interfaces/BMFont.html) | The BMFont definition which holds chars, kernings, etc | undefined | ✔ |
-| **width** | `number` | The desired width of the text box, causes word-wrapping and clipping in [`WordWrapMode`](https://gumob.github.io/three-text-geometry/enums/WordWrapMode.html) mode. Leave as undefined to remove word-wrapping (default behaviour) | undefined |  |
-| **mode** | [`WordWrapMode`](https://gumob.github.io/three-text-geometry/enums/WordWrapMode.html) | A mode for word-wrapper; can be [`WordWrapMode.Pre`](https://gumob.github.io/three-text-geometry/enums/WordWrapMode.html#Pre) (maintain spacing), or [`WordWrapMode.NoWrap`](https://gumob.github.io/three-text-geometry/enums/WordWrapMode.html#NoWrap) (collapse whitespace but only break on newline characters), otherwise assumes normal word-wrap behaviour (collapse whitespace, break at width or newlines) | undefined |  |
-| **align** | [`TextAlign`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html) | This can be [`TextAlign.left`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html#Left), [`TextAlign.center`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html#Center) or [`TextAlign.right`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html#Right) | [`TextAlign.left`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html#Left) |  |
+| **width** | `number` | The desired width of the text box, causes word-wrapping and clipping in [`WordWrapMode`](https://gumob.github.io/three-text-geometry/enums/WordWrapMode.html) mode. Leave as undefined to remove word-wrapping (default behavior) | undefined |  |
+| **mode** | [`WordWrapMode`](https://gumob.github.io/three-text-geometry/enums/WordWrapMode.html) | A mode for word-wrapper; can be [`WordWrapMode.Pre`](https://gumob.github.io/three-text-geometry/enums/WordWrapMode.html#Pre) (maintain spacing), or [`WordWrapMode.NoWrap`](https://gumob.github.io/three-text-geometry/enums/WordWrapMode.html#NoWrap) (collapse whitespace but only break on newline characters), otherwise assumes normal word-wrap behavior (collapse whitespace, break at width or newlines) | undefined |  |
+| **align** | [`TextAlign`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html) | This can be [`TextAlign.Left`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html#Left), [`TextAlign.Center`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html#Center) or [`TextAlign.Right`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html#Right) | [`TextAlign.Left`](https://gumob.github.io/three-text-geometry/enums/TextAlign.html#Left) |  |
 | **letterSpacing** | `number` | The letter spacing in pixels | 0 |  |
 | **lineHeight** | `number` | The line height in pixels | [`font.common.lineHeight`](https://gumob.github.io/three-text-geometry/interfaces/BMFontCommon.html#lineHeight) |  |
 | **tabSize** | `number` | The number of spaces to use in a single tab | 4 |  |
@@ -217,10 +219,10 @@ const font: BMFont = new BMFontBinaryParser().parse(/** `string` data in ASCII B
 The following tools can be used to convert fonts to a bitmap font:
 
 - [msdf-bmfont-web](https://msdf-bmfont.donmccurdy.com/) (Online Tool)
-- [msdf-bmfont-xml](https://github.com/soimy/msdf-bmfont-xml) (Commandline Tool)
+- [msdf-bmfont-xml](https://github.com/soimy/msdf-bmfont-xml) (Command-line Tool)
 - [Hiero](https://github.com/libgdx/libgdx/wiki/Hiero) (Desktop App, Windows Only)
 
-Read the [Three.js documentation](https://threejs.org/docs/index.html#manual/en/introduction/Creating-text) about a bitmap font.
+Read the [Three.js documentation](https://threejs.org/docs/index.html#manual/en/introduction/Creating-text) about bitmap fonts.
 
 ### Using msdf-bmfont-xml
 
@@ -244,4 +246,4 @@ $ msdf-bmfont \
 
 ## Copyright
 
-Punycode is released under MIT license, which means you can modify it, redistribute it or use it however you like.
+This library is released under MIT license, which means you can modify it, redistribute it or use it however you like.
