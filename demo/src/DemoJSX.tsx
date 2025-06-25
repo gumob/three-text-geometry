@@ -6,9 +6,10 @@ import useSWR from 'swr';
 import * as THREE from 'three';
 import TextGeometry, { BMFontJsonParser, TextAlign, TextGeometryOption } from 'three-text-geometry';
 import { BoxHelper } from 'three';
+import { randomText } from './utils/Text';
 
 /**
- * Example 1: Using TextGeometry with JSX (if working)
+ * Example 1: Using TextGeometry with JSX
  */
 const fontUrl = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json';
 const textureUrl = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png';
@@ -46,8 +47,7 @@ const DemoJSXRenderer = (): React.ReactNode => {
       font: font,
       align: TextAlign.Left,
       width: 1600,
-      /** Apply flipY to textOption  */
-      flipY: texture.flipY,
+      flipY: texture.flipY, /** Apply flipY to textOption  */
     };
   }, [font, texture]);
 
@@ -73,7 +73,7 @@ const DemoJSXRenderer = (): React.ReactNode => {
         {/* <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" /> */}
         <GizmoViewcube />
       </GizmoHelper>
-      <axesHelper args={[1000]} />
+      <axesHelper args={[300]} />
       {option && <TextMesh texture={texture} option={option} />}
     </>
   );
@@ -81,7 +81,7 @@ const DemoJSXRenderer = (): React.ReactNode => {
 
 const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeometryOption }) => {
   const meshRef = useRef<THREE.Mesh>(null!);
-  useHelper(meshRef, BoxHelper, 'cyan')
+  useHelper(meshRef, BoxHelper, new THREE.Color(0.02, 0.02, 0.02))
   const geomRef = useRef<TextGeometry>(null!);
 
   useEffect(() => {
@@ -90,20 +90,20 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
     geomRef.current.computeBoundingBox();
     geomRef.current.boundingBox?.getSize(box);
     /** Reset the mesh position */
+    meshRef.current.scale.set(0.5, 0.5, 0.5);
     meshRef.current.position.set(0, 0, 0);
     meshRef.current.rotation.set(0, 0, 0);
     /** Rotate and translate the mesh to center the text */
     meshRef.current
       .rotateY(Math.PI)
       .rotateZ(Math.PI)
-      .translateX(-box.x / 2)
-      .translateY(-box.y / 2);
-    meshRef.current.scale.set(1, 1, 1);
+      .translateX(-box.x / 4)
+      .translateY(-box.y / 4);
   }, [meshRef, geomRef]);
 
   return (
     <mesh ref={meshRef}>
-      <textGeometry ref={geomRef} args={['Hello World', option]} />
+      <textGeometry ref={geomRef} args={[randomText(), option]} />
       <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent={true} color={0xffffff} />
     </mesh>
   );
