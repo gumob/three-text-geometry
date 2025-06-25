@@ -2,12 +2,11 @@ import './index.css';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import DemoJSXSimple from '~/DemoJSXSimple';
+import DemoJSXShuffle from '~/DemoJSXShuffle';
+// import DemoShuffle from '~/DemoShuffle';
 import DemoMultipage from '~/DemoMultipage';
 import DemoShader from '~/DemoShader';
-import DemoShuffle from '~/DemoShuffle';
 import DemoShuffleShader from '~/DemoShuffleShader';
-import DemoSimple from '~/DemoSimple';
-// import reportWebVitals from '~/reportWebVitals'
 import Navigation from '~/Navigation';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
@@ -18,7 +17,7 @@ root.render(
       <Route path="*" element={<Navigate to="/simple" />} />
       <Route path="/simple" element={<DemoJSXSimple />} />
       <Route path="/multipage" element={<DemoMultipage />} />
-      <Route path="/shuffle" element={<DemoShuffle />} />
+      <Route path="/shuffle" element={<DemoJSXShuffle />} />
       <Route path="/shader" element={<DemoShader />} />
       <Route path="/shuffleshader" element={<DemoShuffleShader />} />
     </Routes>

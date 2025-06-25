@@ -1,14 +1,17 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { GizmoHelper, GizmoViewcube, GizmoViewport, OrbitControls, PerspectiveCamera, useHelper, useTexture } from '@react-three/drei';
-import { Canvas, type ThreeElements } from '@react-three/fiber';
-import axios from 'axios';
+import React, { useEffect, useMemo, useRef, useCallback } from 'react';
+import { GizmoHelper, GizmoViewport, OrbitControls, PerspectiveCamera, useTexture } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import useSWR from 'swr';
 import * as THREE from 'three';
-import TextGeometry, { BMFontJsonParser, TextAlign, TextGeometryOption } from 'three-text-geometry';
-import { BoxHelper } from 'three';
+import TextGeometry, { TextAlign, TextGeometryOption } from 'three-text-geometry';
 import { FONT_URL, fetchFont, randomText, TEXTURE_URL } from './utils';
+import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle';
 
-
+/**
+ * DemoJSXShuffle
+ *
+ * @returns {React.ReactNode}
+ */
 const DemoJSXShuffle = (): React.ReactNode => {
   return (
     <Canvas>
@@ -17,11 +20,14 @@ const DemoJSXShuffle = (): React.ReactNode => {
   );
 };
 
-
 /**
  * Example 1: Using TextGeometry with JSX
  */
 const DemoJSXRenderer = (): React.ReactNode => {
+  /************************************
+   * References
+   ************************************/
+
   const cameraRef = useRef<THREE.PerspectiveCamera>(null!);
 
   const { data: font, error: fontError, isLoading: fontLoading } = useSWR(FONT_URL, fetchFont);
@@ -37,7 +43,9 @@ const DemoJSXRenderer = (): React.ReactNode => {
     };
   }, [font, texture]);
 
-  const autoRotate = useRef(true);
+  /************************************
+   * Effects
+   ************************************/
 
   useEffect(() => {
     if (fontError) console.error('Failed to load font:', fontError);
@@ -47,28 +55,65 @@ const DemoJSXRenderer = (): React.ReactNode => {
     if (cameraRef.current) cameraRef.current.lookAt(0, 0, 0);
   }, [cameraRef]);
 
+  /************************************
+   * Render
+   ************************************/
+
   return (
     <>
       <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 2000]} fov={45} aspect={window.innerWidth / window.innerHeight} near={1} far={100000} />
       <ambientLight intensity={0.1} />
       <pointLight position={[1000, 1000, 1000]} />
       <OrbitControls autoRotate={true} />
-      <GizmoHelper alignment="bottom-right" margin={[80, 80]} onClick={
-        () => autoRotate.current = false
-      }>
-        {/* <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" /> */}
-        <GizmoViewcube />
+      <GizmoHelper alignment="bottom-right" margin={[80, 80]}>
+        <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" />
       </GizmoHelper>
-      <axesHelper args={[300]} />
+      <axesHelper args={[250]} />
       {option && <TextMesh texture={texture} option={option} />}
     </>
   );
 };
 
 const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeometryOption }) => {
+  /************************************
+   * References
+   ************************************/
+
   const meshRef = useRef<THREE.Mesh>(null!);
-  useHelper(meshRef, BoxHelper, new THREE.Color(0.02, 0.02, 0.02))
   const geomRef = useRef<TextGeometry>(null!);
+  const text = useMemo(() => randomText(), []);
+
+  /************************************
+   * Shuffle Effect
+   ************************************/
+
+  const shuffleTimeoutID = useRef<any>(null);
+  const shuffle = useRef<ShuffleText | null>(null);
+
+  const shuffleText = useCallback((timeout: number) => {
+    const option: ShuffleOption = {
+      shuffleText: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+      ignoreRegex: /\s|\t|\n|\r|(\n\r|\.|,)/,
+      delay: { min: 0, max: 0 },
+      fadeDuration: { min: 500, max: 700 },
+      shuffleDuration: { min: 1000, max: 2000 },
+      interval: { min: 20, max: 40 },
+    };
+    shuffle.current?.cancel();
+    shuffle.current = new ShuffleText(text, option, (text: string, state: ShuffleState) => {
+      const geom = meshRef.current.geometry as TextGeometry;
+      geom.update(text);
+      if (state === ShuffleState.Completed) shuffleText(3000);
+    });
+    clearTimeout(shuffleTimeoutID.current);
+    shuffleTimeoutID.current = setTimeout(() => {
+      shuffle.current?.start();
+    }, timeout);
+  }, [text]);
+
+  /************************************
+   * Effects
+   ************************************/
 
   useEffect(() => {
     /** Get the bounding box of the text geometry */
@@ -76,21 +121,34 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
     geomRef.current.computeBoundingBox();
     geomRef.current.boundingBox?.getSize(box);
     /** Reset the mesh position */
-    meshRef.current.scale.set(0.5, 0.5, 0.5);
+    const scale = 0.5;
+    meshRef.current.scale.set(scale, scale, scale);
     meshRef.current.position.set(0, 0, 0);
     meshRef.current.rotation.set(0, 0, 0);
     /** Rotate and translate the mesh to center the text */
     meshRef.current
       .rotateY(Math.PI)
       .rotateZ(Math.PI)
-      .translateX(-box.x / 4)
-      .translateY(-box.y / 4);
+      .translateX(-(box.x / 2) * scale)
+      .translateY(-(box.y / 2) * scale);
   }, [meshRef, geomRef]);
+
+  useEffect(() => {
+    shuffleText(1000);
+    return () => {
+      clearTimeout(shuffleTimeoutID.current);
+      shuffle.current?.cancel();
+    };
+  }, [shuffleText]);
+
+  /************************************
+   * Render
+   ************************************/
 
   return (
     <mesh ref={meshRef}>
-      <textGeometry ref={geomRef} args={[randomText(), option]} />
-      <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent={true} color={0xffffff} />
+      <textGeometry ref={geomRef} args={[text, option]} />
+      <meshBasicMaterial map={texture} side={THREE.DoubleSide} transparent={true} color={0x999999} />
     </mesh>
   );
 };
