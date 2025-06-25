@@ -1,13 +1,15 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { GizmoHelper, GizmoViewcube, GizmoViewport, OrbitControls, PerspectiveCamera, useHelper, useTexture } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, type ThreeElements } from '@react-three/fiber';
+import axios from 'axios';
 import useSWR from 'swr';
 import * as THREE from 'three';
-import TextGeometry, { TextAlign, TextGeometryOption } from 'three-text-geometry';
+import TextGeometry, { BMFontJsonParser, TextAlign, TextGeometryOption } from 'three-text-geometry';
 import { BoxHelper } from 'three';
 import { FONT_URL, fetchFont, randomText, TEXTURE_URL } from './utils';
 
-const DemoJSXSimple = (): React.ReactNode => {
+
+const DemoJSXShuffle = (): React.ReactNode => {
   return (
     <Canvas>
       <DemoJSXRenderer />
@@ -93,4 +95,4 @@ const TextMesh = ({ texture, option }: { texture: THREE.Texture; option: TextGeo
   );
 };
 
-export default DemoJSXSimple;
+export default DemoJSXShuffle;

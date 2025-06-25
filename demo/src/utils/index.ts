@@ -1,7 +1,21 @@
+import axios from 'axios';
+import TextGeometry, { BMFontJsonParser } from 'three-text-geometry';
+
 const FONT_URL = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json';
 const TEXTURE_URL = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png';
 
-const textIndex: number = 0;
+
+/**
+ * Fetcher for font JSON and parse with BMFontJsonParser
+ *
+ * @param {string} url - The URL of the font JSON file
+ * @returns {Promise<BMFont>} The parsed font data
+ */
+const fetchFont = async (url: string) => {
+  const response = await axios.get(url);
+  return new BMFontJsonParser().parse(response.data);
+};
+
 const textList: string[] = [
   `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla enim odio, tincidunt sed fringilla sed, placerat vel lectus.\nDuis non sapien nulla.\nIn convallis nulla nec nulla varius rutrum.\nNunc augue augue, ornare in cursus egestas, cursus vel magna.\nFusce at felis vel tortor sagittis tincidunt nec vitae nisl.\nSed efficitur nibh consequat tortor pulvinar, dignissim tincidunt risus hendrerit.\nSuspendisse quis commodo nulla.\nUt orci urna, mollis non nisl id, molestie tristique purus.\nPhasellus efficitur laoreet eros vehicula convallis.\nSed imperdiet, lectus a facilisis tempus, elit orci varius ante, at lacinia odio massa et quam.\nQuisque vulputate nulla vitae feugiat aliquam.\nVivamus vel mauris sit amet est rhoncus molestie at quis neque.\nDuis faucibus laoreet tempus.\nMaecenas metus velit, lobortis sit amet mauris at, vehicula condimentum velit.\nVestibulum ornare eu turpis vel laoreet.\nNunc ac cursus nunc, non porttitor arcu.`,
   `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nFusce dapibus vehicula semper.\nAliquam pulvinar enim quis tristique tincidunt.\nSed faucibus turpis ipsum, non ultrices odio varius et.\nDonec eget vulputate enim.\nAenean posuere, dolor quis dapibus interdum, ipsum dolor molestie nunc, consequat tincidunt ex leo eu lectus.\nInteger a risus iaculis, facilisis orci ac, maximus augue.\nDonec at feugiat leo, at sollicitudin sapien.\nNullam quis lacus consequat, sodales mi eleifend, efficitur tortor.\nVivamus bibendum ante eu dolor convallis, id blandit felis placerat.\nAliquam maximus at dolor eget facilisis.\nMaecenas aliquam consequat urna eget ullamcorper.`,
@@ -10,9 +24,14 @@ const textList: string[] = [
   `Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nVivamus eu mauris pretium, pellentesque justo at, sodales ligula.\nPraesent vitae dolor porttitor, laoreet metus ut, posuere ligula.\nMauris dolor ante, consectetur eu vulputate eget, tempus in nunc.\nMaecenas bibendum eleifend lacus in sodales.\nAenean mollis lorem a sem ultrices, nec lobortis erat eleifend.\nCurabitur ante eros, porta eget mi a, bibendum luctus ante.\nNulla est purus, posuere at rutrum sit amet, bibendum condimentum elit.\nNunc nec sem enim.`,
 ];
 
+/**
+ * Get a random text from the text list
+ *
+ * @returns {string} A random text from the text list
+ */
 const randomText = (): string => {
   const index = Math.floor(Math.random() * textList.length);
   return textList[index];
 }
 
-export { randomText, FONT_URL, TEXTURE_URL };
+export { fetchFont, randomText, FONT_URL, TEXTURE_URL };
