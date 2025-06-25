@@ -46,7 +46,7 @@
     "@vitejs/plugin-react-swc": "^3.10.2",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-jsdoc": "^51.2.1",
+    "eslint-plugin-jsdoc": "^51.2.3",
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
