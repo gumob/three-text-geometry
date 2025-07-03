@@ -48,13 +48,21 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
    * Loaders
    *********************************/
 
-  const { data: font, error: fontError, isLoading: isFontLoading } = useSWR(fontUrl, (url) => fontFetcher(url, 0), {
+  const {
+    data: font,
+    error: fontError,
+    isLoading: isFontLoading,
+  } = useSWR(fontUrl, (url) => fontFetcher(url, 0), {
     // suspense: true,
     // revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
-  const { data: texture, error: textureError, isLoading: isTextureLoading } = useSWR(textureUrl, (url) => textureFetcher(url, 1), {
+  const {
+    data: texture,
+    error: textureError,
+    isLoading: isTextureLoading,
+  } = useSWR(textureUrl, (url) => textureFetcher(url, 1), {
     // suspense: true,
     // revalidateIfStale: false,
     revalidateOnFocus: false,
