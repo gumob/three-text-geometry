@@ -1,3 +1,70 @@
+# [1.0.0](https://github.com/gumob/three-text-geometry/compare/0.2.0...1.0.0) (2026-03-09)
+
+
+* feat!: migrate three, react, @react-three/fiber to peerDependencies ([6a3ba29](https://github.com/gumob/three-text-geometry/commit/6a3ba296ac8ae0cdf698a5bad6c793f2f33f6d9f))
+
+
+### Bug Fixes
+
+* correct formatting in TextGeometryJSXExample component ([906c94d](https://github.com/gumob/three-text-geometry/commit/906c94ddaad60c49aba287eb4eb73932cd7e8a0c))
+* fix script ([3099462](https://github.com/gumob/three-text-geometry/commit/309946213963384bd0f0a42fde7bb75d4df7c1f1))
+* fixed an issue that progress event for TextureLoader is not fired ([e806a7d](https://github.com/gumob/three-text-geometry/commit/e806a7d4f77c50549a0f06c09103f7c164bfb8ce))
+* **hooks:** Handle undefined total in progress calculation ([d771cea](https://github.com/gumob/three-text-geometry/commit/d771cea0b0b7faf512f45902183cabef0505e212))
+* Increase stdout maxBuffer to handle large diffs ([514c4ac](https://github.com/gumob/three-text-geometry/commit/514c4aca9ed99bbf143117c6ec9fa98269443f21))
+* Increase stdout maxBuffer to handle large diffs ([f7965c1](https://github.com/gumob/three-text-geometry/commit/f7965c1274c92895ad0443bc767886d93aac6b79))
+* rename unused parameter url to _url to satisfy ESLint no-unused-vars rule ([1574863](https://github.com/gumob/three-text-geometry/commit/1574863bdf1f3419c8aea62f376882fa8aa18393))
+* update duration in TextMesh for smoother animation ([ee3b74c](https://github.com/gumob/three-text-geometry/commit/ee3b74c66377fab2aaaa799d5d4a525235d4d6a3))
+* **utils/compute.ts:** refactor compute functions to use THREE.Box2 and THREE.Sphere, improve performance by avoiding unnecessary type checks. This modification fixes bug that a computingBoundingBox value sometimes returns  inconsist value. ([6217d2a](https://github.com/gumob/three-text-geometry/commit/6217d2a88ab25317af29dde121949d7d8093072a))
+
+
+### Features
+
+* add @react-three/postprocessing dependency for enhanced visual effects ([925f5f5](https://github.com/gumob/three-text-geometry/commit/925f5f57cd93122ed54b531365ba05463e93a53e))
+* add DemoJSX component and integrate into routing ([774a338](https://github.com/gumob/three-text-geometry/commit/774a338ec14b997bf4dadca84625180228fab9d3))
+* add DemoJSXShader component for advanced text rendering ([d682ce4](https://github.com/gumob/three-text-geometry/commit/d682ce4f44d6425b2237d930e6c94d132805f175))
+* add DemoJSXShuffle component for enhanced text rendering ([3d5c05b](https://github.com/gumob/three-text-geometry/commit/3d5c05bbc74c1c5d390e860592431a364f7ae994))
+* add DemoJSXShuffleShader component for advanced text effects ([46b7575](https://github.com/gumob/three-text-geometry/commit/46b75750d4ef3760b2ff4e952973cd20b1033d66))
+* add dynamic text and traditional text geometry examples ([c569829](https://github.com/gumob/three-text-geometry/commit/c569829eaca6d28fa3041031b77dd94d78187dfb))
+* add postprocessing dependency for enhanced visual effects ([c8d90e5](https://github.com/gumob/three-text-geometry/commit/c8d90e513e4dbd984e7c5e436d9a50a1144f7ba9))
+* add progress callback for useFont hook ([27e2c71](https://github.com/gumob/three-text-geometry/commit/27e2c71d487fcad66958271ad64c225af04df57e))
+* add support for @react-three/drei and @react-three/fiber in demo ([59572a6](https://github.com/gumob/three-text-geometry/commit/59572a6972659957347b6642d372301998eac384))
+* add SWR dependency for data fetching ([ff5e942](https://github.com/gumob/three-text-geometry/commit/ff5e9427f9907190ebfcb4c8c463f4c056b66b89))
+* add three-stdlib dependency for enhanced 3D capabilities ([bb3ecb3](https://github.com/gumob/three-text-geometry/commit/bb3ecb353e31a9383526dd1b51b72da53ad2d5d2))
+* enhance DemoJSX component with improved camera controls and Gizmo integration ([a0f2822](https://github.com/gumob/three-text-geometry/commit/a0f28229f0394c69d26c874e0d82f99e0b51b443))
+* enhance DemoJSX component with random text generation and minor adjustments ([0426a33](https://github.com/gumob/three-text-geometry/commit/0426a333e526bbfe8941689b0f0301cae9a7030d))
+* Fixed `IntrinsicElements` for `@react-three/fiber` ([019cc75](https://github.com/gumob/three-text-geometry/commit/019cc7533d286fb9d387b41a347eada60cb3adf0))
+* **helpers/fiber.ts:** Add TextGeometryNode to JSX IntrinsicElements and extend fiber namespace for TextGeometry ([babd61d](https://github.com/gumob/three-text-geometry/commit/babd61d4b9815db7db787d861350b5cfb54269ad))
+* **helpers/fiber.ts:** Add TextGeometryProps type and extend JSX IntrinsicElements with TextGeometryElements interface for better type safety and readability ([ca6e915](https://github.com/gumob/three-text-geometry/commit/ca6e91582e27c8eb22cc3d12be1434b33203ae45))
+* **helpers/hook.ts:** Add support for loading BMFont files in various formats (fnt, json, xml, bin) ([e52e933](https://github.com/gumob/three-text-geometry/commit/e52e933d016b2fa8cb5aa97f829d27d778e28ab9))
+* **helpers/hook.ts:** Add support for loading BMFont files in various formats (fnt, json, xml, bin) ([e594687](https://github.com/gumob/three-text-geometry/commit/e5946872edad01f19d849363961898dfebbbda0b))
+* **helpers/hook.ts:** Add support for loading BMFont files in various formats (fnt, json, xml, bin) ([98e3e32](https://github.com/gumob/three-text-geometry/commit/98e3e3212dd6aff6efd3643ae3b380d352b042ad))
+* **helpers/hook:** add custom hook to load a font and its texture using SWR and Three.js ([f26265e](https://github.com/gumob/three-text-geometry/commit/f26265e7a8fb9ec16dd653b9a52525b09ba13020))
+* **helpers/hook:** add custom hook to load a font and its texture using SWR and Three.js ([6470ac4](https://github.com/gumob/three-text-geometry/commit/6470ac4e5207549807f756662e5653575945c626))
+* integrate Tailwind CSS into demo application ([b5da2c2](https://github.com/gumob/three-text-geometry/commit/b5da2c26c1d5a282d6ab69545786e05365a31450))
+* introduce DemoJSXSimple component for enhanced text geometry rendering ([ff921b1](https://github.com/gumob/three-text-geometry/commit/ff921b1d71fdc64eccac066eadb0c5e23220dd10))
+* refactor DemoJSX component to utilize SWR for font loading and improve structure ([d4ff455](https://github.com/gumob/three-text-geometry/commit/d4ff4553b8a21810e3641073bbd3839f7ff7bb6f))
+* **src/helpers/fiber.ts:** add TextGeometryNode and TextGeometryProps types for the TextGeometry component using @react-three/fiber ([45b96ad](https://github.com/gumob/three-text-geometry/commit/45b96ad240f8a6f12cebd3bc9d6450882732b3e2))
+* TextGeometry - Add copy method to clone geometry with text and options ([4eba7ca](https://github.com/gumob/three-text-geometry/commit/4eba7ca1437f2427b6fd188548db5899db6f1ab7))
+* **TextGeometry:** Add a warning when no font is specified in options and allow updating the font option ([2a1932a](https://github.com/gumob/three-text-geometry/commit/2a1932a752b32387d22d5fe2c102e280623a4dad))
+* upgrade canvas to v3.1.1 ([ec482d8](https://github.com/gumob/three-text-geometry/commit/ec482d876724ce33dce2525ca3e6710d4f87b9ef))
+* use Promise for TextureLoader ([4496bb6](https://github.com/gumob/three-text-geometry/commit/4496bb69fe6039dbeb42430388b81fc999b2fdc0))
+
+
+### Reverts
+
+* **helpers/fiber.ts:** Add `TextGeometryOption` to the `TextGeometryNode` type for better type safety and consistency with other fiber nodes. ([c75b6a7](https://github.com/gumob/three-text-geometry/commit/c75b6a7e9755591f9a119e45da483a167b6f65de))
+
+
+### BREAKING CHANGES
+
+* three, react, and @react-three/fiber are now peer
+dependencies. Users must install them alongside three-text-geometry.
+
+Also adds a GitHub Actions workflow to auto-detect Three.js updates
+and create PRs, and removes stale git tags 3.0.0 and 4.0.0.
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
 # [0.2.0](https://github.com/gumob/three-text-geometry/compare/0.1.0...0.2.0) (2024-09-03)
 
 
