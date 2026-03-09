@@ -132,9 +132,9 @@ const useFont = (fontUrl: string | null = null, textureUrl: string | null = null
    * @param {number} index - The index of the data.
    * @param {number} loaded - The loaded bytes.
    * @param {number} total - The total bytes.
-   * @param {string} url - The URL of the item.
+   * @param {string} _url - The URL of the item.
    */
-  const calculateProgress = (index: number, loaded: number, total: number, url: string) => {
+  const calculateProgress = (index: number, loaded: number, total: number, _url: string) => {
     /** Update the loaded and total bytes for the item. */
     itemBytesLoaded.current[index] = loaded;
     itemBytesTotal.current[index] = total;
