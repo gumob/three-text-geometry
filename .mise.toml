@@ -1,4 +1,4 @@
 [tools]
-node = "20"
+node = "24"
 python = "3.12"
 ruby = "3.2"
