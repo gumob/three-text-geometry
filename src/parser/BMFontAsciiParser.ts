@@ -47,7 +47,7 @@ class BMFontAsciiParser implements IBMFontParser<string> {
           const arr = str.split('=');
           const key: string = arr[0] as string;
           const value: string = arr[1] as string;
-          if (/^-?\d+\.?\d*$/.test(value)) keyValues[key] = +value;
+          if (/^-?\d+(?:\.\d*)?$/.test(value)) keyValues[key] = +value;
           else if (/^[\d,]+/.test(value)) keyValues[key] = value.split(',').map((value) => +value);
           else if (/^("|').*("|')$/.test(value)) keyValues[key] = value.replace(/^("|')(.*)("|')$/g, '$2');
           else keyValues[key] = value;
