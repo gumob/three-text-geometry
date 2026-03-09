@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/gumob/three-text-geometry/compare/2.0.0...2.0.1) (2026-03-09)
+
+
+### Bug Fixes
+
+* resolve security vulnerabilities in dependencies and code ([9aab3cd](https://github.com/gumob/three-text-geometry/commit/9aab3cd40fe7242369c2324569cd1b7e9d0b40ea))
+
 # [2.0.0](https://github.com/gumob/three-text-geometry/compare/v1.0.1...2.0.0) (2026-03-09)
 
 
