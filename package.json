@@ -9,8 +9,12 @@
     "url": "https://github.com/gumob/three-text-geometry"
   },
   "repository": {
-    "type": "https",
+    "type": "git",
     "url": "https://github.com/gumob/three-text-geometry.git"
+  },
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
   },
   "engines": {
     "node": ">=22"
