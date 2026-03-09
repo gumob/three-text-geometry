@@ -58,14 +58,19 @@
     "all": "pnpm format-fix && pnpm lint-fix && pnpm typedoc && pnpm build && pnpm test-coverage"
   },
   "dependencies": {
-    "@react-three/fiber": "^8.18.0",
     "ajv": "^8",
     "fast-xml-parser": "^5.2.5",
-    "react": "^18",
-    "swr": "^2.3.4",
-    "three": "0.172.0"
+    "swr": "^2.3.4"
+  },
+  "peerDependencies": {
+    "three": ">=0.167.1",
+    "react": ">=18",
+    "@react-three/fiber": ">=8.18.0"
   },
   "devDependencies": {
+    "three": "0.172.0",
+    "react": "^18",
+    "@react-three/fiber": "^8.18.0",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.30.1",

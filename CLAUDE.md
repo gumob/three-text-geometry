@@ -56,6 +56,12 @@ Dual format: CommonJS (`dist-cjs/`, ES2018) and ESM (`dist-esm/`, ES2020). Both 
 - WebGL mocked via `tests/helpers/webgl-mock.ts` (no real GPU needed)
 - CI runs tests with xvfb-run on Ubuntu (libgl1-mesa-dev for headless GL)
 
+## Dependencies
+
+- `three`, `react`, `@react-three/fiber` are **peerDependencies** (users must install them alongside this package)
+- They are also in `devDependencies` for development/testing
+- Core dependencies (`ajv`, `fast-xml-parser`, `swr`) remain in `dependencies`
+
 ## Branch Strategy
 
 - `main` — production releases (semantic-release auto-publishes to npm)

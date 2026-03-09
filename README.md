@@ -15,6 +15,8 @@ The difference in rendering speed is noticeable when animations are enabled, and
 ## Requirements
 
 - Three.js 0.167.1 or later
+- React 18 or later
+- React Three Fiber 8.18.0 or later
 - Node.js 20.8.1 or later
 
 ## Installation
@@ -22,20 +24,22 @@ The difference in rendering speed is noticeable when animations are enabled, and
 ### NPM
 
 ```
-$ npm install three-text-geometry
+$ npm install three-text-geometry three react @react-three/fiber
 ```
 
 ### PNPM
 
 ```
-$ pnpm add three-text-geometry
+$ pnpm add three-text-geometry three react @react-three/fiber
 ```
 
 ### Yarn
 
 ```
-$ yarn add three-text-geometry
+$ yarn add three-text-geometry three react @react-three/fiber
 ```
+
+> **Note:** `three`, `react`, and `@react-three/fiber` are peer dependencies and must be installed alongside `three-text-geometry`.
 
 ## Usage
 

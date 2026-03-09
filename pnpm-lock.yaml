@@ -8,24 +8,15 @@ importers:
 
   .:
     dependencies:
-      '@react-three/fiber':
-        specifier: ^8.18.0
-        version: 8.18.0(react@18.3.1)(three@0.172.0)
       ajv:
         specifier: ^8
         version: 8.17.1
       fast-xml-parser:
         specifier: ^5.2.5
         version: 5.2.5
-      react:
-        specifier: ^18
-        version: 18.3.1
       swr:
         specifier: ^2.3.4
         version: 2.3.4(react@18.3.1)
-      three:
-        specifier: 0.172.0
-        version: 0.172.0
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.8.1
@@ -51,6 +42,9 @@ importers:
       '@playwright/test':
         specifier: ^1.53.2
         version: 1.53.2
+      '@react-three/fiber':
+        specifier: ^8.18.0
+        version: 8.18.0(react@18.3.1)(three@0.172.0)
       '@semantic-release/changelog':
         specifier: ^6
         version: 6.0.3(semantic-release@24.2.6(typescript@5.8.3))
@@ -162,9 +156,15 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.6.14
         version: 0.6.14(@ianvs/prettier-plugin-sort-imports@4.4.2(prettier@3.6.2))(prettier-plugin-multiline-arrays@4.0.3(prettier@3.6.2))(prettier@3.6.2)
+      react:
+        specifier: ^18
+        version: 18.3.1
       semantic-release:
         specifier: ^24.2.6
         version: 24.2.6(typescript@5.8.3)
+      three:
+        specifier: 0.172.0
+        version: 0.172.0
       ts-jest:
         specifier: ^29.4.0
         version: 29.4.0(@babel/core@7.26.0)(@jest/transform@30.0.4)(@jest/types@30.0.1)(babel-jest@30.0.4(@babel/core@7.26.0))(jest-util@30.0.2)(jest@30.0.4(@types/node@20.19.6)(ts-node@10.9.2(@types/node@20.19.6)(typescript@5.8.3)))(typescript@5.8.3)

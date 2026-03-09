@@ -1,0 +1,172 @@
+name: Update Three.js
+
+on:
+  schedule:
+    - cron: '0 9 * * 1,4' # Mon & Thu 09:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  check-update:
+    runs-on: ubuntu-latest
+    outputs:
+      latest: ${{ steps.check.outputs.latest }}
+      should_update: ${{ steps.check.outputs.should_update }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+
+      - name: Check for Three.js update
+        id: check
+        run: |
+          CURRENT=$(jq -r '.devDependencies.three' package.json)
+          LATEST=$(npm view three version)
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "latest=$LATEST" >> "$GITHUB_OUTPUT"
+
+          if [ "$CURRENT" = "$LATEST" ]; then
+            echo "Three.js is already up to date ($CURRENT)"
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Update available: $CURRENT -> $LATEST"
+
+          # Check if @types/three has a matching version
+          TYPES_EXISTS=$(npm view "@types/three@$LATEST" version 2>/dev/null || echo "")
+          if [ -z "$TYPES_EXISTS" ]; then
+            echo "@types/three@$LATEST not yet published, creating issue"
+            EXISTING_ISSUE=$(gh issue list --search "three.js $LATEST @types/three" --state open --json number --jq '.[0].number // empty')
+            if [ -z "$EXISTING_ISSUE" ]; then
+              gh issue create \
+                --title "Three.js $LATEST: waiting for @types/three" \
+                --body "Three.js \`$LATEST\` has been released, but \`@types/three@$LATEST\` is not yet available on npm. Once it is published, the update workflow can proceed." \
+                --label "dependencies"
+            fi
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Check if a PR already exists
+          EXISTING_PR=$(gh pr list --search "update three.js to $LATEST" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #$EXISTING_PR already exists, skipping"
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "should_update=true" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  update-and-test:
+    needs: check-update
+    if: needs.check-update.outputs.should_update == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y libgl1-mesa-dev xvfb
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Create update branch
+        run: git checkout -b deps/update-three-${{ needs.check-update.outputs.latest }}
+
+      - name: Update root package.json
+        run: |
+          VERSION=${{ needs.check-update.outputs.latest }}
+          jq --arg v "$VERSION" '
+            .devDependencies.three = $v |
+            .devDependencies["@types/three"] = $v |
+            .peerDependencies.three = ">=" + $v
+          ' package.json > package.json.tmp && mv package.json.tmp package.json
+
+      - name: Update demo/package.json
+        run: |
+          VERSION=${{ needs.check-update.outputs.latest }}
+          jq --arg v "^$VERSION" '
+            .dependencies.three = $v |
+            .devDependencies["@types/three"] = $v
+          ' demo/package.json > demo/package.json.tmp && mv demo/package.json.tmp demo/package.json
+
+      - name: Update README.md
+        run: |
+          VERSION=${{ needs.check-update.outputs.latest }}
+          sed -i "s/Three\.js [0-9]\+\.[0-9]\+\.[0-9]\+ or later/Three.js $VERSION or later/" README.md
+
+      - name: Install dependencies
+        run: |
+          pnpm install --no-frozen-lockfile
+          cd demo && pnpm install --no-frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint-check
+
+      - name: Test
+        id: test
+        continue-on-error: true
+        run: xvfb-run --auto-servernum pnpm test-coverage
+
+      - name: Build
+        run: pnpm build
+
+      - name: Commit and push
+        run: |
+          VERSION=${{ needs.check-update.outputs.latest }}
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat!: update three.js to $VERSION"
+          git push origin deps/update-three-$VERSION
+
+      - name: Create pull request
+        run: |
+          VERSION=${{ needs.check-update.outputs.latest }}
+          DRAFT_FLAG=""
+          TEST_STATUS="All tests passed."
+          if [ "${{ steps.test.outcome }}" = "failure" ]; then
+            DRAFT_FLAG="--draft"
+            TEST_STATUS="⚠️ Some tests failed. Please review before merging."
+          fi
+
+          gh pr create \
+            --base develop \
+            --title "feat!: update three.js to $VERSION" \
+            $DRAFT_FLAG \
+            --body "$(cat <<EOF
+          ## Summary
+
+          - Update \`three\` and \`@types/three\` to \`$VERSION\`
+          - Update \`peerDependencies.three\` to \`>=$VERSION\`
+          - Update \`demo/package.json\` dependencies
+
+          ## Test results
+
+          $TEST_STATUS
+
+          ## Links
+
+          - [Three.js release notes](https://github.com/mrdoob/three.js/releases/tag/r${VERSION##0.})
+
+          ---
+          🤖 Generated by the [update-three](https://github.com/gumob/three-text-geometry/actions/workflows/update-three.yaml) workflow
+          EOF
+          )"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
