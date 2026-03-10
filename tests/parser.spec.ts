@@ -1,175 +1,153 @@
+import fs from 'fs';
+import path from 'path';
+
 import { BMFontError } from '@three-text-geometry/error';
 import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '@three-text-geometry/parser';
 import { isBMFont } from '@three-text-geometry/types';
-import axios, { AxiosResponse } from 'axios';
 
-const config = {
-  headers: {
-    'Cache-Control': 'no-cache',
-    Pragma: 'no-cache',
-    Expires: '0',
-  },
-};
-
-function fetchData(uri: string): Promise<AxiosResponse<any, any>> {
-  return axios.get(uri, config);
+function readLocalFile(filePath: string): string;
+function readLocalFile(filePath: string, binary: true): Buffer;
+function readLocalFile(filePath: string, binary?: boolean): string | Buffer {
+  const resolved = path.resolve(__dirname, 'fonts', filePath);
+  if (binary) {
+    return fs.readFileSync(resolved);
+  }
+  return fs.readFileSync(resolved, 'utf-8');
 }
 
 describe('BMFontParser', () => {
-  test('XML / Valid Single Page', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.xml';
-    const res = await fetchData(uri);
-    const font = new BMFontXMLParser().parse(res.data);
+  test('XML / Valid Single Page', () => {
+    const data = readLocalFile('Roboto-Regular.xml');
+    const font = new BMFontXMLParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('XML / Valid Multiple Page', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-pages.xml';
-    const res = await fetchData(uri);
-    const font = new BMFontXMLParser().parse(res.data);
+  test('XML / Valid Multiple Page', () => {
+    const data = readLocalFile('Roboto-Regular-pages.xml');
+    const font = new BMFontXMLParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('XML / Invalid Single Page', async () => {
+  test('XML / Invalid Single Page', () => {
     try {
-      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-invalid.xml';
-      const res = await fetchData(uri);
-      new BMFontXMLParser().parse(res.data);
+      const data = readLocalFile('Roboto-Regular-invalid.xml');
+      new BMFontXMLParser().parse(data);
     } catch (error: any) {
       expect(error instanceof BMFontError).toBe(true);
     }
   });
 
-  test('XML / Empty Single Page', async () => {
+  test('XML / Empty Single Page', () => {
     try {
-      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-empty.xml';
-      const res = await fetchData(uri);
-      new BMFontXMLParser().parse(res.data);
+      const data = readLocalFile('Roboto-Regular-empty.xml');
+      new BMFontXMLParser().parse(data);
     } catch (error: any) {
       expect(error instanceof BMFontError).toBe(true);
     }
   });
 
-  test('Json / Valid', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular.json';
-    const res = await fetchData(uri);
-    const font = new BMFontJsonParser().parse(res.data);
+  test('Json / Valid', () => {
+    const data = readLocalFile('Roboto-Regular.json');
+    const font = new BMFontJsonParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('Json / Empty', async () => {
+  test('Json / Empty', () => {
     try {
-      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-empty.json';
-      const res = await fetchData(uri);
-      new BMFontJsonParser().parse(res.data);
+      const data = readLocalFile('Roboto-Regular-empty.json');
+      new BMFontJsonParser().parse(data);
     } catch (error: any) {
       expect(error instanceof BMFontError).toBe(true);
     }
   });
 
-  test('Json / Invalid', async () => {
+  test('Json / Invalid', () => {
     try {
-      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Roboto-Regular-invalid.json';
-      const res = await fetchData(uri);
-      new BMFontJsonParser().parse(res.data);
+      const data = readLocalFile('Roboto-Regular-invalid.json');
+      new BMFontJsonParser().parse(data);
     } catch (error: any) {
       expect(error instanceof BMFontError).toBe(true);
     }
   });
 
-  test('Ascii / Valid / DejaVu-sdf.fnt', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/DejaVu-sdf.fnt';
-    const res = await fetchData(uri);
-    const font = new BMFontAsciiParser().parse(res.data);
+  test('Ascii / Valid / DejaVu-sdf.fnt', () => {
+    const data = readLocalFile('DejaVu-sdf.fnt');
+    const font = new BMFontAsciiParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('Ascii / Invalid / DejaVu-sdf.fnt', async () => {
+  test('Ascii / Invalid / DejaVu-sdf.fnt', () => {
     try {
-      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/DejaVu-sdf-invalid.fnt';
-      const res = await fetchData(uri);
-      new BMFontAsciiParser().parse(res.data);
+      const data = readLocalFile('DejaVu-sdf-invalid.fnt');
+      new BMFontAsciiParser().parse(data);
     } catch (error: any) {
       expect(error instanceof BMFontError).toBe(true);
     }
   });
 
-  test('Ascii / Empty / DejaVu-sdf.fnt', async () => {
+  test('Ascii / Empty / DejaVu-sdf.fnt', () => {
     try {
-      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/DejaVu-sdf-empty.fnt';
-      const res = await fetchData(uri);
-      new BMFontAsciiParser().parse(res.data);
+      const data = readLocalFile('DejaVu-sdf-empty.fnt');
+      new BMFontAsciiParser().parse(data);
     } catch (error: any) {
       expect(error instanceof BMFontError).toBe(true);
     }
   });
 
-  test('Ascii / Valid / Lato-Regular-16.fnt', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-16.fnt';
-    const res = await fetchData(uri);
-    const font = new BMFontAsciiParser().parse(res.data);
+  test('Ascii / Valid / Lato-Regular-16.fnt', () => {
+    const data = readLocalFile('Lato-Regular-16.fnt');
+    const font = new BMFontAsciiParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('Ascii / Valid / Lato-Regular-24.fnt', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-24.fnt';
-    const res = await fetchData(uri);
-    const font = new BMFontAsciiParser().parse(res.data);
+  test('Ascii / Valid / Lato-Regular-24.fnt', () => {
+    const data = readLocalFile('Lato-Regular-24.fnt');
+    const font = new BMFontAsciiParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('Ascii / Valid / Lato-Regular-32.fnt', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-32.fnt';
-    const res = await fetchData(uri);
-    const font = new BMFontAsciiParser().parse(res.data);
+  test('Ascii / Valid / Lato-Regular-32.fnt', () => {
+    const data = readLocalFile('Lato-Regular-32.fnt');
+    const font = new BMFontAsciiParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('Ascii / Valid / Lato-Regular-64.fnt', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Lato-Regular-64.fnt';
-    const res = await fetchData(uri);
-    const font = new BMFontAsciiParser().parse(res.data);
+  test('Ascii / Valid / Lato-Regular-64.fnt', () => {
+    const data = readLocalFile('Lato-Regular-64.fnt');
+    const font = new BMFontAsciiParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('Ascii / Valid / Norwester-Multi-32.fnt', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Norwester-Multi-32.fnt';
-    const res = await fetchData(uri);
-    const font = new BMFontAsciiParser().parse(res.data);
+  test('Ascii / Valid / Norwester-Multi-32.fnt', () => {
+    const data = readLocalFile('Norwester-Multi-32.fnt');
+    const font = new BMFontAsciiParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('Ascii / Valid / Norwester-Multi-64.fnt', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Norwester-Multi-64.fnt';
-    const res = await fetchData(uri);
-    const font = new BMFontAsciiParser().parse(res.data);
+  test('Ascii / Valid / Norwester-Multi-64.fnt', () => {
+    const data = readLocalFile('Norwester-Multi-64.fnt');
+    const font = new BMFontAsciiParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('Binary / Valid', async () => {
-    const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Arial.bin';
-    const res = await fetchData(uri);
-    const data = typeof res.data === 'string' ? Buffer.from(res.data, 'binary') : (res.data as Buffer);
+  test('Binary / Valid', () => {
+    const data = readLocalFile('Arial.bin', true);
     const font = new BMFontBinaryParser().parse(data);
     expect(isBMFont(font)).toEqual(true);
   });
 
-  test('Binary / Invalid', async () => {
+  test('Binary / Invalid', () => {
     try {
-      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Arial-invalid.bin';
-      const res = await fetchData(uri);
-      const data = typeof res.data === 'string' ? Buffer.from(res.data, 'binary') : (res.data as Buffer);
+      const data = readLocalFile('Arial-invalid.bin', true);
       new BMFontBinaryParser().parse(data);
     } catch (error: any) {
       expect(error instanceof BMFontError).toBe(true);
     }
   });
 
-  test('Binary / Empty', async () => {
+  test('Binary / Empty', () => {
     try {
-      const uri = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/Arial-empty.bin';
-      const res = await fetchData(uri);
-      const data = typeof res.data === 'string' ? Buffer.from(res.data, 'binary') : (res.data as Buffer);
+      const data = readLocalFile('Arial-empty.bin', true);
       new BMFontBinaryParser().parse(data);
     } catch (error: any) {
       expect(error instanceof BMFontError).toBe(true);
