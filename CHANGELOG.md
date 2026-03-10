@@ -1,3 +1,38 @@
+# [3.0.0](https://github.com/gumob/three-text-geometry/compare/2.0.3...3.0.0) (2026-03-10)
+
+
+* feat!: migrate to React 19 and React Three Fiber v9 ([3544c41](https://github.com/gumob/three-text-geometry/commit/3544c417737d9f63f062e9162ccf9376cfc2fe72))
+
+
+### Bug Fixes
+
+* resolve JSDoc lint warnings in fiber.ts ([db9e4d9](https://github.com/gumob/three-text-geometry/commit/db9e4d9e688977432a89bb2206de035a9071fbf6))
+
+
+### BREAKING CHANGES
+
+* Minimum peer dependency versions
+changed to react@19, @react-three/fiber@9,
+three@0.172
+
+Co-Authored-By: Claude Opus 4.6
+<noreply@anthropic.com>
+
+* feat(demo): rewrite demo app with React Three Fiber
+
+- Replace vanilla Three.js class components with R3F
+  functional components
+- Add @react-three/fiber and @react-three/drei, remove
+  axios from demo
+- Convert 5 demos (Simple, Multipage, Shuffle, Shader,
+  ShuffleShader) to R3F scenes
+- Add shared SceneSetup, DemoPage, useTextData hooks
+- Convert Navigation to functional component
+- Restructure README: R3F as primary, Vanilla as concise
+  secondary example
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
 ## [2.0.3](https://github.com/gumob/three-text-geometry/compare/2.0.2...2.0.3) (2026-03-10)
 
 
