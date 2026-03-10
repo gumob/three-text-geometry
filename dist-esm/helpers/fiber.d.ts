@@ -1,6 +1,7 @@
-import { BufferGeometryNode, ThreeElements } from '@react-three/fiber';
+import type { ThreeElement, ThreeElements } from '@react-three/fiber';
 import TextGeometry from '../TextGeometry';
-export type TextGeometryProps = BufferGeometryNode<TextGeometry, typeof TextGeometry>;
+export declare function registerTextGeometry(extend: (catalog: Record<string, unknown>) => void): void;
+export type TextGeometryProps = ThreeElement<typeof TextGeometry>;
 export interface TextGeometryElements extends ThreeElements {
     textGeometry: TextGeometryProps;
 }

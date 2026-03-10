@@ -1,36 +1,34 @@
-import { BufferGeometryNode, extend, ThreeElements } from '@react-three/fiber';
+import type { ThreeElement, ThreeElements } from '@react-three/fiber';
 
 import TextGeometry from '../TextGeometry';
 
-extend({ TextGeometry });
-
-// import { Node, Overwrite } from '@react-three/fiber';
-// import { EventHandlers } from '@react-three/fiber/dist/declarations/src/core/events';
-// import { TextGeometryOption } from '../types';
-
-// /**
-//  * TextGeometryNode is a type that extends the Node type and takes two type parameters, TextGeometry and typeof TextGeometry.
-//  * It is used to create a props object for the TextGeometry component.
-//  *
-//  * @template T - The type of the TextGeometry class.
-//  * @template P - The type of the props for the TextGeometry component.
-//  */
-// type TextGeometryNode<T, P> = Overwrite<
-//   Node<T, P>,
-//   {
-//     text: string;
-//     option: TextGeometryOption;
-//   }
-// > &
-//   BufferGeometryNode<TextGeometry, typeof TextGeometry> &
-//   EventHandlers;
+/**
+ * Register TextGeometry with React Three Fiber.
+ * Call this once in your app setup.
+ *
+ * @example
+ * // Catalog pattern (R3F v8/v9)
+ * import { extend } from '\@react-three/fiber';
+ * import { registerTextGeometry } from 'three-text-geometry';
+ * registerTextGeometry(extend);
+ * // <textGeometry ... />
+ * @example
+ * // Factory pattern (R3F v9)
+ * import { extend } from '\@react-three/fiber';
+ * import TextGeometry from 'three-text-geometry';
+ * const TextGeometryEl = extend(TextGeometry);
+ * // <TextGeometryEl ... />
+ * @param {(catalog: Record<string, unknown>) => void} extend - The extend function from `\@react-three/fiber`.
+ */
+export function registerTextGeometry(extend: (catalog: Record<string, unknown>) => void): void {
+  extend({ TextGeometry });
+}
 
 /**
- * TextGeometryProps is a type that extends TextGeometryNode with specific type parameters.
- * It is used to define the props for the TextGeometry component.
+ * TextGeometryProps is a type that defines the props for the TextGeometry component.
+ * It is used to define the props for the TextGeometry component in React Three Fiber.
  */
-// export type TextGeometryProps = TextGeometryNode<TextGeometry, typeof TextGeometry>;
-export type TextGeometryProps = BufferGeometryNode<TextGeometry, typeof TextGeometry>;
+export type TextGeometryProps = ThreeElement<typeof TextGeometry>;
 
 /**
  * TextGeometryElements is an interface that extends the ThreeElements interface and includes the TextGeometry component.

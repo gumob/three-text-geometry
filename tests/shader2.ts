@@ -71,10 +71,7 @@ export function createMultipageShader(opt: IMultipageShaderOption): THREE.Shader
     attributes: { page: { type: 'f', value: 0 } },
   };
 
-  const threeVers = (parseInt(THREE.REVISION, 10) || 0) | 0;
-  if (threeVers >= 72) {
-    attributes = undefined;
-  }
+  attributes = undefined;
 
   return Object.assign(
     {
