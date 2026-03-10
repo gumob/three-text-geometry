@@ -45,128 +45,15 @@ $ yarn add three-text-geometry three react @react-three/fiber
 
 For detailed information, read the [documentation](https://gumob.github.io/three-text-geometry/) and check the [demo](https://github.com/gumob/three-text-geometry/tree/develop/demo).
 
-### How to run the demo
-
-The demo is written in TypeScript using React, so you need to check out the repository and build sources to run the demo app.
-The source code for the demo is available [here](https://github.com/gumob/three-text-geometry/tree/develop/demo).
-
-```
-git clone https://github.com/gumob/three-text-geometry.git
-cd three-text-geometry/demo
-corepack enable
-pnpm install
-pnpm dev
-```
-
-Please refer to the [README.md in the demo directory](https://github.com/gumob/three-text-geometry/blob/beta/demo/README.md) for more details.
-
-### Sample code
-
-1. Combine [`Axios`](https://github.com/axios/axios) and [`THREE.TextureLoader`](https://threejs.org/docs/#api/en/loaders/TextureLoader) to load assets asynchronously.
-2. Instantiate [`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) using the loaded [`BMFont`](https://gumob.github.io/three-text-geometry/interfaces/BMFont.html) and [`THREE.Texture`](https://threejs.org/docs/#api/en/textures/Texture) data.
-
-[`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) supports word wrapping, text aligning, letter spacing, kerning. see [the list](#option-list) to see how each option works.
-
-```TypeScript
-import * as THREE from 'three'
-import axios from 'axios'
-import TextGeometry, { BMFont, BMFontJsonParser, TextGeometryOption, TextAlign } from 'three-text-geometry'
-
-class TextGeometryRenderer extends React.Component {
-
-    renderer?: THREE.WebGLRenderer
-    scene?: THREE.Scene
-    camera?: THREE.PerspectiveCamera
-
-    componentDidMount() {
-        const fontUri: string =
-            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json'
-        const textureUri: string =
-            'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png'
-        Promise.all([
-            axios.get(fontUri).then(res => new BMFontJsonParser().parse(res.data)), /** Load a font */
-            new THREE.TextureLoader().loadAsync(textureUri) /** Load a texture */
-        ]).then((values: [BMFont, THREE.Texture]) => {
-            let font: BMFont
-            let texture: THREE.Texture
-            values.forEach((value: BMFont | THREE.Texture) => {
-                if (value instanceof THREE.Texture) texture = value as THREE.Texture
-                else font = value as BMFont
-            })
-            this.initScene(font, texture)
-        })
-    }
-
-    initScene(font: BMFont, texture: THREE.Texture) {
-        /** Renderer */
-        this.renderer = new THREE.WebGLRenderer({ alpha: true })
-        this.renderer.setClearColor(0x000000, 0)
-        this.renderer.setPixelRatio(window.devicePixelRatio)
-        this.renderer.setSize(window.innerWidth, window.innerHeight)
-
-        const container = document.querySelector('#demo')
-        container?.append(this.renderer.domElement)
-
-        /** Scene */
-        this.scene = new THREE.Scene()
-        this.scene.background = new THREE.Color(0x000000)
-
-        /** Camera */
-        const aspect = window.innerWidth / window.innerHeight
-        this.camera = new THREE.PerspectiveCamera(45, aspect, 1, 100000)
-        this.camera.position.set(1000, 1000, 2000)
-        this.camera.lookAt(0, 0, 0)
-
-        /** Geometry */
-        const text: string = 'Hollo World.\nHello Universe.' /** The text to layout. Newline characters `\n` will cause line breaks */
-        const textOption: TextGeometryOption = {
-            font: font,
-            align: TextAlign.Left,
-            width: 1600,
-            flipY: textures.flipY,
-            multipage: false
-        }
-        const textGeometry = new TextGeometry(text, textOption)
-
-        /** Material */
-        const textMaterial = new THREE.MeshBasicMaterial({
-            map: texture,
-            side: THREE.DoubleSide,
-            transparent: true,
-            color: 0x666666,
-        })
-
-        /** Mesh */
-        const mesth = new THREE.Mesh(textGeometry, textMaterial)
-            .rotateY(Math.PI)
-            .rotateZ(Math.PI)
-            .translateX(-box.x / 2)
-            .translateY(-box.y / 2)
-        this.scene!.add(mesth)
-
-        this.updateScene()
-    }
-
-    updateScene() {
-        this.renderer?.render(this.scene!, this.camera!)
-        this.stats?.update()
-        requestAnimationFrame(this.updateScene.bind(this))
-    }
-
-    render() {
-        return <div id='demo'></div>
-    }
-}
-
-```
+[`TextGeometry`](https://gumob.github.io/three-text-geometry/classes/TextGeometry.html) supports word wrapping, text aligning, letter spacing, kerning. See [the list](#option-list) for all available options.
 
 ### React Three Fiber
 
-three-text-geometry provides helpers for integrating with [React Three Fiber](https://github.com/pmndrs/react-three-fiber).
+three-text-geometry provides first-class support for [React Three Fiber](https://github.com/pmndrs/react-three-fiber).
 
 #### Setup
 
-There are two patterns to use `TextGeometry` with R3F.
+There are two patterns to register `TextGeometry` with R3F.
 
 **Catalog pattern (R3F v8/v9)**
 
@@ -192,13 +79,17 @@ const TextGeometryEl = extend(TextGeometry)
 // Now you can use <TextGeometryEl ... />
 ```
 
-#### useFont hook
+#### Example
 
-The `useFont` hook loads a font file and its texture asynchronously.
+The `useFont` hook loads a BMFont file and its texture asynchronously. Combined with `<textGeometry>`, you can render bitmap text in just a few lines.
 
 ```TypeScript
 import * as THREE from 'three'
-import { useFont } from 'three-text-geometry'
+import { Canvas, extend } from '@react-three/fiber'
+import { TextAlign, useFont, registerTextGeometry } from 'three-text-geometry'
+
+// Register once at module scope
+registerTextGeometry(extend)
 
 function TextMesh() {
   const { font, texture, isLoading } = useFont(
@@ -209,10 +100,18 @@ function TextMesh() {
   if (isLoading || !font || !texture) return null
 
   return (
-    <mesh>
-      <textGeometry args={['Hello World', { font, flipY: texture.flipY }]} />
+    <mesh rotation={[Math.PI, 0, 0]}>
+      <textGeometry args={['Hello World', { font, align: TextAlign.Left, width: 800, flipY: texture.flipY }]} />
       <meshBasicMaterial map={texture} transparent side={THREE.DoubleSide} />
     </mesh>
+  )
+}
+
+function App() {
+  return (
+    <Canvas camera={{ fov: 45, position: [0, 0, 500] }}>
+      <TextMesh />
+    </Canvas>
   )
 }
 ```
@@ -225,7 +124,50 @@ To enable type completions for `<textGeometry>` in TypeScript projects, simply i
 import 'three-text-geometry' // Adds textGeometry to JSX.IntrinsicElements
 ```
 
-#### Screen coordinate system and Three.js coordinate system
+### Vanilla Three.js
+
+You can also use `TextGeometry` directly without React Three Fiber.
+
+```TypeScript
+import * as THREE from 'three'
+import TextGeometry, { BMFont, BMFontJsonParser, TextAlign } from 'three-text-geometry'
+
+// Load font and texture
+const res = await fetch('https://example.com/font.json')
+const font: BMFont = new BMFontJsonParser().parse(await res.json())
+const texture = await new THREE.TextureLoader().loadAsync('https://example.com/font.png')
+
+// Create geometry and mesh
+const geometry = new TextGeometry('Hello World', {
+  font,
+  align: TextAlign.Left,
+  width: 800,
+  flipY: texture.flipY,
+})
+const material = new THREE.MeshBasicMaterial({
+  map: texture,
+  side: THREE.DoubleSide,
+  transparent: true,
+})
+const mesh = new THREE.Mesh(geometry, material)
+  .rotateY(Math.PI)
+  .rotateZ(Math.PI)
+scene.add(mesh)
+```
+
+### How to run the demo
+
+The demo is built with React Three Fiber. Clone the repository and run:
+
+```
+git clone https://github.com/gumob/three-text-geometry.git
+cd three-text-geometry/demo
+corepack enable
+pnpm install
+pnpm dev
+```
+
+### Screen coordinate system and Three.js coordinate system
 
 TextGeometry places text based on the screen coordinate system.
 Therefore, when [`THREE.Mesh`](https://threejs.org/docs/#api/en/objects/Mesh) is added to the scene, the text will be placed inverted when viewed from the positive direction of the Z axis.

@@ -1,35 +1,32 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { extend } from '@react-three/fiber';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { registerTextGeometry } from 'three-text-geometry';
 
-import DemoMultipage from '~/DemoMultipage';
-import DemoShader from '~/DemoShader';
-import DemoShuffle from '~/DemoShuffle';
-import DemoShuffleShader from '~/DemoShuffleShader';
-import DemoSimple from '~/DemoSimple';
-// import reportWebVitals from '~/reportWebVitals'
-import Navigation from '~/Navigation';
+import DemoPage from '~/pages/DemoPage';
+import MultipageScene from '~/scenes/MultipageScene';
+import ShaderScene from '~/scenes/ShaderScene';
+import ShuffleScene from '~/scenes/ShuffleScene';
+import ShuffleShaderScene from '~/scenes/ShuffleShaderScene';
+import SimpleScene from '~/scenes/SimpleScene';
 
 import './index.css';
+
+registerTextGeometry(extend);
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <Navigation />
       <Routes>
         <Route path="*" element={<Navigate to="/simple" />} />
-        <Route path="/simple" element={<DemoSimple />} />
-        <Route path="/multipage" element={<DemoMultipage />} />
-        <Route path="/shuffle" element={<DemoShuffle />} />
-        <Route path="/shader" element={<DemoShader />} />
-        <Route path="/shuffleshader" element={<DemoShuffleShader />} />
+        <Route path="/simple" element={<DemoPage><SimpleScene /></DemoPage>} />
+        <Route path="/multipage" element={<DemoPage><MultipageScene /></DemoPage>} />
+        <Route path="/shuffle" element={<DemoPage><ShuffleScene /></DemoPage>} />
+        <Route path="/shader" element={<DemoPage><ShaderScene /></DemoPage>} />
+        <Route path="/shuffleshader" element={<DemoPage><ShuffleShaderScene /></DemoPage>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals()
