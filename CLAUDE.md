@@ -99,3 +99,10 @@ Dual format: CommonJS (`dist-cjs/`, ES2018) and ESM (`dist-esm/`, ES2020). Both 
 
 - semantic-release runs automatically on merge to `main`
 - Automatically creates npm publish and GitHub Release
+
+### Automation
+
+- Dependabot PRs (patch/minor) are auto-approved and auto-merged to `develop`
+- Dependabot major updates require manual review
+- A `develop → main` PR is automatically created when develop receives changes
+- Merging the `develop → main` PR (and thus npm release) is done manually
