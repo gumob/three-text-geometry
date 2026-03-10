@@ -8,19 +8,17 @@ import TextGeometry from '../TextGeometry';
  *
  * @example
  * // Catalog pattern (R3F v8/v9)
- * import { extend } from '@react-three/fiber';
+ * import { extend } from '\@react-three/fiber';
  * import { registerTextGeometry } from 'three-text-geometry';
  * registerTextGeometry(extend);
  * // <textGeometry ... />
- *
  * @example
  * // Factory pattern (R3F v9)
- * import { extend } from '@react-three/fiber';
+ * import { extend } from '\@react-three/fiber';
  * import TextGeometry from 'three-text-geometry';
  * const TextGeometryEl = extend(TextGeometry);
  * // <TextGeometryEl ... />
- *
- * @param {function} extend - The extend function from @react-three/fiber.
+ * @param {(catalog: Record<string, unknown>) => void} extend - The extend function from `\@react-three/fiber`.
  */
 export function registerTextGeometry(extend: (catalog: Record<string, unknown>) => void): void {
   extend({ TextGeometry });
