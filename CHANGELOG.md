@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/gumob/three-text-geometry/compare/2.0.2...2.0.3) (2026-03-10)
+
+
+### Bug Fixes
+
+* **test:** replace HTTP fetch with local file reads in parser tests ([#59](https://github.com/gumob/three-text-geometry/issues/59)) ([a1f0931](https://github.com/gumob/three-text-geometry/commit/a1f0931c035436bcd381872701eeea4f44715701))
+
 ## [2.0.2](https://github.com/gumob/three-text-geometry/compare/2.0.1...2.0.2) (2026-03-10)
 
 
