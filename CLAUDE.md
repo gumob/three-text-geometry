@@ -62,8 +62,47 @@ Dual format: CommonJS (`dist-cjs/`, ES2018) and ESM (`dist-esm/`, ES2020). Both 
 - They are also in `devDependencies` for development/testing
 - Core dependencies (`ajv`, `fast-xml-parser`, `swr`) remain in `dependencies`
 
-## Branch Strategy
+## Branch Strategy & Development Workflow
+
+### Branches
 
 - `main` — production releases (semantic-release auto-publishes to npm)
 - `develop` — development branch
 - Feature branches merge into develop
+
+### Branch Protection
+
+- **No direct push to `main` or `develop`** — all changes must go through pull requests
+- Flow: feature branch → PR → `develop` → PR → `main`
+
+### Merge Strategy
+
+- **feature → develop**: Squash merge (consolidate PR commits into one)
+- **develop → main**: Merge commit (preserve commit history for semantic-release analysis)
+
+### CI Requirements
+
+- `lint-check` and `test-coverage` must pass before PR merge
+
+### Versioning (Conventional Commits)
+
+- `feat!:` or `BREAKING CHANGE:` → **major** version bump
+- `feat:` → **minor** version bump
+- `fix:` → **patch** version bump
+
+### Peer Dependencies Update Policy
+
+- **Major version** update of peerDeps (three.js, react, @react-three/fiber) → `feat!:` (breaking change, major bump)
+- **Minor/patch version** update of peerDeps → `feat:` (minor bump)
+
+### Release Process
+
+- semantic-release runs automatically on merge to `main`
+- Automatically creates npm publish and GitHub Release
+
+### Automation
+
+- Dependabot PRs (patch/minor) are auto-approved and auto-merged to `develop`
+- Dependabot major updates require manual review
+- A `develop → main` PR is automatically created when develop receives changes
+- Merging the `develop → main` PR (and thus npm release) is done manually
