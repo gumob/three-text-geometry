@@ -61,7 +61,6 @@
     "pre-publish-only": "pinst --disable",
     "post-publish": "pinst --enable",
     "typedoc": "pnpm format-fix && pnpm lint-fix && typedoc --options typedoc.mjs",
-    "reflect-toc": "markdown-toc README.md -i --maxdepth 4 && prettier --write README.md",
     "all": "pnpm format-fix && pnpm lint-fix && pnpm typedoc && pnpm build && pnpm test-coverage"
   },
   "dependencies": {
@@ -115,7 +114,6 @@
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-suspend": "^1.1.2",
     "jest-watch-typeahead": "^3.0.1",
-    "markdown-toc": "^1.2.0",
     "pinst": "^3.0.0",
     "playwright": "^1.58.2",
     "prettier": "^3.8.1",
