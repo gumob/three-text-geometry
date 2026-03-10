@@ -1,3 +1,28 @@
+## [2.0.1](https://github.com/gumob/three-text-geometry/compare/2.0.0...2.0.1) (2026-03-09)
+
+
+### Bug Fixes
+
+* resolve security vulnerabilities in dependencies and code ([9aab3cd](https://github.com/gumob/three-text-geometry/commit/9aab3cd40fe7242369c2324569cd1b7e9d0b40ea))
+
+# [2.0.0](https://github.com/gumob/three-text-geometry/compare/v1.0.1...2.0.0) (2026-03-09)
+
+
+* feat!: upgrade three.js to 0.183.2 ([94575a9](https://github.com/gumob/three-text-geometry/commit/94575a90eeb4ff6e6643c0680512d4eaa2819320))
+
+
+### Bug Fixes
+
+* **ci:** restore NPM_TOKEN and add issues permission to main workflow ([2bf2164](https://github.com/gumob/three-text-geometry/commit/2bf216400d4c4bfed8d6b1ea203d84b449008789))
+* correct repository.type from "https" to "git" and add publishConfig ([e39ab1e](https://github.com/gumob/three-text-geometry/commit/e39ab1ec706e8a647ec1502dca7d141e7081ee7f))
+
+
+### BREAKING CHANGES
+
+* minimum peer dependency for three.js raised from >=0.167.1 to >=0.172.0
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
 # [1.0.0](https://github.com/gumob/three-text-geometry/compare/0.2.0...1.0.0) (2026-03-09)
 
 
