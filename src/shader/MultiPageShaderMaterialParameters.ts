@@ -120,10 +120,7 @@ export class MultiPageShaderMaterialParameters implements THREE.ShaderMaterialPa
       attributes: { page: { type: 'f', value: 0 } },
     };
 
-    const threeVers = (parseInt(THREE.REVISION, 10) || 0) | 0;
-    if (threeVers >= 72) {
-      attributes = undefined;
-    }
+    attributes = undefined;
     const discard = alphaTest === 0 ? '' : `if (gl_FragColor.a < ${alphaTest}) discard;`;
     const variables = Object.assign(
       {

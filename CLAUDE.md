@@ -9,7 +9,7 @@ A pure TypeScript port of JavaScript BMFont rendering libraries for Three.js. Re
 ## Commands
 
 ```bash
-pnpm install          # Install dependencies (pnpm 9.15.0+, Node 20.8.1+)
+pnpm install          # Install dependencies (pnpm 9.15.0+, Node 22+)
 pnpm build            # Full build (CJS + ESM + minification)
 pnpm dev              # Watch mode for both CJS and ESM
 pnpm test             # Run all tests
