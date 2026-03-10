@@ -1,3 +1,11 @@
+## [2.0.2](https://github.com/gumob/three-text-geometry/compare/2.0.1...2.0.2) (2026-03-10)
+
+
+### Bug Fixes
+
+* **ci:** use PAT for semantic-release to bypass branch protection ([ad83323](https://github.com/gumob/three-text-geometry/commit/ad8332320ff8f3ee731e681b43a10606c5e2df7e))
+* **deps:** remove markdown-toc to resolve lodash.template vulnerability ([af70617](https://github.com/gumob/three-text-geometry/commit/af70617599bd41ac012383f71c320cc79d2ce726))
+
 ## [2.0.1](https://github.com/gumob/three-text-geometry/compare/2.0.0...2.0.1) (2026-03-09)
 
 
