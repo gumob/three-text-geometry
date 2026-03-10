@@ -15,9 +15,9 @@ The difference in rendering speed is noticeable when animations are enabled, and
 ## Requirements
 
 - Three.js 0.172.0 or later
-- React 18 or later
-- React Three Fiber 8.18.0 or later
-- Node.js 20.8.1 or later
+- React 19 or later
+- React Three Fiber 9 or later
+- Node.js 22 or later
 
 ## Installation
 
@@ -158,6 +158,71 @@ class TextGeometryRenderer extends React.Component {
     }
 }
 
+```
+
+### React Three Fiber
+
+three-text-geometry provides helpers for integrating with [React Three Fiber](https://github.com/pmndrs/react-three-fiber).
+
+#### Setup
+
+There are two patterns to use `TextGeometry` with R3F.
+
+**Catalog pattern (R3F v8/v9)**
+
+Use the `registerTextGeometry` helper to register `<textGeometry>` as a JSX element. Call this once at your app's entry point.
+
+```TypeScript
+import { extend } from '@react-three/fiber'
+import { registerTextGeometry } from 'three-text-geometry'
+
+registerTextGeometry(extend)
+// Now you can use <textGeometry ... />
+```
+
+**Factory pattern (R3F v9)**
+
+Use R3F v9's `extend` to create a component directly.
+
+```TypeScript
+import { extend } from '@react-three/fiber'
+import TextGeometry from 'three-text-geometry'
+
+const TextGeometryEl = extend(TextGeometry)
+// Now you can use <TextGeometryEl ... />
+```
+
+#### useFont hook
+
+The `useFont` hook loads a font file and its texture asynchronously.
+
+```TypeScript
+import * as THREE from 'three'
+import { useFont } from 'three-text-geometry'
+
+function TextMesh() {
+  const { font, texture, isLoading } = useFont(
+    'https://example.com/font.json',
+    'https://example.com/font.png'
+  )
+
+  if (isLoading || !font || !texture) return null
+
+  return (
+    <mesh>
+      <textGeometry args={['Hello World', { font, flipY: texture.flipY }]} />
+      <meshBasicMaterial map={texture} transparent side={THREE.DoubleSide} />
+    </mesh>
+  )
+}
+```
+
+#### Type definitions
+
+To enable type completions for `<textGeometry>` in TypeScript projects, simply import `three-text-geometry`. The global JSX types are automatically augmented.
+
+```TypeScript
+import 'three-text-geometry' // Adds textGeometry to JSX.IntrinsicElements
 ```
 
 #### Screen coordinate system and Three.js coordinate system

@@ -69,8 +69,8 @@
     "swr": "^2.4.1"
   },
   "peerDependencies": {
-    "@react-three/fiber": ">=8.18.0",
-    "react": ">=18",
+    "@react-three/fiber": ">=9",
+    "react": ">=19",
     "three": ">=0.172.0"
   },
   "devDependencies": {
@@ -82,7 +82,7 @@
     "@microsoft/tsdoc": "^0.15.1",
     "@microsoft/tsdoc-config": "^0.18.1",
     "@playwright/test": "^1.58.2",
-    "@react-three/fiber": "^8.18.0",
+    "@react-three/fiber": "^9.5.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
@@ -92,7 +92,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^24.12.0",
     "@types/offscreencanvas": "^2019.7.3",
-    "@types/react": "^18.3.28",
+    "@types/react": "^19.2.0",
     "@types/three": "0.183.1",
     "@types/ts-nameof": "^4.2.5",
     "@types/uglify-js": "^3.17.5",
@@ -119,9 +119,9 @@
     "prettier": "^3.8.1",
     "prettier-plugin-multiline-arrays": "^4.1.4",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "react": "^18.3.1",
+    "react": "^19.2.0",
     "semantic-release": "^24.2.9",
-    "three": "0.183.2",
+    "three": "0.183.1",
     "ts-jest": "^29.4.6",
     "ts-jest-resolver": "^2.0.1",
     "ts-nameof": "^5.0.0",
