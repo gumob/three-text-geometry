@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/gumob/three-text-geometry/compare/3.0.0...3.0.1) (2026-03-11)
+
+
+### Bug Fixes
+
+* auto-register TextGeometry with R3F catalog on import ([d528915](https://github.com/gumob/three-text-geometry/commit/d528915c450b8908d6f9eec2ca4c71483c90e654))
+
 # [3.0.0](https://github.com/gumob/three-text-geometry/compare/2.0.3...3.0.0) (2026-03-10)
 
 
