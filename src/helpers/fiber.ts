@@ -1,28 +1,9 @@
-import type { ThreeElement, ThreeElements } from '@react-three/fiber';
+import { extend, ThreeElement } from '@react-three/fiber';
 
 import TextGeometry from '../TextGeometry';
 
-/**
- * Register TextGeometry with React Three Fiber.
- * Call this once in your app setup.
- *
- * @example
- * // Catalog pattern (R3F v8/v9)
- * import { extend } from '\@react-three/fiber';
- * import { registerTextGeometry } from 'three-text-geometry';
- * registerTextGeometry(extend);
- * // <textGeometry ... />
- * @example
- * // Factory pattern (R3F v9)
- * import { extend } from '\@react-three/fiber';
- * import TextGeometry from 'three-text-geometry';
- * const TextGeometryEl = extend(TextGeometry);
- * // <TextGeometryEl ... />
- * @param {(catalog: Record<string, unknown>) => void} extend - The extend function from `\@react-three/fiber`.
- */
-export function registerTextGeometry(extend: (catalog: Record<string, unknown>) => void): void {
-  extend({ TextGeometry });
-}
+/* Register TextGeometry with R3F catalog on import */
+extend({ TextGeometry: TextGeometry });
 
 /**
  * TextGeometryProps is a type that defines the props for the TextGeometry component.
@@ -30,37 +11,9 @@ export function registerTextGeometry(extend: (catalog: Record<string, unknown>) 
  */
 export type TextGeometryProps = ThreeElement<typeof TextGeometry>;
 
-/**
- * TextGeometryElements is an interface that extends the ThreeElements interface and includes the TextGeometry component.
- *
- * @global
- * @interface TextGeometryElements
- * @extends {ThreeElements}
- */
-export interface TextGeometryElements extends ThreeElements {
-  /**
-   * The props for the TextGeometry component.
-   *
-   * @type {TextGeometryProps}
-   */
-  textGeometry: TextGeometryProps;
-}
-
-/**
- * Declares a global namespace for JSX.
- * It extends the IntrinsicElements interface to include the TextGeometry component.
- *
- * @global
- * @interface IntrinsicElements
- * @extends {TextGeometryElements}
- */
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    // interface IntrinsicElements {
-    //   textGeometry: TextGeometryProps;
-    // }
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    interface IntrinsicElements extends TextGeometryElements {}
+/* React 19 / R3F v9 compatible module augmentation */
+declare module '@react-three/fiber' {
+  interface ThreeElements {
+    textGeometry: TextGeometryProps;
   }
 }

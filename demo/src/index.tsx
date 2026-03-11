@@ -1,8 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { extend } from '@react-three/fiber';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { registerTextGeometry } from 'three-text-geometry';
+import 'three-text-geometry';
 
 import DemoPage from '~/pages/DemoPage';
 import MultipageScene from '~/scenes/MultipageScene';
@@ -12,8 +11,6 @@ import ShuffleShaderScene from '~/scenes/ShuffleShaderScene';
 import SimpleScene from '~/scenes/SimpleScene';
 
 import './index.css';
-
-registerTextGeometry(extend);
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(

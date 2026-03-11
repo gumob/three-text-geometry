@@ -1,14 +1,9 @@
-import type { ThreeElement, ThreeElements } from '@react-three/fiber';
+import { ThreeElement } from '@react-three/fiber';
 import TextGeometry from '../TextGeometry';
-export declare function registerTextGeometry(extend: (catalog: Record<string, unknown>) => void): void;
 export type TextGeometryProps = ThreeElement<typeof TextGeometry>;
-export interface TextGeometryElements extends ThreeElements {
-    textGeometry: TextGeometryProps;
-}
-declare global {
-    namespace JSX {
-        interface IntrinsicElements extends TextGeometryElements {
-        }
+declare module '@react-three/fiber' {
+    interface ThreeElements {
+        textGeometry: TextGeometryProps;
     }
 }
 //# sourceMappingURL=fiber.d.ts.map
