@@ -53,23 +53,16 @@ three-text-geometry provides first-class support for [React Three Fiber](https:/
 
 #### Setup
 
-There are two patterns to register `TextGeometry` with R3F.
-
-**Catalog pattern (R3F v8/v9)**
-
-Use the `registerTextGeometry` helper to register `<textGeometry>` as a JSX element. Call this once at your app's entry point.
+`TextGeometry` is automatically registered with the R3F catalog when the library is imported. No manual setup is required.
 
 ```TypeScript
-import { extend } from '@react-three/fiber'
-import { registerTextGeometry } from 'three-text-geometry'
-
-registerTextGeometry(extend)
-// Now you can use <textGeometry ... />
+import 'three-text-geometry'
+// <textGeometry ... /> is now available
 ```
 
 **Factory pattern (R3F v9)**
 
-Use R3F v9's `extend` to create a component directly.
+Alternatively, use R3F v9's `extend` to create a component directly.
 
 ```TypeScript
 import { extend } from '@react-three/fiber'
@@ -85,11 +78,8 @@ The `useFont` hook loads a BMFont file and its texture asynchronously. Combined 
 
 ```TypeScript
 import * as THREE from 'three'
-import { Canvas, extend } from '@react-three/fiber'
-import { TextAlign, useFont, registerTextGeometry } from 'three-text-geometry'
-
-// Register once at module scope
-registerTextGeometry(extend)
+import { Canvas } from '@react-three/fiber'
+import { TextAlign, useFont } from 'three-text-geometry'
 
 function TextMesh() {
   const { font, texture, isLoading } = useFont(
@@ -118,10 +108,10 @@ function App() {
 
 #### Type definitions
 
-To enable type completions for `<textGeometry>` in TypeScript projects, simply import `three-text-geometry`. The global JSX types are automatically augmented.
+Importing `three-text-geometry` automatically augments R3F's `ThreeElements` interface, enabling type completions for `<textGeometry>` in TypeScript projects.
 
 ```TypeScript
-import 'three-text-geometry' // Adds textGeometry to JSX.IntrinsicElements
+import 'three-text-geometry' // Adds textGeometry to ThreeElements
 ```
 
 ### Vanilla Three.js

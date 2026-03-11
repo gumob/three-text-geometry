@@ -1,1 +1,1 @@
-import TextGeometry from"../TextGeometry";function registerTextGeometry(e){e({TextGeometry:TextGeometry})}export{registerTextGeometry};
+import{extend}from"@react-three/fiber";import TextGeometry from"../TextGeometry";extend({TextGeometry:TextGeometry});
