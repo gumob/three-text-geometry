@@ -121,7 +121,7 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "react": "^19.2.0",
     "semantic-release": "^24.2.9",
-    "three": "0.183.1",
+    "three": "0.183.2",
     "ts-jest": "^29.4.6",
     "ts-jest-resolver": "^2.0.1",
     "ts-nameof": "^5.0.0",
