@@ -12,7 +12,7 @@
     "@react-three/fiber": "^9.5.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.13.2",
+    "react-router-dom": "^7.14.0",
     "supports-color": "^10.2.2",
     "three": "^0.183.1",
     "three-text-geometry": "file:..",
