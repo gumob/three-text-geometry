@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import * as THREE from 'three/webgpu';
 import TextGeometry, { TextAlign, useFont } from 'three-text-geometry';
 
 import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle';

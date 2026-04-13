@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import * as THREE from 'three/webgpu';
 import TextGeometry, { TextAlign, useFont } from 'three-text-geometry';
 
 import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle';
 import { useTextData } from '~/hooks/useTextData';
-import { fragmentShader, vertexShader } from '~/shaders/effect';
+import { createEffectMaterial } from '~/shaders/effect';
 
 const fontUrl = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.json';
 const textureUrl = 'https://raw.githubusercontent.com/gumob/three-text-geometry/develop/tests/fonts/OdudoMono-Regular-64.png';
@@ -29,21 +29,9 @@ export default function ShuffleShaderScene() {
   const timeRef = useRef(0);
   const shuffleRef = useRef<ShuffleText | null>(null);
 
-  const material = useMemo(() => {
+  const effect = useMemo(() => {
     if (!texture) return null;
-    return new THREE.RawShaderMaterial({
-      vertexShader: vertexShader,
-      fragmentShader: fragmentShader,
-      uniforms: {
-        animate: { value: 1 },
-        iGlobalTime: { value: 0 },
-        map: { value: texture },
-        color: { value: new THREE.Color(0x999999) },
-      },
-      transparent: true,
-      side: THREE.DoubleSide,
-      depthTest: false,
-    });
+    return createEffectMaterial({ map: texture, color: new THREE.Color(0x999999) });
   }, [texture]);
 
   const triggerShuffle = useCallback(() => {
@@ -67,25 +55,25 @@ export default function ShuffleShaderScene() {
   useEffect(() => {
     return () => {
       shuffleRef.current?.cancel();
-      material?.dispose();
+      effect?.material.dispose();
     };
-  }, [material]);
+  }, [effect]);
 
   useFrame((_, delta) => {
-    if (!material || !geometryRef.current || !meshRef.current) return;
+    if (!effect || !geometryRef.current || !meshRef.current) return;
     timeRef.current += delta;
-    material.uniforms.iGlobalTime.value = timeRef.current;
-    material.uniforms.animate.value = timeRef.current / DURATION;
+    effect.uniforms.iGlobalTime.value = timeRef.current;
+    effect.uniforms.animate.value = timeRef.current / DURATION;
     if (timeRef.current > DURATION) {
       timeRef.current = 0;
       triggerShuffle();
     }
   });
 
-  if (isLoading || !font || !texture || !material) return null;
+  if (isLoading || !font || !texture || !effect) return null;
 
   return (
-    <mesh ref={meshRef} rotation={[Math.PI, 0, 0]} material={material}>
+    <mesh ref={meshRef} rotation={[Math.PI, 0, 0]} material={effect.material}>
       <textGeometry ref={geometryRef} args={[staticText(), { font, align: TextAlign.Left, width: 1600, flipY: texture.flipY }]} />
     </mesh>
   );
