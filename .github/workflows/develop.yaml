@@ -52,6 +52,18 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+  tests-result:
+    if: always()
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check test results
+        run: |
+          if [ "${{ needs.tests.result }}" != "success" ]; then
+            echo "Tests failed"
+            exit 1
+          fi
+
   release:
     runs-on: ubuntu-latest
     permissions:
@@ -89,4 +101,4 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           pnpm semantic-release --dry-run
-    needs: tests
+    needs: tests-result
