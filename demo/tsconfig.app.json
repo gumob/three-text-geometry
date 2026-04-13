@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",                               // Silence TS 6.0 deprecation errors (baseUrl)
     "target": "ES2020",                                      // Specify ECMAScript version for output <https://www.typescriptlang.org/tsconfig#target>
     "useDefineForClassFields": true,                         // Use 'define' for class fields <https://www.typescriptlang.org/tsconfig#useDefineForClassFields>
     "lib": ["ES2020", "DOM", "DOM.Iterable"],                // Include standard libraries <https://www.typescriptlang.org/tsconfig#lib>

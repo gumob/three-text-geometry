@@ -23,7 +23,7 @@ type QuadIndices = Array<number> | Int8Array | Int16Array | Int32Array | Uint8Ar
  */
 function createIndices(array: QuadIndices | QuadOptions | null = null, opt: QuadOptions | null = null): QuadIndices {
   /** if user didn't specify an output array */
-  let arr: QuadIndices | null = null;
+  let arr: QuadIndices | null;
   if (!array || !(Array.isArray(array) || Buffer.isBuffer(array))) {
     opt = (array as QuadOptions) || {};
     arr = null;
