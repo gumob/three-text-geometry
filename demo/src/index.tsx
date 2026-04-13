@@ -1,8 +1,15 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import * as THREE from 'three/webgpu';
+import { extend, ThreeToJSXElements } from '@react-three/fiber';
 
 import 'three-text-geometry';
+
+declare module '@react-three/fiber' {
+  interface ThreeElements extends ThreeToJSXElements<typeof THREE> {}
+}
+extend(THREE as any);
 
 import DemoPage from '~/pages/DemoPage';
 import MultipageScene from '~/scenes/MultipageScene';
