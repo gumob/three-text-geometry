@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useLoader } from '@react-three/fiber';
-import * as THREE from 'three';
-import TextGeometry, { MultiPageShaderMaterialParameters, TextAlign, useFont } from 'three-text-geometry';
+import TextGeometry, { MultiPageTextNodeMaterial, TextAlign, useFont } from 'three-text-geometry';
+import * as THREE from 'three/webgpu';
 
 import { useTextData } from '~/hooks/useTextData';
 
@@ -18,9 +18,9 @@ export default function MultipageScene() {
   const { staticText } = useTextData();
   const meshRef = useRef<THREE.Mesh>(null);
 
-  const params = useMemo(() => {
+  const material = useMemo(() => {
     if (!textures || textures.length === 0) return null;
-    return new MultiPageShaderMaterialParameters({
+    return new MultiPageTextNodeMaterial({
       textures: textures,
       transparent: true,
       opacity: 0.95,
@@ -38,12 +38,17 @@ export default function MultipageScene() {
     meshRef.current.position.set(-box.x / 2, box.y / 2, 0);
   }, [font, textures]);
 
-  if (isFontLoading || !font || !textures || !params) return null;
+  useEffect(() => {
+    return () => {
+      material?.dispose();
+    };
+  }, [material]);
+
+  if (isFontLoading || !font || !textures || !material) return null;
 
   return (
-    <mesh ref={meshRef} rotation={[Math.PI, 0, 0]}>
+    <mesh ref={meshRef} rotation={[Math.PI, 0, 0]} material={material}>
       <textGeometry args={[staticText(), { font, align: TextAlign.Left, width: 1600, flipY: textures[0].flipY, multipage: true }]} />
-      <rawShaderMaterial args={[params]} side={THREE.DoubleSide} />
     </mesh>
   );
 }

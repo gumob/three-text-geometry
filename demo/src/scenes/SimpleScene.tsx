@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
 import TextGeometry, { TextAlign, useFont } from 'three-text-geometry';
+import * as THREE from 'three/webgpu';
 
 import { useTextData } from '~/hooks/useTextData';
 

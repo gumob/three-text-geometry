@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",                               // Silence TS 6.0 deprecation errors (baseUrl, node10 moduleResolution)
     /** Linting */
     "strict": true,                                            // Enable all strict type-checking options to catch more errors <https://www.typescriptlang.org/tsconfig#strict>
     "noImplicitReturns": true,                                 // Ensure that all functions return a value or explicitly return undefined <https://www.typescriptlang.org/tsconfig#noImplicitReturns>
@@ -14,6 +15,8 @@
 
     "resolveJsonModule": true,                                 // Enable importing JSON modules <https://www.typescriptlang.org/tsconfig#resolveJsonModule>
     "esModuleInterop": true,                                   // Disable interoperability between CommonJS and ES Modules <https://www.typescriptlang.org/tsconfig#esModuleInterop>
+    "skipLibCheck": true,                                      // Skip type checking of declaration files (@webgpu/types conflicts with TS6 built-in WebGPU types)
+    "types": ["node", "jest"],                                 // Include Node.js and Jest type definitions <https://www.typescriptlang.org/tsconfig#types>
 
     /** Module Resolution */
     "baseUrl": "./",                                           // Set the base URL for module resolution <https://www.typescriptlang.org/tsconfig#baseUrl>

@@ -10,7 +10,7 @@ export default function Navigation() {
         <MenuItem component={NavLink} to="/simple">
           Simple
         </MenuItem>
-<MenuItem component={NavLink} to="/shuffle">
+        <MenuItem component={NavLink} to="/shuffle">
           Shuffle
         </MenuItem>
         <MenuItem component={NavLink} to="/shader">

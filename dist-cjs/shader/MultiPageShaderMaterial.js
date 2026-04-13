@@ -1,1 +1,0 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.MultiPageShaderMaterial=void 0;let tslib_1=require("tslib"),THREE=tslib_1.__importStar(require("three"));class MultiPageShaderMaterial extends THREE.ShaderMaterial{constructor(e){super(e)}}exports.MultiPageShaderMaterial=MultiPageShaderMaterial;
