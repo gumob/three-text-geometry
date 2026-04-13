@@ -1,5 +1,5 @@
 import * as THREE from 'three/webgpu';
-import { abs, attribute, color, dFdx, dFdy, float, Fn, pow, smoothstep, texture, uniform, uv, vec2, vec4, wgslFn } from 'three/tsl';
+import { abs, color, dFdx, dFdy, float, Fn, pow, smoothstep, texture, uniform, uv, vec2, vec3, vec4, wgslFn } from 'three/tsl';
 
 /**
  * Simplex noise implemented in WGSL, ported from the classic Ashima Arts GLSL implementation.
@@ -77,10 +77,6 @@ const snoise3D = wgslFn(`
     let m2 = m * m;
     return 42.0 * dot(m2 * m2, vec4f(dot(np0, x0), dot(np1, x1), dot(np2, x2), dot(np3, x3)));
   }
-
-  fn main(input: vec3f) -> f32 {
-    return snoise(input);
-  }
 `);
 
 export interface EffectMaterialUniforms {
@@ -97,14 +93,13 @@ export function createEffectMaterial(opts: { map: THREE.Texture; color?: THREE.C
   const col = color(opts.color ?? new THREE.Color(0x999999)) as any;
   const tex = texture(opts.map) as any;
 
-  const lineAttr = attribute('line', 'float') as any;
   const uvNode = uv() as any;
 
   const colorOutput = Fn(() => {
     const sdf = tex.a;
 
     /* animated threshold driven by time and per-glyph line index */
-    const animValue = pow(abs(animate.mul(2.0).sub(1.0)), float(12.0).sub(lineAttr.mul(5.0)));
+    const animValue = pow(abs(animate.mul(2.0).sub(1.0)), float(12.0).sub(float(0)));
     const threshold = animValue.mul(0.5).add(0.5);
 
     /* aastep — anti-aliased threshold using screen-space derivatives */
@@ -116,11 +111,11 @@ export function createEffectMaterial(opts: { map: THREE.Texture; color?: THREE.C
     const mult = float(3.0);
 
     /* layer 1: large-scale noise */
-    const noise1 = snoise3D(vec4(uvNode.mul(10.0), iGlobalTime, float(0))) as any;
+    const noise1 = snoise3D(vec3(uvNode.mul(10.0), iGlobalTime)) as any;
     const alpha1 = aastep(threshold, sdf.add(noise1.mul(0.4).mul(mult))).mul(0.15);
 
     /* layer 2: fine-scale noise */
-    const noise2 = snoise3D(vec4(uvNode.mul(50.0), iGlobalTime, float(0))) as any;
+    const noise2 = snoise3D(vec3(uvNode.mul(50.0), iGlobalTime)) as any;
     const alpha2 = aastep(threshold, sdf.add(noise2.mul(0.1).mul(mult))).mul(0.35);
 
     /* layer 3: clean SDF edge */
