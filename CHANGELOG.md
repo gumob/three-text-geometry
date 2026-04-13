@@ -1,3 +1,17 @@
+## [4.0.0](https://github.com/gumob/three-text-geometry/compare/3.0.1...4.0.0) (2026-04-13)
+
+### ⚠ BREAKING CHANGES
+
+* add WebGPU/TSL support and upgrade dependencies
+
+### Features
+
+* add WebGPU/TSL support and upgrade dependencies ([b330b89](https://github.com/gumob/three-text-geometry/commit/b330b89704af46552b3651f3d8d9b907216858e0))
+
+### Bug Fixes
+
+* use conventionalcommits preset for semantic-release ([de86854](https://github.com/gumob/three-text-geometry/commit/de86854aab84f911971e40834e3def234e0ff33a))
+
 ## [3.0.1](https://github.com/gumob/three-text-geometry/compare/3.0.0...3.0.1) (2026-03-11)
 
 
