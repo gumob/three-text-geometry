@@ -2,10 +2,11 @@
  * @jest-environment jsdom
  */
 import './helpers/webgpu-mock';
+
 import * as fs from 'fs';
 import TextGeometry, { TextAlign, WordWrapMode } from '@three-text-geometry/index';
-import { BMFontAsciiParser } from '@three-text-geometry/parser';
 import { MultiPageTextNodeMaterial } from '@three-text-geometry/materials';
+import { BMFontAsciiParser } from '@three-text-geometry/parser';
 
 import THREE from './helpers/webgl-mock';
 

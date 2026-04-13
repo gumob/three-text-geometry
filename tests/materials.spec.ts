@@ -4,7 +4,6 @@
 import './helpers/webgpu-mock';
 
 import fs from 'fs';
-
 import { BasicTextNodeMaterial, MSDFTextNodeMaterial, MultiPageTextNodeMaterial, SDFTextNodeMaterial } from '@three-text-geometry/materials';
 import { BMFontAsciiParser } from '@three-text-geometry/parser';
 import TextGeometry from '@three-text-geometry/TextGeometry';

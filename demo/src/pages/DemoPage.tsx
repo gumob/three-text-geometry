@@ -20,9 +20,7 @@ export default function DemoPage({ children }: DemoPageProps) {
         }}
       >
         <SceneSetup />
-        <Suspense fallback={null}>
-          {children}
-        </Suspense>
+        <Suspense fallback={null}>{children}</Suspense>
       </Canvas>
       <Navigation />
     </div>

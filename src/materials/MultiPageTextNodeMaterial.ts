@@ -1,4 +1,4 @@
-import { Fn, If, attribute, color, float, texture, uv, vec4 } from 'three/tsl';
+import { attribute, color, float, Fn, If, texture, uv, vec4 } from 'three/tsl';
 import * as THREE from 'three/webgpu';
 
 import { MultiPageTextMaterialOption } from './types';

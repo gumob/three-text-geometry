@@ -25,19 +25,22 @@ export default function ShuffleScene() {
   const shuffleRef = useRef<ShuffleText | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
-  const startShuffle = useCallback((delay: number) => {
-    shuffleRef.current?.cancel();
-    shuffleRef.current = new ShuffleText(staticText(), shuffleOption, (text: string, state: ShuffleState) => {
-      geometryRef.current?.update(text);
-      if (state === ShuffleState.Completed) {
-        startShuffle(3000);
-      }
-    });
-    clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      shuffleRef.current?.start();
-    }, delay);
-  }, [staticText]);
+  const startShuffle = useCallback(
+    (delay: number) => {
+      shuffleRef.current?.cancel();
+      shuffleRef.current = new ShuffleText(staticText(), shuffleOption, (text: string, state: ShuffleState) => {
+        geometryRef.current?.update(text);
+        if (state === ShuffleState.Completed) {
+          startShuffle(3000);
+        }
+      });
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        shuffleRef.current?.start();
+      }, delay);
+    },
+    [staticText],
+  );
 
   useEffect(() => {
     if (!meshRef.current || !geometryRef.current) return;

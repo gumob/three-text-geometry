@@ -1,4 +1,4 @@
-import { Fn, clamp, color, float, fwidth, max, min, texture, uv } from 'three/tsl';
+import { clamp, color, float, Fn, fwidth, max, min, texture, uv } from 'three/tsl';
 import * as THREE from 'three/webgpu';
 
 import { MSDFTextMaterialOption } from './types';
@@ -7,9 +7,19 @@ import { MSDFTextMaterialOption } from './types';
  * Computes the median of three values.
  * Used to extract the signed distance from an MSDF texture.
  */
-const median = Fn(([r, g, b]: [any, any, any]) => {
-  return max(min(r, g), min(max(r, g), b));
-});
+const median = Fn(
+  ([
+    r,
+    g,
+    b,
+  ]: [
+    any,
+    any,
+    any,
+  ]) => {
+    return max(min(r, g), min(max(r, g), b));
+  },
+);
 
 /**
  * A node-based material for MSDF (Multi-channel Signed Distance Field) text rendering.

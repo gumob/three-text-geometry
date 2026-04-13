@@ -1,4 +1,4 @@
-import { Fn, color, dFdx, dFdy, float, smoothstep, texture, uv, vec2 } from 'three/tsl';
+import { color, dFdx, dFdy, float, Fn, smoothstep, texture, uv, vec2 } from 'three/tsl';
 import * as THREE from 'three/webgpu';
 
 import { TextMaterialOption } from './types';
