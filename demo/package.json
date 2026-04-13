@@ -41,7 +41,7 @@
     "eslint-plugin-only-warn": "^1.2.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.4.0",
+    "globals": "^17.5.0",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1",

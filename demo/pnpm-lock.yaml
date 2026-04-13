@@ -115,8 +115,8 @@ importers:
         specifier: ^0.5.2
         version: 0.5.2(eslint@9.39.4(supports-color@10.2.2))
       globals:
-        specifier: ^17.4.0
-        version: 17.4.0
+        specifier: ^17.5.0
+        version: 17.5.0
       prettier-plugin-tailwindcss:
         specifier: ^0.6.14
         version: 0.6.14(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.6.2)(supports-color@10.2.2))(prettier@3.6.2)
@@ -1461,8 +1461,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@17.4.0:
-    resolution: {integrity: sha512-hjrNztw/VajQwOLsMNT1cbJiH2muO3OROCHnbehc8eY5JyD2gqz4AcMHPqgaOR59DjgUjYAYLeH699g/eWi2jw==}
+  globals@17.5.0:
+    resolution: {integrity: sha512-qoV+HK2yFl/366t2/Cb3+xxPUo5BuMynomoDmiaZBIdbs+0pYbjfZU+twLhGKp4uCZ/+NbtpVepH5bGCxRyy2g==}
     engines: {node: '>=18'}
 
   globrex@0.1.2:
@@ -3630,7 +3630,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@17.4.0: {}
+  globals@17.5.0: {}
 
   globrex@0.1.2: {}
 
