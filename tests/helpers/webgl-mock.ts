@@ -2,7 +2,7 @@
  * Reference: https://github.com/sPHENIX-Collaboration/phoenix/blob/ca552cfc966aa38475f8c3463ca1688c49a91edf/packages/phoenix-event-display/src/tests/helpers/webgl-mock.ts
  */
 
-import THREE from 'three';
+import * as THREE from 'three';
 
 jest.mock('three', () => {
   const THREE = jest.requireActual('three');

@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-
 import { BMFontError } from '@three-text-geometry/error';
 import { BMFontAsciiParser, BMFontBinaryParser, BMFontJsonParser, BMFontXMLParser } from '@three-text-geometry/parser';
 import { isBMFont } from '@three-text-geometry/types';

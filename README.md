@@ -12,6 +12,8 @@
 The port of the JavaScript versions of [three-bmfont-text](https://github.com/Jam3/three-bmfont-text), [layout-bmfont-text](https://github.com/Jam3/layout-bmfont-text), [load-bmfont](https://github.com/Jam3/load-bmfont), and [word-wrapper](https://github.com/mattdesl/word-wrapper) to Pure Typescript, this library enables fast text rendering with Three.js and bitmap font.<br/>
 The difference in rendering speed is noticeable when animations are enabled, and it runs 10x faster than canvas texture based text rendering.
 
+**v4.0** introduces WebGPU support with TSL (Three Shading Language) based node materials that work with both `WebGLRenderer` and `WebGPURenderer`.
+
 ## Requirements
 
 - Three.js 0.172.0 or later
@@ -144,6 +146,80 @@ const mesh = new THREE.Mesh(geometry, material)
   .rotateZ(Math.PI)
 scene.add(mesh)
 ```
+
+### Materials
+
+three-text-geometry provides TSL-based node materials for text rendering. These materials work with both `WebGLRenderer` and `WebGPURenderer`.
+
+#### BasicTextNodeMaterial
+
+Samples a font texture and multiplies by color and opacity. Suitable for standard bitmap fonts.
+
+```TypeScript
+import { BasicTextNodeMaterial } from 'three-text-geometry'
+
+const material = new BasicTextNodeMaterial({
+  map: texture,
+  color: new THREE.Color(0xffffff),
+  opacity: 1,
+})
+```
+
+#### SDFTextNodeMaterial
+
+For SDF (Signed Distance Field) fonts. Uses screen-space derivatives for anti-aliased edges.
+
+```TypeScript
+import { SDFTextNodeMaterial } from 'three-text-geometry'
+
+const material = new SDFTextNodeMaterial({
+  map: texture,
+  color: new THREE.Color(0xffffff),
+})
+```
+
+#### MSDFTextNodeMaterial
+
+For MSDF (Multi-channel Signed Distance Field) fonts. Computes a median from RGB channels for high-quality rendering.
+
+```TypeScript
+import { MSDFTextNodeMaterial } from 'three-text-geometry'
+
+const material = new MSDFTextNodeMaterial({
+  map: texture,
+  color: new THREE.Color(0xffffff),
+  negate: true, // Invert RGB channels (default: true)
+})
+```
+
+#### MultiPageTextNodeMaterial
+
+For multi-texture fonts. Selects the correct texture atlas per vertex using a page attribute. Requires `multipage: true` in `TextGeometryOption`.
+
+```TypeScript
+import { MultiPageTextNodeMaterial } from 'three-text-geometry'
+
+const material = new MultiPageTextNodeMaterial({
+  textures: [texture0, texture1, texture2],
+  color: new THREE.Color(0xffffff),
+})
+
+const geometry = new TextGeometry('Hello', {
+  font,
+  multipage: true,
+})
+```
+
+### Migration from v3
+
+v4 removes the legacy GLSL shader modules. If you were using `MultiPageShaderMaterial` or the GLSL shader sources from `three-text-geometry/shaders`, migrate to the new TSL-based node materials:
+
+| v3 (Removed) | v4 (Replacement) |
+| --- | --- |
+| `shaders/basic` | `BasicTextNodeMaterial` |
+| `shaders/sdf` | `SDFTextNodeMaterial` |
+| `shaders/msdf` | `MSDFTextNodeMaterial` |
+| `MultiPageShaderMaterial` | `MultiPageTextNodeMaterial` |
 
 ### How to run the demo
 

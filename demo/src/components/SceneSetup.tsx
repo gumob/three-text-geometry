@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { OrbitControls, Stats } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
-import * as THREE from 'three';
+import * as THREE from 'three/webgpu';
 
 export default function SceneSetup() {
   const controlsRef = useRef<React.ComponentRef<typeof OrbitControls>>(null);

@@ -1,10 +1,12 @@
 /**
  * @jest-environment jsdom
  */
+import './helpers/webgpu-mock';
+
 import * as fs from 'fs';
 import TextGeometry, { TextAlign, WordWrapMode } from '@three-text-geometry/index';
+import { MultiPageTextNodeMaterial } from '@three-text-geometry/materials';
 import { BMFontAsciiParser } from '@three-text-geometry/parser';
-import { MultiPageShaderMaterialParameters } from '@three-text-geometry/shader';
 
 import THREE from './helpers/webgl-mock';
 
@@ -167,13 +169,12 @@ describe('TextGeometry', () => {
         textureLoader.load('tests/fonts/Norwester-Multi_3.png'),
       ];
       /** Material */
-      const params: MultiPageShaderMaterialParameters = new MultiPageShaderMaterialParameters({
+      const material = new MultiPageTextNodeMaterial({
         textures: textures,
         transparent: true,
         opacity: 0.95,
         color: new THREE.Color('rgb(230, 230, 230)'),
       });
-      const material = new THREE.RawShaderMaterial(params);
       /** Geometry */
       const geometry = new TextGeometry('This bitmap text\nis rendered with \nan OrthographicCamera', {
         font: font,
