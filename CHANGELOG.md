@@ -1,3 +1,59 @@
+## [4.0.0](https://github.com/gumob/three-text-geometry/compare/3.0.1...4.0.0) (2026-04-13)
+
+### ⚠ BREAKING CHANGES
+
+* add WebGPU/TSL support and upgrade dependencies
+
+### Features
+
+* add WebGPU/TSL support and upgrade dependencies ([b330b89](https://github.com/gumob/three-text-geometry/commit/b330b89704af46552b3651f3d8d9b907216858e0))
+
+### Bug Fixes
+
+* use conventionalcommits preset for semantic-release ([de86854](https://github.com/gumob/three-text-geometry/commit/de86854aab84f911971e40834e3def234e0ff33a))
+
+## [3.0.1](https://github.com/gumob/three-text-geometry/compare/3.0.0...3.0.1) (2026-03-11)
+
+
+### Bug Fixes
+
+* auto-register TextGeometry with R3F catalog on import ([d528915](https://github.com/gumob/three-text-geometry/commit/d528915c450b8908d6f9eec2ca4c71483c90e654))
+
+# [3.0.0](https://github.com/gumob/three-text-geometry/compare/2.0.3...3.0.0) (2026-03-10)
+
+
+* feat!: migrate to React 19 and React Three Fiber v9 ([3544c41](https://github.com/gumob/three-text-geometry/commit/3544c417737d9f63f062e9162ccf9376cfc2fe72))
+
+
+### Bug Fixes
+
+* resolve JSDoc lint warnings in fiber.ts ([db9e4d9](https://github.com/gumob/three-text-geometry/commit/db9e4d9e688977432a89bb2206de035a9071fbf6))
+
+
+### BREAKING CHANGES
+
+* Minimum peer dependency versions
+changed to react@19, @react-three/fiber@9,
+three@0.172
+
+Co-Authored-By: Claude Opus 4.6
+<noreply@anthropic.com>
+
+* feat(demo): rewrite demo app with React Three Fiber
+
+- Replace vanilla Three.js class components with R3F
+  functional components
+- Add @react-three/fiber and @react-three/drei, remove
+  axios from demo
+- Convert 5 demos (Simple, Multipage, Shuffle, Shader,
+  ShuffleShader) to R3F scenes
+- Add shared SceneSetup, DemoPage, useTextData hooks
+- Convert Navigation to functional component
+- Restructure README: R3F as primary, Vanilla as concise
+  secondary example
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
+
 ## [2.0.3](https://github.com/gumob/three-text-geometry/compare/2.0.2...2.0.3) (2026-03-10)
 
 
