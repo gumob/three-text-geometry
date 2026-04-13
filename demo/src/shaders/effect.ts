@@ -6,18 +6,6 @@ import { abs, color, dFdx, dFdy, float, Fn, pow, smoothstep, texture, uniform, u
  * Uses wgslFn to embed raw WGSL code in the TSL graph.
  */
 const snoise3D = wgslFn(`
-  fn mod289_3(x: vec3f) -> vec3f {
-    return x - floor(x * (1.0 / 289.0)) * 289.0;
-  }
-  fn mod289_4(x: vec4f) -> vec4f {
-    return x - floor(x * (1.0 / 289.0)) * 289.0;
-  }
-  fn permute(x: vec4f) -> vec4f {
-    return mod289_4(((x * 34.0) + 1.0) * x);
-  }
-  fn taylorInvSqrt(r: vec4f) -> vec4f {
-    return 1.79284291400159 - 0.85373472095314 * r;
-  }
   fn snoise(v: vec3f) -> f32 {
     let C = vec2f(1.0 / 6.0, 1.0 / 3.0);
     let D = vec4f(0.0, 0.5, 1.0, 2.0);
@@ -76,6 +64,18 @@ const snoise3D = wgslFn(`
     let m = max(0.6 - vec4f(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), vec4f(0.0));
     let m2 = m * m;
     return 42.0 * dot(m2 * m2, vec4f(dot(np0, x0), dot(np1, x1), dot(np2, x2), dot(np3, x3)));
+  }
+  fn mod289_3(x: vec3f) -> vec3f {
+    return x - floor(x * (1.0 / 289.0)) * 289.0;
+  }
+  fn mod289_4(x: vec4f) -> vec4f {
+    return x - floor(x * (1.0 / 289.0)) * 289.0;
+  }
+  fn permute(x: vec4f) -> vec4f {
+    return mod289_4(((x * 34.0) + 1.0) * x);
+  }
+  fn taylorInvSqrt(r: vec4f) -> vec4f {
+    return 1.79284291400159 - 0.85373472095314 * r;
   }
 `);
 
