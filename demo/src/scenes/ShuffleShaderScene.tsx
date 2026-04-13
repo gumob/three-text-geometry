@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three/webgpu';
 import TextGeometry, { TextAlign, useFont } from 'three-text-geometry';
+import * as THREE from 'three/webgpu';
 
 import ShuffleText, { ShuffleOption, ShuffleState } from '~/effects/shuffle';
 import { useTextData } from '~/hooks/useTextData';

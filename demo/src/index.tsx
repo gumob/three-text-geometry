@@ -1,15 +1,10 @@
 import { StrictMode } from 'react';
+import { extend, ThreeToJSXElements } from '@react-three/fiber';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import * as THREE from 'three/webgpu';
-import { extend, ThreeToJSXElements } from '@react-three/fiber';
 
 import 'three-text-geometry';
-
-declare module '@react-three/fiber' {
-  interface ThreeElements extends ThreeToJSXElements<typeof THREE> {}
-}
-extend(THREE as any);
 
 import DemoPage from '~/pages/DemoPage';
 import MultipageScene from '~/scenes/MultipageScene';
@@ -19,6 +14,11 @@ import ShuffleShaderScene from '~/scenes/ShuffleShaderScene';
 import SimpleScene from '~/scenes/SimpleScene';
 
 import './index.css';
+
+declare module '@react-three/fiber' {
+  interface ThreeElements extends ThreeToJSXElements<typeof THREE> {}
+}
+extend(THREE as any);
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(

@@ -1,5 +1,5 @@
-import * as THREE from 'three/webgpu';
 import { abs, color, dFdx, dFdy, float, Fn, pow, smoothstep, texture, uniform, uv, vec2, vec3, vec4, wgslFn } from 'three/tsl';
+import * as THREE from 'three/webgpu';
 
 /**
  * Simplex noise implemented in WGSL, ported from the classic Ashima Arts GLSL implementation.
