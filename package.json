@@ -40,6 +40,7 @@
     "format-check": "prettier --check .",
     "lint-fix": "eslint src tests --fix",
     "lint-check": "eslint src tests --max-warnings 0",
+    "verify-release-notes": "node scripts/verify-release-notes.mjs",
     "dev": "pnpm clean-dist && tsc --build --watch tsconfig.cjs.json tsconfig.esm.json",
     "build": "pnpm clean-dist && pnpm build-cjs && pnpm build-esm && pnpm minify-cjs && pnpm minify-esm",
     "build-cjs": "tsc --project tsconfig.cjs.json",
