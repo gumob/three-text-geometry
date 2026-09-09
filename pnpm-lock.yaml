@@ -143,8 +143,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       jest-watch-suspend:
-        specifier: ^1.1.2
-        version: 1.1.2(jest@30.5.1(@types/node@26.5.0)(ts-node@10.9.2(@types/node@26.5.0)(typescript@6.0.3)))
+        specifier: ^2.0.0
+        version: 2.0.0(jest@30.5.1(@types/node@26.5.0)(ts-node@10.9.2(@types/node@26.5.0)(typescript@6.0.3)))
       jest-watch-typeahead:
         specifier: ^3.0.1
         version: 3.0.1(jest@30.5.1(@types/node@26.5.0)(ts-node@10.9.2(@types/node@26.5.0)(typescript@6.0.3)))
@@ -161,8 +161,8 @@ importers:
         specifier: ^4.1.11
         version: 4.1.11(prettier@3.9.6)
       prettier-plugin-tailwindcss:
-        specifier: ^0.7.4
-        version: 0.7.4(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.6))(prettier-plugin-multiline-arrays@4.1.11(prettier@3.9.6))(prettier@3.9.6)
+        specifier: ^0.8.1
+        version: 0.8.1(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.6))(prettier-plugin-multiline-arrays@4.1.11(prettier@3.9.6))(prettier@3.9.6)
       react:
         specifier: ^19.2.8
         version: 19.2.8
@@ -2894,10 +2894,11 @@ packages:
   jest-watch-select-projects@2.0.0:
     resolution: {integrity: sha512-j00nW4dXc2NiCW6znXgFLF9g8PJ0zP25cpQ1xRro/HU2GBfZQFZD0SoXnAlaoKkIY4MlfTMkKGbNXFpvCdjl1w==}
 
-  jest-watch-suspend@1.1.2:
-    resolution: {integrity: sha512-sJRE+xj+jBvCdFhjFzJWFh9bg15v1YbSgmpvSCIR5ttg/Cn+608yfRjtLCDQx3ZVcIYlvorgsWIzW+lDFAhMrQ==}
+  jest-watch-suspend@2.0.0:
+    resolution: {integrity: sha512-tnN8b++VmHgcsiuStV4pCg53As8VHuqrFySiv0MO/8S4x9CDs97yS0Cc1ZxDkrpkmrDdtiski14aqUGXexr45w==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
     peerDependencies:
-      jest: '>=23'
+      jest: '>=28'
 
   jest-watch-typeahead@3.0.1:
     resolution: {integrity: sha512-SFmHcvdueTswZlVhPCWfLXMazvwZlA2UZTrcE7MC3NwEVeWvEcOx6HUe+igMbnmA6qowuBSW4in8iC6J2EYsgQ==}
@@ -3574,8 +3575,8 @@ packages:
     peerDependencies:
       prettier: '>=3.0.0 <4.0.0'
 
-  prettier-plugin-tailwindcss@0.7.4:
-    resolution: {integrity: sha512-UKii4RjY05SNt/WQi6/NcOn/LsT0/ILLXsxygjbRg5/YZelsSu5jTqorYHPDGq4nZy5q5hpCu+XdGZ1xaJEQgw==}
+  prettier-plugin-tailwindcss@0.8.1:
+    resolution: {integrity: sha512-iaFMYqDsE4ffdDkn5qup0j5f2aCEBFZrdrZnvu9QKTlWx/iGPeQ4HHu7b7fCPMxeo9nwQBiOAh2nSypdFYWJkw==}
     engines: {node: '>=20.19'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
@@ -4314,9 +4315,9 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unpartial@0.6.4:
-    resolution: {integrity: sha512-t/aGg/x8vW0KCjPB8A6TBB1hd0wnWMze8WD83uUpqSDm99jmhY2ZcHpivlvvSGmPCJ/S5ASZzxeQHga4JTW/4A==}
-    engines: {node: '>=6'}
+  unpartial@1.0.8:
+    resolution: {integrity: sha512-LDZX3wrdUWQdVKLOgouW+fCqNfietx11UzdipDBRsnx1LWKBkv4FpA9OHVeSNz12STLk6oz07dgENEWnHyAgIg==}
+    engines: {node: '>= 20'}
 
   unrs-resolver@1.12.2:
     resolution: {integrity: sha512-dmlRxBJJayXjqTwC+JtF1HhJmgf3ftQ3YejFcZrf4+KKtJv0qDsK1pjqaaVjG7wJ5NJ6UVP1OqRMQ71Z4C3rxQ==}
@@ -7768,11 +7769,11 @@ snapshots:
       chalk: 3.0.0
       prompts: 2.4.2
 
-  jest-watch-suspend@1.1.2(jest@30.5.1(@types/node@26.5.0)(ts-node@10.9.2(@types/node@26.5.0)(typescript@6.0.3))):
+  jest-watch-suspend@2.0.0(jest@30.5.1(@types/node@26.5.0)(ts-node@10.9.2(@types/node@26.5.0)(typescript@6.0.3))):
     dependencies:
-      chalk: 2.4.2
+      chalk: 4.1.2
       jest: 30.5.1(@types/node@26.5.0)(ts-node@10.9.2(@types/node@26.5.0)(typescript@6.0.3))
-      unpartial: 0.6.4
+      unpartial: 1.0.8
 
   jest-watch-typeahead@3.0.1(jest@30.5.1(@types/node@26.5.0)(ts-node@10.9.2(@types/node@26.5.0)(typescript@6.0.3))):
     dependencies:
@@ -8387,7 +8388,7 @@ snapshots:
       prettier: 3.9.6
       proxy-vir: 2.0.3
 
-  prettier-plugin-tailwindcss@0.7.4(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.6))(prettier-plugin-multiline-arrays@4.1.11(prettier@3.9.6))(prettier@3.9.6):
+  prettier-plugin-tailwindcss@0.8.1(@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.6))(prettier-plugin-multiline-arrays@4.1.11(prettier@3.9.6))(prettier@3.9.6):
     dependencies:
       prettier: 3.9.6
     optionalDependencies:
@@ -9080,7 +9081,7 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unpartial@0.6.4: {}
+  unpartial@1.0.8: {}
 
   unrs-resolver@1.12.2:
     dependencies:
