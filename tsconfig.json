@@ -23,14 +23,7 @@
     "paths": {
       "@three-text-geometry/*": ["./src/*"],
       "@three-text-geometry-tests/*": ["./tests/*"]
-    },
-
-    /** Transformer Plugins made possible by https://github.com/nonara/ts-patch */
-    "plugins": [
-      { "transform": "ts-nameof", "type": "raw" },             // Transform using ts-nameof with raw type <https://github.com/dsherret/ts-nameof>
-      { "transform": "typescript-transform-paths" },           // Transform paths in TypeScript files <https://github.com/LeDDGroup/typescript-transform-paths>
-      { "transform": "typescript-transform-paths", "afterDeclarations": true } // Transform paths after declarations <https://github.com/LeDDGroup/typescript-transform-paths>
-    ]
+    }
   },
   "include": ["src", "tests", "scripts"],                      // Specify directories to include for TypeScript compilation <https://www.typescriptlang.org/tsconfig#include>
   "exclude": ["dist-*", "demo"],                               // Prevent unwanted things like auto-import from built modules <https://www.typescriptlang.org/tsconfig#exclude>
