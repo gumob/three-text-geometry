@@ -59,8 +59,7 @@
     "clean-cache": "rm -rf .cache",
     "modules-clean": "rm -rf node_modules .yarn .pnpm-store",
     "modules-reinstall": "pnpm modules-clean && pnpm install",
-    "pre-publish-only": "pinst --disable",
-    "post-publish": "pinst --enable",
+    "prepare": "husky",
     "typedoc": "pnpm format-fix && pnpm lint-fix && typedoc --options typedoc.mjs",
     "all": "pnpm format-fix && pnpm lint-fix && pnpm typedoc && pnpm build && pnpm test-coverage"
   },
@@ -114,11 +113,9 @@
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-suspend": "^2.0.0",
     "jest-watch-typeahead": "^3.0.1",
-    "pinst": "^3.0.0",
     "playwright": "^1.63.0",
     "prettier": "^3.9.6",
     "prettier-plugin-multiline-arrays": "^4.1.11",
-    "prettier-plugin-tailwindcss": "^0.8.1",
     "react": "^19.2.8",
     "semantic-release": "^25.0.9",
     "three": "0.185.1",
@@ -131,7 +128,6 @@
     "typedoc-plugin-rename-defaults": "^0.7.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.70.0",
-    "typescript-snapshots-plugin": "^1.7.0",
     "uglify-js": "^3.19.3"
   },
   "importSorter": {
