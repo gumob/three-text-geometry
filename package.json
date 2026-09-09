@@ -65,8 +65,8 @@
   },
   "dependencies": {
     "ajv": "^8.20.0",
-    "fast-xml-parser": "^5.10.1",
-    "swr": "^2.4.2"
+    "fast-xml-parser": "^5.11.1",
+    "swr": "^2.5.1"
   },
   "peerDependencies": {
     "@react-three/fiber": ">=9",
