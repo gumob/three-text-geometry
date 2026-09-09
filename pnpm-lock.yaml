@@ -185,8 +185,8 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@26.5.0)(typescript@6.0.3)
       ts-patch:
-        specifier: ^3.3.0
-        version: 3.3.0
+        specifier: ^4.0.1
+        version: 4.0.1
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -209,8 +209,8 @@ importers:
         specifier: ^1.7.0
         version: 1.7.0
       typescript-transform-paths:
-        specifier: ^3.5.6
-        version: 3.5.6(typescript@6.0.3)
+        specifier: ^4.0.0
+        version: 4.0.0(typescript@6.0.3)
       uglify-js:
         specifier: ^3.19.3
         version: 3.19.3
@@ -4175,8 +4175,9 @@ packages:
       '@swc/wasm':
         optional: true
 
-  ts-patch@3.3.0:
-    resolution: {integrity: sha512-zAOzDnd5qsfEnjd9IGy1IRuvA7ygyyxxdxesbhMdutt8AHFjD8Vw8hU2rMF89HX1BKRWFYqKHrO8Q6lw0NeUZg==}
+  ts-patch@4.0.1:
+    resolution: {integrity: sha512-pzXS6vZlsBwq3U+CUiPJfCAh0MJGco1j1C8bWsLgvtzDZLGZ7II1Usjtwm09mZ8Uoma+sg6sO3BlWHd6apCUww==}
+    engines: {node: '>=22.15.0'}
     hasBin: true
 
   tslib@2.8.1:
@@ -4259,10 +4260,11 @@ packages:
   typescript-snapshots-plugin@1.7.0:
     resolution: {integrity: sha512-mWoH2E7/LnXy19YaJKKTWQCajRAdyFMNeMpUFN8XqB0zf/cNTM5JiiGpdpXtzjb3iyzwSEWcGqD8WA0XRp5eug==}
 
-  typescript-transform-paths@3.5.6:
-    resolution: {integrity: sha512-3eQTG6Ogt+pgPEh45uX2s9OwcfAVjWnyNO+osjYcOqYaWDVMIFUkqW8e0O1cOaVwdMqQFQf6alDT+76xmeS2Ag==}
+  typescript-transform-paths@4.0.0:
+    resolution: {integrity: sha512-cQ5MbIFApCsQ2dWL9bkjLJCaV+QnKmkm5thu6yRCmZEkXBmQRIWcwXFDA5kBIUiA5p2tZSweNaE34a7WlHdBsw==}
+    engines: {node: '>=22'}
     peerDependencies:
-      typescript: '>=3.6.5'
+      typescript: '>=5'
 
   typescript@6.0.3:
     resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
@@ -8965,7 +8967,7 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  ts-patch@3.3.0:
+  ts-patch@4.0.1:
     dependencies:
       chalk: 4.1.2
       global-prefix: 4.0.0
@@ -9048,9 +9050,9 @@ snapshots:
 
   typescript-snapshots-plugin@1.7.0: {}
 
-  typescript-transform-paths@3.5.6(typescript@6.0.3):
+  typescript-transform-paths@4.0.0(typescript@6.0.3):
     dependencies:
-      minimatch: 9.0.9
+      minimatch: 10.2.5
       typescript: 6.0.3
 
   typescript@6.0.3: {}
