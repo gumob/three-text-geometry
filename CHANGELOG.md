@@ -1,3 +1,10 @@
+## [4.1.2](https://github.com/futamura/three-text-geometry/compare/4.1.1...4.1.2) (2026-09-09)
+
+### Bug Fixes
+
+* **deps:** hold commitlint at 20 so semantic-release can render release notes ([#151](https://github.com/futamura/three-text-geometry/issues/151)) ([ef78930](https://github.com/futamura/three-text-geometry/commit/ef78930eb93993f7dcd0f56000079ee99197e63b))
+* **deps:** update every dependency except TypeScript 7 and three 0.186 ([#149](https://github.com/futamura/three-text-geometry/issues/149)) ([def6aec](https://github.com/futamura/three-text-geometry/commit/def6aec4910aa23281d5cffb62d1583be67be8e8))
+
 ## [4.1.1](https://github.com/futamura/three-text-geometry/compare/4.1.0...4.1.1) (2026-08-27)
 
 ### Bug Fixes
