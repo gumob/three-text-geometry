@@ -94,7 +94,6 @@
     "@types/offscreencanvas": "^2019.7.3",
     "@types/react": "^19.2.18",
     "@types/three": "0.185.4",
-    "@types/ts-nameof": "^4.2.5",
     "@types/uglify-js": "^3.17.5",
     "@typescript-eslint/eslint-plugin": "^8.70.0",
     "@typescript-eslint/parser": "^8.70.0",
@@ -124,9 +123,7 @@
     "three": "0.185.1",
     "ts-jest": "^29.4.12",
     "ts-jest-resolver": "^2.0.1",
-    "ts-nameof": "^5.0.0",
     "ts-node": "^10.9.2",
-    "ts-patch": "^4.0.1",
     "tslib": "^2.8.1",
     "typedoc": "^0.28.20",
     "typedoc-plugin-merge-modules": "^7.0.0",
@@ -134,7 +131,6 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.70.0",
     "typescript-snapshots-plugin": "^1.7.0",
-    "typescript-transform-paths": "^4.0.0",
     "uglify-js": "^3.19.3"
   },
   "importSorter": {
