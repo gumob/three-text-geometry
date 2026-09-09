@@ -40,13 +40,15 @@ Run a single test file: `pnpm jest tests/parser.spec.ts`
 
 ## Build Output
 
-Dual format: CommonJS (`dist-cjs/`, ES2018) and ESM (`dist-esm/`, ES2020). Both configured via separate tsconfig files (`tsconfig.cjs.json`, `tsconfig.esm.json`). Path aliases (`@three-text-geometry/*` → `./src/*`) are transformed at build time via `typescript-transform-paths`.
+Dual format: CommonJS (`dist-cjs/`, ES2018) and ESM (`dist-esm/`, ES2020). Both configured via separate tsconfig files (`tsconfig.cjs.json`, `tsconfig.esm.json`), and both compile with plain `tsc` — there are no transformer plugins.
+
+The `@three-text-geometry/*` → `./src/*` aliases in `compilerOptions.paths` are used by `tests/` only; `src/` imports relatively, so the build has nothing to rewrite. Jest resolves the aliases through `pathsToModuleNameMapper` in `jest.config.ts`, which reads that same `paths` block — keep it even though the build does not need it.
 
 ## Code Style
 
 - Prettier: 300 char print width, single quotes, trailing commas, 2-space indent
 - ESLint: strict unused variable warnings (underscore prefix ignored), JSDoc required on public APIs (classes, functions, methods, interfaces, type aliases)
-- Commit messages: Conventional Commits format, enforced by commitlint via Husky pre-commit hook
+- Commit messages: Conventional Commits format, enforced by commitlint from the Husky `commit-msg` hook (`.husky/commit-msg`)
 - Import sorting handled by prettier-plugin-sort-imports
 
 ## Testing
@@ -61,6 +63,31 @@ Dual format: CommonJS (`dist-cjs/`, ES2018) and ESM (`dist-esm/`, ES2020). Both 
 - `three`, `react`, `@react-three/fiber` are **peerDependencies** (users must install them alongside this package)
 - They are also in `devDependencies` for development/testing
 - Core dependencies (`ajv`, `fast-xml-parser`, `swr`) remain in `dependencies`
+
+### commitlint is pinned to 20 on purpose
+
+`@commitlint/config-conventional` moved its preset dependency from
+`conventional-changelog-conventionalcommits@^9` to `^10` in its 21 major.
+`@semantic-release/release-notes-generator` does **not** declare that preset — it
+resolves it by name at run time, and in a pnpm tree the fallback hoist directory
+answers the lookup. It does declare `conventional-changelog-writer@^8`, and preset
+10 refuses to render with writer 8.
+
+So bumping commitlint to 21 silently swaps the preset semantic-release loads and
+the release dies in `generateNotes` — on `main`, after the merge. That is what
+happened to 4.1.2 (fixed in #151). `release-notes-generator@14.1.1` is the latest,
+and no release of it accepts preset 10 yet.
+
+Do not raise `@commitlint/cli` or `@commitlint/config-conventional` past 20 until
+`release-notes-generator` ships support for preset 10. Pinning the preset through
+`pnpm.overrides` also works, but forces config-conventional outside its declared
+range, and the preset supplies commitlint's parser options too.
+
+`pnpm verify-release-notes` guards this. It renders sample commits through the
+preset semantic-release will actually load and the writer it depends on, and runs
+in the `tests` job of both workflows. `semantic-release --dry-run` does **not**
+cover it: on a non-release branch the run stops at the branch check, before
+`generateNotes`.
 
 ## Branch Strategy & Development Workflow
 

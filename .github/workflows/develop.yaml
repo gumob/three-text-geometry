@@ -51,6 +51,9 @@ jobs:
       - name: Lint
         run: pnpm lint-check
 
+      - name: Verify release notes rendering
+        run: pnpm verify-release-notes
+
       - name: Test
         run: xvfb-run --auto-servernum pnpm test-coverage
 
