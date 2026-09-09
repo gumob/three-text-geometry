@@ -26,10 +26,5 @@
     }
   },
   "include": ["src", "tests", "scripts"],                      // Specify directories to include for TypeScript compilation <https://www.typescriptlang.org/tsconfig#include>
-  "exclude": ["dist-*", "demo"],                               // Prevent unwanted things like auto-import from built modules <https://www.typescriptlang.org/tsconfig#exclude>
-  "plugins": [
-    {
-      "name": "typescript-snapshots-plugin"                    // Name of the TypeScript snapshots plugin <https://github.com/your-plugin-repo>
-    }
-  ]
+  "exclude": ["dist-*", "demo"]                                // Prevent unwanted things like auto-import from built modules <https://www.typescriptlang.org/tsconfig#exclude>
 }
